@@ -1,13 +1,22 @@
 
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
-import SkillsSection from "@/components/SkillsSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import PublicationsSection from "@/components/PublicationsSection";
-import ContactSection from "@/components/ContactSection";
 import Cursor from "@/components/Cursor";
-import ParticleField from "@/components/ParticleField";
+
+// Lazy load heavier components to improve initial load time
+const ParticleField = lazy(() => import("@/components/ParticleField"));
+const SkillsSection = lazy(() => import("@/components/SkillsSection"));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const PublicationsSection = lazy(() => import("@/components/PublicationsSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+
+// Simple loading component
+const SectionLoader = () => (
+  <div className="flex justify-center items-center py-20">
+    <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 export default function Index() {
   useEffect(() => {
@@ -44,8 +53,10 @@ export default function Index() {
       {/* Custom cursor */}
       <Cursor />
       
-      {/* Particle background */}
-      <ParticleField count={50} />
+      {/* Lazy load particle background */}
+      <Suspense fallback={null}>
+        <ParticleField count={30} />
+      </Suspense>
       
       {/* Navigation */}
       <NavBar />
@@ -53,10 +64,22 @@ export default function Index() {
       {/* Main content sections */}
       <main>
         <HeroSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <PublicationsSection />
-        <ContactSection />
+        
+        <Suspense fallback={<SectionLoader />}>
+          <SkillsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <ProjectsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <PublicationsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <ContactSection />
+        </Suspense>
       </main>
       
       {/* Footer */}

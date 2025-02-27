@@ -21,7 +21,7 @@ interface ParticleFieldProps {
 export default function ParticleField({ count = 50, cursorTrail = true }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [particles, setParticles] = useState<Particle[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
   const lastEmitTime = useRef<number>(0);
 
@@ -64,7 +64,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       );
     }
     
-    setParticles(newParticles);
+    particlesRef.current = newParticles;
   };
 
   useEffect(() => {
@@ -85,11 +85,13 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       if (cursorTrail && Date.now() - lastEmitTime.current > 50) {
         lastEmitTime.current = Date.now();
         
-        setParticles(prev => [
-          ...prev,
-          createParticle(e.clientX, e.clientY, true),
-          createParticle(e.clientX, e.clientY, true)
-        ]);
+        if (particlesRef.current) {
+          const cursorParticles = [
+            createParticle(e.clientX, e.clientY, true),
+            createParticle(e.clientX, e.clientY, true)
+          ];
+          particlesRef.current = [...particlesRef.current, ...cursorParticles];
+        }
       }
     };
 
@@ -116,7 +118,9 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const updatedParticles = particles.filter(p => p.life < p.maxLife).map(particle => {
+      const updatedParticles = particlesRef.current.filter(p => p.life < p.maxLife);
+      
+      updatedParticles.forEach(particle => {
         // Apply data gravity effect toward cursor
         const dx = mousePosition.x - particle.x;
         const dy = mousePosition.y - particle.y;
@@ -145,8 +149,6 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = particle.color.replace(/[\d.]+\)$/g, `${opacity})`);
         ctx.fill();
-        
-        return particle;
       });
       
       // Add new particles to replace those that died
@@ -162,7 +164,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         }
       }
       
-      setParticles(updatedParticles);
+      particlesRef.current = updatedParticles;
       animationFrameId.current = requestAnimationFrame(animate);
     };
     
@@ -171,7 +173,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     return () => {
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [particles, mousePosition, count]);
+  }, [count, mousePosition]);
 
   return (
     <canvas

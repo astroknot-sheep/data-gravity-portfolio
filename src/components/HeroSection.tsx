@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 
 export default function HeroSection() {
@@ -24,6 +24,15 @@ export default function HeroSection() {
       cleanupBackground();
       cleanupContent();
     };
+  }, []);
+
+  // Memoize the data points to prevent recreating on every render
+  const dataPoints = useMemo(() => {
+    return Array.from({ length: 8 }).map((_, i) => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      return { id: i, x, y };
+    });
   }, []);
 
   return (
@@ -96,14 +105,12 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Floating data points that follow cursor */}
+      {/* Floating data points that follow cursor - optimized with fewer points */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 15 }).map((_, i) => {
+        {dataPoints.map((point) => {
           // Calculate distance from cursor
-          const x = Math.random() * window.innerWidth;
-          const y = Math.random() * window.innerHeight;
-          const dx = cursorPos.x - x;
-          const dy = cursorPos.y - y;
+          const dx = cursorPos.x - point.x;
+          const dy = cursorPos.y - point.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           const maxForceDistance = 300;
           const forceMultiplier = Math.max(0, 1 - distance / maxForceDistance);
@@ -114,11 +121,11 @@ export default function HeroSection() {
           
           return (
             <div
-              key={i}
-              className="data-point"
+              key={point.id}
+              className="data-point will-change-transform"
               style={{
-                left: `${x}px`,
-                top: `${y}px`,
+                left: `${point.x}px`,
+                top: `${point.y}px`,
                 transform: `translate(${moveX}px, ${moveY}px)`,
                 opacity: 0.3 + forceMultiplier * 0.7,
                 scale: 1 + forceMultiplier,
