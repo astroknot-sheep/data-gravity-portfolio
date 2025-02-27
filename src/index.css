@@ -204,12 +204,11 @@
   }
 
   .card-3d {
-    @apply relative transition-all duration-500 ease-out transform-gpu perspective-[1000px] cursor-pointer;
+    @apply relative transition-all duration-500 ease-out transform-gpu perspective-1000 cursor-pointer;
   }
 
   .card-3d-content {
-    @apply relative w-full h-full transition-all duration-500 ease-out transform-gpu;
-    transform-style: preserve-3d;
+    @apply relative w-full h-full transition-all duration-500 ease-out transform-gpu transform-style-3d;
   }
 
   .card-3d:hover .card-3d-content {
@@ -217,8 +216,7 @@
   }
 
   .card-3d-front, .card-3d-back {
-    @apply absolute inset-0 rounded-lg p-6 flex flex-col justify-between;
-    backface-visibility: hidden;
+    @apply absolute inset-0 rounded-lg p-6 flex flex-col justify-between backface-hidden;
   }
 
   .card-3d-back {

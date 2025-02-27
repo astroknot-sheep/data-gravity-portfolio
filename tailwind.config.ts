@@ -157,7 +157,50 @@ export default {
 				'height': 'height',
 				'spacing': 'margin, padding',
 			},
+			perspective: {
+				'none': 'none',
+				'500': '500px',
+				'1000': '1000px',
+				'2000': '2000px',
+			},
+			rotate: {
+				'y-180': 'rotateY(180deg)',
+			},
+			transformStyle: {
+				'3d': 'preserve-3d',
+				'flat': 'flat',
+			},
+			backfaceVisibility: {
+				'visible': 'visible',
+				'hidden': 'hidden',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities, theme, e }) {
+			const perspectiveUtilities = Object.entries(theme('perspective', {})).map(([key, value]) => {
+				return {
+					[`.${e(`perspective-${key}`)}`]: { perspective: value }
+				};
+			});
+			
+			const transformUtilities = {
+				'.transform-style-3d': {
+					'transform-style': 'preserve-3d',
+				},
+				'.backface-visible': {
+					'backface-visibility': 'visible',
+				},
+				'.backface-hidden': {
+					'backface-visibility': 'hidden',
+				},
+				'.rotate-y-180': {
+					'transform': 'rotateY(180deg)',
+				},
+			};
+			
+			addUtilities([...perspectiveUtilities, transformUtilities], ['responsive']);
+		},
+	],
 } satisfies Config;
