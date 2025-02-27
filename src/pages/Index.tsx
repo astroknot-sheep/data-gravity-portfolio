@@ -14,12 +14,15 @@ const ContactSection = lazy(() => import("@/components/ContactSection"));
 // Simple loading component
 const SectionLoader = () => (
   <div className="flex justify-center items-center py-20">
-    <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-4 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
 export default function Index() {
   useEffect(() => {
+    // Set dark mode
+    document.documentElement.classList.add('dark');
+    
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -49,7 +52,7 @@ export default function Index() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative dark">
       {/* Custom cursor */}
       <Cursor />
       
@@ -83,7 +86,7 @@ export default function Index() {
       </main>
       
       {/* Footer */}
-      <footer className="py-8 bg-gray-100 dark:bg-gray-900 text-center text-gray-600 dark:text-gray-400 text-sm">
+      <footer className="py-8 bg-gray-900 text-center text-gray-400 text-sm">
         <div className="container mx-auto px-6">
           <p>© {new Date().getFullYear()} Data Scientist Portfolio. All rights reserved.</p>
         </div>

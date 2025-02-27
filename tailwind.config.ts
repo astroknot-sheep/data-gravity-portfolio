@@ -63,16 +63,24 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for our data scientist portfolio
-				purple: {
-					light: '#B794F4',
-					DEFAULT: '#805AD5',
-					dark: '#553C9A',
+				// Custom colors for dark mode data scientist portfolio
+				gray: {
+					50: '#f7f7f7',
+					100: '#e3e3e3',
+					200: '#c8c8c8',
+					300: '#a4a4a4',
+					400: '#818181',
+					500: '#666666',
+					600: '#515151',
+					700: '#434343',
+					800: '#383838',
+					900: '#222222',
+					950: '#141414',
 				},
 				amber: {
-					light: '#FDE68A',
-					DEFAULT: '#F59E0B',
-					dark: '#B45309',
+					light: '#ffd28a',
+					DEFAULT: '#d4a257',
+					dark: '#8c6931',
 				},
 			},
 			borderRadius: {
@@ -147,7 +155,7 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'data-grid': 'linear-gradient(to right, rgba(128, 90, 213, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(128, 90, 213, 0.1) 1px, transparent 1px)',
+				'data-grid': 'linear-gradient(to right, rgba(65, 65, 65, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(65, 65, 65, 0.1) 1px, transparent 1px)',
 			},
 			backdropFilter: {
 				'none': 'none',
