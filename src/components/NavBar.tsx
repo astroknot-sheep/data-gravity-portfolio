@@ -35,16 +35,16 @@ export default function NavBar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <a 
           href="#" 
-          className="text-xl font-bold text-purple-800 dark:text-purple-400 tracking-tight interactive"
+          className="text-xl font-bold text-amber-800 dark:text-amber-400 tracking-tight interactive font-league"
         >
-          DataScientist
+          Dhriman Deka
         </a>
 
         {isMobile ? (
           <>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               aria-label="Toggle menu"
             >
               <div className={`w-6 h-0.5 bg-current mb-1.5 transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`}></div>
@@ -63,7 +63,7 @@ export default function NavBar() {
                     <li key={item.href}>
                       <a
                         href={item.href}
-                        className="text-2xl font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                        className="text-2xl font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
                         onClick={() => setMenuOpen(false)}
                       >
                         {item.label}
@@ -80,7 +80,7 @@ export default function NavBar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors link-underline"
+                  className="font-medium hover:text-amber-600 dark:hover:text-amber-400 transition-colors link-underline"
                 >
                   {item.label}
                 </a>
