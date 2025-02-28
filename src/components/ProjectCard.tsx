@@ -35,11 +35,11 @@ export default function ProjectCard({
         className={`card-3d-content ${isFlipped ? "rotate-y-180" : ""}`}
       >
         {/* Front of card */}
-        <div className="card-3d-front glassmorphism border border-purple-200 dark:border-purple-900">
+        <div className="card-3d-front glassmorphism border border-amber-200 dark:border-amber-900">
           <div className="space-y-4">
             <div className="flex items-start justify-between">
-              <h3 className="text-xl font-bold text-purple-800 dark:text-purple-300">{title}</h3>
-              <span className="chip bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300">{title}</h3>
+              <span className="chip bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
                 {technologies[0]}
               </span>
             </div>
@@ -52,14 +52,14 @@ export default function ProjectCard({
               {technologies.slice(1).map((tech, i) => (
                 <span 
                   key={i} 
-                  className="text-xs py-1 px-2 bg-purple-50 dark:bg-purple-900/50 rounded-full text-purple-700 dark:text-purple-300"
+                  className="text-xs py-1 px-2 bg-amber-50 dark:bg-amber-900/50 rounded-full text-amber-700 dark:text-amber-300"
                 >
                   {tech}
                 </span>
               ))}
             </div>
             
-            <div className="text-sm text-purple-600 dark:text-purple-400 flex items-center mt-4">
+            <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
               <span>Click to see details</span>
               <svg 
                 className="w-4 h-4 ml-1" 
@@ -80,9 +80,9 @@ export default function ProjectCard({
         </div>
         
         {/* Back of card */}
-        <div className="card-3d-back glassmorphism border border-purple-200 dark:border-purple-900">
+        <div className="card-3d-back glassmorphism border border-amber-200 dark:border-amber-900">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-purple-800 dark:text-purple-300">{title} Details</h3>
+            <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300">{title} Details</h3>
             
             <ul className="space-y-2 text-gray-600 dark:text-gray-300">
               {description.map((point, i) => (
@@ -106,7 +106,7 @@ export default function ProjectCard({
               ))}
             </ul>
             
-            <div className="text-sm text-purple-600 dark:text-purple-400 flex items-center mt-4">
+            <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
               <span>Click to go back</span>
               <svg 
                 className="w-4 h-4 ml-1" 

@@ -11,9 +11,9 @@ export default function PublicationsSection() {
     >
       {/* Background elements */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
-        <div className="absolute top-1/4 left-1/5 w-64 h-64 rounded-full border border-purple-500/40 animate-rotate-slow" />
+        <div className="absolute top-1/4 left-1/5 w-64 h-64 rounded-full border border-amber-500/40 animate-rotate-slow" />
         <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full border-2 border-amber-500/30 animate-rotate-slow" style={{ animationDirection: 'reverse' }} />
-        <div className="absolute top-1/2 right-1/3 w-40 h-40 rounded-full border-2 border-purple-500/20 animate-rotate-slow" style={{ animationDuration: '25s' }} />
+        <div className="absolute top-1/2 right-1/3 w-40 h-40 rounded-full border-2 border-amber-500/20 animate-rotate-slow" style={{ animationDuration: '25s' }} />
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
@@ -38,7 +38,7 @@ export default function PublicationsSection() {
             }`}>
               <div className="timeline-dot">
                 <svg 
-                  className="w-4 h-4 text-purple-600 dark:text-purple-400" 
+                  className="w-4 h-4 text-amber-600 dark:text-amber-400" 
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24" 
@@ -55,7 +55,7 @@ export default function PublicationsSection() {
               
               <div className="ml-8">
                 <div className="glassmorphism p-6 transition-all duration-500 hover:shadow-lg interactive">
-                  <h3 className="text-xl font-bold text-purple-800 dark:text-purple-300 mb-2">
+                  <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300 mb-2">
                     Research Publication
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -89,7 +89,7 @@ export default function PublicationsSection() {
             }`}>
               <div className="timeline-dot">
                 <svg
-                  className="w-4 h-4 text-purple-600 dark:text-purple-400"
+                  className="w-4 h-4 text-amber-600 dark:text-amber-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -106,13 +106,13 @@ export default function PublicationsSection() {
               
               <div className="ml-8">
                 <div className="glassmorphism p-6 transition-all duration-500 hover:shadow-lg interactive">
-                  <h3 className="text-xl font-bold text-purple-800 dark:text-purple-300 mb-2">
+                  <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300 mb-2">
                     Top Ten Publication
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Ranked among Top Ten downloads in SSRN's Political Methods eJournal
                   </p>
-                  <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+                  <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-900/30 rounded-lg">
                     <blockquote className="text-sm italic text-gray-600 dark:text-gray-300">
                       "A comprehensive analysis with significant implications for pension reform policy."
                     </blockquote>

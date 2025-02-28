@@ -128,7 +128,7 @@ export default function SkillsSection() {
                   transitionDelay: `${groupIndex * 0.1}s`,
                 }}
               >
-                <h3 className="text-xl font-bold mb-4 text-purple-800 dark:text-purple-300">
+                <h3 className="text-xl font-bold mb-4 text-amber-800 dark:text-amber-300">
                   {skillGroup.category}
                 </h3>
                 <div className="space-y-4">
@@ -140,7 +140,7 @@ export default function SkillsSection() {
                       </div>
                       <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-purple-500 to-amber-500 h-2 rounded-full transition-all duration-1000"
+                          className="bg-gradient-to-r from-amber-500 to-amber-300 h-2 rounded-full transition-all duration-1000"
                           style={{ 
                             width: isInView ? `${skill.proficiency}%` : "0%",
                           }}
