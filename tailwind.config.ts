@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'league': ['"League Spartan"', 'sans-serif'],
+				'intro': ['"Intro Rust"', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -81,6 +85,28 @@ export default {
 					light: '#ffd28a',
 					DEFAULT: '#d4a257',
 					dark: '#8c6931',
+				},
+				green: {
+					100: '#e6f3e6',
+					200: '#c2e0c2',
+					300: '#9ec89e',
+					400: '#7ab17a',
+					500: '#569956',
+					600: '#458a45',
+					700: '#347834',
+					800: '#236723',
+					900: '#124b12',
+				},
+				teal: {
+					100: '#e6f5f5',
+					200: '#c1e3e3',
+					300: '#9cd1d1',
+					400: '#77bebe',
+					500: '#52acac',
+					600: '#429a9a',
+					700: '#318686',
+					800: '#217272',
+					900: '#105151',
 				},
 			},
 			borderRadius: {

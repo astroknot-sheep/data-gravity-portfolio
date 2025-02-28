@@ -38,13 +38,13 @@ export default function ProjectCard({
         <div className="card-3d-front glassmorphism border border-amber-200 dark:border-amber-900">
           <div className="space-y-4">
             <div className="flex items-start justify-between">
-              <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300">{title}</h3>
+              <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title}</h3>
               <span className="chip bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
                 {technologies[0]}
               </span>
             </div>
             
-            <p className="text-gray-600 dark:text-gray-300 flex-grow">
+            <p className="text-gray-600 dark:text-gray-300 flex-grow font-league">
               {description[0]}
             </p>
             
@@ -82,9 +82,9 @@ export default function ProjectCard({
         {/* Back of card */}
         <div className="card-3d-back glassmorphism border border-amber-200 dark:border-amber-900">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-amber-800 dark:text-amber-300">{title} Details</h3>
+            <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title} Details</h3>
             
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-league">
               {description.map((point, i) => (
                 <li key={i} className="flex items-start">
                   <svg 
