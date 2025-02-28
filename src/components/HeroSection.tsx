@@ -41,7 +41,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 -z-10">
         <div 
           ref={parallaxBackgroundRef}
-          className="absolute inset-0 bg-gradient-radial from-purple-100/40 via-transparent to-transparent dark:from-purple-900/20"
+          className="absolute inset-0 bg-gradient-radial from-amber-100/40 via-transparent to-transparent dark:from-amber-900/20"
         />
         
         {/* Background grid */}
@@ -49,10 +49,10 @@ export default function HeroSection() {
         
         {/* Decorative elements */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-amber-300/10 dark:bg-amber-700/10 blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-purple-300/10 dark:bg-purple-700/10 blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-amber-300/10 dark:bg-amber-700/10 blur-3xl animate-float" />
         
         {/* Animated morphing blob */}
-        <div className="absolute top-1/3 right-1/3 w-40 h-40 bg-gradient-to-r from-purple-400/20 to-amber-400/20 rounded-full blur-2xl animate-morph" />
+        <div className="absolute top-1/3 right-1/3 w-40 h-40 bg-gradient-to-r from-amber-400/20 to-amber-400/20 rounded-full blur-2xl animate-morph" />
       </div>
       
       {/* Main content */}
@@ -73,7 +73,7 @@ export default function HeroSection() {
               </span>
               <span 
                 ref={title2Animation.ref}
-                className={`block text-purple-600 dark:text-purple-400 ${title2Animation.animation}`} 
+                className={`block text-amber-600 dark:text-amber-400 ${title2Animation.animation}`} 
                 style={{ animationDelay: "0.2s" }}
               >
                 Into Insights
@@ -96,7 +96,7 @@ export default function HeroSection() {
             >
               <a 
                 href="#projects" 
-                className="interactive glassmorphism px-8 py-3 text-purple-800 dark:text-purple-200 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+                className="interactive glassmorphism px-8 py-3 text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300"
               >
                 View My Work
               </a>
