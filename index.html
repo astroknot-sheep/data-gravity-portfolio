@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Scientist Portfolio</title>
     <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
-    <!-- Adding League Spartan font -->
+    <!-- Adding League Spartan font with proper font display -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap">
-    <!-- Adding Intro Rust font via stylesheet -->
+    <!-- Adding Intro Rust font via stylesheet with proper font display -->
     <style>
       @font-face {
         font-family: 'Intro Rust';
@@ -18,7 +18,34 @@
         font-style: normal;
         font-display: swap;
       }
+      
+      /* Ensure fallback is sans-serif, never Times New Roman */
+      body {
+        font-family: 'League Spartan', sans-serif;
+      }
+      
+      /* Font loading detection */
+      .fonts-loaded body {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
     </style>
+    <!-- Font loading script -->
+    <script>
+      // Optional JavaScript to ensure fonts are loaded before rendering content
+      document.documentElement.classList.add('fonts-loading');
+      Promise.all([
+        document.fonts.load('1em League Spartan'),
+        document.fonts.load('1em Intro Rust')
+      ]).then(() => {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+      }).catch(() => {
+        // Fallback to sans-serif if loading fails
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-failed');
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
