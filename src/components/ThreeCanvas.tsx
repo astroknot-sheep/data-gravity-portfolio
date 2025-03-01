@@ -33,63 +33,102 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvasRef.current.appendChild(renderer.domElement);
     
-    // Create geometry - use smaller segment counts for better performance
-    const geometry = new THREE.TorusKnotGeometry(1, 0.4, 64, 8);
+    // Create more organic, flowing geometry - using CurveGeometry for a more fluid look
+    const curve = new THREE.CubicBezierCurve3(
+      new THREE.Vector3(-1, 0, 0),
+      new THREE.Vector3(-0.5, 1, 0),
+      new THREE.Vector3(0.5, -1, 0),
+      new THREE.Vector3(1, 0, 0)
+    );
     
-    // Create materials with amber tones instead of blue/purple
+    const points = curve.getPoints(50);
+    const tubeGeometry = new THREE.TubeGeometry(
+      new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-1, -1, -1),
+        new THREE.Vector3(-0.5, 1, 0),
+        new THREE.Vector3(0.5, 0, 1),
+        new THREE.Vector3(1, -0.5, -0.5),
+        new THREE.Vector3(0, -1, 0),
+        new THREE.Vector3(-1, -1, -1)
+      ]),
+      80,  // tubular segments
+      0.4,  // radius
+      12,   // radial segments
+      true  // closed
+    );
+    
+    // Create materials with new color scheme (indigo to teal with electric blue accents)
     const primaryMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0xd4a257, // amber color
+      color: 0x1E0F48, // deep indigo
       wireframe: true
     });
     
     const secondaryMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x8c6931, // amber dark
+      color: 0x008B94, // rich teal
       wireframe: true
     });
     
     const accentMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0xffd28a, // amber light
+      color: 0x00C2FF, // electric blue
       wireframe: true
     });
     
     // Create meshes
-    const primaryTorus = new THREE.Mesh(geometry, primaryMaterial);
-    scene.add(primaryTorus);
+    const primaryMesh = new THREE.Mesh(tubeGeometry, primaryMaterial);
+    scene.add(primaryMesh);
     
-    const secondaryTorus = new THREE.Mesh(geometry, secondaryMaterial);
-    secondaryTorus.scale.set(1.1, 1.1, 1.1);
-    secondaryTorus.rotation.set(0, Math.PI / 4, 0);
-    scene.add(secondaryTorus);
+    const secondaryMesh = new THREE.Mesh(tubeGeometry, secondaryMaterial);
+    secondaryMesh.scale.set(1.1, 1.1, 1.1);
+    secondaryMesh.rotation.set(0, Math.PI / 3, 0);
+    scene.add(secondaryMesh);
     
-    const accentTorus = new THREE.Mesh(geometry, accentMaterial);
-    accentTorus.scale.set(1.2, 1.2, 1.2);
-    accentTorus.rotation.set(0, Math.PI / 2, 0);
-    scene.add(accentTorus);
+    const accentMesh = new THREE.Mesh(tubeGeometry, accentMaterial);
+    accentMesh.scale.set(0.8, 0.8, 0.8);
+    accentMesh.rotation.set(0, Math.PI / 2, 0);
+    scene.add(accentMesh);
     
-    // Ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    // Ambient light with violet glow
+    const ambientLight = new THREE.AmbientLight(0x9D4EDD, 0.4);
     scene.add(ambientLight);
     
     // Handle mouse movement - throttled for performance
     let lastTime = 0;
     const throttleMs = 50; // Throttle to 20 updates per second
+    let isHovering = false;
     
     const handleMouseMove = (event: MouseEvent) => {
       const currentTime = Date.now();
       if (currentTime - lastTime < throttleMs) return;
       lastTime = currentTime;
       
+      // Calculate normalized coordinates
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
-      primaryTorus.rotation.x += y * 0.01;
-      primaryTorus.rotation.y += x * 0.01;
+      // Check if mouse is near the center to trigger hover effect
+      const distanceFromCenter = Math.sqrt(x * x + y * y);
+      isHovering = distanceFromCenter < 0.5;
       
-      secondaryTorus.rotation.x += y * 0.008;
-      secondaryTorus.rotation.y += x * 0.008;
+      // Gently move meshes toward cursor
+      primaryMesh.rotation.x += y * 0.01;
+      primaryMesh.rotation.y += x * 0.01;
       
-      accentTorus.rotation.x += y * 0.006;
-      accentTorus.rotation.y += x * 0.006;
+      secondaryMesh.rotation.x += y * 0.008;
+      secondaryMesh.rotation.y += x * 0.008;
+      
+      accentMesh.rotation.x += y * 0.006;
+      accentMesh.rotation.y += x * 0.006;
+      
+      // When hovering, subtle expansion toward cursor
+      if (isHovering) {
+        const expansionFactor = 0.02;
+        primaryMesh.position.x += x * expansionFactor;
+        primaryMesh.position.y += y * expansionFactor;
+        secondaryMesh.position.x += x * expansionFactor * 0.8;
+        secondaryMesh.position.y += y * expansionFactor * 0.8;
+        accentMesh.position.x += x * expansionFactor * 0.6;
+        accentMesh.position.y += y * expansionFactor * 0.6;
+      }
     };
     
     window.addEventListener('mousemove', handleMouseMove);
@@ -108,21 +147,39 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     window.addEventListener('resize', handleResize);
     
-    // For better performance, we'll use a lower animation frame rate
-    // and use requestAnimationFrame more efficiently
+    // Animation loop with elastic easing
     let frameId: number;
     const animate = () => {
       frameId = requestAnimationFrame(animate);
       
-      // Slower rotation for better performance
-      primaryTorus.rotation.x += 0.002;
-      primaryTorus.rotation.y += 0.002;
+      // Implement organic, fluid rotation with eased rotation speed
+      const normalRotationSpeed = isHovering ? 0.0005 : 0.002;
+      const easedRotation = normalRotationSpeed * (Math.sin(Date.now() * 0.001) * 0.5 + 0.5);
       
-      secondaryTorus.rotation.x += 0.001;
-      secondaryTorus.rotation.y += 0.001;
+      // Apply organic, flowing animation
+      primaryMesh.rotation.x += easedRotation;
+      primaryMesh.rotation.y += easedRotation;
       
-      accentTorus.rotation.x += 0.0005;
-      accentTorus.rotation.y += 0.0005;
+      secondaryMesh.rotation.x += easedRotation * 0.8;
+      secondaryMesh.rotation.y += easedRotation * 0.7;
+      
+      accentMesh.rotation.x += easedRotation * 0.6;
+      accentMesh.rotation.y += easedRotation * 0.5;
+      
+      // Subtle breathing/pulsing effect
+      const pulseFactor = Math.sin(Date.now() * 0.001) * 0.02 + 1;
+      primaryMesh.scale.set(pulseFactor, pulseFactor, pulseFactor);
+      secondaryMesh.scale.set(1.1 * pulseFactor, 1.1 * pulseFactor, 1.1 * pulseFactor);
+      
+      // Gradually return to center position when not hovering
+      if (!isHovering) {
+        primaryMesh.position.x *= 0.95;
+        primaryMesh.position.y *= 0.95;
+        secondaryMesh.position.x *= 0.95;
+        secondaryMesh.position.y *= 0.95;
+        accentMesh.position.x *= 0.95;
+        accentMesh.position.y *= 0.95;
+      }
       
       renderer.render(scene, camera);
     };
@@ -139,7 +196,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       cancelAnimationFrame(frameId);
       
       // Dispose resources
-      geometry.dispose();
+      tubeGeometry.dispose();
       primaryMaterial.dispose();
       secondaryMaterial.dispose();
       accentMaterial.dispose();
