@@ -46,9 +46,6 @@ export default function Index() {
     // Add a class to body for styling purposes
     document.body.classList.add('portfolio-page');
     
-    // Make sure fonts are properly loaded
-    document.body.classList.add('font-league');
-    
     return () => {
       document.body.classList.remove('portfolio-page');
     };
@@ -89,9 +86,9 @@ export default function Index() {
       </main>
       
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-center text-gray-400 text-sm font-league">
+      <footer className="py-8 bg-gray-900 text-center text-gray-400 text-sm">
         <div className="container mx-auto px-6">
-          <p>© {new Date().getFullYear()} Dhriman Deka. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Data Scientist Portfolio. All rights reserved.</p>
         </div>
       </footer>
     </div>

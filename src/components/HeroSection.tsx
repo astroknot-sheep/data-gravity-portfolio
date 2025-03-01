@@ -1,7 +1,6 @@
 
 import { useEffect, useRef, useMemo } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
-import ThreeCanvas from "./ThreeCanvas";
 
 export default function HeroSection() {
   const parallaxBackgroundRef = useRef<HTMLDivElement>(null);
@@ -38,9 +37,6 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
-      {/* Three.js background */}
-      <ThreeCanvas />
-      
       {/* Background gradient and shapes */}
       <div className="absolute inset-0 -z-10">
         <div 
@@ -71,13 +67,13 @@ export default function HeroSection() {
             <h1 className="flex flex-col items-center justify-center">
               <span 
                 ref={title1Animation.ref}
-                className={`block font-bold text-gray-900 dark:text-white font-league ${title1Animation.animation}`}
+                className={`block font-bold text-gray-900 dark:text-white ${title1Animation.animation}`}
               >
                 Transforming Data 
               </span>
               <span 
                 ref={title2Animation.ref}
-                className={`block text-amber-600 dark:text-amber-400 font-intro ${title2Animation.animation}`} 
+                className={`block text-amber-600 dark:text-amber-400 ${title2Animation.animation}`} 
                 style={{ animationDelay: "0.2s" }}
               >
                 Into Insights
@@ -86,7 +82,7 @@ export default function HeroSection() {
             
             <p 
               ref={subtitleAnimation.ref}
-              className={`mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league ${subtitleAnimation.animation}`}
+              className={`mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto ${subtitleAnimation.animation}`}
               style={{ animationDelay: "0.4s" }}
             >
               Specialized in building end-to-end ML systems and data-driven solutions
@@ -100,7 +96,7 @@ export default function HeroSection() {
             >
               <a 
                 href="#projects" 
-                className="interactive glassmorphism px-8 py-3 text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-league"
+                className="interactive glassmorphism px-8 py-3 text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300"
               >
                 View My Work
               </a>
@@ -141,7 +137,7 @@ export default function HeroSection() {
       
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-sm text-gray-500 dark:text-gray-400 mb-2 font-league">Scroll</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">Scroll</span>
         <svg 
           className="w-6 h-6 text-gray-500 dark:text-gray-400" 
           fill="none" 
