@@ -36,7 +36,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     // Create geometry - use smaller segment counts for better performance
     const geometry = new THREE.TorusKnotGeometry(1, 0.4, 64, 8);
     
-    // Create materials with amber tones instead of blue/purple
+    // Create materials with amber tones
     const primaryMaterial = new THREE.MeshBasicMaterial({ 
       color: 0xd4a257, // amber color
       wireframe: true
@@ -70,18 +70,19 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     
-    // Handle mouse movement - throttled for performance
-    let lastTime = 0;
-    const throttleMs = 50; // Throttle to 20 updates per second
+    // Throttle mouse movement for better performance
+    let lastMouseMoveTime = 0;
+    const throttleMs = 50; // Only update every 50ms (20fps for mouse interaction)
     
     const handleMouseMove = (event: MouseEvent) => {
       const currentTime = Date.now();
-      if (currentTime - lastTime < throttleMs) return;
-      lastTime = currentTime;
+      if (currentTime - lastMouseMoveTime < throttleMs) return;
+      lastMouseMoveTime = currentTime;
       
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
+      // Reduced rotation speed for smoother movement
       primaryTorus.rotation.x += y * 0.01;
       primaryTorus.rotation.y += x * 0.01;
       
@@ -108,13 +109,12 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     window.addEventListener('resize', handleResize);
     
-    // For better performance, we'll use a lower animation frame rate
-    // and use requestAnimationFrame more efficiently
+    // Animation loop with slower rotation for smoother animation
     let frameId: number;
     const animate = () => {
       frameId = requestAnimationFrame(animate);
       
-      // Slower rotation for better performance
+      // Much slower rotation speeds for smoother animation
       primaryTorus.rotation.x += 0.002;
       primaryTorus.rotation.y += 0.002;
       
@@ -138,7 +138,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameId);
       
-      // Dispose resources
+      // Dispose resources to prevent memory leaks
       geometry.dispose();
       primaryMaterial.dispose();
       secondaryMaterial.dispose();
