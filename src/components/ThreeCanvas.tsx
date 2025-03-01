@@ -33,7 +33,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvasRef.current.appendChild(renderer.domElement);
     
-    // Create a more organic, flowing geometry using curves
+    // Create geometry - use curved, organic shapes for more fluid animation
+    // Using CurveModifier for more organic movement
     const curvePoints = [];
     for (let i = 0; i < 10; i++) {
       const t = i / 9;
@@ -52,7 +53,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     // Create a more organic, flowing geometry
     const geometry = new THREE.TubeGeometry(curve, 100, 0.1, 20, true);
     
-    // Use a harmonious color scheme
+    // Use the new color scheme
     const indigoMaterial = new THREE.MeshBasicMaterial({ 
       color: 0x1E0F48, // deep indigo
       wireframe: true,
@@ -67,8 +68,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       opacity: 0.7,
     });
     
-    const electricBlueMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x00C2FF, // electric blue
+    const violetMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x9D4EDD, // soft violet glow
       wireframe: true,
       transparent: true,
       opacity: 0.5,
@@ -83,10 +84,10 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     tealMesh.rotation.set(0, Math.PI / 4, 0);
     scene.add(tealMesh);
     
-    const blueMesh = new THREE.Mesh(geometry, electricBlueMaterial);
-    blueMesh.scale.set(1.4, 1.4, 1.4);
-    blueMesh.rotation.set(0, Math.PI / 2, 0);
-    scene.add(blueMesh);
+    const violetMesh = new THREE.Mesh(geometry, violetMaterial);
+    violetMesh.scale.set(1.4, 1.4, 1.4);
+    violetMesh.rotation.set(0, Math.PI / 2, 0);
+    scene.add(violetMesh);
     
     // Create pulsing light points along the curves
     const lightPointsCount = 20;
@@ -174,6 +175,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     window.addEventListener('resize', handleResize);
     
     // For better performance, we'll use a lower animation frame rate
+    // and use requestAnimationFrame more efficiently
     let frameId: number;
     let time = 0;
     
@@ -188,15 +190,15 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       frameId = requestAnimationFrame(animate);
       time += 0.005;
       
-      // Apply smooth, fluid movement using elastic easing
+      // Apply organic, fluid movement using elastic easing
       indigoMesh.rotation.x = 0.2 * Math.sin(time * 0.5);
       indigoMesh.rotation.y = 0.2 * Math.cos(time * 0.7);
       
       tealMesh.rotation.x = 0.2 * Math.sin(time * 0.3 + 1);
       tealMesh.rotation.y = 0.2 * Math.cos(time * 0.5 + 1);
       
-      blueMesh.rotation.x = 0.2 * Math.sin(time * 0.2 + 2);
-      blueMesh.rotation.y = 0.2 * Math.cos(time * 0.4 + 2);
+      violetMesh.rotation.x = 0.2 * Math.sin(time * 0.2 + 2);
+      violetMesh.rotation.y = 0.2 * Math.cos(time * 0.4 + 2);
       
       // Animate light points with pulsing
       lightPoints.forEach(point => {
@@ -235,7 +237,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       geometry.dispose();
       indigoMaterial.dispose();
       tealMaterial.dispose();
-      electricBlueMaterial.dispose();
+      violetMaterial.dispose();
       pointGeometry.dispose();
       pointMaterial.dispose();
       renderer.dispose();
