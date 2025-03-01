@@ -13,10 +13,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em rgba(0, 194, 255, 0.7));
+  filter: drop-shadow(0 0 2em rgba(150, 150, 150, 0.7));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em rgba(0, 194, 255, 0.7));
+  filter: drop-shadow(0 0 2em rgba(150, 150, 150, 0.7));
 }
 
 @keyframes logo-spin {
@@ -44,19 +44,18 @@
 
 /* Dark mode specific styles */
 .dark body {
-  background-color: #0A0A0F;
+  background-color: #121212;
   color: #e0e0e0;
-  font-family: 'League Spartan', sans-serif;
 }
 
 .dark .glassmorphism {
-  background-color: rgba(30, 15, 72, 0.5);
+  background-color: rgba(30, 30, 30, 0.5);
   backdrop-filter: blur(8px);
-  border-color: rgba(0, 139, 148, 0.5);
+  border-color: rgba(50, 50, 50, 0.5);
 }
 
 .dark .glow::after {
-  background: radial-gradient(circle, rgba(157, 78, 221, 0.3) 0%, rgba(30, 15, 72, 0.1) 70%);
+  background: radial-gradient(circle, rgba(60, 60, 60, 0.3) 0%, rgba(20, 20, 20, 0.1) 70%);
 }
 
 /* Three.js canvas specific styles */
@@ -78,15 +77,3 @@
   font-family: 'Intro Rust', serif;
 }
 
-/* Ensure no Times New Roman anywhere */
-* {
-  font-family: 'League Spartan', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'League Spartan', sans-serif;
-}
-
-.accent-text {
-  font-family: 'Intro Rust', serif;
-}

@@ -81,31 +81,32 @@ export default {
 					900: '#222222',
 					950: '#141414',
 				},
-				// New color scheme
-				indigo: {
-					DEFAULT: '#1E0F48',
-					light: '#362A73',
-					dark: '#150A33',
+				amber: {
+					light: '#ffd28a',
+					DEFAULT: '#d4a257',
+					dark: '#8c6931',
+				},
+				green: {
+					100: '#e6f3e6',
+					200: '#c2e0c2',
+					300: '#9ec89e',
+					400: '#7ab17a',
+					500: '#569956',
+					600: '#458a45',
+					700: '#347834',
+					800: '#236723',
+					900: '#124b12',
 				},
 				teal: {
-					DEFAULT: '#008B94',
-					light: '#00B5C0',
-					dark: '#006B73',
-				},
-				electric: {
-					DEFAULT: '#00C2FF',
-					light: '#4DD6FF',
-					dark: '#0099CC',
-				},
-				violet: {
-					DEFAULT: '#9D4EDD',
-					light: '#B77FE8',
-					dark: '#7B3CAB',
-				},
-				cosmic: {
-					DEFAULT: '#0A0A0F',
-					light: '#1A1A24',
-					dark: '#050508',
+					100: '#e6f5f5',
+					200: '#c1e3e3',
+					300: '#9cd1d1',
+					400: '#77bebe',
+					500: '#52acac',
+					600: '#429a9a',
+					700: '#318686',
+					800: '#217272',
+					900: '#105151',
 				},
 			},
 			borderRadius: {
@@ -163,13 +164,6 @@ export default {
 					'50%': { borderRadius: '30% 60% 70% 40%/50% 60% 30% 60%' },
 					'100%': { borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%' },
 				},
-				'liquid-flow': {
-					'0%': { transform: 'translateX(0) translateY(0)' },
-					'25%': { transform: 'translateX(5px) translateY(-5px)' },
-					'50%': { transform: 'translateX(0) translateY(-10px)' },
-					'75%': { transform: 'translateX(-5px) translateY(-5px)' },
-					'100%': { transform: 'translateX(0) translateY(0)' },
-				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -184,11 +178,10 @@ export default {
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
 				'rotate-slow': 'rotate-slow 15s linear infinite',
 				'morph': 'morph 8s ease-in-out infinite',
-				'liquid-flow': 'liquid-flow 10s cubic-bezier(0.37, 0, 0.63, 1) infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'data-grid': 'linear-gradient(to right, rgba(0, 194, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 194, 255, 0.1) 1px, transparent 1px)',
+				'data-grid': 'linear-gradient(to right, rgba(65, 65, 65, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(65, 65, 65, 0.1) 1px, transparent 1px)',
 			},
 			backdropFilter: {
 				'none': 'none',
