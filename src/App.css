@@ -70,10 +70,22 @@
 
 /* Font classes for consistency */
 .font-league {
-  font-family: 'League Spartan', sans-serif;
+  font-family: 'League Spartan', sans-serif !important;
 }
 
 .font-intro {
-  font-family: 'Intro Rust', serif;
+  font-family: 'Intro Rust', serif !important;
 }
 
+/* Force removal of any other font families */
+* {
+  font-family: inherit;
+}
+
+body {
+  font-family: 'League Spartan', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Intro Rust', 'League Spartan', sans-serif;
+}
