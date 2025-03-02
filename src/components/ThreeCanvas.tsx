@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -43,7 +44,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     const gap = 0.05;
     const totalSize = 3 * cubeSize + 2 * gap; // 3 cubes + 2 gaps
     
-    // Materials for the skeletal cube
+    // Materials for the skeletal cube - fully transparent with just edges
     const edgeMaterial = new THREE.LineBasicMaterial({ 
       color: 0xd4a257,
       transparent: true,
@@ -79,22 +80,6 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
           const edgeGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
           const edges = new THREE.EdgesGeometry(edgeGeometry);
           const line = new THREE.LineSegments(edges, edgeMaterial);
-          
-          // Add colored faces with low opacity for subtle color indication
-          const colorMaterials = [
-            new THREE.MeshBasicMaterial({ color: 0xff5555, transparent: true, opacity: 0.2 }), // Red
-            new THREE.MeshBasicMaterial({ color: 0xff9955, transparent: true, opacity: 0.2 }), // Orange
-            new THREE.MeshBasicMaterial({ color: 0xffff55, transparent: true, opacity: 0.2 }), // Yellow
-            new THREE.MeshBasicMaterial({ color: 0x55ff55, transparent: true, opacity: 0.2 }), // Green
-            new THREE.MeshBasicMaterial({ color: 0x5555ff, transparent: true, opacity: 0.2 }), // Blue
-            new THREE.MeshBasicMaterial({ color: 0xff55ff, transparent: true, opacity: 0.2 }), // Purple
-          ];
-          
-          // Add subtle colored faces only to the outer visible faces
-          if (x === 0 || x === 2 || y === 0 || y === 2 || z === 0 || z === 2) {
-            const faceMesh = new THREE.Mesh(edgeGeometry, colorMaterials);
-            miniCube.add(faceMesh);
-          }
           
           miniCube.add(line);
           cubeGroup.add(miniCube);
@@ -152,6 +137,14 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     window.addEventListener('resize', handleResize, { passive: true });
     
+    // Auto-solve variables
+    let isAutoSolving = false;
+    let autoSolveStartTime = 0;
+    let lastOperationTime = 0;
+    const operationInterval = 500; // ms between each rotation
+    const maxOperations = 10; // Maximum number of operations for a solve cycle
+    const solveDuration = 5000; // Total solving time in ms
+    
     // Cube solving animation variables
     let isAnimating = false;
     let animationStep = 0;
@@ -159,6 +152,28 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     let cubesToRotate: any[] = [];
     let rotationAxis = new THREE.Vector3(1, 0, 0);
     let rotationAngle = 0;
+    
+    // Auto-solve the cube (automatically scramble then solve)
+    const autoSolveCycle = () => {
+      if (isAnimating || isAutoSolving) return;
+      
+      isAutoSolving = true;
+      autoSolveStartTime = Date.now();
+      lastOperationTime = 0;
+      
+      // First scramble the cube
+      scrambleCube();
+      
+      // Then solve it after a delay
+      setTimeout(() => {
+        solveCube();
+        
+        // End auto-solving cycle
+        setTimeout(() => {
+          isAutoSolving = false;
+        }, solveDuration);
+      }, operationInterval * maxOperations);
+    };
     
     // Random cube scrambler
     const scrambleCube = () => {
@@ -331,33 +346,22 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       
       solveAnimation();
     };
-    
-    // Hover interaction
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-    
-    const onMouseMove = (event: MouseEvent) => {
-      // Calculate mouse position in normalized device coordinates
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Automatically start the auto-solve cycle
+    const startInitialAnimation = () => {
+      setTimeout(autoSolveCycle, 1000);
       
-      // Update the picking ray
-      raycaster.setFromCamera(mouse, camera);
-      
-      // Check if mouse is hovering over the cube
-      const intersects = raycaster.intersectObjects(scene.children, true);
-      
-      if (intersects.length > 0 && !isSolving) {
-        if (!isAnimating) {
-          scrambleCube();
-          setTimeout(() => {
-            solveCube();
-          }, 3000);
+      // Set up interval for continuous animation
+      const autoSolveInterval = setInterval(() => {
+        if (!isAutoSolving && !isAnimating) {
+          autoSolveCycle();
         }
-      }
+      }, 15000); // Every 15 seconds attempt to start a new cycle
+      
+      return autoSolveInterval;
     };
     
-    window.addEventListener('click', onMouseMove);
+    const autoSolveInterval = startInitialAnimation();
     
     // Animation loop
     let frameId: number;
@@ -400,7 +404,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('click', onMouseMove);
+      
+      clearInterval(autoSolveInterval);
       
       if (frameId) {
         cancelAnimationFrame(frameId);
