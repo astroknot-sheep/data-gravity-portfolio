@@ -12,21 +12,21 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Create scene
+    // Create scene with better depth
     const scene = new THREE.Scene();
     
-    // Create camera with optimized FOV
+    // Create camera with improved FOV for immersive experience
     const camera = new THREE.PerspectiveCamera(
-      65, // Reduced FOV for better performance
+      75, // Wider FOV for more immersive effect
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 4;
     
-    // Create renderer with optimized settings
+    // High-quality renderer with improved settings
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: window.devicePixelRatio < 2, // Only use antialiasing on lower DPI screens
+      antialias: true,
       alpha: true,
       powerPreference: 'high-performance',
     });
@@ -34,70 +34,99 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvasRef.current.appendChild(renderer.domElement);
     
-    // Create simplified geometry
-    const geometry = new THREE.TorusKnotGeometry(1, 0.4, 48, 8);
+    // Create a group to hold all objects
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
     
-    // Create materials with amber tones
-    const primaryMaterial = new THREE.MeshBasicMaterial({ 
+    // Create custom organic shapes
+    // First shape: Flowing wave-like structure
+    const wavePoints = [];
+    const waveRadius = 1.5;
+    for (let i = 0; i <= 50; i++) {
+      const angle = (i / 50) * Math.PI * 2;
+      const x = waveRadius * Math.cos(angle);
+      const y = waveRadius * Math.sin(angle);
+      // Add wave effect
+      const z = Math.sin(angle * 4) * 0.2;
+      wavePoints.push(new THREE.Vector3(x, y, z));
+    }
+    
+    // Create a smooth curve from the points
+    const waveCurve = new THREE.CatmullRomCurve3(wavePoints);
+    waveCurve.closed = true;
+    
+    // Create a tube geometry along the curve
+    const waveGeometry = new THREE.TubeGeometry(waveCurve, 100, 0.08, 16, true);
+    
+    // Create materials with elegant gold/amber gradient
+    const waveMaterial = new THREE.MeshBasicMaterial({ 
       color: 0xd4a257,
-      wireframe: true
-    });
-    
-    const secondaryMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x8c6931,
-      wireframe: true
-    });
-    
-    const accentMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0xffd28a,
-      wireframe: true
+      wireframe: true,
+      transparent: true,
+      opacity: 0.8
     });
     
     // Create meshes
-    const primaryTorus = new THREE.Mesh(geometry, primaryMaterial);
-    scene.add(primaryTorus);
+    const waveMesh = new THREE.Mesh(waveGeometry, waveMaterial);
+    mainGroup.add(waveMesh);
     
-    const secondaryTorus = new THREE.Mesh(geometry, secondaryMaterial);
-    secondaryTorus.scale.set(1.1, 1.1, 1.1);
-    secondaryTorus.rotation.set(0, Math.PI / 4, 0);
-    scene.add(secondaryTorus);
+    // Second shape: Angular flowing form
+    const flowGeometry = new THREE.TorusKnotGeometry(1.2, 0.2, 128, 32, 2, 3);
+    const flowMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xffd28a,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.6
+    });
+    const flowMesh = new THREE.Mesh(flowGeometry, flowMaterial);
+    flowMesh.rotation.x = Math.PI / 6;
+    mainGroup.add(flowMesh);
     
-    const accentTorus = new THREE.Mesh(geometry, accentMaterial);
-    accentTorus.scale.set(1.2, 1.2, 1.2);
-    accentTorus.rotation.set(0, Math.PI / 2, 0);
-    scene.add(accentTorus);
+    // Third shape: Outer angular structure
+    const outerGeometry = new THREE.TorusKnotGeometry(1.7, 0.05, 150, 16, 3, 7);
+    const outerMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x8c6931,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.4
+    });
+    const outerMesh = new THREE.Mesh(outerGeometry, outerMaterial);
+    outerMesh.rotation.x = Math.PI / 3;
+    mainGroup.add(outerMesh);
     
     // Add ambient light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     
-    // Improve mouse movement performance
+    // Improve mouse movement performance with throttling
     let lastMouseMoveTime = 0;
-    const throttleMs = 80; // Further reduce update frequency
+    const throttleMs = 60; // Balance smoothness and performance
+    
+    // Mouse movement variables for inertia
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+    const inertiaFactor = 0.03; // Smooth follow factor
     
     const handleMouseMove = (event: MouseEvent) => {
       const currentTime = Date.now();
       if (currentTime - lastMouseMoveTime < throttleMs) return;
       lastMouseMoveTime = currentTime;
       
+      // Convert mouse position to normalized coordinates (-1 to 1)
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
-      // Even smoother rotation with reduced multipliers
-      primaryTorus.rotation.x += y * 0.005;
-      primaryTorus.rotation.y += x * 0.005;
-      
-      secondaryTorus.rotation.x += y * 0.004;
-      secondaryTorus.rotation.y += x * 0.004;
-      
-      accentTorus.rotation.x += y * 0.003;
-      accentTorus.rotation.y += x * 0.003;
+      // Set target rotation based on mouse position
+      targetRotationX = y * 0.3; // Reduced factor for subtler effect
+      targetRotationY = x * 0.3;
     };
     
-    // Use passive event listener for touch events
+    // Use passive event listener for performance
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     
-    // More efficient resize handler
+    // More efficient resize handler with debouncing
     let resizeTimeout: number | null = null;
     const handleResize = () => {
       if (resizeTimeout) window.clearTimeout(resizeTimeout);
@@ -106,33 +135,40 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-      }, 150); // Longer debounce for resize
+      }, 150);
     };
     
     window.addEventListener('resize', handleResize, { passive: true });
     
-    // Optimize animation loop
+    // Optimize animation loop with request animation frame timing
     let frameId: number;
     let lastFrameTime = 0;
-    const targetFPS = 30; // Cap to 30 FPS for performance
+    const targetFPS = 60; // Target 60 FPS for smooth animation
     const frameInterval = 1000 / targetFPS;
     
     const animate = (currentTime: number) => {
       frameId = requestAnimationFrame(animate);
       
-      // Skip frames to maintain target FPS
+      // Limit frame rate for consistent performance
       if (currentTime - lastFrameTime < frameInterval) return;
       lastFrameTime = currentTime;
       
-      // Ultra-slow rotation for smoother animation
-      primaryTorus.rotation.x += 0.001;
-      primaryTorus.rotation.y += 0.001;
+      // Apply inertia for smooth rotation
+      currentRotationX += (targetRotationX - currentRotationX) * inertiaFactor;
+      currentRotationY += (targetRotationY - currentRotationY) * inertiaFactor;
       
-      secondaryTorus.rotation.x += 0.0005;
-      secondaryTorus.rotation.y += 0.0005;
+      // Apply rotation to the main group
+      mainGroup.rotation.x = currentRotationX;
+      mainGroup.rotation.y = currentRotationY;
       
-      accentTorus.rotation.x += 0.00025;
-      accentTorus.rotation.y += 0.00025;
+      // Continuous subtle rotation for constant motion
+      waveMesh.rotation.z += 0.001;
+      flowMesh.rotation.z += 0.0007;
+      outerMesh.rotation.z -= 0.0005;
+      
+      // Slight pulsing effect for more organic feel
+      const pulseFactor = Math.sin(currentTime * 0.0005) * 0.03 + 1;
+      mainGroup.scale.set(pulseFactor, pulseFactor, pulseFactor);
       
       renderer.render(scene, camera);
     };
@@ -141,7 +177,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     // Comprehensive cleanup
     return () => {
-      if (canvasRef.current) {
+      if (canvasRef.current && renderer.domElement) {
         if (canvasRef.current.contains(renderer.domElement)) {
           canvasRef.current.removeChild(renderer.domElement);
         }
@@ -154,15 +190,18 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
         cancelAnimationFrame(frameId);
       }
       
-      // Dispose all THREE.js resources
-      geometry.dispose();
-      primaryMaterial.dispose();
-      secondaryMaterial.dispose();
-      accentMaterial.dispose();
+      // Dispose all THREE.js resources to prevent memory leaks
+      waveGeometry.dispose();
+      flowGeometry.dispose();
+      outerGeometry.dispose();
+      waveMaterial.dispose();
+      flowMaterial.dispose();
+      outerMaterial.dispose();
       renderer.dispose();
       
-      // Clear references
+      // Clear references and scene
       scene.clear();
+      mainGroup.clear();
     };
   }, []);
 
