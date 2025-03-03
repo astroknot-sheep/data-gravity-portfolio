@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -42,7 +41,6 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     // Cube parameters
     const cubeSize = 1;
     const gap = 0.05;
-    const totalSize = 3 * cubeSize + 2 * gap; // 3 cubes + 2 gaps
     
     // Materials for the skeletal cube - fully transparent with just edges
     const edgeMaterial = new THREE.LineBasicMaterial({ 
@@ -101,10 +99,6 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
     
-    // Mouse movement tracking with performance optimization
-    let lastMouseMoveTime = 0;
-    const throttleMs = 30;
-    
     // Rotation variables
     let targetRotationX = 0;
     let targetRotationY = 0;
@@ -112,18 +106,15 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     let currentRotationY = 0;
     const inertiaFactor = 0.05;
     
+    // Handle mouse movement with reduced sensitivity to prevent cube destruction
     const handleMouseMove = (event: MouseEvent) => {
-      const currentTime = Date.now();
-      if (currentTime - lastMouseMoveTime < throttleMs) return;
-      lastMouseMoveTime = currentTime;
-      
       // Convert mouse position to normalized coordinates (-1 to 1)
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
-      // Set target rotation based on mouse position
-      targetRotationX = y * 0.8;
-      targetRotationY = x * 0.8;
+      // Reduce sensitivity to prevent "cube destruction"
+      targetRotationX = y * 0.3; // Reduced from 0.8
+      targetRotationY = x * 0.3; // Reduced from 0.8
     };
     
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -142,8 +133,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     let autoSolveStartTime = 0;
     let lastOperationTime = 0;
     const operationInterval = 500; // ms between each rotation
-    const maxOperations = 10; // Maximum number of operations for a solve cycle
-    const solveDuration = 5000; // Total solving time in ms
+    const maxOperations = 5; // Reduced number of operations for faster cycles
+    const solveDuration = 3000; // Reduced solving time for faster cycles
     
     // Cube solving animation variables
     let isAnimating = false;
@@ -183,7 +174,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       setIsSolving(false);
       
       // Apply random rotations
-      const scrambles = 5;
+      const scrambles = 3; // Reduced from 5 for faster cycles
       let delay = 0;
       
       for (let i = 0; i < scrambles; i++) {
@@ -192,7 +183,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
           const clockwise = Math.random() > 0.5;
           rotateFace(face, clockwise);
         }, delay);
-        delay += 500;
+        delay += 400; // Reduced from 500 for faster cycles
       }
     };
     
@@ -302,7 +293,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       setIsSolving(true);
       
       // Simple animation to return cubes to original positions
-      const duration = 1500; // ms
+      const duration = 1200; // Reduced from 1500 for faster cycles
       const startTime = Date.now();
       
       const startPositions = miniCubes.map(cube => ({
@@ -356,14 +347,14 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
         if (!isAutoSolving && !isAnimating) {
           autoSolveCycle();
         }
-      }, 15000); // Every 15 seconds attempt to start a new cycle
+      }, 12000); // Reduced from 15000 for faster cycles
       
       return autoSolveInterval;
     };
     
     const autoSolveInterval = startInitialAnimation();
     
-    // Animation loop
+    // Animation loop with frame rate limiting
     let frameId: number;
     let lastFrameTime = 0;
     const targetFPS = 60;
@@ -372,7 +363,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     const animate = (currentTime: number) => {
       frameId = requestAnimationFrame(animate);
       
-      // Limit frame rate
+      // Limit frame rate for better performance
       if (currentTime - lastFrameTime < frameInterval) return;
       lastFrameTime = currentTime;
       
@@ -380,9 +371,10 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       currentRotationX += (targetRotationX - currentRotationX) * inertiaFactor;
       currentRotationY += (targetRotationY - currentRotationY) * inertiaFactor;
       
-      // Apply rotation to the entire cube group
-      cubeGroup.rotation.x = currentRotationX;
-      cubeGroup.rotation.y = currentRotationY;
+      // Apply rotation to the entire cube group - clamped to prevent destruction
+      // This prevents the cube from rotating too far and "crumbling"
+      cubeGroup.rotation.x = Math.max(-0.8, Math.min(0.8, currentRotationX));
+      cubeGroup.rotation.y = Math.max(-0.8, Math.min(0.8, currentRotationY));
       
       // Subtle constant rotation
       if (!isAnimating && !isSolving) {

@@ -18,7 +18,7 @@ interface ParticleFieldProps {
   cursorTrail?: boolean;
 }
 
-export default function ParticleField({ count = 50, cursorTrail = true }: ParticleFieldProps) {
+export default function ParticleField({ count = 30, cursorTrail = true }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const particlesRef = useRef<Particle[]>([]);
@@ -28,8 +28,6 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
   const colors = [
     "rgba(176, 127, 244, 0.7)", // Purple
     "rgba(245, 158, 11, 0.7)",  // Amber
-    "rgba(139, 92, 246, 0.7)",  // Indigo
-    "rgba(249, 115, 22, 0.7)",  // Orange
   ];
 
   const createParticle = (x: number, y: number, fromCursor = false): Particle => {
@@ -40,12 +38,12 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       id: Math.random(),
       x,
       y,
-      size: fromCursor ? Math.random() * 4 + 2 : Math.random() * 3 + 1,
+      size: fromCursor ? Math.random() * 3 + 2 : Math.random() * 2 + 1,
       color: colors[Math.floor(Math.random() * colors.length)],
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
       life: 0,
-      maxLife: fromCursor ? Math.random() * 40 + 20 : Math.random() * 200 + 50
+      maxLife: fromCursor ? Math.random() * 30 + 15 : Math.random() * 150 + 50
     };
   };
 
@@ -81,22 +79,19 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       
-      // Add particles on mouse move with rate limiting
-      if (cursorTrail && Date.now() - lastEmitTime.current > 50) {
+      // Add particles on mouse move with rate limiting (slower emission rate)
+      if (cursorTrail && Date.now() - lastEmitTime.current > 100) { // Increased from 50 to 100ms for performance
         lastEmitTime.current = Date.now();
         
         if (particlesRef.current) {
-          const cursorParticles = [
-            createParticle(e.clientX, e.clientY, true),
-            createParticle(e.clientX, e.clientY, true)
-          ];
-          particlesRef.current = [...particlesRef.current, ...cursorParticles];
+          const cursorParticle = createParticle(e.clientX, e.clientY, true);
+          particlesRef.current = [...particlesRef.current, cursorParticle];
         }
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     
     handleResize();
     
@@ -115,7 +110,17 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     
     if (!ctx) return;
 
-    const animate = () => {
+    let lastAnimTime = 0;
+    const animInterval = 1000 / 40; // Cap at 40fps for better performance
+
+    const animate = (timestamp: number) => {
+      // Frame rate limiting for better performance
+      if (timestamp - lastAnimTime < animInterval) {
+        animationFrameId.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastAnimTime = timestamp;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       const updatedParticles = particlesRef.current.filter(p => p.life < p.maxLife);
@@ -126,8 +131,8 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         const dy = mousePosition.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 200 && distance > 5) {
-          const force = 0.2 / distance;
+        if (distance < 150 && distance > 5) { // Reduced from 200 to 150 for performance
+          const force = 0.15 / distance;
           particle.vx += dx * force;
           particle.vy += dy * force;
         }
@@ -151,9 +156,9 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         ctx.fill();
       });
       
-      // Add new particles to replace those that died
+      // Add new particles to replace those that died (with a limit on total particles)
       if (updatedParticles.length < count) {
-        const newCount = count - updatedParticles.length;
+        const newCount = Math.min(3, count - updatedParticles.length); // Add at most 3 at once
         for (let i = 0; i < newCount; i++) {
           updatedParticles.push(
             createParticle(
@@ -168,7 +173,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       animationFrameId.current = requestAnimationFrame(animate);
     };
     
-    animate();
+    animationFrameId.current = requestAnimationFrame(animate);
     
     return () => {
       cancelAnimationFrame(animationFrameId.current);

@@ -14,12 +14,21 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const interactiveElementsRef = useRef<NodeListOf<Element> | null>(null);
+  const lastUpdateTime = useRef(0);
 
   useEffect(() => {
+    // Only apply custom cursor on non-touch devices
+    if ('ontouchstart' in window) return;
+
     // Hide default cursor
     document.body.style.cursor = "none";
 
     const updateCursorPosition = (e: MouseEvent) => {
+      // Throttle updates for better performance
+      const now = Date.now();
+      if (now - lastUpdateTime.current < 16) return; // ~60fps
+      lastUpdateTime.current = now;
+
       setPosition({ x: e.clientX, y: e.clientY });
       setHidden(false);
       
@@ -38,10 +47,10 @@ export default function Cursor() {
     const handleMouseEnter = () => setHidden(false);
 
     document.addEventListener("mousemove", updateCursorPosition, { passive: true });
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mousedown", handleMouseDown, { passive: true });
+    document.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    document.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
     // Add event listeners to all links and interactive elements - once at mount
     interactiveElementsRef.current = document.querySelectorAll(
@@ -49,8 +58,8 @@ export default function Cursor() {
     );
 
     interactiveElementsRef.current.forEach((element) => {
-      element.addEventListener("mouseenter", handleLinkHoverOn);
-      element.addEventListener("mouseleave", handleLinkHoverOff);
+      element.addEventListener("mouseenter", handleLinkHoverOn, { passive: true });
+      element.addEventListener("mouseleave", handleLinkHoverOff, { passive: true });
     });
 
     return () => {
@@ -70,48 +79,40 @@ export default function Cursor() {
     };
   }, []);
 
-  // Mutation observer to detect new interactive elements
+  // Use a more efficient way to detect interactive elements
   useEffect(() => {
-    const updateInteractiveElements = () => {
-      if (interactiveElementsRef.current) {
-        const handleLinkHoverOn = () => setLinkHovered(true);
-        const handleLinkHoverOff = () => setLinkHovered(false);
-  
-        interactiveElementsRef.current.forEach((element) => {
-          element.removeEventListener("mouseenter", handleLinkHoverOn);
-          element.removeEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
+    if ('ontouchstart' in window) return; // Skip on touch devices
+    
+    // Use event delegation instead of attaching listeners to every element
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = 
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.classList.contains('interactive') ||
+        target.tagName === 'INPUT' ||
+        target.tagName === 'SELECT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.getAttribute('role') === 'button';
       
-      interactiveElementsRef.current = document.querySelectorAll(
-        "a, button, .interactive, input, select, textarea, [role='button']"
-      );
-  
-      const handleLinkHoverOn = () => setLinkHovered(true);
-      const handleLinkHoverOff = () => setLinkHovered(false);
-  
-      if (interactiveElementsRef.current) {
-        interactiveElementsRef.current.forEach((element) => {
-          element.addEventListener("mouseenter", handleLinkHoverOn);
-          element.addEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
+      setLinkHovered(isInteractive);
     };
-  
-    // Set up mutation observer instead of interval
-    const observer = new MutationObserver(updateInteractiveElements);
-    observer.observe(document.body, { 
-      childList: true, 
-      subtree: true 
-    });
-  
-    // Initial setup
-    updateInteractiveElements();
-  
-    return () => observer.disconnect();
+    
+    const handleMouseOut = () => {
+      setLinkHovered(false);
+    };
+    
+    document.addEventListener('mouseover', handleMouseOver, { passive: true });
+    document.addEventListener('mouseout', handleMouseOut, { passive: true });
+    
+    return () => {
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+    };
   }, []);
 
-  if (typeof window === "undefined") return null;
+  // Skip rendering on touch devices or server-side
+  if (typeof window === "undefined" || ('ontouchstart' in window)) return null;
 
   return (
     <>
