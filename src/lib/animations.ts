@@ -82,3 +82,62 @@ export function useCursorPosition() {
   
   return position;
 }
+
+// Custom hook for card tilt effect based on mouse position
+export function useCardTilt() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calculate distance from center
+      const x = e.clientX - centerX;
+      const y = e.clientY - centerY;
+      
+      // Apply subtle tilt effect (maximum 5 degrees)
+      const tiltX = (y / (rect.height / 2)) * 5;
+      const tiltY = (x / (rect.width / 2)) * -5;
+      
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    };
+    
+    const handleMouseLeave = () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    };
+    
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseleave', handleMouseLeave);
+    
+    return () => {
+      card.removeEventListener('mousemove', handleMouseMove);
+      card.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+  
+  return cardRef;
+}
+
+// Custom hook for staggered animations based on index
+export function useStaggeredAnimation(itemCount: number) {
+  const [styles, setStyles] = useState<Array<{ style: React.CSSProperties }>>([]);
+
+  useEffect(() => {
+    const newStyles = Array.from({ length: itemCount }).map((_, index) => ({
+      style: {
+        opacity: 0,
+        transform: 'translateY(20px)',
+        transition: `all 0.5s ease-out ${index * 0.1}s`,
+      }
+    }));
+    
+    setStyles(newStyles);
+  }, [itemCount]);
+
+  return styles;
+}
