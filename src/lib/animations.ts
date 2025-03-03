@@ -83,61 +83,49 @@ export function useCursorPosition() {
   return position;
 }
 
-// Custom hook for card tilt effect based on mouse position
+// Create a tilt effect for 3D cards
 export function useCardTilt() {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
+    const element = ref.current;
+    if (!element) return;
     
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
       
-      // Calculate distance from center
-      const x = e.clientX - centerX;
-      const y = e.clientY - centerY;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
       
-      // Apply subtle tilt effect (maximum 5 degrees)
-      const tiltX = (y / (rect.height / 2)) * 5;
-      const tiltY = (x / (rect.width / 2)) * -5;
+      const tiltX = (y - centerY) / 10;
+      const tiltY = (centerX - x) / 10;
       
-      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      element.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     };
     
     const handleMouseLeave = () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
     };
     
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('mouseleave', handleMouseLeave);
     
     return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener('mousemove', handleMouseMove);
+      element.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
   
-  return cardRef;
+  return ref;
 }
 
-// Custom hook for staggered animations based on index
-export function useStaggeredAnimation(itemCount: number) {
-  const [styles, setStyles] = useState<Array<{ style: React.CSSProperties }>>([]);
-
-  useEffect(() => {
-    const newStyles = Array.from({ length: itemCount }).map((_, index) => ({
-      style: {
-        opacity: 0,
-        transform: 'translateY(20px)',
-        transition: `all 0.5s ease-out ${index * 0.1}s`,
-      }
-    }));
-    
-    setStyles(newStyles);
-  }, [itemCount]);
-
-  return styles;
+// Stagger the animation of multiple elements
+export function useStaggeredAnimation(count: number, delay: number = 0.1) {
+  return Array.from({ length: count }).map((_, index) => ({
+    style: {
+      animationDelay: `${delay * index}s`,
+    },
+  }));
 }

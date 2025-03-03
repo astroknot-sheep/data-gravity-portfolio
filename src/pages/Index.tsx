@@ -23,7 +23,7 @@ export default function Index() {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Smooth scroll for anchor links with passive event listeners for better performance
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -40,14 +40,17 @@ export default function Index() {
           top: targetPosition,
           behavior: 'smooth'
         });
-      }, { passive: false });
+      });
     });
     
+    // Add a class to body for styling purposes
+    document.body.classList.add('portfolio-page');
+    
+    // Make sure fonts are properly loaded
+    document.body.classList.add('font-league');
+    
     return () => {
-      // Clean up event listeners (though this won't run often as Index is the main page)
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', () => {});
-      });
+      document.body.classList.remove('portfolio-page');
     };
   }, []);
 
@@ -56,9 +59,9 @@ export default function Index() {
       {/* Custom cursor */}
       <Cursor />
       
-      {/* Lazy load particle background with reduced particle count */}
+      {/* Lazy load particle background */}
       <Suspense fallback={null}>
-        <ParticleField count={20} />
+        <ParticleField count={30} />
       </Suspense>
       
       {/* Navigation */}

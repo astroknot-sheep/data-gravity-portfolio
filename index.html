@@ -5,11 +5,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Data Scientist & ML Engineer Portfolio - Dhriman Deka" />
-    <title>Dhriman Deka | Data Scientist & ML Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Data Scientist Portfolio</title>
+    <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
+    <!-- League Spartan font with preload for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Intro Rust font -->
+    <style>
+      @font-face {
+        font-family: 'Intro Rust';
+        src: url('/fonts/IntroRust-Base.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      /* Force font family throughout the application - strengthen selectors */
+      html, body, input, button, textarea, select, div, p, span, a {
+        font-family: 'League Spartan', sans-serif !important;
+      }
+      
+      h1, h2, h3, h4, h5, h6, .font-intro {
+        font-family: 'Intro Rust', 'League Spartan', sans-serif !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
