@@ -38,12 +38,12 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
-      {/* Three.js background */}
+      {/* Enhanced Three.js background with higher z-index to ensure it stays behind content */}
       <div className="absolute inset-0 z-0">
         <ThreeCanvas />
       </div>
       
-      {/* Background gradient and shapes */}
+      {/* Background gradient and shapes with slightly reduced opacity for better contrast */}
       <div className="absolute inset-0 -z-10">
         <div 
           ref={parallaxBackgroundRef}
@@ -53,50 +53,45 @@ export default function HeroSection() {
         {/* Background grid with subtle effect */}
         <div className="absolute inset-0 bg-data-grid bg-[length:30px_30px] opacity-20" />
         
-        {/* Decorative elements */}
+        {/* Decorative elements with refined styling */}
         <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-amber-300/10 dark:bg-amber-700/10 blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-amber-300/10 dark:bg-amber-700/10 blur-3xl animate-float" />
         
-        {/* Animated morphing blob */}
+        {/* Animated morphing blob with increased size and more subtle effect */}
         <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-amber-400/15 to-amber-400/15 rounded-full blur-3xl animate-morph" />
       </div>
       
-      {/* Semi-transparent backdrop for better text readability */}
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-10">
-        {/* Intentionally empty for the backdrop effect */}
-      </div>
-      
-      {/* Main content */}
+      {/* Main content with increased z-index to ensure it stays on top */}
       <div className="container mx-auto px-6 z-20 relative">
         <div className="max-w-4xl mx-auto text-center">
           <div 
             ref={parallaxContentRef}
-            className="relative p-8 rounded-xl bg-black/40 backdrop-blur-sm border border-white/10"
+            className="relative"
           >
-            {/* Badge with improved contrast */}
-            <span className="chip mb-6 inline-block px-4 py-2 text-sm bg-amber-500/40 text-white backdrop-blur-sm border border-amber-400/30 shadow-lg">Data Scientist & ML Engineer</span>
+            {/* Badge with improved styling */}
+            <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
             
             {/* Heading with improved typography and contrast */}
             <h1 className="flex flex-col items-center justify-center">
               <span 
                 ref={title1Animation.ref}
-                className={`block font-bold text-white font-league text-5xl md:text-6xl lg:text-7xl mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${title1Animation.animation}`}
+                className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl ${title1Animation.animation}`}
               >
                 Transforming Data 
               </span>
               <span 
                 ref={title2Animation.ref}
-                className={`block text-amber-300 dark:text-amber-300 font-intro text-5xl md:text-6xl lg:text-7xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${title2Animation.animation}`} 
+                className={`block text-amber-600 dark:text-amber-400 font-intro text-5xl md:text-6xl lg:text-7xl ${title2Animation.animation}`} 
                 style={{ animationDelay: "0.2s" }}
               >
                 Into Insights
               </span>
             </h1>
             
-            {/* Subtitle with improved contrast */}
+            {/* Subtitle with improved contrast and sizing */}
             <p 
               ref={subtitleAnimation.ref}
-              className={`mt-8 text-lg md:text-xl lg:text-2xl text-gray-100 max-w-2xl mx-auto font-league leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] ${subtitleAnimation.animation}`}
+              className={`mt-8 text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto font-league leading-relaxed ${subtitleAnimation.animation}`}
               style={{ animationDelay: "0.4s" }}
             >
               Specialized in building end-to-end ML systems and data-driven solutions
@@ -111,7 +106,7 @@ export default function HeroSection() {
             >
               <a 
                 href="#projects" 
-                className="interactive glassmorphism px-8 py-4 text-lg text-amber-200 font-medium rounded-full shadow-xl hover:shadow-amber-500/20 transition-all duration-300 font-league border border-amber-400/50 bg-amber-900/50 hover:bg-amber-800/60"
+                className="interactive glassmorphism px-8 py-4 text-lg text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-amber-500/30"
               >
                 View My Work
               </a>
@@ -153,11 +148,11 @@ export default function HeroSection() {
         })}
       </div>
       
-      {/* Refined scroll indicator with better contrast */}
+      {/* Refined scroll indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20">
-        <span className="text-sm text-white mb-2 font-league drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Scroll</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400 mb-2 font-league">Scroll</span>
         <svg 
-          className="w-6 h-6 text-amber-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" 
+          className="w-6 h-6 text-amber-600 dark:text-amber-400" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24" 
