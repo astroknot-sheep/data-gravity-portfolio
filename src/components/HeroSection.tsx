@@ -61,44 +61,46 @@ export default function HeroSection() {
         <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-amber-400/15 to-amber-400/15 rounded-full blur-3xl animate-morph" />
       </div>
       
-      {/* Main content with increased z-index to ensure it stays on top */}
+      {/* Main content with increased z-index and text readability improvements */}
       <div className="container mx-auto px-6 z-20 relative">
         <div className="max-w-4xl mx-auto text-center">
           <div 
             ref={parallaxContentRef}
-            className="relative"
+            className="relative p-8 rounded-xl backdrop-blur-sm bg-black/15 dark:bg-gray-900/40 shadow-xl"
           >
-            {/* Badge with improved styling */}
-            <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
+            {/* Badge with improved styling and higher contrast */}
+            <span className="chip mb-6 inline-block px-4 py-2 text-sm font-semibold bg-amber-900/40 text-amber-50 backdrop-blur-sm border border-amber-500/30 rounded-full shadow-sm">
+              Data Scientist & ML Engineer
+            </span>
             
-            {/* Heading with improved typography and contrast */}
-            <h1 className="flex flex-col items-center justify-center">
+            {/* Heading with improved typography, spacing, and contrast */}
+            <h1 className="flex flex-col items-center justify-center space-y-2 mb-6">
               <span 
                 ref={title1Animation.ref}
-                className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl ${title1Animation.animation}`}
+                className={`block font-bold text-gray-900 dark:text-amber-50 font-league text-5xl md:text-6xl lg:text-7xl ${title1Animation.animation} drop-shadow-md`}
               >
                 Transforming Data 
               </span>
               <span 
                 ref={title2Animation.ref}
-                className={`block text-amber-600 dark:text-amber-400 font-intro text-5xl md:text-6xl lg:text-7xl ${title2Animation.animation}`} 
+                className={`block text-amber-600 dark:text-amber-300 font-intro text-5xl md:text-6xl lg:text-7xl ${title2Animation.animation} drop-shadow-md`} 
                 style={{ animationDelay: "0.2s" }}
               >
                 Into Insights
               </span>
             </h1>
             
-            {/* Subtitle with improved contrast and sizing */}
+            {/* Subtitle with improved contrast, sizing, and line height */}
             <p 
               ref={subtitleAnimation.ref}
-              className={`mt-8 text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto font-league leading-relaxed ${subtitleAnimation.animation}`}
+              className={`mt-8 text-lg md:text-xl lg:text-2xl text-gray-800 dark:text-gray-100 max-w-2xl mx-auto font-league leading-relaxed tracking-wide ${subtitleAnimation.animation} drop-shadow-sm`}
               style={{ animationDelay: "0.4s" }}
             >
               Specialized in building end-to-end ML systems and data-driven solutions
               with expertise in Python, Deep Learning, and MLOps.
             </p>
             
-            {/* Call to action with improved visual appeal */}
+            {/* Call to action with improved visual appeal and contrast */}
             <div 
               ref={buttonAnimation.ref}
               className={`mt-12 ${buttonAnimation.animation}`}
@@ -106,7 +108,7 @@ export default function HeroSection() {
             >
               <a 
                 href="#projects" 
-                className="interactive glassmorphism px-8 py-4 text-lg text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-amber-500/30"
+                className="interactive glassmorphism px-8 py-4 text-lg font-bold text-amber-800 dark:text-amber-100 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-amber-500/50 hover:bg-amber-500/20"
               >
                 View My Work
               </a>
@@ -169,3 +171,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
