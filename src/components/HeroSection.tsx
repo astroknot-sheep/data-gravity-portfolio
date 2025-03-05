@@ -1,16 +1,23 @@
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
 
 export default function HeroSection() {
   const parallaxBackgroundRef = useRef<HTMLDivElement>(null);
   const parallaxContentRef = useRef<HTMLDivElement>(null);
-  const title1Animation = useScrollAnimation();
-  const title2Animation = useScrollAnimation();
-  const subtitleAnimation = useScrollAnimation();
   const buttonAnimation = useScrollAnimation();
   const cursorPos = useCursorPosition();
+  
+  // State for the sequential messages
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  const messages = [
+    "Hi, I'm Dhriman",
+    "I specialize in solving complex Machine Learning problems and optimizing solutions through Operations Research.",
+    "Let's connect to explore innovative data-driven possibilities!"
+  ];
 
   useEffect(() => {
     const backgroundElement = parallaxBackgroundRef.current;
@@ -21,11 +28,21 @@ export default function HeroSection() {
     const cleanupBackground = applyParallax(backgroundElement, 100);
     const cleanupContent = applyParallax(contentElement, -30);
     
+    // Set up message transition
+    const messageTimer = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setMessageIndex((prev) => (prev + 1) % messages.length);
+        setIsAnimating(false);
+      }, 500); // 500ms for fade out
+    }, 4000); // Change message every 4 seconds
+    
     return () => {
       cleanupBackground();
       cleanupContent();
+      clearInterval(messageTimer);
     };
-  }, []);
+  }, [messages.length]);
 
   // Memoize the data points to prevent recreating on every render
   const dataPoints = useMemo(() => {
@@ -71,32 +88,16 @@ export default function HeroSection() {
             {/* Badge with improved styling */}
             <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
             
-            {/* Heading with improved typography and contrast */}
-            <h1 className="flex flex-col items-center justify-center">
-              <span 
-                ref={title1Animation.ref}
-                className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl ${title1Animation.animation}`}
+            {/* Animated message display */}
+            <div className="min-h-[220px] flex flex-col items-center justify-center">
+              <h1 
+                className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ${
+                  isAnimating ? 'opacity-0 transform translate-y-5' : 'opacity-100 transform translate-y-0'
+                }`}
               >
-                Transforming Data 
-              </span>
-              <span 
-                ref={title2Animation.ref}
-                className={`block text-amber-600 dark:text-amber-400 font-intro text-5xl md:text-6xl lg:text-7xl ${title2Animation.animation}`} 
-                style={{ animationDelay: "0.2s" }}
-              >
-                Into Insights
-              </span>
-            </h1>
-            
-            {/* Subtitle with improved contrast and sizing */}
-            <p 
-              ref={subtitleAnimation.ref}
-              className={`mt-8 text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto font-league leading-relaxed ${subtitleAnimation.animation}`}
-              style={{ animationDelay: "0.4s" }}
-            >
-              Specialized in building end-to-end ML systems and data-driven solutions
-              with expertise in Python, Deep Learning, and MLOps.
-            </p>
+                {messages[messageIndex]}
+              </h1>
+            </div>
             
             {/* Call to action with improved visual appeal */}
             <div 

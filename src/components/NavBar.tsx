@@ -37,7 +37,7 @@ export default function NavBar() {
           href="#" 
           className="text-xl font-bold text-amber-800 dark:text-amber-400 tracking-tight interactive font-league"
         >
-          Dhriman Deka
+          DHRIMAN DEKA
         </a>
 
         {isMobile ? (
