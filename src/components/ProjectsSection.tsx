@@ -79,8 +79,6 @@ export default function ProjectsSection() {
       id="projects"
       className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
     >
-      <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent z-0"></div>
-      
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12" ref={ref}>
           <motion.h2
@@ -103,25 +101,25 @@ export default function ProjectsSection() {
         
         {/* Project filter tabs */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white dark:bg-gray-800 rounded-full p-1 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setFilter(category.id)}
-                className={`relative px-4 py-2 rounded-full text-sm transition-all ${
+                className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === category.id 
-                    ? "text-white dark:text-gray-900" 
-                    : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                    ? "text-gray-900" 
+                    : "text-gray-300 hover:text-white"
                 }`}
               >
-                {category.name}
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-amber-500 dark:bg-amber-400 rounded-full -z-10"
+                    className="absolute inset-0 bg-amber-400 rounded-full -z-10"
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
+                {category.name}
               </button>
             ))}
           </div>
@@ -130,15 +128,15 @@ export default function ProjectsSection() {
         {/* Projects grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.title}
               layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="h-full"
             >
