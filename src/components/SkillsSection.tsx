@@ -1,6 +1,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useInView, useStaggeredAnimation } from "@/lib/animations";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
 
 interface Skill {
   category: string;
@@ -12,8 +15,12 @@ interface Skill {
 
 export default function SkillsSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
-  const skillsData: Skill[] = [
-    {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState("programming");
+  
+  // Skill data organized by categories for tab filtering
+  const skillsData: Record<string, Skill> = {
+    programming: {
       category: "Programming Languages",
       items: [
         { name: "Python", proficiency: 95 },
@@ -23,7 +30,7 @@ export default function SkillsSection() {
         { name: "Shell Scripting", proficiency: 65 },
       ],
     },
-    {
+    ml: {
       category: "ML & Data Science",
       items: [
         { name: "Regression", proficiency: 90 },
@@ -34,7 +41,7 @@ export default function SkillsSection() {
         { name: "Time Series", proficiency: 75 },
       ],
     },
-    {
+    data: {
       category: "Data Engineering",
       items: [
         { name: "Data Pipelines", proficiency: 85 },
@@ -43,7 +50,7 @@ export default function SkillsSection() {
         { name: "Data Cleaning", proficiency: 90 },
       ],
     },
-    {
+    tools: {
       category: "Tools & Technologies",
       items: [
         { name: "Docker", proficiency: 80 },
@@ -54,131 +61,104 @@ export default function SkillsSection() {
         { name: "Tableau", proficiency: 70 },
       ],
     },
-  ];
+  };
 
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const skillItemAnimations = useStaggeredAnimation(skillsData.length);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!sectionRef.current) return;
-      
-      const rect = sectionRef.current.getBoundingClientRect();
-      setCursorPosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    };
-    
-    const element = sectionRef.current;
-    if (element) {
-      element.addEventListener("mousemove", handleMouseMove);
-    }
-    
-    return () => {
-      if (element) {
-        element.removeEventListener("mousemove", handleMouseMove);
-      }
-    };
-  }, []);
+  // Animation variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   return (
     <section 
       id="skills" 
       ref={sectionRef}
-      className="relative py-20 overflow-hidden bg-gray-50 dark:bg-gray-900"
+      className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-data-grid bg-[length:30px_30px] opacity-30" />
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwLTkuOTQtOC4wNi0xOC0xOC0xOCIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGZpbGw9IiNlMmU4ZjAiIGN4PSIzNiIgY3k9IjE4IiByPSIxIi8+PHBhdGggZD0iTTI0LjMzIDEyYy0xNS43MyAwLTI4LjMzIDEyLjYtMjguMzMgMjguMzNzMTIuNiAyOC4zNCAyOC4zMyAyOC4zNCIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGZpbGw9IiNlMmU4ZjAiIGN4PSIyNC4zMyIgY3k9IjEyIiByPSIxIi8+PHBhdGggZD0iTTU4LjUgNDBjMC0xNS43NC0xMi42LTI4LjM0LTI4LjM0LTI4LjM0Ii8+PC9nPjwvc3ZnPg==')] bg-repeat opacity-5 dark:opacity-1"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16" ref={ref}>
-          <span className="chip mb-3">Expertise</span>
-          <h2 className={`text-4xl font-bold transition-all duration-700 ${
+        <div className="text-center mb-12" ref={ref}>
+          <div className={`transition-all duration-700 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
-            Technical Skills
-          </h2>
-          <p className={`mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-            isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-          }`}>
-            Specialized in machine learning, data science, and engineering with expertise across multiple domains
-          </p>
+            <span className="inline-block px-3 py-1 text-sm font-medium text-amber-800 bg-amber-100 rounded-full dark:bg-amber-900/30 dark:text-amber-300 mb-3">Expertise</span>
+            <h2 className="text-4xl font-bold mb-4">Technical Skills</h2>
+            <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+              Specialized in machine learning, data science, and engineering with expertise across multiple domains
+            </p>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillsData.map((skillGroup, groupIndex) => {
-            const distanceFactor = getDistanceFactor(
-              cursorPosition, 
-              groupIndex, 
-              skillsData.length
-            );
-            
-            return (
-              <div 
-                key={skillGroup.category}
-                className="glassmorphism p-6 transition-all duration-500 glow"
-                style={{
-                  ...skillItemAnimations[groupIndex].style,
-                  transform: `perspective(1000px) 
-                              rotateX(${distanceFactor.y * 5}deg) 
-                              rotateY(${distanceFactor.x * 5}deg)
-                              scale(${isInView ? 1 : 0.9})`,
-                  opacity: isInView ? 1 : 0,
-                  transitionDelay: `${groupIndex * 0.1}s`,
-                }}
+        {/* Modern tabbed interface */}
+        <Tabs 
+          defaultValue="programming" 
+          className="w-full" 
+          value={activeTab}
+          onValueChange={setActiveTab}
+        >
+          <div className="flex justify-center mb-8">
+            <TabsList className="grid grid-cols-4 w-full max-w-xl">
+              <TabsTrigger value="programming">Programming</TabsTrigger>
+              <TabsTrigger value="ml">ML & DS</TabsTrigger>
+              <TabsTrigger value="data">Data Eng</TabsTrigger>
+              <TabsTrigger value="tools">Tools</TabsTrigger>
+            </TabsList>
+          </div>
+          
+          {Object.entries(skillsData).map(([key, skillGroup]) => (
+            <TabsContent key={key} value={key} className="mt-0">
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                initial="hidden"
+                animate={activeTab === key ? "show" : "hidden"}
+                variants={containerVariants}
               >
-                <h3 className="text-xl font-bold mb-4 text-amber-800 dark:text-amber-300">
-                  {skillGroup.category}
-                </h3>
-                <div className="space-y-4">
-                  {skillGroup.items.map((skill) => (
-                    <div key={skill.name} className="interactive">
-                      <div className="flex justify-between mb-1">
-                        <span className="font-medium">{skill.name}</span>
-                        <span className="text-sm text-gray-500">{skill.proficiency}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-amber-500 to-amber-300 h-2 rounded-full transition-all duration-1000"
-                          style={{ 
-                            width: isInView ? `${skill.proficiency}%` : "0%",
-                          }}
-                        />
-                      </div>
+                {skillGroup.items.map((skill, i) => (
+                  <motion.div 
+                    key={skill.name} 
+                    className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+                    variants={itemVariants}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <h3 className="font-bold text-lg">{skill.name}</h3>
+                      <span className="text-sm font-medium text-amber-600 dark:text-amber-400">{skill.proficiency}%</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+                    <Progress value={isInView ? skill.proficiency : 0} className="h-2 bg-gray-200 dark:bg-gray-700" indicatorClassName="bg-gradient-to-r from-amber-500 to-amber-300" />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </TabsContent>
+          ))}
+        </Tabs>
+        
+        {/* Core competencies overview */}
+        <div className={`mt-16 text-center transition-all duration-700 delay-300 ${
+          isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
+        }`}>
+          <h3 className="text-2xl font-bold mb-6">Core Competencies</h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {["Machine Learning", "Data Analysis", "Statistical Modeling", "Deep Learning", 
+              "Natural Language Processing", "Time Series Analysis", "Feature Engineering", 
+              "ETL Processes", "Cloud Computing", "MLOps", "Data Visualization", "Research"].map((competency) => (
+              <span key={competency} className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-800 dark:text-gray-200 font-medium text-sm border border-gray-200 dark:border-gray-700 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-800 dark:hover:text-amber-300 transition-colors duration-300">
+                {competency}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-}
-
-// Helper function to calculate distance factor for 3D effect
-function getDistanceFactor(
-  cursorPosition: { x: number; y: number },
-  index: number,
-  totalItems: number
-) {
-  // Simulate position based on index for a grid layout
-  const itemsPerRow = 4; // Adjust based on your layout
-  const row = Math.floor(index / itemsPerRow);
-  const col = index % itemsPerRow;
-  
-  // Estimate position (this will need adjustment based on actual layout)
-  const estimatedWidth = window.innerWidth / itemsPerRow;
-  const estimatedHeight = 300; // Approximate height of skill cards
-  
-  const estimatedX = col * estimatedWidth + estimatedWidth / 2;
-  const estimatedY = row * estimatedHeight + estimatedHeight / 2;
-  
-  // Calculate normalized distance from cursor (-1 to 1 range)
-  const dx = (cursorPosition.x - estimatedX) / (window.innerWidth / 2);
-  const dy = (cursorPosition.y - estimatedY) / (window.innerHeight / 2);
-  
-  return { x: dx, y: dy };
 }

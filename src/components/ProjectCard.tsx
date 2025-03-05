@@ -1,6 +1,7 @@
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useCardTilt } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   title: string;
@@ -8,6 +9,7 @@ interface ProjectCardProps {
   description: string[];
   index: number;
   isInView: boolean;
+  image?: string;
 }
 
 export default function ProjectCard({ 
@@ -15,117 +17,96 @@ export default function ProjectCard({
   technologies, 
   description, 
   index, 
-  isInView 
+  isInView,
+  image
 }: ProjectCardProps) {
   const cardRef = useCardTilt();
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Default placeholder image if none is provided
+  const backgroundImage = image || "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop";
   
   return (
-    <div 
-      className="card-3d w-full h-full"
-      style={{
-        transitionDelay: `${index * 0.1}s`,
-        opacity: isInView ? 1 : 0,
-        transform: isInView ? "translateY(0)" : "translateY(50px)",
-      }}
-      onClick={() => setIsFlipped(!isFlipped)}
+    <motion.div 
+      className="relative h-full rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+      ref={cardRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
     >
-      <div 
-        ref={cardRef}
-        className={`card-3d-content ${isFlipped ? "rotate-y-180" : ""}`}
-      >
-        {/* Front of card */}
-        <div className="card-3d-front glassmorphism border border-amber-200 dark:border-amber-900">
-          <div className="space-y-4">
-            <div className="flex items-start justify-between">
-              <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title}</h3>
-              <span className="chip bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
-                {technologies[0]}
-              </span>
-            </div>
-            
-            <p className="text-gray-600 dark:text-gray-300 flex-grow font-league">
-              {description[0]}
-            </p>
-            
-            <div className="flex flex-wrap gap-2 mt-auto pt-4">
-              {technologies.slice(1).map((tech, i) => (
-                <span 
-                  key={i} 
-                  className="text-xs py-1 px-2 bg-amber-50 dark:bg-amber-900/50 rounded-full text-amber-700 dark:text-amber-300"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-            
-            <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
-              <span>Click to see details</span>
-              <svg 
-                className="w-4 h-4 ml-1" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth="2" 
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+      {/* Project Image with Overlay */}
+      <div className="relative h-52 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-80" />
         
-        {/* Back of card */}
-        <div className="card-3d-back glassmorphism border border-amber-200 dark:border-amber-900">
-          <div className="space-y-4">
-            <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title} Details</h3>
-            
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-league">
-              {description.map((point, i) => (
-                <li key={i} className="flex items-start">
-                  <svg 
-                    className="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth="2" 
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-            
-            <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
-              <span>Click to go back</span>
-              <svg 
-                className="w-4 h-4 ml-1" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24" 
-                xmlns="http://www.w3.org/2000/svg"
+        {/* Title Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+          <h3 className="text-xl font-bold">{title}</h3>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {technologies.slice(0, 3).map((tech, i) => (
+              <span 
+                key={i} 
+                className="text-xs py-1 px-2 bg-amber-500/80 rounded-full text-white"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth="2" 
-                  d="M11 17l-5-5m0 0l5-5m-5 5h12"
-                />
-              </svg>
-            </div>
+                {tech}
+              </span>
+            ))}
+            {technologies.length > 3 && (
+              <span className="text-xs py-1 px-2 bg-white/20 rounded-full">
+                +{technologies.length - 3}
+              </span>
+            )}
           </div>
         </div>
       </div>
-    </div>
+      
+      {/* Project Details */}
+      <div className="p-5 bg-white dark:bg-gray-800">
+        <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-4">
+          {description.map((point, i) => (
+            <li key={i} className="flex items-start text-sm">
+              <svg 
+                className="w-4 h-4 text-amber-500 mr-2 mt-0.5 flex-shrink-0" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+        
+        {/* Technologies not shown in the top section */}
+        <div className="flex flex-wrap gap-2 mt-4">
+          {technologies.slice(3).map((tech, i) => (
+            <span 
+              key={i} 
+              className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-700 dark:text-gray-300"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+        
+        {/* View Details Button */}
+        <div className="mt-5 pt-5 border-t border-gray-100 dark:border-gray-700">
+          <button 
+            className="w-full py-2 flex items-center justify-center text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
+          >
+            <span className="font-medium">View Details</span>
+            <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 5L15 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </motion.div>
   );
 }
