@@ -15,8 +15,8 @@ export default function HeroSection() {
   
   const messages = [
     "Hi, I'm Dhriman",
-    "I specialize in solving complex Machine Learning problems and optimizing solutions through Operations Research.",
-    "Let's connect to explore innovative data-driven possibilities!"
+    "I specialise in <span class='text-amber-500 font-semibold'>ML</span> and <span class='text-amber-500 font-semibold'>Operations Research</span>.",
+    "Let's connect for <span class='text-amber-500 font-semibold'>data-driven innovation</span>!"
   ];
 
   useEffect(() => {
@@ -94,8 +94,8 @@ export default function HeroSection() {
                 className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ${
                   isAnimating ? 'opacity-0 transform translate-y-5' : 'opacity-100 transform translate-y-0'
                 }`}
+                dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               >
-                {messages[messageIndex]}
               </h1>
             </div>
             
