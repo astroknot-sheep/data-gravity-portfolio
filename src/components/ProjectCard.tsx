@@ -1,6 +1,6 @@
 
-import { useRef, useState, useEffect } from "react";
-import { useCardTilt } from "@/lib/animations";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   title: string;
@@ -17,34 +17,32 @@ export default function ProjectCard({
   index, 
   isInView 
 }: ProjectCardProps) {
-  const cardRef = useCardTilt();
   const [isFlipped, setIsFlipped] = useState(false);
   
   return (
     <div 
-      className="card-3d w-full h-full"
-      style={{
-        transitionDelay: `${index * 0.1}s`,
-        opacity: isInView ? 1 : 0,
-        transform: isInView ? "translateY(0)" : "translateY(50px)",
-      }}
+      className="h-full perspective-1000"
       onClick={() => setIsFlipped(!isFlipped)}
     >
-      <div 
-        ref={cardRef}
-        className={`card-3d-content ${isFlipped ? "rotate-y-180" : ""}`}
+      <motion.div 
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative w-full h-full transform-style-3d cursor-pointer"
       >
         {/* Front of card */}
-        <div className="card-3d-front glassmorphism border border-amber-200 dark:border-amber-900">
-          <div className="space-y-4">
+        <div 
+          className={`absolute inset-0 bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col backface-hidden border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-lg transition-shadow`}
+        >
+          <div className="space-y-4 h-full">
             <div className="flex items-start justify-between">
-              <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title}</h3>
-              <span className="chip bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-amber-300">{title}</h3>
+              <span className="bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 px-2 py-1 rounded-full text-xs font-medium">
                 {technologies[0]}
               </span>
             </div>
             
-            <p className="text-gray-600 dark:text-gray-300 flex-grow font-league">
+            <p className="text-gray-600 dark:text-gray-300 flex-grow">
               {description[0]}
             </p>
             
@@ -52,7 +50,7 @@ export default function ProjectCard({
               {technologies.slice(1).map((tech, i) => (
                 <span 
                   key={i} 
-                  className="text-xs py-1 px-2 bg-amber-50 dark:bg-amber-900/50 rounded-full text-amber-700 dark:text-amber-300"
+                  className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300"
                 >
                   {tech}
                 </span>
@@ -60,7 +58,7 @@ export default function ProjectCard({
             </div>
             
             <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
-              <span>Click to see details</span>
+              <span>View details</span>
               <svg 
                 className="w-4 h-4 ml-1" 
                 fill="none" 
@@ -80,11 +78,13 @@ export default function ProjectCard({
         </div>
         
         {/* Back of card */}
-        <div className="card-3d-back glassmorphism border border-amber-200 dark:border-amber-900">
-          <div className="space-y-4">
-            <h3 className="text-xl font-intro font-bold text-amber-800 dark:text-amber-300">{title} Details</h3>
+        <div 
+          className={`absolute inset-0 bg-white dark:bg-gray-800 rounded-xl p-6 flex flex-col backface-hidden rotate-y-180 border border-gray-200 dark:border-gray-700 shadow-md`}
+        >
+          <div className="space-y-4 h-full">
+            <h3 className="text-xl font-bold text-gray-800 dark:text-amber-300 mb-4">{title}</h3>
             
-            <ul className="space-y-2 text-gray-600 dark:text-gray-300 font-league">
+            <ul className="space-y-3 text-gray-600 dark:text-gray-300 flex-grow">
               {description.map((point, i) => (
                 <li key={i} className="flex items-start">
                   <svg 
@@ -107,7 +107,7 @@ export default function ProjectCard({
             </ul>
             
             <div className="text-sm text-amber-600 dark:text-amber-400 flex items-center mt-4">
-              <span>Click to go back</span>
+              <span>Back to summary</span>
               <svg 
                 className="w-4 h-4 ml-1" 
                 fill="none" 
@@ -125,7 +125,7 @@ export default function ProjectCard({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

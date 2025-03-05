@@ -1,7 +1,8 @@
 
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import ProjectCard from "./ProjectCard";
+import { motion } from "framer-motion";
 
 const projectsData = [
   {
@@ -12,6 +13,7 @@ const projectsData = [
       "Achieved 99.9% uptime with Docker and AWS CloudWatch",
       "Reduced operational costs by 35% through resource optimization",
     ],
+    category: "mlops"
   },
   {
     title: "Real-Time Flight Price Prediction",
@@ -21,6 +23,7 @@ const projectsData = [
       "Engineered FastAPI service handling 1000+ concurrent requests",
       "Designed Airflow DAGs for daily data collection from 15+ sources",
     ],
+    category: "ml"
   },
   {
     title: "Conversational Q&A Chatbot",
@@ -30,6 +33,7 @@ const projectsData = [
       "Integrated RAG architecture for efficient document retrieval",
       "Improved answer accuracy by 45% with prompt templates",
     ],
+    category: "nlp"
   },
   {
     title: "Resume ATS System",
@@ -39,6 +43,7 @@ const projectsData = [
       "Reduced manual review time by 80%",
       "Built React dashboard reducing HR time-to-decision by 35%",
     ],
+    category: "nlp"
   },
   {
     title: "News Aggregation System",
@@ -48,41 +53,94 @@ const projectsData = [
       "Reduced processing time by 85% using microservices",
       "Ensured zero-downtime deployment",
     ],
+    category: "ml"
   },
+];
+
+// Filter categories
+const categories = [
+  { id: "all", name: "All Projects" },
+  { id: "ml", name: "Machine Learning" },
+  { id: "nlp", name: "NLP" },
+  { id: "mlops", name: "MLOps" },
 ];
 
 export default function ProjectsSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const [filter, setFilter] = useState("all");
+  
+  // Filter projects based on selected category
+  const filteredProjects = filter === "all" 
+    ? projectsData 
+    : projectsData.filter(project => project.category === filter);
   
   return (
     <section
       id="projects"
-      className="py-20 bg-white dark:bg-gray-800 relative overflow-hidden"
+      className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
     >
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-100/30 dark:bg-purple-900/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-amber-100/20 dark:bg-amber-900/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent z-0"></div>
       
-      <div className="container mx-auto px-6 relative">
-        <div className="text-center mb-16" ref={ref}>
-          <span className="chip mb-3">Portfolio</span>
-          <h2 className={`text-4xl font-bold transition-all duration-700 ${
-            isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-          }`}>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-12" ref={ref}>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
+          >
             Featured Projects
-          </h2>
-          <p className={`mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-            isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
-          }`}>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          >
             Explore my data science and machine learning projects showcasing end-to-end implementation
-          </p>
+          </motion.p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <div 
-              key={index} 
-              className="h-80 transition-all duration-500"
+        {/* Project filter tabs */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex bg-white dark:bg-gray-800 rounded-full p-1 shadow-sm border border-gray-200 dark:border-gray-700">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setFilter(category.id)}
+                className={`relative px-4 py-2 rounded-full text-sm transition-all ${
+                  filter === category.id 
+                    ? "text-white dark:text-gray-900" 
+                    : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                }`}
+              >
+                {category.name}
+                {filter === category.id && (
+                  <motion.div
+                    layoutId="activePill"
+                    className="absolute inset-0 bg-amber-500 dark:bg-amber-400 rounded-full -z-10"
+                    transition={{ type: "spring", duration: 0.6 }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        {/* Projects grid */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="h-full"
             >
               <ProjectCard
                 title={project.title}
@@ -91,9 +149,15 @@ export default function ProjectsSection() {
                 index={index}
                 isInView={isInView}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+        
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-gray-500 dark:text-gray-400">No projects found in this category.</p>
+          </div>
+        )}
       </div>
     </section>
   );
