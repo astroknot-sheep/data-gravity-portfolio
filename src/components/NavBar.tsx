@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
@@ -13,7 +12,6 @@ export default function NavBar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
       
-      // Update active section based on scroll position
       const sections = ["home", "about", "skills", "projects", "publications", "experience", "contact"];
       
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -58,7 +56,7 @@ export default function NavBar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <a 
           href="#" 
-          className="text-xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-league"
+          className="text-xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-intro"
         >
           DHRIMAN DEKA
         </a>
