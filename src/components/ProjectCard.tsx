@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
+import { Github, ChevronRight } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -49,7 +49,7 @@ export default function ProjectCard({
       >
         {/* Front of card */}
         <div 
-          className="absolute w-full h-full rounded-xl overflow-hidden backface-hidden cursor-pointer"
+          className="absolute w-full h-full rounded-xl overflow-hidden backface-hidden cursor-pointer group"
           onClick={handleClick}
           style={{ backfaceVisibility: 'hidden' }}
         >
@@ -79,6 +79,12 @@ export default function ProjectCard({
                   {tech}
                 </span>
               ))}
+            </div>
+            
+            {/* Click indicator */}
+            <div className="absolute bottom-3 right-3 flex items-center text-amber-300 text-sm font-medium opacity-70 group-hover:opacity-100 transition-opacity">
+              <span>Click for details</span>
+              <ChevronRight className="w-4 h-4 ml-1" />
             </div>
             
             <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-amber-600"></div>

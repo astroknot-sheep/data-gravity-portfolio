@@ -58,7 +58,7 @@ export default function NavBar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <a 
           href="#" 
-          className="text-xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-intro"
+          className="text-xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-league"
         >
           DHRIMAN DEKA
         </a>
