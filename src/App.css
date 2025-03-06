@@ -1,4 +1,5 @@
 
+/* Base styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -6,6 +7,7 @@
   text-align: center;
 }
 
+/* Optimized logo styles */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -19,6 +21,7 @@
   filter: drop-shadow(0 0 2em rgba(150, 150, 150, 0.7));
 }
 
+/* Optimized animation with transform: will-change */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -28,9 +31,11 @@
   }
 }
 
+/* Prefer-reduced-motion support */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
+    will-change: transform;
   }
 }
 
@@ -42,23 +47,25 @@
   color: #888;
 }
 
-/* Dark mode specific styles */
+/* Dark mode optimized styles */
 .dark body {
   background-color: #121212;
   color: #e0e0e0;
 }
 
+/* Optimized glassmorphism with performance considerations */
 .dark .glassmorphism {
   background-color: rgba(30, 30, 30, 0.5);
   backdrop-filter: blur(8px);
   border-color: rgba(50, 50, 50, 0.5);
+  will-change: transform, opacity;
 }
 
 .dark .glow::after {
   background: radial-gradient(circle, rgba(60, 60, 60, 0.3) 0%, rgba(20, 20, 20, 0.1) 70%);
 }
 
-/* Three.js canvas specific styles */
+/* Three.js canvas optimized styles */
 .three-canvas {
   position: absolute;
   top: 0;
@@ -66,9 +73,10 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+  will-change: transform;
 }
 
-/* Font classes for consistency */
+/* Font class optimizations */
 .font-league {
   font-family: 'League Spartan', sans-serif !important;
 }
@@ -77,8 +85,8 @@
   font-family: 'Intro Rust', serif !important;
 }
 
-/* Force removal of any other font families with higher specificity */
-html *, body * {
+/* Force removal of any other font families with higher specificity - optimized selectors */
+body, body * {
   font-family: inherit !important;
 }
 
@@ -90,7 +98,47 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Intro Rust', 'League Spartan', sans-serif !important;
 }
 
-/* Override any conflicting styles */
-*[style*="font-family"] {
-  font-family: inherit !important;
+/* Performance-optimized cursor styles */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(245, 158, 11, 0.9);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  will-change: transform, opacity;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(245, 158, 11, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform-origin: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  will-change: transform, opacity;
+}
+
+/* Optimizing data points for better performance */
+.data-point {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: rgba(245, 158, 11, 0.5);
+  border-radius: 50%;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Add will-change hints for animations that will change frequently */
+.animate-pulse-slow,
+.animate-float,
+.animate-morph,
+[class*="animate-"] {
+  will-change: transform, opacity;
 }

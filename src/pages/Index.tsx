@@ -1,19 +1,21 @@
 
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useCallback, useState } from "react";
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import Cursor from "@/components/Cursor";
 
-// Lazy load heavier components to improve initial load time
+// Lazy load heavier components with higher priority
 const ParticleField = lazy(() => import("@/components/ParticleField"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+
+// Lower priority components that appear later in the page
 const PublicationsSection = lazy(() => import("@/components/PublicationsSection"));
 const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
-// Simple loading component
+// Simple loading component with reduced animation
 const SectionLoader = () => (
   <div className="flex justify-center items-center py-20">
     <div className="w-8 h-8 border-4 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
@@ -21,40 +23,79 @@ const SectionLoader = () => (
 );
 
 export default function Index() {
+  // Track visible sections for performance optimization
+  const [visibleSections, setVisibleSections] = useState({
+    publications: false,
+    experience: false,
+    contact: false
+  });
+
+  // Optimize scroll handling with IntersectionObserver
+  const observerCallback = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        if (id === 'publications' || id === 'experience' || id === 'contact') {
+          setVisibleSections(prev => ({ ...prev, [id]: true }));
+        }
+      }
+    });
+  }, []);
+
   useEffect(() => {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (!targetId) return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (!targetElement) return;
-        
-        const navbarHeight = 80; // Approximate navbar height
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+    // Optimized scroll anchor handling
+    const handleAnchorClick = (e: Event) => {
+      e.preventDefault();
+      const anchor = e.currentTarget as HTMLAnchorElement;
+      const targetId = anchor.getAttribute('href');
+      if (!targetId || !targetId.startsWith('#')) return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (!targetElement) return;
+      
+      const navbarHeight = 80; // Approximate navbar height
+      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+      
+      // Use native smooth scrolling with behavior hint
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
+    };
+    
+    // Improved event delegation for better performance
+    document.body.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement;
+      if (anchor) {
+        handleAnchorClick(new Event('click', { bubbles: true, cancelable: true }));
+      }
+    });
+    
+    // Set up intersection observer for lazy loading components
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: '100px', // Load slightly before coming into view
+      threshold: 0.1
+    });
+    
+    // Observe sections that should be lazy loaded
+    ['publications', 'experience', 'contact'].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
     });
     
     // Add a class to body for styling purposes
     document.body.classList.add('portfolio-page');
-    
-    // Make sure fonts are properly loaded
     document.body.classList.add('font-league');
     
     return () => {
       document.body.classList.remove('portfolio-page');
+      observer.disconnect();
     };
-  }, []);
+  }, [observerCallback]);
 
   return (
     <div className="relative dark">
@@ -69,7 +110,7 @@ export default function Index() {
       {/* Navigation */}
       <NavBar />
       
-      {/* Main content sections */}
+      {/* Main content sections with optimized suspense boundaries */}
       <main className="overflow-x-hidden">
         <HeroSection />
         
@@ -85,17 +126,30 @@ export default function Index() {
           <ProjectsSection />
         </Suspense>
         
-        <Suspense fallback={<SectionLoader />}>
-          <PublicationsSection />
-        </Suspense>
+        {/* Conditionally load lower priority sections */}
+        <div id="publications">
+          {visibleSections.publications && (
+            <Suspense fallback={<SectionLoader />}>
+              <PublicationsSection />
+            </Suspense>
+          )}
+        </div>
         
-        <Suspense fallback={<SectionLoader />}>
-          <ExperienceSection />
-        </Suspense>
+        <div id="experience">
+          {visibleSections.experience && (
+            <Suspense fallback={<SectionLoader />}>
+              <ExperienceSection />
+            </Suspense>
+          )}
+        </div>
         
-        <Suspense fallback={<SectionLoader />}>
-          <ContactSection />
-        </Suspense>
+        <div id="contact">
+          {visibleSections.contact && (
+            <Suspense fallback={<SectionLoader />}>
+              <ContactSection />
+            </Suspense>
+          )}
+        </div>
       </main>
       
       {/* Footer */}

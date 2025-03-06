@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 
 interface Particle {
   id: number;
@@ -20,19 +20,22 @@ interface ParticleFieldProps {
 
 export default function ParticleField({ count = 50, cursorTrail = true }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePositionRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
-  const lastEmitTime = useRef<number>(0);
-
-  const colors = [
+  const lastEmitTimeRef = useRef<number>(0);
+  const isActiveRef = useRef<boolean>(true);
+  
+  // Use a memoized color palette to avoid recreation
+  const colors = useMemo(() => [
     "rgba(176, 127, 244, 0.7)", // Purple
     "rgba(245, 158, 11, 0.7)",  // Amber
     "rgba(139, 92, 246, 0.7)",  // Indigo
     "rgba(249, 115, 22, 0.7)",  // Orange
-  ];
+  ], []);
 
-  const createParticle = (x: number, y: number, fromCursor = false): Particle => {
+  // Memoized particle creator function
+  const createParticle = useCallback((x: number, y: number, fromCursor = false): Particle => {
     const angle = Math.random() * Math.PI * 2;
     const speed = fromCursor ? Math.random() * 2 + 1 : Math.random() * 0.5 + 0.1;
     
@@ -47,9 +50,10 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       life: 0,
       maxLife: fromCursor ? Math.random() * 40 + 20 : Math.random() * 200 + 50
     };
-  };
+  }, [colors]);
 
-  const initParticles = () => {
+  // Optimized initialization of particles
+  const initParticles = useCallback(() => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
@@ -65,27 +69,49 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     }
     
     particlesRef.current = newParticles;
-  };
+  }, [count, createParticle]);
 
   useEffect(() => {
+    // Resize handler with performance optimization
     const handleResize = () => {
       if (!canvasRef.current) return;
       
       const canvas = canvasRef.current;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext("2d");
+      
+      // Use device pixel ratio for better quality on high-DPI screens
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      
+      // Scale the canvas back to its original size for display
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      
+      // Scale the context to match the device pixel ratio
+      if (ctx) {
+        ctx.scale(dpr, dpr);
+      }
       
       initParticles();
     };
 
+    // Use throttled mouse move handler
+    let lastMouseMoveTime = 0;
+    const throttleThreshold = 16; // ~60fps
+    
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      const now = performance.now();
+      if (now - lastMouseMoveTime < throttleThreshold) return;
+      lastMouseMoveTime = now;
+      
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
       
       // Add particles on mouse move with rate limiting
-      if (cursorTrail && Date.now() - lastEmitTime.current > 50) {
-        lastEmitTime.current = Date.now();
+      if (cursorTrail && now - lastEmitTimeRef.current > 50) {
+        lastEmitTimeRef.current = now;
         
-        if (particlesRef.current) {
+        if (particlesRef.current && canvasRef.current) {
           const cursorParticles = [
             createParticle(e.clientX, e.clientY, true),
             createParticle(e.clientX, e.clientY, true)
@@ -95,17 +121,25 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       }
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    
+    // Add visibility change listeners to pause animations when tab inactive
+    const handleVisibilityChange = () => {
+      isActiveRef.current = document.visibilityState === 'visible';
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
     
     handleResize();
     
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [cursorTrail]);
+  }, [cursorTrail, createParticle, initParticles]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -114,16 +148,37 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     const ctx = canvas.getContext("2d");
     
     if (!ctx) return;
+    
+    // Optimize animation with proper timing
+    let lastFrameTime = 0;
+    const targetFPS = 60;
+    const frameInterval = 1000 / targetFPS;
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const animate = (timestamp: number) => {
+      if (!isActiveRef.current) {
+        animationFrameId.current = requestAnimationFrame(animate);
+        return;
+      }
+      
+      // Calculate elapsed time and skip frames if needed
+      const elapsed = timestamp - lastFrameTime;
+      if (elapsed < frameInterval) {
+        animationFrameId.current = requestAnimationFrame(animate);
+        return;
+      }
+      
+      lastFrameTime = timestamp - (elapsed % frameInterval);
+      
+      // Clear the canvas using a more efficient method
+      ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
       
       const updatedParticles = particlesRef.current.filter(p => p.life < p.maxLife);
       
+      // Batch similar operations for better performance
       updatedParticles.forEach(particle => {
         // Apply data gravity effect toward cursor
-        const dx = mousePosition.x - particle.x;
-        const dy = mousePosition.y - particle.y;
+        const dx = mousePositionRef.current.x - particle.x;
+        const dy = mousePositionRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < 200 && distance > 5) {
@@ -142,7 +197,11 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         
         // Increase life
         particle.life += 1;
-        
+      });
+      
+      // Batch all drawing operations
+      ctx.save();
+      updatedParticles.forEach(particle => {
         // Draw particle
         const opacity = 1 - particle.life / particle.maxLife;
         ctx.beginPath();
@@ -150,6 +209,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         ctx.fillStyle = particle.color.replace(/[\d.]+\)$/g, `${opacity})`);
         ctx.fill();
       });
+      ctx.restore();
       
       // Add new particles to replace those that died
       if (updatedParticles.length < count) {
@@ -157,8 +217,8 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
         for (let i = 0; i < newCount; i++) {
           updatedParticles.push(
             createParticle(
-              Math.random() * canvas.width,
-              Math.random() * canvas.height
+              Math.random() * (canvas.width / (window.devicePixelRatio || 1)),
+              Math.random() * (canvas.height / (window.devicePixelRatio || 1))
             )
           );
         }
@@ -168,12 +228,12 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       animationFrameId.current = requestAnimationFrame(animate);
     };
     
-    animate();
+    animationFrameId.current = requestAnimationFrame(animate);
     
     return () => {
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [count, mousePosition]);
+  }, [count, createParticle]);
 
   return (
     <canvas
