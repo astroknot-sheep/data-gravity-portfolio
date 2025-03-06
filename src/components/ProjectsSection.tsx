@@ -77,7 +77,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+      className="py-20 bg-gray-900 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12" ref={ref}>
@@ -85,7 +85,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
+            className="text-4xl font-bold mb-4 font-intro text-amber-400"
           >
             Featured Projects
           </motion.h2>
@@ -93,7 +93,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-gray-300 max-w-2xl mx-auto"
           >
             Explore my data science and machine learning projects showcasing end-to-end implementation
           </motion.p>
@@ -128,7 +128,7 @@ export default function ProjectsSection() {
         {/* Projects grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 z-20"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -138,7 +138,7 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="h-full"
+              className="h-80"
             >
               <ProjectCard
                 title={project.title}
