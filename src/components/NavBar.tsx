@@ -1,5 +1,4 @@
-
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 
@@ -9,29 +8,27 @@ export default function NavBar() {
   const [activeSection, setActiveSection] = useState("home");
   const isMobile = useIsMobile();
 
-  // Optimize scroll handler using useCallback
-  const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 10);
-    
-    const sections = ["home", "about", "skills", "projects", "publications", "experience", "contact"];
-    
-    // Find active section with single loop and early return
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = document.getElementById(sections[i]);
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 100) {
-          setActiveSection(sections[i]);
-          break;
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+      
+      const sections = ["home", "about", "skills", "projects", "publications", "experience", "contact"];
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100) {
+            setActiveSection(sections[i]);
+            break;
+          }
         }
       }
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   const navItems = [
     { label: "Home", href: "#home" },
