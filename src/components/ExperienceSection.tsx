@@ -7,22 +7,16 @@ export default function ExperienceSection() {
   
   const experienceData = [
     {
-      title: "Lead Data Scientist",
-      company: "Tech Innovations Inc.",
-      period: "2021 - Present",
-      description: "Leading a team of data scientists to develop ML solutions for enterprise clients. Implemented advanced NLP models that improved customer satisfaction by 35%."
+      title: "Research Intern, LaRGo - Large Language Models Research Group",
+      company: "Advanced AI Research Team under Professor Kripa Bandhu Ghosh",
+      period: "Feb 2024 - Present",
+      description: "Developing innovative AI solutions for psychiatry and psychotherapy using large language models (LLMs). Implementing state-of-the-art neural networks and transformer architectures. Co-authoring research papers for submission to top AI conferences (NeurIPS, ICML, ICLR)."
     },
     {
-      title: "Machine Learning Engineer",
-      company: "Data Solutions Ltd.",
-      period: "2019 - 2021",
-      description: "Designed and deployed end-to-end ML pipelines for real-time data processing. Reduced inference time by 40% through model optimization."
-    },
-    {
-      title: "Data Analyst",
-      company: "Research Analytics",
-      period: "2017 - 2019",
-      description: "Conducted statistical analysis and built predictive models for market research. Developed automated reporting tools that saved 20+ hours weekly."
+      title: "Winter Intern, MOON Lab, IISER Bhopal",
+      company: "Large Language Models and Retrieval-Augmented Generation (RAG)",
+      period: "Dec 2023 - Present",
+      description: "Researching RAG architecture optimization and embedding model implementation. Developing expertise in vector databases and semantic search technologies."
     }
   ];
   
@@ -47,7 +41,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            My journey through the world of data science and machine learning
+            My journey through the world of AI research and language models
           </motion.p>
         </div>
         
