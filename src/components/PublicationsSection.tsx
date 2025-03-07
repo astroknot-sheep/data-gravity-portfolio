@@ -118,15 +118,6 @@ export default function PublicationsSection() {
                   "A comprehensive analysis with significant implications for pension reform policy."
                 </blockquote>
               </div>
-              
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="flex items-center text-sm text-amber-600 dark:text-amber-400">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  Cited in 3 other publications
-                </span>
-              </div>
             </div>
           </motion.div>
         </div>
