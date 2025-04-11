@@ -1,41 +1,25 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { Building, Code, Briefcase, GraduationCap, Terminal } from "lucide-react";
+import { Flask, Database, Search, Network, BookOpen } from "lucide-react";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const experienceData = [
     {
-      icon: <Briefcase className="w-5 h-5" />,
-      title: "Data Science Intern - XYZ Analytics",
-      period: "Jun 2023 - Aug 2023",
-      description: "Implemented machine learning models for predictive analytics, resulting in a 30% improvement in forecast accuracy."
+      icon: <Flask className="w-5 h-5" />,
+      title: "Research Intern, LaRGo - Large Language Models Research Group",
+      location: "Kolkata, India",
+      period: "Feb 2024 – Present",
+      description: "Advanced AI Research Team under Professor Kripa Bandhu Ghosh. Developing innovative AI solutions for psychiatry and psychotherapy using large language models (LLMs). Implementing state-of-the-art neural networks and transformer architectures. Co-authoring research papers for submission to top AI conferences (NeurIPS, ICML, ICLR)."
     },
     {
-      icon: <Terminal className="w-5 h-5" />,
-      title: "ML Engineering Intern - ABC Tech Solutions",
-      period: "Jan 2023 - May 2023",
-      description: "Developed and deployed NLP models for sentiment analysis, processing over 10,000 customer reviews daily."
-    },
-    {
-      icon: <Code className="w-5 h-5" />,
-      title: "Software Development Intern - Tech Innovators",
-      period: "Aug 2022 - Dec 2022",
-      description: "Built RESTful APIs using FastAPI and integrated with front-end applications, improving data retrieval time by 40%."
-    },
-    {
-      icon: <Building className="w-5 h-5" />,
-      title: "Data Engineering Intern - Data Platforms Inc",
-      period: "May 2022 - Jul 2022",
-      description: "Created data pipelines using Apache Airflow, processing and transforming 5TB of structured and unstructured data."
-    },
-    {
-      icon: <GraduationCap className="w-5 h-5" />,
-      title: "Research Assistant - University Research Lab",
-      period: "Jan 2022 - Apr 2022",
-      description: "Assisted in research on AI ethics and bias detection algorithms, contributing to a published conference paper."
+      icon: <Database className="w-5 h-5" />,
+      title: "Winter Intern, MOON Lab, IISER Bhopal",
+      location: "Bhopal, India",
+      period: "Dec 2023 – Present",
+      description: "Large Language Models and Retrieval-Augmented Generation (RAG). Researching RAG architecture optimization and embedding model implementation. Developing expertise in vector databases and semantic search technologies."
     }
   ];
   
@@ -52,7 +36,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
           >
-            Internship Experience
+            Experience
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +44,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            My professional journey in data science and engineering
+            My research journey in AI and language models
           </motion.p>
         </div>
         
@@ -87,9 +71,12 @@ export default function ExperienceSection() {
               
               {/* Content */}
               <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-amber-300">{experience.title}</h3>
-                  <div className="text-sm font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-full">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-amber-300">{experience.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{experience.location}</p>
+                  </div>
+                  <div className="text-sm font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-full mt-2 md:mt-0">
                     {experience.period}
                   </div>
                 </div>
