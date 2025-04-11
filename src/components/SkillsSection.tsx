@@ -2,62 +2,82 @@
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
+import { 
+  Code, Database, Coffee, Terminal, FileCode, 
+  Server, Cloud, GitCompare, Timer, Cpu, 
+  Archive, Brain, Edit, Globe, HardDrive, Network
+} from "lucide-react";
 
-interface Skill {
-  category: string;
-  items: {
+interface SkillCategory {
+  name: string;
+  skills: {
     name: string;
-    proficiency: number;
+    icon: JSX.Element;
   }[];
 }
 
 export default function SkillsSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
-  const [activeCategory, setActiveCategory] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
   
-  const skillsData: Skill[] = [
+  const getSkillIcon = (skill: string) => {
+    switch (skill.toLowerCase()) {
+      case "python": return <Code className="w-8 h-8" />;
+      case "sql": return <Database className="w-8 h-8" />;
+      case "java": return <Coffee className="w-8 h-8" />;
+      case "r": return <FileCode className="w-8 h-8" />;
+      case "shell scripting": return <Terminal className="w-8 h-8" />;
+      case "docker": return <Server className="w-8 h-8" />;
+      case "aws": return <Cloud className="w-8 h-8" />;
+      case "ci/cd": return <GitCompare className="w-8 h-8" />;
+      case "airflow": return <Timer className="w-8 h-8" />;
+      case "fastapi": return <Cpu className="w-8 h-8" />;
+      case "vector stores": return <Archive className="w-8 h-8" />;
+      case "llms": return <Brain className="w-8 h-8" />;
+      case "prompt engineering": return <Edit className="w-8 h-8" />;
+      case "react": return <Globe className="w-8 h-8" />;
+      case "docker compose": return <HardDrive className="w-8 h-8" />;
+      case "microservices": return <Network className="w-8 h-8" />;
+      default: return <Code className="w-8 h-8" />;
+    }
+  };
+
+  const skillsData: SkillCategory[] = [
     {
-      category: "Programming Languages",
-      items: [
-        { name: "Python", proficiency: 95 },
-        { name: "SQL", proficiency: 85 },
-        { name: "Java", proficiency: 70 },
-        { name: "R", proficiency: 75 },
-        { name: "Shell Scripting", proficiency: 65 },
-      ],
+      name: "Programming",
+      skills: [
+        { name: "Python", icon: getSkillIcon("python") },
+        { name: "SQL", icon: getSkillIcon("sql") },
+        { name: "Java", icon: getSkillIcon("java") },
+        { name: "R", icon: getSkillIcon("r") },
+        { name: "Shell Scripting", icon: getSkillIcon("shell scripting") },
+      ]
     },
     {
-      category: "ML & Data Science",
-      items: [
-        { name: "Regression", proficiency: 90 },
-        { name: "Classification", proficiency: 85 },
-        { name: "NLP", proficiency: 80 },
-        { name: "Deep Learning", proficiency: 85 },
-        { name: "Feature Engineering", proficiency: 90 },
-        { name: "Time Series", proficiency: 75 },
-      ],
+      name: "DevOps & Deployment",
+      skills: [
+        { name: "Docker", icon: getSkillIcon("docker") },
+        { name: "AWS", icon: getSkillIcon("aws") },
+        { name: "CI/CD", icon: getSkillIcon("ci/cd") },
+        { name: "Airflow", icon: getSkillIcon("airflow") },
+        { name: "FastAPI", icon: getSkillIcon("fastapi") },
+      ]
     },
     {
-      category: "Data Engineering",
-      items: [
-        { name: "Data Pipelines", proficiency: 85 },
-        { name: "ETL Processes", proficiency: 80 },
-        { name: "Data Warehousing", proficiency: 75 },
-        { name: "Data Cleaning", proficiency: 90 },
-      ],
+      name: "AI & Machine Learning",
+      skills: [
+        { name: "Vector Stores", icon: getSkillIcon("vector stores") },
+        { name: "LLMs", icon: getSkillIcon("llms") },
+        { name: "Prompt Engineering", icon: getSkillIcon("prompt engineering") },
+      ]
     },
     {
-      category: "Tools & Technologies",
-      items: [
-        { name: "Docker", proficiency: 80 },
-        { name: "AWS", proficiency: 75 },
-        { name: "MLFlow", proficiency: 85 },
-        { name: "Git", proficiency: 90 },
-        { name: "FastAPI", proficiency: 80 },
-        { name: "Tableau", proficiency: 70 },
-      ],
-    },
+      name: "Frontend & Architecture",
+      skills: [
+        { name: "React", icon: getSkillIcon("react") },
+        { name: "Docker Compose", icon: getSkillIcon("docker compose") },
+        { name: "Microservices", icon: getSkillIcon("microservices") },
+      ]
+    }
   ];
 
   return (
@@ -85,65 +105,35 @@ export default function SkillsSection() {
           </motion.p>
         </div>
         
-        {/* Skill category tabs */}
-        <div className="flex justify-center mb-8 overflow-x-auto pb-2 scrollbar-none" ref={containerRef}>
-          <div className="flex space-x-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-full">
-            {skillsData.map((skill, idx) => (
-              <button
-                key={skill.category}
-                onClick={() => setActiveCategory(idx)}
-                className={`relative px-4 py-2 rounded-full text-sm md:text-base whitespace-nowrap transition-all duration-300 ${
-                  activeCategory === idx 
-                    ? "text-gray-800 dark:text-amber-300 font-medium" 
-                    : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-amber-300"
-                }`}
-              >
-                {skill.category}
-                {activeCategory === idx && (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {skillsData.map((category, catIndex) => (
+            <motion.div
+              key={category.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: catIndex * 0.1 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
+            >
+              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-amber-300">{category.name}</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {category.skills.map((skill) => (
                   <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-white dark:bg-gray-700 rounded-full -z-10"
-                    transition={{ type: "spring", duration: 0.5 }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        {/* Skills content */}
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="grid gap-6 md:grid-cols-2"
-          >
-            {skillsData[activeCategory].items.map((skill) => (
-              <motion.div
-                key={skill.name}
-                whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
-              >
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-medium text-gray-800 dark:text-white">{skill.name}</h3>
-                  <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
-                    {skill.proficiency}%
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.proficiency}%` }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="h-full bg-gradient-to-r from-amber-500 to-amber-300 rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                    key={skill.name}
+                    whileHover={{ y: -5 }}
+                    className="flex flex-col items-center justify-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <div className="text-amber-600 dark:text-amber-400 mb-2">
+                      {skill.icon}
+                    </div>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,22 +1,41 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
+import { FileText, Code, Brain, Server, BookOpen } from "lucide-react";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const experienceData = [
     {
-      title: "Research Intern, LaRGo - Large Language Models Research Group",
-      company: "Advanced AI Research Team under Professor Kripa Bandhu Ghosh",
-      period: "Feb 2024 - Present",
-      description: "Developing innovative AI solutions for psychiatry and psychotherapy using large language models (LLMs). Implementing state-of-the-art neural networks and transformer architectures. Co-authoring research papers for submission to top AI conferences (NeurIPS, ICML, ICLR)."
+      icon: <FileText className="w-5 h-5" />,
+      title: "Research Publication - Political Methods eJournal",
+      period: "2023 - 2024",
+      description: "Co-authored a top-ten ranked paper analyzing pension reforms, recognized for comprehensive fiscal policy analysis."
     },
     {
-      title: "Winter Intern, MOON Lab, IISER Bhopal",
-      company: "Large Language Models and Retrieval-Augmented Generation (RAG)",
-      period: "Dec 2023 - Present",
-      description: "Researching RAG architecture optimization and embedding model implementation. Developing expertise in vector databases and semantic search technologies."
+      icon: <Brain className="w-5 h-5" />,
+      title: "AI & NLP Projects",
+      period: "2023 - Present",
+      description: "Developed conversational Q&A chatbots with RAG architecture and Resume ATS systems using LLMs and computer vision techniques."
+    },
+    {
+      icon: <Server className="w-5 h-5" />,
+      title: "MLOps & Production Systems",
+      period: "2022 - Present",
+      description: "Built end-to-end ML system with CI/CD, achieving 99.9% uptime and 40% inference time reduction."
+    },
+    {
+      icon: <Code className="w-5 h-5" />,
+      title: "Data Engineering & ML Research",
+      period: "2021 - 2022",
+      description: "Created real-time flight price prediction models and news aggregation systems processing thousands of articles daily."
+    },
+    {
+      icon: <BookOpen className="w-5 h-5" />,
+      title: "Technical Skill Development",
+      period: "2020 - 2021",
+      description: "Mastered Python, SQL, Docker, AWS and machine learning fundamentals through intensive study and practical applications."
     }
   ];
   
@@ -33,7 +52,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
           >
-            Professional Experience
+            My Journey
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -41,7 +60,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            My journey through the world of AI research and language models
+            Timeline of my experience in AI research and engineering
           </motion.p>
         </div>
         
@@ -61,7 +80,9 @@ export default function ExperienceSection() {
               
               {/* Timeline dot */}
               <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-amber-500 dark:bg-amber-400 flex items-center justify-center z-10">
-                <div className="w-2 h-2 rounded-full bg-white dark:bg-gray-900"></div>
+                <div className="text-white dark:text-gray-900">
+                  {experience.icon}
+                </div>
               </div>
               
               {/* Content */}
@@ -71,9 +92,6 @@ export default function ExperienceSection() {
                   <div className="text-sm font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-full">
                     {experience.period}
                   </div>
-                </div>
-                <div className="mb-3 text-sm font-medium text-gray-600 dark:text-gray-400">
-                  {experience.company}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
                   {experience.description}
