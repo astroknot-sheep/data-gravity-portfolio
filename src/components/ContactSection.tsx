@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useInView } from "@/lib/animations";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, SendHorizontal } from "lucide-react";
+import { Mail, MapPin, SendHorizontal, Linkedin } from "lucide-react";
 
 export default function ContactSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -109,22 +109,17 @@ export default function ContactSection() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
-                    <div className="w-6 h-6 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                        <path d="M14.2 2.875a4.625 4.625 0 0 0-4.625 4.625v.1A9.98 9.98 0 0 0 4.95 12a9.969 9.969 0 0 0 0 9.95v.05h6.675v-.075a9.965 9.965 0 0 0 5.425-2.75v-7.1a9.984 9.984 0 0 0-1.05-4.5A4.624 4.624 0 0 0 14.2 2.875Z"/>
-                        <path d="M23.275 12c0 3.925-2.25 7.35-5.55 9v-2.025a7.982 7.982 0 0 0 3.525-6.975c0-2.7-1.35-5.1-3.4-6.55a6.668 6.668 0 0 1 1.45 4.225v.1A7.988 7.988 0 0 1 19.5 13.5v4.15a9.967 9.967 0 0 0 1.7-5.65c0-5.525-4.475-10-10-10a9.963 9.963 0 0 0-8.65 5h2.85A4.625 4.625 0 0 1 14.2 2.875c2.55 0 4.625 2.075 4.625 4.625v.1a9.986 9.986 0 0 0-2.575-4.725A7.948 7.948 0 0 0 12 2c-5.525 0-10 4.475-10 10a9.974 9.974 0 0 0 2.95 7.1 9.996 9.996 0 0 0 4.15 2.85v-2.025a7.95 7.95 0 0 1-5.075-7.425 8.025 8.025 0 0 1 5.075-7.45 7.959 7.959 0 0 1 8.55 1.725A7.976 7.976 0 0 1 20 12a7.927 7.927 0 0 1-1.525 4.625 3.05 3.05 0 0 0-.55-.85L15.8 13.65c-.55-.55-.85-1.275-.85-2.05s.3-1.5.85-2.05l2.125-2.125c.225-.225.35-.525.35-.85a1.163 1.163 0 0 0-.35-.85 1.163 1.163 0 0 0-.85-.35c-.325 0-.625.125-.85.35l-2.125 2.125c-.55.55-1.275.85-2.05.85s-1.5-.3-2.05-.85L8.85 6.6c-.225-.225-.525-.35-.85-.35-.325 0-.625.125-.85.35-.225.225-.35.525-.35.85 0 .325.125.625.35.85l2.125 2.125c.55.55.85 1.275.85 2.05s-.3 1.5-.85 2.05l-2.125 2.125c-.225.225-.35.525-.35.85 0 .325.125.625.35.85.225.225.525.35.85.35.325 0 .625-.125.85-.35l2.125-2.125c.55-.55 1.275-.85 2.05-.85s1.5.3 2.05.85l2.125 2.125c.225.225.525.35.85.35.325 0 .625-.125.85-.35.225-.225.35-.525.35-.85a1.163 1.163 0 0 0-.35-.85Z"/>
-                      </svg>
-                    </div>
+                    <Linkedin className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Connect</h3>
                     <a 
-                      href="https://x.com/kaiser135971256" 
+                      href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors"
                     >
-                      Follow me on X.com
+                      Connect on LinkedIn
                     </a>
                   </div>
                 </div>

@@ -1,41 +1,41 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { FileText, Code, Brain, Server, BookOpen } from "lucide-react";
+import { Building, Code, Briefcase, GraduationCap, Terminal } from "lucide-react";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const experienceData = [
     {
-      icon: <FileText className="w-5 h-5" />,
-      title: "Research Publication - Political Methods eJournal",
-      period: "2023 - 2024",
-      description: "Co-authored a top-ten ranked paper analyzing pension reforms, recognized for comprehensive fiscal policy analysis."
+      icon: <Briefcase className="w-5 h-5" />,
+      title: "Data Science Intern - XYZ Analytics",
+      period: "Jun 2023 - Aug 2023",
+      description: "Implemented machine learning models for predictive analytics, resulting in a 30% improvement in forecast accuracy."
     },
     {
-      icon: <Brain className="w-5 h-5" />,
-      title: "AI & NLP Projects",
-      period: "2023 - Present",
-      description: "Developed conversational Q&A chatbots with RAG architecture and Resume ATS systems using LLMs and computer vision techniques."
-    },
-    {
-      icon: <Server className="w-5 h-5" />,
-      title: "MLOps & Production Systems",
-      period: "2022 - Present",
-      description: "Built end-to-end ML system with CI/CD, achieving 99.9% uptime and 40% inference time reduction."
+      icon: <Terminal className="w-5 h-5" />,
+      title: "ML Engineering Intern - ABC Tech Solutions",
+      period: "Jan 2023 - May 2023",
+      description: "Developed and deployed NLP models for sentiment analysis, processing over 10,000 customer reviews daily."
     },
     {
       icon: <Code className="w-5 h-5" />,
-      title: "Data Engineering & ML Research",
-      period: "2021 - 2022",
-      description: "Created real-time flight price prediction models and news aggregation systems processing thousands of articles daily."
+      title: "Software Development Intern - Tech Innovators",
+      period: "Aug 2022 - Dec 2022",
+      description: "Built RESTful APIs using FastAPI and integrated with front-end applications, improving data retrieval time by 40%."
     },
     {
-      icon: <BookOpen className="w-5 h-5" />,
-      title: "Technical Skill Development",
-      period: "2020 - 2021",
-      description: "Mastered Python, SQL, Docker, AWS and machine learning fundamentals through intensive study and practical applications."
+      icon: <Building className="w-5 h-5" />,
+      title: "Data Engineering Intern - Data Platforms Inc",
+      period: "May 2022 - Jul 2022",
+      description: "Created data pipelines using Apache Airflow, processing and transforming 5TB of structured and unstructured data."
+    },
+    {
+      icon: <GraduationCap className="w-5 h-5" />,
+      title: "Research Assistant - University Research Lab",
+      period: "Jan 2022 - Apr 2022",
+      description: "Assisted in research on AI ethics and bias detection algorithms, contributing to a published conference paper."
     }
   ];
   
@@ -52,7 +52,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
           >
-            My Journey
+            Internship Experience
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            Timeline of my experience in AI research and engineering
+            My professional journey in data science and engineering
           </motion.p>
         </div>
         
