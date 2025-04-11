@@ -1,8 +1,18 @@
-
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { Code, Database, Server, Terminal, Braces, Brain, Flask, GitBranch, Docker, Cloud } from "lucide-react";
+import { 
+  Code, 
+  Database, 
+  Server, 
+  Terminal, 
+  Braces, 
+  Brain, 
+  Flask as FlaskIcon, 
+  GitBranch, 
+  Compass, 
+  Cloud 
+} from "lucide-react";
 
 interface SkillCategory {
   category: string;
@@ -34,7 +44,7 @@ export default function SkillsSection() {
     {
       category: "Tools & Technologies",
       icon: <Server className="w-6 h-6 text-amber-400" />,
-      items: ["Docker", "AWS", "MLFlow", "Git", "FastAPI", "Tableau"],
+      items: ["Containers", "AWS", "MLFlow", "Git", "FastAPI", "Tableau"],
     },
   ];
 
@@ -132,13 +142,13 @@ function getSkillIcon(skill: string) {
       return <Braces className="w-8 h-8 mx-auto text-amber-500" />;
     case 'shell scripting':
       return <Terminal className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'docker':
-      return <Docker className="w-8 h-8 mx-auto text-amber-500" />;
+    case 'containers':
+      return <Compass className="w-8 h-8 mx-auto text-amber-500" />;
     case 'aws':
       return <Cloud className="w-8 h-8 mx-auto text-amber-500" />;
     case 'git':
       return <GitBranch className="w-8 h-8 mx-auto text-amber-500" />;
     default:
-      return <Flask className="w-8 h-8 mx-auto text-amber-500" />;
+      return <FlaskIcon className="w-8 h-8 mx-auto text-amber-500" />;
   }
 }
