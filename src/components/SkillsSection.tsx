@@ -2,23 +2,13 @@
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { 
-  Code, 
-  Database, 
-  Server, 
-  Terminal, 
-  Braces, 
-  Brain, 
-  Beaker, 
-  GitBranch, 
-  Compass, 
-  Cloud 
-} from "lucide-react";
 
-interface SkillCategory {
+interface Skill {
   category: string;
-  icon: React.ReactNode;
-  items: string[];
+  items: {
+    name: string;
+    proficiency: number;
+  }[];
 }
 
 export default function SkillsSection() {
@@ -26,26 +16,47 @@ export default function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const skillsData: SkillCategory[] = [
+  const skillsData: Skill[] = [
     {
       category: "Programming Languages",
-      icon: <Code className="w-6 h-6 text-amber-400" />,
-      items: ["Python", "SQL", "Java", "R", "Shell Scripting"],
+      items: [
+        { name: "Python", proficiency: 95 },
+        { name: "SQL", proficiency: 85 },
+        { name: "Java", proficiency: 70 },
+        { name: "R", proficiency: 75 },
+        { name: "Shell Scripting", proficiency: 65 },
+      ],
     },
     {
       category: "ML & Data Science",
-      icon: <Brain className="w-6 h-6 text-amber-400" />,
-      items: ["Regression", "Classification", "NLP", "Deep Learning", "Feature Engineering", "Time Series"],
+      items: [
+        { name: "Regression", proficiency: 90 },
+        { name: "Classification", proficiency: 85 },
+        { name: "NLP", proficiency: 80 },
+        { name: "Deep Learning", proficiency: 85 },
+        { name: "Feature Engineering", proficiency: 90 },
+        { name: "Time Series", proficiency: 75 },
+      ],
     },
     {
       category: "Data Engineering",
-      icon: <Database className="w-6 h-6 text-amber-400" />,
-      items: ["Data Pipelines", "ETL Processes", "Data Warehousing", "Data Cleaning"],
+      items: [
+        { name: "Data Pipelines", proficiency: 85 },
+        { name: "ETL Processes", proficiency: 80 },
+        { name: "Data Warehousing", proficiency: 75 },
+        { name: "Data Cleaning", proficiency: 90 },
+      ],
     },
     {
       category: "Tools & Technologies",
-      icon: <Server className="w-6 h-6 text-amber-400" />,
-      items: ["Containers", "AWS", "MLFlow", "Git", "FastAPI", "Tableau"],
+      items: [
+        { name: "Docker", proficiency: 80 },
+        { name: "AWS", proficiency: 75 },
+        { name: "MLFlow", proficiency: 85 },
+        { name: "Git", proficiency: 90 },
+        { name: "FastAPI", proficiency: 80 },
+        { name: "Tableau", proficiency: 70 },
+      ],
     },
   ];
 
@@ -81,14 +92,13 @@ export default function SkillsSection() {
               <button
                 key={skill.category}
                 onClick={() => setActiveCategory(idx)}
-                className={`relative px-4 py-2 rounded-full text-sm md:text-base whitespace-nowrap transition-all duration-300 flex items-center space-x-2 ${
+                className={`relative px-4 py-2 rounded-full text-sm md:text-base whitespace-nowrap transition-all duration-300 ${
                   activeCategory === idx 
                     ? "text-gray-800 dark:text-amber-300 font-medium" 
                     : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-amber-300"
                 }`}
               >
-                {skill.icon}
-                <span>{skill.category}</span>
+                {skill.category}
                 {activeCategory === idx && (
                   <motion.div
                     layoutId="activeTab"
@@ -109,17 +119,27 @@ export default function SkillsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="grid gap-6 md:grid-cols-3 lg:grid-cols-4"
+            className="grid gap-6 md:grid-cols-2"
           >
             {skillsData[activeCategory].items.map((skill) => (
               <motion.div
-                key={skill}
+                key={skill.name}
                 whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-center justify-center"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
               >
-                <div className="text-center">
-                  {getSkillIcon(skill)}
-                  <h3 className="mt-3 font-medium text-gray-800 dark:text-white">{skill}</h3>
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="font-medium text-gray-800 dark:text-white">{skill.name}</h3>
+                  <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
+                    {skill.proficiency}%
+                  </span>
+                </div>
+                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.proficiency}%` }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className="h-full bg-gradient-to-r from-amber-500 to-amber-300 rounded-full"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -128,28 +148,4 @@ export default function SkillsSection() {
       </div>
     </section>
   );
-}
-
-// Helper function to get appropriate icon for each skill
-function getSkillIcon(skill: string) {
-  switch(skill.toLowerCase()) {
-    case 'python':
-      return <Terminal className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'sql':
-      return <Database className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'java':
-      return <Code className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'r':
-      return <Braces className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'shell scripting':
-      return <Terminal className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'containers':
-      return <Compass className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'aws':
-      return <Cloud className="w-8 h-8 mx-auto text-amber-500" />;
-    case 'git':
-      return <GitBranch className="w-8 h-8 mx-auto text-amber-500" />;
-    default:
-      return <Beaker className="w-8 h-8 mx-auto text-amber-500" />;
-  }
 }

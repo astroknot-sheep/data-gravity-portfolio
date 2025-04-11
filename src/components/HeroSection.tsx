@@ -2,7 +2,6 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
-import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const parallaxBackgroundRef = useRef<HTMLDivElement>(null);
@@ -81,77 +80,38 @@ export default function HeroSection() {
       
       {/* Main content with increased z-index to ensure it stays on top */}
       <div className="container mx-auto px-6 z-20 relative">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto text-center">
           <div 
             ref={parallaxContentRef}
-            className="relative flex flex-col md:flex-row items-center justify-between"
+            className="relative"
           >
-            {/* Left side content (text) */}
-            <div className="text-center md:text-left md:w-1/2 mb-10 md:mb-0">
-              {/* Badge with improved styling */}
-              <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
-              
-              {/* Animated message display */}
-              <div className="min-h-[200px] flex flex-col items-center md:items-start justify-center">
-                <h1 
-                  className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ${
-                    isAnimating ? 'opacity-0 transform translate-y-5' : 'opacity-100 transform translate-y-0'
-                  }`}
-                  dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
-                >
-                </h1>
-              </div>
-              
-              {/* Call to action with improved visual appeal */}
-              <div 
-                ref={buttonAnimation.ref}
-                className={`mt-8 ${buttonAnimation.animation}`}
-                style={{ animationDelay: "0.6s" }}
+            {/* Badge with improved styling */}
+            <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
+            
+            {/* Animated message display */}
+            <div className="min-h-[220px] flex flex-col items-center justify-center">
+              <h1 
+                className={`block font-bold text-gray-900 dark:text-white font-league text-5xl md:text-6xl lg:text-7xl transition-opacity duration-500 ${
+                  isAnimating ? 'opacity-0 transform translate-y-5' : 'opacity-100 transform translate-y-0'
+                }`}
+                dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               >
-                <a 
-                  href="#projects" 
-                  className="interactive glassmorphism px-8 py-4 text-lg text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-amber-500/30"
-                >
-                  View My Work
-                </a>
-              </div>
+              </h1>
             </div>
             
-            {/* Right side content (profile image) */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="md:w-2/5 relative"
+            {/* Call to action with improved visual appeal */}
+            <div 
+              ref={buttonAnimation.ref}
+              className={`mt-12 ${buttonAnimation.animation}`}
+              style={{ animationDelay: "0.6s" }}
             >
-              <div className="w-64 h-64 md:w-80 md:h-80 mx-auto relative">
-                {/* Decorative circle behind the image */}
-                <div className="absolute inset-0 rounded-full border-2 border-amber-500/20 animate-spin-slow"></div>
-                
-                {/* Circular frame for the image */}
-                <div className="absolute inset-2 rounded-full border-2 border-amber-500/40 overflow-hidden p-1">
-                  {/* The actual profile image */}
-                  <img 
-                    src="/lovable-uploads/3177f1e3-726e-4704-8d2d-35d3e33ca6c9.png" 
-                    alt="Dhriman Deka" 
-                    className="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700"
-                  />
-                </div>
-                
-                {/* Animated dots around the profile */}
-                {[...Array(8)].map((_, i) => (
-                  <div 
-                    key={i}
-                    className="absolute w-3 h-3 rounded-full bg-amber-400"
-                    style={{
-                      top: `${50 + 42 * Math.sin(2 * Math.PI * i / 8)}%`,
-                      left: `${50 + 42 * Math.cos(2 * Math.PI * i / 8)}%`,
-                      animation: `pulse 2s infinite ${i * 0.25}s`
-                    }}
-                  ></div>
-                ))}
-              </div>
-            </motion.div>
+              <a 
+                href="#projects" 
+                className="interactive glassmorphism px-8 py-4 text-lg text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-amber-500/30"
+              >
+                View My Work
+              </a>
+            </div>
           </div>
         </div>
       </div>
