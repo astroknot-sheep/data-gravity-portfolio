@@ -13,7 +13,8 @@ const projectsData = [
       "Achieved 99.9% uptime with Docker and AWS CloudWatch",
       "Reduced operational costs by 35% through resource optimization",
     ],
-    category: "mlops"
+    category: "mlops",
+    githubUrl: "https://github.com/astroknot-sheep"
   },
   {
     title: "Real-Time Flight Price Prediction",
@@ -23,7 +24,8 @@ const projectsData = [
       "Engineered FastAPI service handling 1000+ concurrent requests",
       "Designed Airflow DAGs for daily data collection from 15+ sources",
     ],
-    category: "ml"
+    category: "ml",
+    githubUrl: "https://github.com/astroknot-sheep"
   },
   {
     title: "Conversational Q&A Chatbot",
@@ -33,7 +35,8 @@ const projectsData = [
       "Integrated RAG architecture for efficient document retrieval",
       "Improved answer accuracy by 45% with prompt templates",
     ],
-    category: "nlp"
+    category: "nlp",
+    githubUrl: "https://github.com/astroknot-sheep"
   },
   {
     title: "Resume ATS System",
@@ -43,7 +46,8 @@ const projectsData = [
       "Reduced manual review time by 80%",
       "Built React dashboard reducing HR time-to-decision by 35%",
     ],
-    category: "nlp"
+    category: "nlp",
+    githubUrl: "https://github.com/astroknot-sheep"
   },
   {
     title: "News Aggregation System",
@@ -53,7 +57,8 @@ const projectsData = [
       "Reduced processing time by 85% using microservices",
       "Ensured zero-downtime deployment",
     ],
-    category: "ml"
+    category: "ml",
+    githubUrl: "https://github.com/astroknot-sheep"
   },
 ];
 
@@ -146,6 +151,7 @@ export default function ProjectsSection() {
                 description={project.description}
                 index={index}
                 isInView={isInView}
+                githubUrl={project.githubUrl}
               />
             </motion.div>
           ))}

@@ -9,6 +9,7 @@ interface ProjectCardProps {
   description: string[];
   index: number;
   isInView: boolean;
+  githubUrl?: string;
 }
 
 export default function ProjectCard({ 
@@ -16,7 +17,8 @@ export default function ProjectCard({
   technologies, 
   description, 
   index, 
-  isInView 
+  isInView,
+  githubUrl = "https://github.com/astroknot-sheep"
 }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   
@@ -131,10 +133,11 @@ export default function ProjectCard({
             
             <div className="mt-auto">
               <a 
-                href="https://github.com" 
+                href={githubUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-4 py-2 bg-amber-500 text-gray-900 rounded-lg font-medium transition-colors hover:bg-amber-400"
+                onClick={(e) => e.stopPropagation()}
               >
                 <Github className="w-4 h-4 mr-2" />
                 View Project
