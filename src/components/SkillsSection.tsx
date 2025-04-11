@@ -1,3 +1,4 @@
+
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
@@ -8,7 +9,7 @@ import {
   Terminal, 
   Braces, 
   Brain, 
-  Flask as FlaskIcon, 
+  Beaker, 
   GitBranch, 
   Compass, 
   Cloud 
@@ -149,6 +150,6 @@ function getSkillIcon(skill: string) {
     case 'git':
       return <GitBranch className="w-8 h-8 mx-auto text-amber-500" />;
     default:
-      return <FlaskIcon className="w-8 h-8 mx-auto text-amber-500" />;
+      return <Beaker className="w-8 h-8 mx-auto text-amber-500" />;
   }
 }
