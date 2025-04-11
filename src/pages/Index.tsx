@@ -52,6 +52,17 @@ export default function Index() {
     // Make sure fonts are properly loaded
     document.body.classList.add('font-league');
     
+    // Add responsive viewport meta tag to ensure proper mobile display
+    const existingMeta = document.querySelector('meta[name="viewport"]');
+    if (existingMeta) {
+      existingMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+      document.head.appendChild(meta);
+    }
+    
     return () => {
       document.body.classList.remove('portfolio-page');
     };

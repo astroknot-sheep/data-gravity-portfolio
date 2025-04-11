@@ -2,7 +2,6 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function HeroSection() {
   const parallaxBackgroundRef = useRef<HTMLDivElement>(null);
@@ -86,14 +85,6 @@ export default function HeroSection() {
             ref={parallaxContentRef}
             className="relative"
           >
-            {/* Profile Image */}
-            <div className="mb-8 flex justify-center">
-              <Avatar className="w-32 h-32 border-4 border-amber-500 dark:border-amber-400 shadow-xl">
-                <AvatarImage src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" alt="Dhriman Deka" />
-                <AvatarFallback>DD</AvatarFallback>
-              </Avatar>
-            </div>
-            
             {/* Badge with improved styling */}
             <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-amber-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
             

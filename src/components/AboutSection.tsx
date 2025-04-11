@@ -1,6 +1,7 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function AboutSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -74,9 +75,17 @@ export default function AboutSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative"
+            className="relative flex flex-col items-center"
           >
-            <div className="grid grid-cols-2 gap-4">
+            {/* Profile Image */}
+            <div className="mb-8 flex justify-center">
+              <Avatar className="w-44 h-44 border-4 border-amber-500 dark:border-amber-400 shadow-xl">
+                <AvatarImage src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" alt="Dhriman Deka" />
+                <AvatarFallback>DD</AvatarFallback>
+              </Avatar>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4 w-full">
               <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-amber-100 to-amber-300 dark:from-amber-900/30 dark:to-amber-700/30 p-1">
                 <div className="w-full h-full bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center">
                   <svg className="w-16 h-16 text-amber-500 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
