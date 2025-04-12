@@ -26,8 +26,42 @@ export default function Index() {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (!targetId) return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
+        
+        const navbarHeight = 80; // Approximate navbar height
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      });
+    });
+    
     // Add a class to body for styling purposes
     document.body.classList.add('portfolio-page');
+    
+    // Make sure fonts are properly loaded
+    document.body.classList.add('font-league');
+    
+    // Add responsive viewport meta tag to ensure proper mobile display
+    const existingMeta = document.querySelector('meta[name="viewport"]');
+    if (existingMeta) {
+      existingMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+      document.head.appendChild(meta);
+    }
     
     return () => {
       document.body.classList.remove('portfolio-page');

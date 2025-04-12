@@ -81,8 +81,52 @@ export default function Cursor() {
     };
   }, [isMobile]);
 
-  // Return null for mobile
-  if (isMobile) return null;
+  // Mutation observer to detect new interactive elements
+  useEffect(() => {
+    // Skip cursor effects on mobile
+    if (isMobile) return;
+    
+    const updateInteractiveElements = () => {
+      if (interactiveElementsRef.current) {
+        const handleLinkHoverOn = () => setLinkHovered(true);
+        const handleLinkHoverOff = () => setLinkHovered(false);
+  
+        interactiveElementsRef.current.forEach((element) => {
+          element.removeEventListener("mouseenter", handleLinkHoverOn);
+          element.removeEventListener("mouseleave", handleLinkHoverOff);
+        });
+      }
+      
+      interactiveElementsRef.current = document.querySelectorAll(
+        "a, button, .interactive, input, select, textarea, [role='button']"
+      );
+  
+      const handleLinkHoverOn = () => setLinkHovered(true);
+      const handleLinkHoverOff = () => setLinkHovered(false);
+  
+      if (interactiveElementsRef.current) {
+        interactiveElementsRef.current.forEach((element) => {
+          element.addEventListener("mouseenter", handleLinkHoverOn);
+          element.addEventListener("mouseleave", handleLinkHoverOff);
+        });
+      }
+    };
+  
+    // Set up mutation observer instead of interval
+    const observer = new MutationObserver(updateInteractiveElements);
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true 
+    });
+  
+    // Initial setup
+    updateInteractiveElements();
+  
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  // Return null for mobile or SSR 
+  if (typeof window === "undefined" || isMobile) return null;
 
   return (
     <>
