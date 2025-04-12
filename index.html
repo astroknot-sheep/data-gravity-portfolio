@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#121212" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Data Scientist Portfolio</title>
     <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
     <!-- League Spartan font with preload for performance -->
@@ -33,12 +34,13 @@
       }
       
       /* Fix for iOS 100vh issue */
-      html, body {
-        height: -webkit-fill-available;
+      html {
+        height: 100%;
       }
       
-      /* Fix for mobile overflow issues */
       body {
+        min-height: 100%;
+        height: -webkit-fill-available;
         position: relative;
         overflow-x: hidden;
         width: 100%;
@@ -58,6 +60,16 @@
           min-height: 44px;
           min-width: 44px;
         }
+      }
+      
+      /* Prevent iOS touch callout */
+      * {
+        -webkit-touch-callout: none;
+      }
+      
+      /* Stop rubber-band scrolling on iOS */
+      html, body {
+        overscroll-behavior-y: none;
       }
     </style>
   </head>

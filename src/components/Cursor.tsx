@@ -17,14 +17,14 @@ export default function Cursor() {
   const interactiveElementsRef = useRef<NodeListOf<Element> | null>(null);
   const isMobile = useIsMobile();
 
-  // Return null immediately if on mobile
+  // Return null immediately if on mobile - prevents any cursor effects on touch devices
   if (isMobile) return null;
 
   useEffect(() => {
     // Skip cursor effects on mobile
     if (isMobile) {
       document.body.style.cursor = "auto";
-      return;
+      return () => {}; // Empty cleanup for mobile
     }
 
     // Hide default cursor
@@ -49,12 +49,12 @@ export default function Cursor() {
     const handleMouseEnter = () => setHidden(false);
 
     document.addEventListener("mousemove", updateCursorPosition, { passive: true });
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousedown", handleMouseDown, { passive: true });
+    document.addEventListener("mouseup", handleMouseUp, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
-    // Add event listeners to all links and interactive elements - once at mount
+    // Add event listeners to all links and interactive elements
     interactiveElementsRef.current = document.querySelectorAll(
       "a, button, .interactive, input, select, textarea, [role='button']"
     );
@@ -125,6 +125,7 @@ export default function Cursor() {
     return () => observer.disconnect();
   }, [isMobile]);
 
+  // Return null for mobile or SSR 
   if (typeof window === "undefined" || isMobile) return null;
 
   return (
