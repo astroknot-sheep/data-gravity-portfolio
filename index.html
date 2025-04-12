@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="format-detection" content="telephone=no" />
+    <!-- Add iOS Chrome specific meta tag -->
+    <meta name="supported-color-schemes" content="light dark">
     <title>Data Scientist Portfolio</title>
     <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
     <!-- League Spartan font with preload for performance -->
@@ -36,6 +38,7 @@
       /* Fix for iOS 100vh issue */
       html {
         height: 100%;
+        background-color: #121212; /* Ensure there's a background color */
       }
       
       body {
@@ -44,6 +47,9 @@
         position: relative;
         overflow-x: hidden;
         width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #121212; /* Ensure there's a background color */
       }
       
       /* Improve tap targets on mobile */
@@ -70,6 +76,15 @@
       /* Stop rubber-band scrolling on iOS */
       html, body {
         overscroll-behavior-y: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      /* iOS Chrome specific adjustments */
+      #root {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
       }
     </style>
   </head>

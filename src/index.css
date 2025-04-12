@@ -82,6 +82,11 @@
     --sidebar-border: 12 3.7% 15.9%;
     --sidebar-ring: 35 50% 40%;
   }
+
+  .ios {
+    @apply text-foreground bg-background;
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
 @layer base {
@@ -95,6 +100,8 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     touch-action: manipulation;
     overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -273,6 +280,7 @@
   
   html, body {
     height: -webkit-fill-available;
+    background-color: var(--background);
   }
   
   /* Prevent iOS content shift on keyboard appearance */
@@ -283,6 +291,13 @@
   /* Fix for iOS momentum scrolling */
   .overflow-y-auto, .overflow-x-auto, .overflow-auto {
     -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure content is visible on iOS Chrome */
+  #root {
+    display: block !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
   }
 }
 
@@ -300,5 +315,30 @@
   /* Ensure all interactive elements have proper touch areas */
   button, a, [role="button"], input, select, .interactive {
     touch-action: manipulation;
+  }
+}
+
+/* iOS Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  #root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
