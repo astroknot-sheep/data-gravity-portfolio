@@ -4,48 +4,56 @@ import * as React from "react"
 const MOBILE_BREAKPOINT = 768
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean>(true); // Default to true for SSR
+  const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     // Function to determine if device is mobile
     const checkMobile = () => {
-      // Check user agent first (most reliable for iOS)
+      // Primary check: viewport width
+      const isMobileViewport = window.innerWidth < MOBILE_BREAKPOINT;
+      
+      // Secondary signals
+      const isTouchDevice = 'ontouchstart' in window || 
+                          navigator.maxTouchPoints > 0;
+      
+      // User agent check for iOS and Android (more reliable for iOS detection)
       const userAgent = navigator.userAgent.toLowerCase();
-      const isIOS = /iphone|ipad|ipod/.test(userAgent) || 
-                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
       const isAndroid = /android/.test(userAgent);
       
-      // Device detection
-      const isMobileDevice = isIOS || isAndroid || window.innerWidth < MOBILE_BREAKPOINT;
+      // Consider iOS and Android as mobile regardless of viewport
+      const isMobileDevice = isIOS || isAndroid;
       
-      // Touch capability detection
-      const isTouchDevice = 'ontouchstart' in window || 
-                           navigator.maxTouchPoints > 0;
-      
-      // Set mobile if any of these conditions are true
-      setIsMobile(isMobileDevice || isTouchDevice);
-      
-      // Apply mobile class to document for global styling
-      if (isMobileDevice || isTouchDevice) {
-        document.documentElement.classList.add('mobile-device');
-      } else {
-        document.documentElement.classList.remove('mobile-device');
-      }
+      // For most cases, combine viewport with device detection
+      setIsMobile(isMobileViewport || isMobileDevice);
     };
 
+    // Set up media query listener
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
+    
+    const onChange = () => {
+      checkMobile();
+    }
+    
     // Run check immediately
     checkMobile();
     
-    // Set up listeners for changes
-    window.addEventListener("resize", checkMobile);
-    window.addEventListener("orientationchange", checkMobile);
+    // Use standard event listener
+    mql.addEventListener("change", onChange);
+    
+    // Check on resize as well
+    window.addEventListener("resize", onChange);
+    
+    // Check on orientation change (important for mobile)
+    window.addEventListener("orientationchange", onChange);
     
     // Cleanup
     return () => {
-      window.removeEventListener("resize", checkMobile);
-      window.removeEventListener("orientationchange", checkMobile);
+      mql.removeEventListener("change", onChange);
+      window.removeEventListener("resize", onChange);
+      window.removeEventListener("orientationchange", onChange);
     }
-  }, []);
+  }, [])
 
   return isMobile;
 }
