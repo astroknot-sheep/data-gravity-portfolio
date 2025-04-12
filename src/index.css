@@ -83,26 +83,16 @@
     --sidebar-border: 12 3.7% 15.9%;
     --sidebar-ring: 35 50% 40%;
   }
-
-  .ios {
-    @apply text-foreground bg-background;
-    -webkit-text-size-adjust: 100%;
-  }
 }
 
 @layer base {
   * {
     @apply border-border;
-    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    touch-action: manipulation;
-    overscroll-behavior-y: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -121,13 +111,6 @@
     @apply text-2xl sm:text-3xl;
   }
 
-  .min-h-screen {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
-    min-height: stretch;
-  }
-
   ::-webkit-scrollbar {
     @apply w-2 h-2;
   }
@@ -138,14 +121,6 @@
 
   ::-webkit-scrollbar-thumb {
     @apply bg-primary/30 rounded-full transition-colors hover:bg-primary/50;
-  }
-  
-  @media (max-width: 768px) {
-    ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-      background: transparent;
-    }
   }
 }
 
@@ -191,12 +166,6 @@
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
   }
 
-  .data-cursor {
-    @apply fixed pointer-events-none z-50 flex items-center justify-center;
-    @apply w-6 h-6 -ml-3 -mt-3 mix-blend-difference;
-    @apply rounded-full bg-white transform transition-transform duration-150 ease-out;
-  }
-
   .cursor-dot {
     @apply fixed pointer-events-none z-50 w-3 h-3 -ml-1.5 -mt-1.5 transition-transform duration-150 ease-out;
     @apply rounded-full bg-gray-400 dark:bg-gray-300 transform will-change-transform;
@@ -208,7 +177,7 @@
   }
 
   .interactive {
-    @apply hover:scale-[1.02] transition-all duration-300 hover:shadow-md active:scale-[0.98] min-h-11 min-w-11;
+    @apply hover:scale-[1.02] transition-all duration-300 hover:shadow-md active:scale-[0.98];
   }
 
   .parallax-layer {
@@ -249,13 +218,6 @@
   }
 }
 
-/* Hide cursor on touch devices */
-@media (hover: none) {
-  .data-cursor, .cursor-dot, .cursor-ring {
-    display: none !important;
-  }
-}
-
 /* This ensures that the scroll animations are disabled for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -270,96 +232,7 @@
   }
 }
 
-/* Fix iOS Safari 100vh bug - expanded implementation */
-@supports (-webkit-touch-callout: none) {
-  .min-h-screen {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: -moz-available;
-    min-height: stretch;
-  }
-  
-  html, body {
-    height: -webkit-fill-available;
-    background-color: var(--background);
-  }
-  
-  /* Prevent iOS content shift on keyboard appearance */
-  input, textarea, select {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-  }
-  
-  /* Fix for iOS momentum scrolling */
-  .overflow-y-auto, .overflow-x-auto, .overflow-auto {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Ensure content is visible on iOS Chrome */
-  #root {
-    display: block !important;
-    min-height: 100vh !important;
-    min-height: -webkit-fill-available !important;
-  }
-}
-
-/* Additional touch device optimizations */
-@media (hover: none) {
-  /* Disable hover effects that might cause flickering on touch */
-  .hover\:scale-\[1\.02\]:hover {
-    transform: none !important;
-  }
-  
-  .hover\:shadow-md:hover {
-    box-shadow: none !important;
-  }
-  
-  /* Ensure all interactive elements have proper touch areas */
-  button, a, [role="button"], input, select, .interactive {
-    touch-action: manipulation;
-  }
-}
-
-/* iOS Chrome specific fixes */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  html, body {
-    height: 100%;
-  }
-  
-  body {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  #root {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Hide 3D effects on mobile */
-  .mobile-device .card-3d:hover .card-3d-content {
-    transform: none;
-  }
-  
-  /* Hide parallax effects on mobile */
-  .mobile-device .parallax-layer {
-    transform: none !important;
-  }
-}
-
-/* Mobile-specific styles */
-.mobile-device {
-  /* Simplified styles for mobile */
-  --radius: 0.3rem;
-}
-
-/* Mobile canvas placeholder */
-.mobile-canvas-placeholder {
-  background: radial-gradient(circle, rgba(60, 60, 60, 0.3) 0%, rgba(20, 20, 20, 0.1) 70%);
+/* Font classes for consistency */
+.font-league {
+  font-family: 'League Spartan', sans-serif !important;
 }
