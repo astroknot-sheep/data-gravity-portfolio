@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			scale: {
+				'98': '0.98',
+				'102': '1.02',
+			},
 			fontFamily: {
 				'league': ['"League Spartan"', 'sans-serif'],
 				'intro': ['"Intro Rust"', 'serif'],
