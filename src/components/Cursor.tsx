@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface CursorPosition {
   x: number;
@@ -14,8 +15,18 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const interactiveElementsRef = useRef<NodeListOf<Element> | null>(null);
+  const isMobile = useIsMobile();
+
+  // Return null immediately if on mobile
+  if (isMobile) return null;
 
   useEffect(() => {
+    // Skip cursor effects on mobile
+    if (isMobile) {
+      document.body.style.cursor = "auto";
+      return;
+    }
+
     // Hide default cursor
     document.body.style.cursor = "none";
 
@@ -68,10 +79,13 @@ export default function Cursor() {
         });
       }
     };
-  }, []);
+  }, [isMobile]);
 
   // Mutation observer to detect new interactive elements
   useEffect(() => {
+    // Skip cursor effects on mobile
+    if (isMobile) return;
+    
     const updateInteractiveElements = () => {
       if (interactiveElementsRef.current) {
         const handleLinkHoverOn = () => setLinkHovered(true);
@@ -109,9 +123,9 @@ export default function Cursor() {
     updateInteractiveElements();
   
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined" || isMobile) return null;
 
   return (
     <>

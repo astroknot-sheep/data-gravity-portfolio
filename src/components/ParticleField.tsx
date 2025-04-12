@@ -1,5 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Particle {
   id: number;
@@ -24,6 +25,12 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
   const lastEmitTime = useRef<number>(0);
+  const isMobile = useIsMobile();
+  
+  // Reduce particle count on mobile for better performance
+  const actualCount = isMobile ? Math.floor(count / 3) : count;
+  // Disable cursor trail on mobile
+  const actualCursorTrail = isMobile ? false : cursorTrail;
 
   const colors = [
     "rgba(176, 127, 244, 0.7)", // Purple
@@ -55,7 +62,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     const canvas = canvasRef.current;
     const newParticles: Particle[] = [];
     
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < actualCount; i++) {
       newParticles.push(
         createParticle(
           Math.random() * canvas.width,
@@ -82,7 +89,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       setMousePosition({ x: e.clientX, y: e.clientY });
       
       // Add particles on mouse move with rate limiting
-      if (cursorTrail && Date.now() - lastEmitTime.current > 50) {
+      if (actualCursorTrail && Date.now() - lastEmitTime.current > 50) {
         lastEmitTime.current = Date.now();
         
         if (particlesRef.current) {
@@ -95,17 +102,27 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       }
     };
 
+    // Touch move handler for mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        setMousePosition({ x: touch.clientX, y: touch.clientY });
+      }
+    };
+
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     
     handleResize();
     
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [cursorTrail]);
+  }, [actualCursorTrail]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -121,13 +138,13 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       const updatedParticles = particlesRef.current.filter(p => p.life < p.maxLife);
       
       updatedParticles.forEach(particle => {
-        // Apply data gravity effect toward cursor
+        // Apply data gravity effect toward cursor with reduced intensity on mobile
         const dx = mousePosition.x - particle.x;
         const dy = mousePosition.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < 200 && distance > 5) {
-          const force = 0.2 / distance;
+          const force = isMobile ? 0.1 / distance : 0.2 / distance;
           particle.vx += dx * force;
           particle.vy += dy * force;
         }
@@ -152,8 +169,8 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
       });
       
       // Add new particles to replace those that died
-      if (updatedParticles.length < count) {
-        const newCount = count - updatedParticles.length;
+      if (updatedParticles.length < actualCount) {
+        const newCount = actualCount - updatedParticles.length;
         for (let i = 0; i < newCount; i++) {
           updatedParticles.push(
             createParticle(
@@ -173,7 +190,7 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
     return () => {
       cancelAnimationFrame(animationFrameId.current);
     };
-  }, [count, mousePosition]);
+  }, [actualCount, mousePosition, isMobile]);
 
   return (
     <canvas

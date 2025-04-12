@@ -4,7 +4,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Data Scientist Portfolio</title>
     <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
     <!-- League Spartan font with preload for performance -->
@@ -27,6 +30,34 @@
       
       h1, h2, h3, h4, h5, h6, .font-intro {
         font-family: 'Intro Rust', 'League Spartan', sans-serif !important;
+      }
+      
+      /* Fix for iOS 100vh issue */
+      html, body {
+        height: -webkit-fill-available;
+      }
+      
+      /* Fix for mobile overflow issues */
+      body {
+        position: relative;
+        overflow-x: hidden;
+        width: 100%;
+      }
+      
+      /* Improve tap targets on mobile */
+      @media (max-width: 768px) {
+        button, 
+        [role="button"],
+        a,
+        input[type="submit"],
+        input[type="button"],
+        input[type="checkbox"],
+        input[type="radio"],
+        select,
+        .interactive {
+          min-height: 44px;
+          min-width: 44px;
+        }
       }
     </style>
   </head>

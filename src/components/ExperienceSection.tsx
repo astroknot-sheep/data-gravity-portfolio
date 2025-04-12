@@ -1,10 +1,12 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { Beaker, Database, Search, Network, BookOpen } from "lucide-react";
+import { Beaker, Database } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const isMobile = useIsMobile();
   
   const experienceData = [
     {
@@ -26,15 +28,15 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+      className="py-12 md:py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
     >
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16" ref={ref}>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-8 md:mb-16" ref={ref}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
+            className="text-3xl md:text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
           >
             Experience
           </motion.h2>
@@ -42,7 +44,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
             My research journey in AI and language models
           </motion.p>
@@ -70,17 +72,17 @@ export default function ExperienceSection() {
               </div>
               
               {/* Content */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-amber-300">{experience.title}</h3>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800 dark:text-amber-300">{experience.title}</h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{experience.location}</p>
                   </div>
                   <div className="text-sm font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 px-3 py-1 rounded-full mt-2 md:mt-0">
                     {experience.period}
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
                   {experience.description}
                 </p>
               </div>
