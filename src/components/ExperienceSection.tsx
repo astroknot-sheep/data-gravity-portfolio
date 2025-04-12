@@ -1,14 +1,14 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { Flask, Database, Search, Network, BookOpen } from "lucide-react";
+import { Beaker, Database, Search, Network, BookOpen } from "lucide-react";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const experienceData = [
     {
-      icon: <Flask className="w-5 h-5" />,
+      icon: <Beaker className="w-5 h-5" />,
       title: "Research Intern, LaRGo - Large Language Models Research Group",
       location: "Kolkata, India",
       period: "Feb 2024 – Present",
