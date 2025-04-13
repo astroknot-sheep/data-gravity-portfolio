@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Data Scientist Portfolio</title>
     <meta name="description" content="Portfolio website showcasing data science and machine learning projects">
     <!-- League Spartan font with preload for performance -->
@@ -27,6 +27,29 @@
       
       h1, h2, h3, h4, h5, h6, .font-intro {
         font-family: 'Intro Rust', 'League Spartan', sans-serif !important;
+      }
+
+      /* Initial loading state */
+      #root:empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #121212;
+        color: white;
+      }
+
+      #root:empty::after {
+        content: 'Loading...';
+        font-family: 'League Spartan', sans-serif;
+        font-size: 24px;
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
       }
     </style>
   </head>
