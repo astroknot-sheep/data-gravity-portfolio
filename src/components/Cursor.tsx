@@ -1,6 +1,5 @@
 
 import { useEffect, useRef, useState } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface CursorPosition {
   x: number;
@@ -15,18 +14,8 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const interactiveElementsRef = useRef<NodeListOf<Element> | null>(null);
-  const isMobile = useIsMobile();
-
-  // Return null immediately if on mobile - prevents any cursor effects on touch devices
-  if (isMobile) return null;
 
   useEffect(() => {
-    // Skip cursor effects on mobile
-    if (isMobile) {
-      document.body.style.cursor = "auto";
-      return () => {}; // Empty cleanup for mobile
-    }
-
     // Hide default cursor
     document.body.style.cursor = "none";
 
@@ -49,12 +38,12 @@ export default function Cursor() {
     const handleMouseEnter = () => setHidden(false);
 
     document.addEventListener("mousemove", updateCursorPosition, { passive: true });
-    document.addEventListener("mousedown", handleMouseDown, { passive: true });
-    document.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
 
-    // Add event listeners to all links and interactive elements
+    // Add event listeners to all links and interactive elements - once at mount
     interactiveElementsRef.current = document.querySelectorAll(
       "a, button, .interactive, input, select, textarea, [role='button']"
     );
@@ -79,13 +68,10 @@ export default function Cursor() {
         });
       }
     };
-  }, [isMobile]);
+  }, []);
 
   // Mutation observer to detect new interactive elements
   useEffect(() => {
-    // Skip cursor effects on mobile
-    if (isMobile) return;
-    
     const updateInteractiveElements = () => {
       if (interactiveElementsRef.current) {
         const handleLinkHoverOn = () => setLinkHovered(true);
@@ -123,10 +109,9 @@ export default function Cursor() {
     updateInteractiveElements();
   
     return () => observer.disconnect();
-  }, [isMobile]);
+  }, []);
 
-  // Return null for mobile or SSR 
-  if (typeof window === "undefined" || isMobile) return null;
+  if (typeof window === "undefined") return null;
 
   return (
     <>

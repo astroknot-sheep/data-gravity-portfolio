@@ -1,6 +1,6 @@
+
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ThreeCanvasProps {
   className?: string;
@@ -9,16 +9,10 @@ interface ThreeCanvasProps {
 const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isSolving, setIsSolving] = useState(false);
-  const isMobile = useIsMobile();
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Check if we're on iOS
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    
     // Scene setup
     const scene = new THREE.Scene();
     
@@ -33,30 +27,13 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     // Renderer with performance optimizations
     const renderer = new THREE.WebGLRenderer({ 
-      antialias: !isMobile, // Disable antialiasing on mobile for performance
+      antialias: true,
       alpha: true,
-      powerPreference: isIOS ? 'default' : 'high-performance', // Use default on iOS
-      preserveDrawingBuffer: isIOS, // Important for iOS Chrome
-      precision: isIOS ? 'mediump' : 'highp', // Lower precision on iOS for better performance
+      powerPreference: 'high-performance',
     });
-    
-    rendererRef.current = renderer;
-    
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isIOS ? 1 : 2)); // Lower pixel ratio on iOS
-    
-    // Create a container for the renderer's canvas element
-    const container = document.createElement('div');
-    container.style.position = 'absolute';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.width = '100%';
-    container.style.height = '100%';
-    container.appendChild(renderer.domElement);
-    canvasRef.current.appendChild(container);
-    
-    // Force the canvas to be visible - helps with iOS Chrome black screen issues
-    renderer.domElement.style.display = 'block';
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    canvasRef.current.appendChild(renderer.domElement);
     
     // Main group to hold the Rubik's cube
     const cubeGroup = new THREE.Group();
@@ -420,11 +397,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     // Comprehensive cleanup
     return () => {
       if (canvasRef.current && renderer.domElement) {
-        if (container && container.contains(renderer.domElement)) {
-          container.removeChild(renderer.domElement);
-        }
-        if (canvasRef.current.contains(container)) {
-          canvasRef.current.removeChild(container);
+        if (canvasRef.current.contains(renderer.domElement)) {
+          canvasRef.current.removeChild(renderer.domElement);
         }
       }
       
@@ -438,28 +412,29 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       }
       
       // Dispose all resources
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
-        rendererRef.current = null;
-      }
+      renderer.dispose();
+      miniCubes.forEach(cube => {
+        cube.mesh.traverse((obj: any) => {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) {
+              obj.material.forEach((mat: THREE.Material) => mat.dispose());
+            } else {
+              obj.material.dispose();
+            }
+          }
+        });
+      });
       
       scene.clear();
     };
-  }, [isSolving, isMobile]);
+  }, [isSolving]);
 
   return (
     <div 
       ref={canvasRef} 
       className={`absolute inset-0 -z-5 opacity-80 ${className || ''}`}
       aria-hidden="true"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden'
-      }}
     />
   );
 };
