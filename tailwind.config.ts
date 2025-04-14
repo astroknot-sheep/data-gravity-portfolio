@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -67,7 +66,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for dark mode data scientist portfolio
+				// Custom colors with warm amber/red tones instead of blue
 				gray: {
 					50: '#f7f7f7',
 					100: '#e3e3e3',
@@ -86,27 +85,16 @@ export default {
 					DEFAULT: '#d4a257',
 					dark: '#8c6931',
 				},
-				green: {
-					100: '#e6f3e6',
-					200: '#c2e0c2',
-					300: '#9ec89e',
-					400: '#7ab17a',
-					500: '#569956',
-					600: '#458a45',
-					700: '#347834',
-					800: '#236723',
-					900: '#124b12',
-				},
-				teal: {
-					100: '#e6f5f5',
-					200: '#c1e3e3',
-					300: '#9cd1d1',
-					400: '#77bebe',
-					500: '#52acac',
-					600: '#429a9a',
-					700: '#318686',
-					800: '#217272',
-					900: '#105151',
+				red: {
+					100: '#ffebeb',
+					200: '#ffd1d1',
+					300: '#ffb8b8',
+					400: '#ff9e9e',
+					500: '#ff8585',
+					600: '#ea384c', // Warm red color
+					700: '#c92b2b',
+					800: '#a31f1f',
+					900: '#7d1414',
 				},
 			},
 			borderRadius: {

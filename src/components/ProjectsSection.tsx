@@ -106,7 +106,7 @@ export default function ProjectsSection() {
           </motion.p>
         </div>
         
-        {/* Project filter tabs */}
+        {/* Project filter tabs with red-tinged amber active state */}
         <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
           <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
             {categories.map((category) => (
@@ -122,7 +122,7 @@ export default function ProjectsSection() {
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-amber-400 rounded-full -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-amber-400 to-red-500 rounded-full -z-10"
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
@@ -170,7 +170,7 @@ export default function ProjectsSection() {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-amber-500/50 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300"
+              className="bg-transparent border-red-500/50 text-red-400 hover:bg-red-500/10 hover:text-red-300"
             >
               <PlusCircle className="mr-2 h-5 w-5" />
               View More Projects

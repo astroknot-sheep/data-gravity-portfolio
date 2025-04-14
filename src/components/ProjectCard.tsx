@@ -91,7 +91,7 @@ export default function ProjectCard({
             
             {/* View Project Button */}
             <Button 
-              className="absolute bottom-6 left-6 bg-secondary hover:bg-secondary/80 text-white px-4 h-10 flex items-center"
+              className="absolute bottom-6 left-6 bg-red-600 hover:bg-red-700 text-white px-4 h-10 flex items-center"
               onClick={handleViewProject}
             >
               <span>View Project</span>
@@ -104,7 +104,7 @@ export default function ProjectCard({
               <ChevronRight className="w-4 h-4 ml-1" />
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-amber-600"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-red-600"></div>
           </div>
         </div>
         
@@ -150,7 +150,7 @@ export default function ProjectCard({
             <div className="mt-auto flex justify-between items-center">
               <Button 
                 variant="default"
-                className="bg-secondary hover:bg-secondary/80 text-white"
+                className="bg-red-600 hover:bg-red-700 text-white"
                 onClick={handleViewProject}
               >
                 <Github className="w-4 h-4 mr-2" />
@@ -168,7 +168,7 @@ export default function ProjectCard({
               </button>
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-600 to-amber-400"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-red-600 to-amber-400"></div>
           </div>
         </div>
       </motion.div>

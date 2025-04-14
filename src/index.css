@@ -17,7 +17,7 @@
     --primary: 32 95% 50%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 48% 45%;
+    --secondary: 0 84% 56%; /* Warm red instead of blue */
     --secondary-foreground: 24 9.8% 10%;
 
     --muted: 60 4.8% 95.9%;
@@ -58,7 +58,7 @@
     --primary: 32 95% 55%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 48% 45%;
+    --secondary: 0 84% 56%; /* Warm red instead of blue */
     --secondary-foreground: 0 0% 98%;
 
     --muted: 12 3.7% 15.9%;

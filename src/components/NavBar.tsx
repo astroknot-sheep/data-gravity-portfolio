@@ -150,7 +150,7 @@ export default function NavBar() {
                     
                     <div className="flex justify-center mt-12 space-x-4">
                       <a 
-                        href="https://github.com/dhrimandeka" 
+                        href="https://github.com/astroknot-sheep" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         aria-label="GitHub profile"
@@ -178,7 +178,7 @@ export default function NavBar() {
                     
                     <div className="mt-12 text-center">
                       <Button 
-                        className="bg-secondary hover:bg-secondary/80 text-white h-12 px-6"
+                        className="bg-red-600 hover:bg-red-700 text-white h-12 px-6"
                         onClick={() => {
                           setMenuOpen(false);
                           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -219,7 +219,7 @@ export default function NavBar() {
             <li>
               <a
                 href="#contact"
-                className="ml-3 px-5 py-3 bg-secondary hover:bg-secondary/80 text-white rounded-full text-sm font-medium transition-colors"
+                className="ml-3 px-5 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full text-sm font-medium transition-colors"
               >
                 Contact Me
               </a>
