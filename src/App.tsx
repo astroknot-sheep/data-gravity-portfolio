@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,31 +12,16 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const [loadingMessage, setLoadingMessage] = useState("Initializing...");
+  const [loadingMessage, setLoadingMessage] = useState("Loading");
 
-  // Simulate checking if resources are loaded with sequential messages
+  // Simple loading animation with basic text
   useEffect(() => {
-    const messages = [
-      "Initializing...",
-      "Loading resources...",
-      "Preparing experience..."
-    ];
-    
-    let currentIndex = 0;
-    const messageInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % messages.length;
-      setLoadingMessage(messages[currentIndex]);
-    }, 1000);
-    
     const timer = setTimeout(() => {
-      clearInterval(messageInterval);
       setLoading(false);
-      console.log("App finished loading");
-    }, 2500); // Keep loading time reasonable
+    }, 1500); // Shorter loading time for better UX
 
     return () => {
       clearTimeout(timer);
-      clearInterval(messageInterval);
     };
   }, []);
 

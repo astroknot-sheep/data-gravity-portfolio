@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { Loader } from 'lucide-react'
 
 interface LoadingScreenProps {
   message?: string
@@ -7,28 +8,18 @@ interface LoadingScreenProps {
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ message = "Loading..." }) => {
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center justify-center z-50">
-      <div className="relative">
-        <div className="w-20 h-20 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
-        <div className="absolute top-0 left-0 w-20 h-20 border-4 border-transparent border-r-amber-300/60 rounded-full animate-[spin_2s_linear_infinite]"></div>
-      </div>
-      <p className="text-amber-300 text-xl font-medium mt-6 font-intro">{message}</p>
-      <div className="mt-4 flex space-x-2">
-        {[0, 1, 2].map((i) => (
-          <div 
-            key={i} 
-            className="w-3 h-3 rounded-full bg-amber-400/70"
-            style={{ animation: `pulse 1.5s infinite ${i * 0.2}s` }}
-          ></div>
-        ))}
-      </div>
+    <div className="fixed inset-0 bg-gray-900 flex flex-col items-center justify-center z-50">
+      <Loader className="w-10 h-10 text-amber-500 animate-spin" />
+      <p className="text-amber-300 text-xl font-medium mt-4">{message}</p>
       
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(0.8); opacity: 0.5; }
-          50% { transform: scale(1.2); opacity: 1; }
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+          }
+        `}
+      </style>
     </div>
   )
 }
