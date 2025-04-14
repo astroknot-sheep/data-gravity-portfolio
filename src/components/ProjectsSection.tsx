@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react";
 
 const projectsData = [
   {
@@ -13,7 +15,8 @@ const projectsData = [
       "Achieved 99.9% uptime with Docker and AWS CloudWatch",
       "Reduced operational costs by 35% through resource optimization",
     ],
-    category: "mlops"
+    category: "mlops",
+    link: "https://github.com/dhrimandeka/ml-cicd-pipeline",
   },
   {
     title: "Real-Time Flight Price Prediction",
@@ -23,7 +26,8 @@ const projectsData = [
       "Engineered FastAPI service handling 1000+ concurrent requests",
       "Designed Airflow DAGs for daily data collection from 15+ sources",
     ],
-    category: "ml"
+    category: "ml",
+    link: "https://github.com/dhrimandeka/flight-price-prediction",
   },
   {
     title: "Conversational Q&A Chatbot",
@@ -33,7 +37,8 @@ const projectsData = [
       "Integrated RAG architecture for efficient document retrieval",
       "Improved answer accuracy by 45% with prompt templates",
     ],
-    category: "nlp"
+    category: "nlp",
+    link: "https://github.com/dhrimandeka/conversational-qa-system",
   },
   {
     title: "Resume ATS System",
@@ -43,7 +48,8 @@ const projectsData = [
       "Reduced manual review time by 80%",
       "Built React dashboard reducing HR time-to-decision by 35%",
     ],
-    category: "nlp"
+    category: "nlp",
+    link: "https://github.com/dhrimandeka/resume-ats-system",
   },
   {
     title: "News Aggregation System",
@@ -53,7 +59,8 @@ const projectsData = [
       "Reduced processing time by 85% using microservices",
       "Ensured zero-downtime deployment",
     ],
-    category: "ml"
+    category: "ml",
+    link: "https://github.com/dhrimandeka/news-aggregation-system",
   },
 ];
 
@@ -79,7 +86,7 @@ export default function ProjectsSection() {
       id="projects"
       className="py-20 bg-gray-900 relative overflow-hidden"
     >
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 md:px-8 relative z-10">
         <div className="text-center mb-12" ref={ref}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +107,7 @@ export default function ProjectsSection() {
         </div>
         
         {/* Project filter tabs */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
           <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
             {categories.map((category) => (
               <button
@@ -146,6 +153,7 @@ export default function ProjectsSection() {
                 description={project.description}
                 index={index}
                 isInView={isInView}
+                link={project.link}
               />
             </motion.div>
           ))}
@@ -154,6 +162,19 @@ export default function ProjectsSection() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-20">
             <p className="text-gray-500 dark:text-gray-400">No projects found in this category.</p>
+          </div>
+        )}
+        
+        {filter === "all" && filteredProjects.length >= 5 && (
+          <div className="mt-12 text-center">
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="bg-transparent border-amber-500/50 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300"
+            >
+              <PlusCircle className="mr-2 h-5 w-5" />
+              View More Projects
+            </Button>
           </div>
         )}
       </div>

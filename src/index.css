@@ -14,16 +14,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 32 95% 44%;
+    --primary: 32 95% 50%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 60 4.8% 95.9%;
+    --secondary: 210 48% 45%;
     --secondary-foreground: 24 9.8% 10%;
 
     --muted: 60 4.8% 95.9%;
     --muted-foreground: 25 5.3% 44.7%;
 
-    --accent: 39 96% 48%;
+    --accent: 39 96% 55%;
     --accent-foreground: 24 9.8% 10%;
 
     --destructive: 0 84.2% 60.2%;
@@ -55,17 +55,17 @@
     --popover: 20 10% 5%;
     --popover-foreground: 0 0% 90%;
 
-    --primary: 35 50% 40%;
-    --primary-foreground: 0 0% 90%;
+    --primary: 32 95% 55%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 12 3.7% 15.9%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 210 48% 45%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 12 3.7% 15.9%;
     --muted-foreground: 24 5% 64.9%;
 
-    --accent: 35 80% 40%;
-    --accent-foreground: 0 0% 90%;
+    --accent: 35 80% 55%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 90%;
@@ -93,6 +93,8 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -109,6 +111,14 @@
 
   h3 {
     @apply text-2xl sm:text-3xl;
+  }
+
+  p {
+    @apply text-base;
+  }
+
+  .subheading {
+    @apply text-lg font-bold;
   }
 
   ::-webkit-scrollbar {

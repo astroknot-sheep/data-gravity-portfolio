@@ -1,7 +1,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github, ChevronRight } from "lucide-react";
+import { Github, ChevronRight, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProjectCardProps {
   title: string;
@@ -9,6 +10,7 @@ interface ProjectCardProps {
   description: string[];
   index: number;
   isInView: boolean;
+  link?: string;
 }
 
 export default function ProjectCard({ 
@@ -16,7 +18,8 @@ export default function ProjectCard({
   technologies, 
   description, 
   index, 
-  isInView 
+  isInView,
+  link = "#"
 }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   
@@ -25,6 +28,11 @@ export default function ProjectCard({
   
   const handleClick = () => {
     setIsFlipped(!isFlipped);
+  };
+  
+  const handleViewProject = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(link, '_blank', 'noopener,noreferrer');
   };
   
   return (
@@ -70,7 +78,7 @@ export default function ProjectCard({
             </p>
             
             {/* Tech stack */}
-            <div className="flex flex-wrap gap-2 mt-auto mb-6">
+            <div className="flex flex-wrap gap-2 mt-auto mb-14">
               {technologies.slice(1).map((tech, i) => (
                 <span 
                   key={i} 
@@ -80,6 +88,15 @@ export default function ProjectCard({
                 </span>
               ))}
             </div>
+            
+            {/* View Project Button */}
+            <Button 
+              className="absolute bottom-6 left-6 bg-secondary hover:bg-secondary/80 text-white px-4 h-10 flex items-center"
+              onClick={handleViewProject}
+            >
+              <span>View Project</span>
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </Button>
             
             {/* Click indicator */}
             <div className="absolute bottom-3 right-3 flex items-center text-amber-300 text-sm font-medium opacity-70 group-hover:opacity-100 transition-opacity">
@@ -116,6 +133,7 @@ export default function ProjectCard({
                     stroke="currentColor" 
                     viewBox="0 0 24 24" 
                     xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                   >
                     <path 
                       strokeLinecap="round" 
@@ -129,16 +147,25 @@ export default function ProjectCard({
               ))}
             </ul>
             
-            <div className="mt-auto">
-              <a 
-                href="https://github.com/astroknot-sheep" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-4 py-2 bg-amber-500 text-gray-900 rounded-lg font-medium transition-colors hover:bg-amber-400"
+            <div className="mt-auto flex justify-between items-center">
+              <Button 
+                variant="default"
+                className="bg-secondary hover:bg-secondary/80 text-white"
+                onClick={handleViewProject}
               >
                 <Github className="w-4 h-4 mr-2" />
                 View Project
-              </a>
+              </Button>
+              
+              <button 
+                onClick={handleClick}
+                className="text-gray-400 hover:text-amber-300 transition-colors"
+                aria-label="Flip card back"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+              </button>
             </div>
             
             <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-600 to-amber-400"></div>

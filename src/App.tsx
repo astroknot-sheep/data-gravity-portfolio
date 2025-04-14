@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,17 +9,34 @@ import LoadingScreen from "./components/LoadingScreen";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Create QueryClient with optimal performance settings
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 1 minute
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("Loading");
 
-  // Simple loading animation with basic text
+  // Simpler loading with performance focus
   useEffect(() => {
+    // Check if the page was already loaded before (for better UX on navigations)
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    
+    if (hasVisited) {
+      setLoading(false);
+      return;
+    }
+    
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500); // Shorter loading time for better UX
+      sessionStorage.setItem('hasVisited', 'true');
+    }, 1000); // Reduced loading time for better UX
 
     return () => {
       clearTimeout(timer);
