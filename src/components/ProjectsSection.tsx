@@ -16,7 +16,7 @@ const projectsData = [
       "Reduced operational costs by 35% through resource optimization",
     ],
     category: "mlops",
-    link: "https://github.com/dhrimandeka/ml-cicd-pipeline",
+    link: "https://github.com/astroknot-sheep",
   },
   {
     title: "Real-Time Flight Price Prediction",
@@ -27,7 +27,7 @@ const projectsData = [
       "Designed Airflow DAGs for daily data collection from 15+ sources",
     ],
     category: "ml",
-    link: "https://github.com/dhrimandeka/flight-price-prediction",
+    link: "https://github.com/astroknot-sheep",
   },
   {
     title: "Conversational Q&A Chatbot",
@@ -38,7 +38,7 @@ const projectsData = [
       "Improved answer accuracy by 45% with prompt templates",
     ],
     category: "nlp",
-    link: "https://github.com/dhrimandeka/conversational-qa-system",
+    link: "https://github.com/astroknot-sheep",
   },
   {
     title: "Resume ATS System",
@@ -49,7 +49,7 @@ const projectsData = [
       "Built React dashboard reducing HR time-to-decision by 35%",
     ],
     category: "nlp",
-    link: "https://github.com/dhrimandeka/resume-ats-system",
+    link: "https://github.com/astroknot-sheep",
   },
   {
     title: "News Aggregation System",
@@ -60,7 +60,7 @@ const projectsData = [
       "Ensured zero-downtime deployment",
     ],
     category: "ml",
-    link: "https://github.com/dhrimandeka/news-aggregation-system",
+    link: "https://github.com/astroknot-sheep",
   },
 ];
 

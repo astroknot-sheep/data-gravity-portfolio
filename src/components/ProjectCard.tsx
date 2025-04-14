@@ -67,8 +67,8 @@ export default function ProjectCard({
           {/* Card content */}
           <div className="relative z-10 p-6 h-full flex flex-col">
             <div className="flex items-start justify-between mb-4">
-              <h3 className="text-xl font-bold text-amber-300">{title}</h3>
-              <span className="bg-amber-400/20 text-amber-300 px-3 py-1 rounded-full text-xs font-medium border border-amber-500/30">
+              <h3 className="text-xl font-bold text-rose-300">{title}</h3>
+              <span className="bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full text-xs font-medium border border-rose-500/30">
                 {mainTech}
               </span>
             </div>
@@ -91,7 +91,7 @@ export default function ProjectCard({
             
             {/* View Project Button */}
             <Button 
-              className="absolute bottom-6 left-6 bg-red-600 hover:bg-red-700 text-white px-4 h-10 flex items-center"
+              className="absolute bottom-6 left-6 bg-rose-600 hover:bg-rose-700 text-white px-4 h-10 flex items-center"
               onClick={handleViewProject}
             >
               <span>View Project</span>
@@ -99,12 +99,12 @@ export default function ProjectCard({
             </Button>
             
             {/* Click indicator */}
-            <div className="absolute bottom-3 right-3 flex items-center text-amber-300 text-sm font-medium opacity-70 group-hover:opacity-100 transition-opacity">
+            <div className="absolute bottom-3 right-3 flex items-center text-rose-300 text-sm font-medium opacity-70 group-hover:opacity-100 transition-opacity">
               <span>Click for details</span>
               <ChevronRight className="w-4 h-4 ml-1" />
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-red-600"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-rose-400 to-red-600"></div>
           </div>
         </div>
         
@@ -122,13 +122,13 @@ export default function ProjectCard({
           
           {/* Card content */}
           <div className="relative z-10 p-6 h-full flex flex-col">
-            <h3 className="text-xl font-bold text-amber-300 mb-4">{title}</h3>
+            <h3 className="text-xl font-bold text-rose-300 mb-4">{title}</h3>
             
             <ul className="space-y-3 text-gray-300">
               {description.map((point, i) => (
                 <li key={i} className="flex items-start">
                   <svg 
-                    className="w-5 h-5 text-amber-400 mr-2 mt-0.5 flex-shrink-0" 
+                    className="w-5 h-5 text-rose-400 mr-2 mt-0.5 flex-shrink-0" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24" 
@@ -150,7 +150,7 @@ export default function ProjectCard({
             <div className="mt-auto flex justify-between items-center">
               <Button 
                 variant="default"
-                className="bg-red-600 hover:bg-red-700 text-white"
+                className="bg-rose-600 hover:bg-rose-700 text-white"
                 onClick={handleViewProject}
               >
                 <Github className="w-4 h-4 mr-2" />
@@ -159,7 +159,7 @@ export default function ProjectCard({
               
               <button 
                 onClick={handleClick}
-                className="text-gray-400 hover:text-amber-300 transition-colors"
+                className="text-gray-400 hover:text-rose-300 transition-colors"
                 aria-label="Flip card back"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +168,7 @@ export default function ProjectCard({
               </button>
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-red-600 to-amber-400"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-red-600 to-rose-400"></div>
           </div>
         </div>
       </motion.div>
