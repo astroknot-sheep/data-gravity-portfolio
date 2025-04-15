@@ -66,7 +66,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors with warm amber/red tones instead of blue
 				gray: {
 					50: '#f7f7f7',
 					100: '#e3e3e3',
@@ -81,16 +80,29 @@ export default {
 					950: '#141414',
 				},
 				orange: {
-					50: '#FFF5E1',
-					100: '#FFE5CC',
-					200: '#FFCC99',
-					300: '#FFB366',
-					400: '#FF9933',
-					500: '#FF8000',  // Primary orange
-					600: '#E67200',
-					700: '#CC6600',
-					800: '#B35900',
-					900: '#994D00',
+					50: '#FFF8E6',
+					100: '#FFECC9',
+					200: '#FFE0A3',
+					300: '#FFD47D',
+					400: '#FFC857',
+					500: '#FFBF40',
+					600: '#E6A520',
+					700: '#CC8C00',
+					800: '#B37300',
+					900: '#A36600',
+				},
+				amber: {
+					50: '#FFFBEB',
+					100: '#FEF3C7',
+					200: '#FDE68A',
+					300: '#FCD34D',
+					400: '#FBBF24',
+					500: '#F59E0B',
+					600: '#D97706',
+					700: '#B45309',
+					800: '#92400E',
+					900: '#78350F',
+					950: '#451A03',
 				},
 			},
 			borderRadius: {
