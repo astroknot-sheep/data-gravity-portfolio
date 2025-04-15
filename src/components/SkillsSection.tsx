@@ -91,7 +91,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-6 font-intro text-gray-800 dark:text-amber-300"
+            className="text-4xl font-bold mb-6 font-intro text-gray-800 dark:text-orange-300"
           >
             Technical Expertise
           </motion.h2>
@@ -114,7 +114,7 @@ export default function SkillsSection() {
               transition={{ duration: 0.6, delay: catIndex * 0.1 }}
               className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
             >
-              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-amber-300">{category.name}</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-orange-300">{category.name}</h3>
               
               <div className="grid grid-cols-2 gap-4">
                 {category.skills.map((skill) => (
@@ -123,7 +123,7 @@ export default function SkillsSection() {
                     whileHover={{ y: -5 }}
                     className="flex flex-col items-center justify-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    <div className="text-amber-600 dark:text-amber-400 mb-2">
+                    <div className="text-orange-600 dark:text-orange-400 mb-2">
                       {skill.icon}
                     </div>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">

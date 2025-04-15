@@ -8,12 +8,31 @@ import { PlusCircle } from "lucide-react";
 
 const projectsData = [
   {
-    title: "End-to-End ML System with CI/CD",
-    technologies: ["MLOps", "Python", "Docker", "AWS", "CI/CD"],
+    title: "LYRA - AI-Powered Mental Health Therapy Chatbot",
+    technologies: ["React", "Express", "MongoDB", "GenAI"],
     description: [
-      "Built production-ready ML pipeline reducing inference time by 40%",
-      "Achieved 99.9% uptime with Docker and AWS CloudWatch",
-      "Reduced operational costs by 35% through resource optimization",
+      "Full-stack platform with 40% faster response time vs traditional chatbots",
+      "Google Gemini AI integration with Clerk auth and MongoDB persistence",
+    ],
+    category: "nlp",
+    link: "https://github.com/astroknot-sheep",
+  },
+  {
+    title: "Flight Price Prediction System",
+    technologies: ["Python", "Scikit-learn", "Pandas"],
+    description: [
+      "94.2% accuracy across 10,000+ data points with optimized feature engineering",
+      "37% prediction error reduction through advanced preprocessing techniques",
+    ],
+    category: "ml",
+    link: "https://github.com/astroknot-sheep",
+  },
+  {
+    title: "CI/CD ML Pipeline on AWS",
+    technologies: ["Docker", "GitHub Actions", "Flask", "AWS"],
+    description: [
+      "End-to-end automated ML deployment pipeline with 95% less manual work",
+      "Dockerized Flask application with GitHub Actions-driven AWS deployments",
     ],
     category: "mlops",
     link: "https://github.com/astroknot-sheep",
@@ -24,7 +43,6 @@ const projectsData = [
     description: [
       "Developed LSTM models with 88% prediction accuracy and <100ms latency",
       "Engineered FastAPI service handling 1000+ concurrent requests",
-      "Designed Airflow DAGs for daily data collection from 15+ sources",
     ],
     category: "ml",
     link: "https://github.com/astroknot-sheep",
@@ -35,31 +53,8 @@ const projectsData = [
     description: [
       "Achieved 92% user satisfaction with 50ms response time",
       "Integrated RAG architecture for efficient document retrieval",
-      "Improved answer accuracy by 45% with prompt templates",
     ],
     category: "nlp",
-    link: "https://github.com/astroknot-sheep",
-  },
-  {
-    title: "Resume ATS System",
-    technologies: ["Computer Vision", "LLMs", "FastAPI", "React"],
-    description: [
-      "Processed 1000+ resumes/hour with 95% data extraction accuracy",
-      "Reduced manual review time by 80%",
-      "Built React dashboard reducing HR time-to-decision by 35%",
-    ],
-    category: "nlp",
-    link: "https://github.com/astroknot-sheep",
-  },
-  {
-    title: "News Aggregation System",
-    technologies: ["Transformers", "Docker Compose", "Microservices"],
-    description: [
-      "Processed 10,000+ daily articles with 96% classification accuracy",
-      "Reduced processing time by 85% using microservices",
-      "Ensured zero-downtime deployment",
-    ],
-    category: "ml",
     link: "https://github.com/astroknot-sheep",
   },
 ];
@@ -92,7 +87,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-amber-400"
+            className="text-4xl font-bold mb-4 font-intro text-orange-400"
           >
             Featured Projects
           </motion.h2>
@@ -106,7 +101,7 @@ export default function ProjectsSection() {
           </motion.p>
         </div>
         
-        {/* Project filter tabs with red-tinged amber active state */}
+        {/* Project filter tabs with orange gradient active state */}
         <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
           <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
             {categories.map((category) => (
@@ -122,7 +117,7 @@ export default function ProjectsSection() {
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-gradient-to-r from-amber-400 to-red-500 rounded-full -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full -z-10"
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
@@ -170,7 +165,7 @@ export default function ProjectsSection() {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-red-500/50 text-red-400 hover:bg-red-500/10 hover:text-red-300"
+              className="bg-transparent border-orange-500/50 text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
             >
               <PlusCircle className="mr-2 h-5 w-5" />
               View More Projects
