@@ -2,6 +2,10 @@
 import React from 'react'
 import { Loader } from 'lucide-react'
 
+interface LoadingScreenProps {
+  message?: string;
+}
+
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ message = "Loading..." }) => {
   return (
     <div className="fixed inset-0 bg-orange-900 flex flex-col items-center justify-center z-50">
