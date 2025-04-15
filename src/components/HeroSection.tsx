@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
@@ -15,8 +14,8 @@ export default function HeroSection() {
   
   const messages = [
     "Hi, I'm Dhriman",
-    "I specialise in <span class='text-red-500 font-semibold'>ML</span> and <span class='text-red-500 font-semibold'>Operations Research</span>.",
-    "Let's connect for <span class='text-red-500 font-semibold'>data-driven innovation</span>!"
+    "I specialise in <span class='text-orange-500 font-semibold'>ML</span> and <span class='text-orange-500 font-semibold'>Operations Research</span>.",
+    "Let's connect for <span class='text-orange-500 font-semibold'>data-driven innovation</span>!"
   ];
 
   useEffect(() => {
@@ -64,18 +63,18 @@ export default function HeroSection() {
       <div className="absolute inset-0 -z-10">
         <div 
           ref={parallaxBackgroundRef}
-          className="absolute inset-0 bg-gradient-radial from-red-100/30 via-transparent to-transparent dark:from-red-900/15"
+          className="absolute inset-0 bg-gradient-radial from-orange-100/30 via-transparent to-transparent dark:from-orange-900/15"
         />
         
         {/* Background grid with subtle effect */}
         <div className="absolute inset-0 bg-data-grid bg-[length:30px_30px] opacity-20" />
         
         {/* Decorative elements with refined styling in warm red tones */}
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-amber-300/10 dark:bg-red-700/10 blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-amber-300/10 dark:bg-red-700/10 blur-3xl animate-float" />
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-orange-300/10 dark:bg-orange-700/10 blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-orange-300/10 dark:bg-orange-700/10 blur-3xl animate-float" />
         
         {/* Animated morphing blob with warmer red tones */}
-        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-red-400/15 to-amber-400/15 rounded-full blur-3xl animate-morph" />
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-orange-400/15 to-orange-300/15 rounded-full blur-3xl animate-morph" />
       </div>
       
       {/* Main content with increased z-index to ensure it stays on top */}
@@ -86,7 +85,7 @@ export default function HeroSection() {
             className="relative"
           >
             {/* Badge with improved styling */}
-            <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-red-900/20 text-amber-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
+            <span className="chip mb-4 inline-block px-4 py-1 text-sm bg-orange-900/20 text-orange-200 backdrop-blur-sm">Data Scientist & ML Engineer</span>
             
             {/* Animated message display */}
             <div className="min-h-[220px] flex flex-col items-center justify-center">
@@ -107,7 +106,7 @@ export default function HeroSection() {
             >
               <a 
                 href="#projects" 
-                className="interactive glassmorphism px-8 py-4 text-lg text-amber-800 dark:text-amber-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-red-500/30"
+                className="interactive glassmorphism px-8 py-4 text-lg text-orange-800 dark:text-orange-200 font-medium rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 font-league border border-orange-500/30"
               >
                 View My Work
               </a>
@@ -153,7 +152,7 @@ export default function HeroSection() {
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20">
         <span className="text-sm text-gray-500 dark:text-gray-400 mb-2 font-league">Scroll</span>
         <svg 
-          className="w-6 h-6 text-red-600 dark:text-red-400" 
+          className="w-6 h-6 text-orange-600 dark:text-orange-400" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24" 

@@ -1,4 +1,3 @@
-
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
 import ProjectCard from "./ProjectCard";
@@ -79,7 +78,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 bg-gray-900 relative overflow-hidden"
+      className="py-20 bg-orange-950 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 md:px-8 relative z-10">
         <div className="text-center mb-12" ref={ref}>
@@ -101,9 +100,9 @@ export default function ProjectsSection() {
           </motion.p>
         </div>
         
-        {/* Project filter tabs with orange gradient active state */}
+        {/* Project filter tabs with orange gradient */}
         <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
-          <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
+          <div className="inline-flex rounded-full p-1 bg-orange-900/80 backdrop-blur-sm border border-orange-800">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -111,7 +110,7 @@ export default function ProjectsSection() {
                 className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === category.id 
                     ? "text-gray-900" 
-                    : "text-gray-300 hover:text-white"
+                    : "text-orange-300 hover:text-white"
                 }`}
               >
                 {filter === category.id && (

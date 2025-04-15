@@ -80,21 +80,17 @@ export default {
 					900: '#222222',
 					950: '#141414',
 				},
-				amber: {
-					light: '#ffd28a',
-					DEFAULT: '#d4a257',
-					dark: '#8c6931',
-				},
-				red: {
-					100: '#ffebeb',
-					200: '#ffd1d1',
-					300: '#ffb8b8',
-					400: '#ff9e9e',
-					500: '#ff8585',
-					600: '#ea384c', // Warm red color
-					700: '#c92b2b',
-					800: '#a31f1f',
-					900: '#7d1414',
+				orange: {
+					50: '#FFF5E1',
+					100: '#FFE5CC',
+					200: '#FFCC99',
+					300: '#FFB366',
+					400: '#FF9933',
+					500: '#FF8000',  // Primary orange
+					600: '#E67200',
+					700: '#CC6600',
+					800: '#B35900',
+					900: '#994D00',
 				},
 			},
 			borderRadius: {
