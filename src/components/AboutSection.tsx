@@ -2,7 +2,7 @@
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Code, Database, Server, Cloud, Terminal, GitBranch, FileCode } from "lucide-react";
+import { Code, Database, Server, Cloud, Terminal, GitBranch, FileCode, GraduationCap } from "lucide-react";
 
 export default function AboutSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -80,6 +80,12 @@ export default function AboutSection() {
               className="space-y-6 text-gray-600 dark:text-gray-300"
             >
               <div>
+                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Education</h3>
+                <div className="flex items-start gap-2 mb-4">
+                  <GraduationCap className="w-5 h-5 mt-0.5 text-orange-500 dark:text-orange-400" />
+                  <p>Bachelor of Science (B.S.) in Economics from IISER Bhopal</p>
+                </div>
+                
                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Technical Skills</h3>
                 <div className="space-y-4">
                   {technologies.slice(0, 2).map((tech, index) => (
