@@ -79,7 +79,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 bg-amber-950 relative overflow-hidden"
+      className="py-20 bg-gray-900 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 md:px-8 relative z-10">
         <div className="text-center mb-12" ref={ref}>
@@ -87,7 +87,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-amber-300"
+            className="text-4xl font-bold mb-4 font-intro text-gray-200"
           >
             Featured Projects
           </motion.h2>
@@ -101,9 +101,9 @@ export default function ProjectsSection() {
           </motion.p>
         </div>
         
-        {/* Project filter tabs with orange gradient */}
+        {/* Project filter tabs with dark gradient */}
         <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
-          <div className="inline-flex rounded-full p-1 bg-amber-900/80 backdrop-blur-sm border border-amber-800">
+          <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -111,13 +111,13 @@ export default function ProjectsSection() {
                 className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === category.id 
                     ? "text-gray-900" 
-                    : "text-amber-300 hover:text-white"
+                    : "text-gray-300 hover:text-white"
                 }`}
               >
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 rounded-full -z-10"
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
@@ -165,7 +165,7 @@ export default function ProjectsSection() {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-amber-500/50 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300"
+              className="bg-transparent border-gray-500/50 text-gray-400 hover:bg-gray-500/10 hover:text-gray-300"
             >
               <PlusCircle className="mr-2 h-5 w-5" />
               View More Projects
