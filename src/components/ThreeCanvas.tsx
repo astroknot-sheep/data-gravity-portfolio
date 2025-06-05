@@ -41,7 +41,6 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     // Cube parameters
     const cubeSize = 1;
     const gap = 0.05;
-    const totalSize = 3 * cubeSize + 2 * gap; // 3 cubes + 2 gaps
     
     // Materials for the skeletal cube - fully transparent with just edges
     const edgeMaterial = new THREE.LineBasicMaterial({ 
@@ -100,23 +99,17 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
     
-    // Mouse movement tracking - FIXED to follow cursor automatically
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-    let currentRotationX = 0;
-    let currentRotationY = 0;
-    const inertiaFactor = 0.08; // Slightly faster response
+    // FIXED: Automatic cursor following without dragging
+    let mouseX = 0;
+    let mouseY = 0;
     
     const handleMouseMove = (event: MouseEvent) => {
-      // Convert mouse position to normalized coordinates (-1 to 1)
-      const x = (event.clientX / window.innerWidth) * 2 - 1;
-      const y = -(event.clientY / window.innerHeight) * 2 + 1;
-      
-      // Set target rotation based on mouse position - smooth movement
-      targetRotationX = y * 0.5;
-      targetRotationY = x * 0.5;
+      // Normalize mouse coordinates to -1 to 1 range
+      mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
     };
     
+    // Add the event listener immediately
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     
     // Resize handler
@@ -354,29 +347,19 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     const autoSolveInterval = startInitialAnimation();
     
-    // Animation loop with smooth cursor following
+    // Animation loop - FIXED to use direct mouse position
     let frameId: number;
-    let lastFrameTime = 0;
-    const targetFPS = 60;
-    const frameInterval = 1000 / targetFPS;
     
-    const animate = (currentTime: number) => {
+    const animate = () => {
       frameId = requestAnimationFrame(animate);
       
-      if (currentTime - lastFrameTime < frameInterval) return;
-      lastFrameTime = currentTime;
+      // FIXED: Direct rotation based on mouse position (no inertia, no dragging)
+      cubeGroup.rotation.x = mouseY * 0.5;
+      cubeGroup.rotation.y = mouseX * 0.5;
       
-      // Apply smooth inertia for cursor following
-      currentRotationX += (targetRotationX - currentRotationX) * inertiaFactor;
-      currentRotationY += (targetRotationY - currentRotationY) * inertiaFactor;
-      
-      // Apply rotation to the entire cube group
-      cubeGroup.rotation.x = currentRotationX;
-      cubeGroup.rotation.y = currentRotationY;
-      
-      // Subtle constant rotation when not being controlled
-      if (Math.abs(targetRotationX) < 0.01 && Math.abs(targetRotationY) < 0.01) {
-        cubeGroup.rotation.y += 0.001;
+      // Subtle constant rotation when mouse is at center
+      if (Math.abs(mouseX) < 0.1 && Math.abs(mouseY) < 0.1) {
+        cubeGroup.rotation.y += 0.002;
       }
       
       renderer.render(scene, camera);
@@ -384,7 +367,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     frameId = requestAnimationFrame(animate);
     
-    // Comprehensive cleanup
+    // Cleanup
     return () => {
       if (canvasRef.current && renderer.domElement) {
         if (canvasRef.current.contains(renderer.domElement)) {
@@ -401,7 +384,6 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
         cancelAnimationFrame(frameId);
       }
       
-      // Dispose all resources
       renderer.dispose();
       miniCubes.forEach(cube => {
         cube.mesh.traverse((obj: any) => {
