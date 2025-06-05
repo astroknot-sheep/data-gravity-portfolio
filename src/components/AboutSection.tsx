@@ -2,7 +2,7 @@
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Code, Database, Server, Cloud, Terminal, GitBranch, FileCode, GraduationCap } from "lucide-react";
+import { Code, Database, Server, Cloud, Terminal, GitBranch, FileCode, GraduationCap, MapPin, Calendar } from "lucide-react";
 
 export default function AboutSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -79,13 +79,35 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-6 text-gray-600 dark:text-gray-300"
             >
-              <div>
-                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Education</h3>
-                <div className="flex items-start gap-2 mb-4">
-                  <GraduationCap className="w-5 h-5 mt-0.5 text-orange-500 dark:text-orange-400" />
-                  <p>Bachelor of Science (B.S.) in Economics from IISER Bhopal</p>
+              {/* Education Section - Made more prominent */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+                <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white flex items-center gap-2">
+                  <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  Education
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="bg-blue-600 dark:bg-blue-500 text-white p-2 rounded-lg">
+                      <GraduationCap className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
+                        Bachelor of Science (B.S.) in Economics
+                      </h4>
+                      <div className="flex items-center gap-2 mt-1 text-blue-600 dark:text-blue-400">
+                        <Calendar className="w-4 h-4" />
+                        <span className="font-medium">2021 - 2025</span>
+                      </div>
+                      <div className="flex items-center gap-2 mt-1 text-gray-600 dark:text-gray-300">
+                        <MapPin className="w-4 h-4" />
+                        <span>Indian Institute of Science Education and Research, Bhopal</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
+              </div>
+              
+              <div>
                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Technical Skills</h3>
                 <div className="space-y-4">
                   {technologies.slice(0, 2).map((tech, index) => (

@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -101,29 +100,21 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
     
-    // Mouse movement tracking with performance optimization
-    let lastMouseMoveTime = 0;
-    const throttleMs = 30;
-    
-    // Rotation variables
+    // Mouse movement tracking - FIXED to follow cursor automatically
     let targetRotationX = 0;
     let targetRotationY = 0;
     let currentRotationX = 0;
     let currentRotationY = 0;
-    const inertiaFactor = 0.05;
+    const inertiaFactor = 0.08; // Slightly faster response
     
     const handleMouseMove = (event: MouseEvent) => {
-      const currentTime = Date.now();
-      if (currentTime - lastMouseMoveTime < throttleMs) return;
-      lastMouseMoveTime = currentTime;
-      
       // Convert mouse position to normalized coordinates (-1 to 1)
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
-      // Set target rotation based on mouse position
-      targetRotationX = y * 0.8;
-      targetRotationY = x * 0.8;
+      // Set target rotation based on mouse position - smooth movement
+      targetRotationX = y * 0.5;
+      targetRotationY = x * 0.5;
     };
     
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -363,7 +354,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     const autoSolveInterval = startInitialAnimation();
     
-    // Animation loop
+    // Animation loop with smooth cursor following
     let frameId: number;
     let lastFrameTime = 0;
     const targetFPS = 60;
@@ -372,11 +363,10 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     const animate = (currentTime: number) => {
       frameId = requestAnimationFrame(animate);
       
-      // Limit frame rate
       if (currentTime - lastFrameTime < frameInterval) return;
       lastFrameTime = currentTime;
       
-      // Apply inertia for smooth rotation
+      // Apply smooth inertia for cursor following
       currentRotationX += (targetRotationX - currentRotationX) * inertiaFactor;
       currentRotationY += (targetRotationY - currentRotationY) * inertiaFactor;
       
@@ -384,8 +374,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       cubeGroup.rotation.x = currentRotationX;
       cubeGroup.rotation.y = currentRotationY;
       
-      // Subtle constant rotation
-      if (!isAnimating && !isSolving) {
+      // Subtle constant rotation when not being controlled
+      if (Math.abs(targetRotationX) < 0.01 && Math.abs(targetRotationY) < 0.01) {
         cubeGroup.rotation.y += 0.001;
       }
       
