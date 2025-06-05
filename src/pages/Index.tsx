@@ -5,7 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import Cursor from "@/components/Cursor";
 import { Linkedin } from "lucide-react";
 
-// Lazy load components with better strategy
+// Lazy load heavier components to improve initial load time
 const ParticleField = lazy(() => import("@/components/ParticleField"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
@@ -14,10 +14,10 @@ const PublicationsSection = lazy(() => import("@/components/PublicationsSection"
 const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
-// Optimized loading component
+// Simple loading component
 const SectionLoader = () => (
-  <div className="flex justify-center items-center py-16">
-    <div className="w-6 h-6 border-2 border-gray-600 border-t-transparent rounded-full animate-spin"></div>
+  <div className="flex justify-center items-center py-20">
+    <div className="w-8 h-8 border-4 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -26,36 +26,37 @@ export default function Index() {
     // Set dark mode
     document.documentElement.classList.add('dark');
     
-    // Optimized smooth scroll for anchor links
-    const handleAnchorClick = (e: Event) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.getAttribute('href')?.startsWith('#')) {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = target.getAttribute('href');
+        const targetId = this.getAttribute('href');
         if (!targetId) return;
         
         const targetElement = document.querySelector(targetId);
         if (!targetElement) return;
         
-        const navbarHeight = 80;
+        const navbarHeight = 80; // Approximate navbar height
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
         
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
         });
-      }
-    };
+      });
+    });
     
-    // Use event delegation for better performance
-    document.addEventListener('click', handleAnchorClick);
+    // Add a class to body for styling purposes
+    document.body.classList.add('portfolio-page');
     
-    // Add classes for styling and fonts
-    document.body.classList.add('portfolio-page', 'font-league');
+    // Make sure fonts are properly loaded
+    document.body.classList.add('font-league');
     
-    // Optimized viewport meta tag
-    let existingMeta = document.querySelector('meta[name="viewport"]');
-    if (!existingMeta) {
+    // Add responsive viewport meta tag to ensure proper mobile display
+    const existingMeta = document.querySelector('meta[name="viewport"]');
+    if (existingMeta) {
+      existingMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    } else {
       const meta = document.createElement('meta');
       meta.name = 'viewport';
       meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
@@ -63,7 +64,6 @@ export default function Index() {
     }
     
     return () => {
-      document.removeEventListener('click', handleAnchorClick);
       document.body.classList.remove('portfolio-page');
     };
   }, []);
@@ -73,9 +73,9 @@ export default function Index() {
       {/* Custom cursor */}
       <Cursor />
       
-      {/* Lazy load particle background with lower priority */}
+      {/* Lazy load particle background */}
       <Suspense fallback={null}>
-        <ParticleField count={20} />
+        <ParticleField count={30} />
       </Suspense>
       
       {/* Navigation */}
@@ -118,7 +118,7 @@ export default function Index() {
               href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-300 transition-colors"
+              className="text-gray-400 hover:text-amber-400 transition-colors"
               aria-label="LinkedIn profile"
             >
               <Linkedin className="w-5 h-5" />

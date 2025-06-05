@@ -34,7 +34,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-gray-200"
+            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-orange-300"
           >
             Experience
           </motion.h2>
@@ -63,7 +63,7 @@ export default function ExperienceSection() {
               )}
               
               {/* Timeline dot */}
-              <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-gray-600 dark:bg-gray-400 flex items-center justify-center z-10">
+              <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-orange-500 dark:bg-orange-400 flex items-center justify-center z-10">
                 <div className="text-white dark:text-gray-900">
                   {experience.icon}
                 </div>
@@ -73,10 +73,10 @@ export default function ExperienceSection() {
               <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{experience.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-orange-300">{experience.title}</h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">{experience.location}</p>
                   </div>
-                  <div className="text-sm font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 px-3 py-1 rounded-full mt-2 md:mt-0">
+                  <div className="text-sm font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-400 px-3 py-1 rounded-full mt-2 md:mt-0">
                     {experience.period}
                   </div>
                 </div>

@@ -9,23 +9,23 @@ import LoadingScreen from "./components/LoadingScreen";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-// Optimized QueryClient for better performance
+// Create QueryClient with optimal performance settings
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 60 * 1000, // 1 minute
       refetchOnWindowFocus: false,
-      retry: 1, // Reduce retries for faster failure handling
     },
   },
 });
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const [loadingMessage, setLoadingMessage] = useState("Loading");
 
-  // Optimized loading with better performance
+  // Simpler loading with performance focus
   useEffect(() => {
-    // Check if the page was already loaded before
+    // Check if the page was already loaded before (for better UX on navigations)
     const hasVisited = sessionStorage.getItem('hasVisited');
     
     if (hasVisited) {
@@ -33,11 +33,10 @@ const App = () => {
       return;
     }
     
-    // Reduced loading time for better UX
     const timer = setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem('hasVisited', 'true');
-    }, 800);
+    }, 1000); // Reduced loading time for better UX
 
     return () => {
       clearTimeout(timer);
@@ -45,7 +44,7 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <LoadingScreen message="Loading Portfolio..." />;
+    return <LoadingScreen message={loadingMessage} />;
   }
 
   return (
@@ -56,6 +55,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
