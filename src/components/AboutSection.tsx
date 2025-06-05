@@ -68,7 +68,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="text-4xl font-bold mb-6 font-intro text-gray-800 dark:text-orange-300"
+              className="text-4xl font-bold mb-6 font-intro text-gray-800 dark:text-gray-200"
             >
               About Me
             </motion.h2>
@@ -82,15 +82,19 @@ export default function AboutSection() {
               <div>
                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Education</h3>
                 <div className="flex items-start gap-2 mb-4">
-                  <GraduationCap className="w-5 h-5 mt-0.5 text-orange-500 dark:text-orange-400" />
-                  <p>Bachelor of Science (B.S.) in Economics from IISER Bhopal</p>
+                  <GraduationCap className="w-5 h-5 mt-0.5 text-gray-600 dark:text-gray-400" />
+                  <div>
+                    <p className="font-medium">Bachelor of Science (B.S.) in Economics</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">2021-2025</p>
+                    <p className="text-sm">Indian Institute of Science Education and Research, Bhopal</p>
+                  </div>
                 </div>
                 
                 <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Technical Skills</h3>
                 <div className="space-y-4">
                   {technologies.slice(0, 2).map((tech, index) => (
                     <div key={index}>
-                      <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">{tech.category}</h4>
+                      <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-gray-300">{tech.category}</h4>
                       <ul className="list-disc pl-5 space-y-1">
                         {tech.items.map((item, i) => (
                           <li key={i} className="text-sm">{item}</li>
@@ -119,9 +123,9 @@ export default function AboutSection() {
                     className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 px-3 py-1.5 rounded-full text-sm flex items-center gap-1"
                     title={`${skill.name} - ${skill.level}`}
                   >
-                    <span className="text-orange-500 dark:text-orange-400 mr-1">{skill.icon}</span>
+                    <span className="text-gray-600 dark:text-gray-400 mr-1">{skill.icon}</span>
                     <span>{skill.name}</span>
-                    <span className="text-xs ml-1 px-1.5 py-0.5 bg-orange-500/20 text-orange-600 dark:text-orange-400 rounded-full">{skill.level}</span>
+                    <span className="text-xs ml-1 px-1.5 py-0.5 bg-gray-200/70 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-full">{skill.level}</span>
                   </motion.div>
                 ))}
               </div>
@@ -136,7 +140,7 @@ export default function AboutSection() {
           >
             {/* Profile Image */}
             <div className="mb-8 flex justify-center">
-              <Avatar className="w-44 h-44 border-4 border-orange-500 dark:border-orange-400 shadow-xl">
+              <Avatar className="w-44 h-44 border-4 border-gray-400 dark:border-gray-600 shadow-xl">
                 <AvatarImage src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" alt="Profile picture of Dhriman Deka" />
                 <AvatarFallback>DD</AvatarFallback>
               </Avatar>
@@ -144,7 +148,7 @@ export default function AboutSection() {
             
             <div className="space-y-4 w-full">
               <div>
-                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">Data Engineering</h4>
+                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-gray-300">Data Engineering</h4>
                 <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[2].items.map((item, i) => (
                     <li key={i}>{item}</li>
@@ -153,7 +157,7 @@ export default function AboutSection() {
               </div>
               
               <div>
-                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">Cloud & Tools</h4>
+                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-gray-300">Cloud & Tools</h4>
                 <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[3].items.map((item, i) => (
                     <li key={i}>{item}</li>
@@ -162,7 +166,7 @@ export default function AboutSection() {
               </div>
             </div>
             
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-orange-300 to-orange-600 dark:from-orange-700 dark:to-orange-900 rounded-full -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-gray-300 to-gray-500 dark:from-gray-700 dark:to-gray-900 rounded-full -z-10"></div>
             <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-gray-200 to-gray-400 dark:from-gray-700 dark:to-gray-900 rounded-full -z-10"></div>
           </motion.div>
         </div>
