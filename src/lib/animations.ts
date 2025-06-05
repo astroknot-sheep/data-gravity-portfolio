@@ -64,7 +64,7 @@ export function useScrollAnimation() {
   };
 }
 
-// Custom hook for tracking cursor position
+// Custom hook for tracking cursor position - RESTORED
 export function useCursorPosition() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   
@@ -73,7 +73,7 @@ export function useCursorPosition() {
       setPosition({ x: e.clientX, y: e.clientY });
     };
     
-    window.addEventListener('mousemove', updatePosition);
+    window.addEventListener('mousemove', updatePosition, { passive: true });
     
     return () => {
       window.removeEventListener('mousemove', updatePosition);
