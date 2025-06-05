@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
@@ -103,14 +102,14 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
     
     // Mouse movement tracking with performance optimization
     let lastMouseMoveTime = 0;
-    const throttleMs = 30;
+    const throttleMs = 16; // ~60fps
     
     // Rotation variables
     let targetRotationX = 0;
     let targetRotationY = 0;
     let currentRotationX = 0;
     let currentRotationY = 0;
-    const inertiaFactor = 0.05;
+    const inertiaFactor = 0.08;
     
     const handleMouseMove = (event: MouseEvent) => {
       const currentTime = Date.now();
@@ -121,9 +120,9 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
       
-      // Set target rotation based on mouse position
-      targetRotationX = y * 0.8;
-      targetRotationY = x * 0.8;
+      // Set target rotation based on mouse position - AUTOMATIC FOLLOWING
+      targetRotationX = y * 0.5;
+      targetRotationY = x * 0.5;
     };
     
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -376,7 +375,7 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       if (currentTime - lastFrameTime < frameInterval) return;
       lastFrameTime = currentTime;
       
-      // Apply inertia for smooth rotation
+      // Apply inertia for smooth rotation - AUTOMATIC CURSOR FOLLOWING
       currentRotationX += (targetRotationX - currentRotationX) * inertiaFactor;
       currentRotationY += (targetRotationY - currentRotationY) * inertiaFactor;
       
@@ -384,8 +383,8 @@ const ThreeCanvas = ({ className }: ThreeCanvasProps) => {
       cubeGroup.rotation.x = currentRotationX;
       cubeGroup.rotation.y = currentRotationY;
       
-      // Subtle constant rotation
-      if (!isAnimating && !isSolving) {
+      // Subtle constant rotation when not being controlled by mouse
+      if (Math.abs(targetRotationX) < 0.01 && Math.abs(targetRotationY) < 0.01 && !isAnimating && !isSolving) {
         cubeGroup.rotation.y += 0.001;
       }
       
