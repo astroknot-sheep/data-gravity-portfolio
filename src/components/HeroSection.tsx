@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
@@ -100,7 +99,7 @@ export default function HeroSection() {
             {/* Enhanced animated message display */}
             <div className="min-h-[240px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-bold text-gray-900 dark:text-white font-playfair text-5xl md:text-7xl lg:text-8xl transition-all duration-700 ease-out leading-tight tracking-tight ${
+                className={`block font-bold text-gray-900 dark:text-white text-5xl md:text-7xl lg:text-8xl transition-all duration-700 ease-out leading-tight tracking-tight ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
@@ -120,7 +119,7 @@ export default function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a 
                   href="#projects" 
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-xl hover:shadow-2xl hover:scale-105 font-inter"
+                  className="group relative inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-xl hover:shadow-2xl hover:scale-105"
                 >
                   <span className="absolute inset-0 bg-shimmer-gradient animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
                   <span className="relative z-10">View My Work</span>
@@ -131,7 +130,7 @@ export default function HeroSection() {
                 
                 <a 
                   href="#contact" 
-                  className="group inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 text-orange-800 dark:text-orange-200 hover:bg-orange-50/20 dark:hover:bg-orange-900/20 hover:border-orange-300/50 dark:hover:border-orange-600/50 hover:scale-105 font-inter"
+                  className="group inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 text-orange-800 dark:text-orange-200 hover:bg-orange-50/20 dark:hover:bg-orange-900/20 hover:border-orange-300/50 dark:hover:border-orange-600/50 hover:scale-105"
                 >
                   <span>Get In Touch</span>
                   <svg className="ml-2 w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
