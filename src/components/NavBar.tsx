@@ -129,7 +129,7 @@ export default function NavBar() {
                         <li key={item.href} className="w-full">
                           <a
                             href={item.href}
-                            className={`text-2xl font-medium transition-colors block py-2 text-center ${
+                            className={`text-2xl font-medium transition-colors block py-2 text-center font-league ${
                               activeSection === item.href.substring(1)
                                 ? "text-amber-600 dark:text-amber-400 font-semibold"
                                 : "text-gray-800 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400"
@@ -178,7 +178,7 @@ export default function NavBar() {
                     
                     <div className="mt-12 text-center">
                       <Button 
-                        className="bg-amber-600 hover:bg-amber-700 text-white h-12 px-6"
+                        className="bg-amber-600 hover:bg-amber-700 text-white h-12 px-6 font-league"
                         onClick={() => {
                           setMenuOpen(false);
                           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -199,7 +199,7 @@ export default function NavBar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className={`relative px-3 py-2 rounded-full font-medium text-sm transition-colors ${
+                  className={`relative px-3 py-2 rounded-full font-medium text-sm transition-colors font-league ${
                     activeSection === item.href.substring(1)
                       ? "text-white dark:text-gray-900"
                       : "text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100"
@@ -219,7 +219,7 @@ export default function NavBar() {
             <li>
               <a
                 href="#contact"
-                className="ml-3 px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-full text-sm font-medium transition-colors"
+                className="ml-3 px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-full text-sm font-medium transition-colors font-league"
               >
                 Contact Me
               </a>

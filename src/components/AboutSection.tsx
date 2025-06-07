@@ -77,11 +77,11 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6 text-gray-600 dark:text-gray-300"
+              className="space-y-6 text-gray-600 dark:text-gray-300 font-league"
             >
-              {/* Education Section - NO BLUE COLORS */}
+              {/* Education Section */}
               <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 p-6 rounded-lg border border-orange-200 dark:border-orange-800">
-                <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white flex items-center gap-2">
+                <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white flex items-center gap-2 font-intro">
                   <GraduationCap className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                   Education
                 </h3>
@@ -91,14 +91,14 @@ export default function AboutSection() {
                       <GraduationCap className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
+                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white font-intro">
                         Bachelor of Science (B.S.) in Economics
                       </h4>
-                      <div className="flex items-center gap-2 mt-1 text-orange-600 dark:text-orange-400">
+                      <div className="flex items-center gap-2 mt-1 text-orange-600 dark:text-orange-400 font-league">
                         <Calendar className="w-4 h-4" />
                         <span className="font-medium">2021 - 2025</span>
                       </div>
-                      <div className="flex items-center gap-2 mt-1 text-gray-600 dark:text-gray-300">
+                      <div className="flex items-center gap-2 mt-1 text-gray-600 dark:text-gray-300 font-league">
                         <MapPin className="w-4 h-4" />
                         <span>Indian Institute of Science Education and Research, Bhopal</span>
                       </div>
@@ -108,14 +108,14 @@ export default function AboutSection() {
               </div>
               
               <div>
-                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">Technical Skills</h3>
+                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white font-intro">Technical Skills</h3>
                 <div className="space-y-4">
                   {technologies.slice(0, 2).map((tech, index) => (
                     <div key={index}>
-                      <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">{tech.category}</h4>
+                      <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200 font-intro">{tech.category}</h4>
                       <ul className="list-disc pl-5 space-y-1">
                         {tech.items.map((item, i) => (
-                          <li key={i} className="text-sm">{item}</li>
+                          <li key={i} className="text-sm font-league">{item}</li>
                         ))}
                       </ul>
                     </div>
@@ -130,7 +130,7 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-8"
             >
-              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Core Competencies</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white font-intro">Core Competencies</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.map((skill, index) => (
                   <motion.div
@@ -138,7 +138,7 @@ export default function AboutSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-                    className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 px-3 py-1.5 rounded-full text-sm flex items-center gap-1"
+                    className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 px-3 py-1.5 rounded-full text-sm flex items-center gap-1 font-league"
                     title={`${skill.name} - ${skill.level}`}
                   >
                     <span className="text-orange-500 dark:text-orange-400 mr-1">{skill.icon}</span>
@@ -166,19 +166,19 @@ export default function AboutSection() {
             
             <div className="space-y-4 w-full">
               <div>
-                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">Data Engineering</h4>
+                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200 font-intro">Data Engineering</h4>
                 <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[2].items.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i} className="font-league">{item}</li>
                   ))}
                 </ul>
               </div>
               
               <div>
-                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200">Cloud & Tools</h4>
+                <h4 className="text-base font-semibold mb-1 text-gray-700 dark:text-orange-200 font-intro">Cloud & Tools</h4>
                 <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[3].items.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i} className="font-league">{item}</li>
                   ))}
                 </ul>
               </div>

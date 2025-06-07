@@ -42,7 +42,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league"
           >
             My research journey in AI and language models
           </motion.p>
@@ -73,14 +73,14 @@ export default function ExperienceSection() {
               <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-orange-300">{experience.title}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{experience.location}</p>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-orange-300 font-intro">{experience.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-league">{experience.location}</p>
                   </div>
-                  <div className="text-sm font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-400 px-3 py-1 rounded-full mt-2 md:mt-0">
+                  <div className="text-sm font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-400 px-3 py-1 rounded-full mt-2 md:mt-0 font-league">
                     {experience.period}
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-300 font-league">
                   {experience.description}
                 </p>
               </div>

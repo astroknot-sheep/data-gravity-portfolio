@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
@@ -90,16 +91,16 @@ export default function HeroSection() {
           >
             {/* Enhanced badge with better styling */}
             <div className="mb-6 inline-block">
-              <span className="inline-flex items-center px-6 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/60 dark:to-amber-900/60 text-orange-800 dark:text-orange-200 backdrop-blur-lg border border-orange-200/50 dark:border-orange-700/50 shadow-lg">
+              <span className="inline-flex items-center px-6 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/60 dark:to-amber-900/60 text-orange-800 dark:text-orange-200 backdrop-blur-lg border border-orange-200/50 dark:border-orange-700/50 shadow-lg font-league">
                 <span className="w-2 h-2 bg-orange-500 rounded-full mr-2 animate-pulse"></span>
                 Data Scientist & ML Engineer
               </span>
             </div>
             
-            {/* Enhanced animated message display */}
+            {/* Enhanced animated message display with reduced font size */}
             <div className="min-h-[240px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-bold text-gray-900 dark:text-white text-5xl md:text-7xl lg:text-8xl transition-all duration-700 ease-out leading-tight tracking-tight ${
+                className={`block font-bold text-gray-900 dark:text-white font-intro text-4xl md:text-6xl lg:text-7xl transition-all duration-700 ease-out leading-tight tracking-tight ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
@@ -119,7 +120,7 @@ export default function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a 
                   href="#projects" 
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-xl hover:shadow-2xl hover:scale-105"
+                  className="group relative inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-xl hover:shadow-2xl hover:scale-105 font-league"
                 >
                   <span className="absolute inset-0 bg-shimmer-gradient animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
                   <span className="relative z-10">View My Work</span>
@@ -130,7 +131,7 @@ export default function HeroSection() {
                 
                 <a 
                   href="#contact" 
-                  className="group inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 text-orange-800 dark:text-orange-200 hover:bg-orange-50/20 dark:hover:bg-orange-900/20 hover:border-orange-300/50 dark:hover:border-orange-600/50 hover:scale-105"
+                  className="group inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 text-orange-800 dark:text-orange-200 hover:bg-orange-50/20 dark:hover:bg-orange-900/20 hover:border-orange-300/50 dark:hover:border-orange-600/50 hover:scale-105 font-league"
                 >
                   <span>Get In Touch</span>
                   <svg className="ml-2 w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,7 +180,7 @@ export default function HeroSection() {
       
       {/* Enhanced scroll indicator */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-        <span className="text-sm text-gray-600 dark:text-gray-400 mb-3 font-inter font-medium tracking-wide">Scroll to explore</span>
+        <span className="text-sm text-gray-600 dark:text-gray-400 mb-3 font-league font-medium tracking-wide">Scroll to explore</span>
         <div className="animate-bounce">
           <div className="w-6 h-10 border-2 border-orange-400 dark:border-orange-500 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-orange-500 dark:bg-orange-400 rounded-full mt-2 animate-pulse"></div>

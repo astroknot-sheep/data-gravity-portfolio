@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -84,14 +85,14 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-league;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-size: 16px;
     line-height: 1.6;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-semibold tracking-tight font-intro;
     line-height: 1.2;
   }
 
@@ -110,11 +111,11 @@
   }
 
   p {
-    @apply text-base leading-relaxed;
+    @apply text-base leading-relaxed font-league;
   }
 
   .subheading {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold font-league;
   }
 
   ::-webkit-scrollbar {
@@ -130,9 +131,39 @@
   }
 }
 
+/* Custom Cursor Styles */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out, opacity 0.3s ease-out;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(249, 115, 22, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.3s ease-out, scale 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translate(-50%, -50%);
+}
+
 @layer components {
   .chip {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200 font-league;
   }
   
   .glassmorphism {

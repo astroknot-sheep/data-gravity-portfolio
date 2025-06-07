@@ -72,7 +72,7 @@ export default function ContactSection() {
           }`}>
             Contact Me
           </h2>
-          <p className={`mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
+          <p className={`mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league transition-all duration-700 delay-100 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Interested in working together or have a question about my work?
@@ -93,7 +93,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300 break-all">dhrimandekastudy@gmail.com</p>
+                    <p className="text-gray-600 dark:text-gray-300 break-all font-league">dhrimandekastudy@gmail.com</p>
                   </div>
                 </div>
                 
@@ -103,7 +103,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-300">Bhopal, India</p>
+                    <p className="text-gray-600 dark:text-gray-300 font-league">Bhopal, India</p>
                   </div>
                 </div>
                 
@@ -117,7 +117,7 @@ export default function ContactSection() {
                       href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors"
+                      className="text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors font-league"
                     >
                       Connect on LinkedIn
                     </a>
@@ -135,7 +135,7 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
                       Name
                     </label>
                     <input
@@ -145,13 +145,13 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
                       placeholder="Your name"
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
                       Email
                     </label>
                     <input
@@ -161,14 +161,14 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
                       placeholder="Your email"
                     />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
                     Message
                   </label>
                   <textarea
@@ -178,7 +178,7 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
                     placeholder="Your message"
                   ></textarea>
                 </div>
@@ -187,7 +187,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-3 bg-amber-600 text-white font-medium rounded-full shadow-md hover:bg-amber-500 transition-all duration-300 flex items-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="px-6 py-3 bg-amber-600 text-white font-medium rounded-full shadow-md hover:bg-amber-500 transition-all duration-300 flex items-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed font-league"
                   >
                     {isSubmitting ? (
                       <>
