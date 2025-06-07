@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -239,7 +238,7 @@
   }
 
   .data-point {
-    @apply absolute rounded-full bg-gradient-to-r from-orange-400/70 to-amber-400/70 dark:from-orange-500/60 dark:to-amber-500/60 transition-all duration-1200 shadow-xl;
+    @apply absolute rounded-full bg-gradient-to-r from-orange-400/70 to-amber-400/70 dark:from-orange-500/60 dark:to-amber-500/60 transition-all duration-1000 shadow-xl;
   }
 
   .stagger-item {
@@ -256,7 +255,7 @@
 
   .enhanced-link::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-orange-500/15 to-amber-500/15 translate-x-[-100%] transition-transform duration-600;
+    @apply absolute inset-0 bg-gradient-to-r from-orange-500/15 to-amber-500/15 translate-x-[-100%] transition-transform duration-500;
   }
 
   .enhanced-link:hover::before {
@@ -264,24 +263,24 @@
   }
 
   .interactive {
-    @apply hover:scale-110 transition-all duration-600 hover:shadow-2xl;
+    @apply hover:scale-110 transition-all duration-500 hover:shadow-2xl;
   }
 
   .enhanced-interactive {
-    @apply transition-all duration-800 ease-out hover:scale-115 hover:rotate-1 hover:shadow-3xl;
+    @apply transition-all duration-700 ease-out hover:scale-105 hover:rotate-1 hover:shadow-2xl;
   }
 
   .card-3d {
-    @apply relative transition-all duration-800 ease-out transform-gpu perspective-1000 cursor-pointer will-change-transform;
+    @apply relative transition-all duration-700 ease-out transform-gpu perspective-1000 cursor-pointer will-change-transform;
   }
 
   .enhanced-card {
-    @apply relative transition-all duration-800 ease-out transform-gpu cursor-pointer will-change-transform bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-3xl shadow-2xl hover:shadow-3xl;
+    @apply relative transition-all duration-700 ease-out transform-gpu cursor-pointer will-change-transform bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-3xl shadow-2xl hover:shadow-3xl;
   }
 
   .enhanced-card::before {
     content: '';
-    @apply absolute -inset-px bg-gradient-to-r from-orange-500/25 to-amber-500/25 rounded-3xl opacity-0 transition-opacity duration-600;
+    @apply absolute -inset-px bg-gradient-to-r from-orange-500/25 to-amber-500/25 rounded-3xl opacity-0 transition-opacity duration-500;
   }
 
   .enhanced-card:hover::before {
