@@ -24,11 +24,8 @@ export default function ContactSection() {
     setIsSubmitting(true);
     
     try {
-      // In a real environment, you would implement your email sending logic here
-      // For now, we'll simulate it
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Create a mailto link as fallback
       const mailtoLink = `mailto:dhrimandekastudy@gmail.com?subject=Message from ${formData.name}&body=${formData.message}%0D%0A%0D%0AFrom: ${formData.email}`;
       window.open(mailtoLink);
       
@@ -56,23 +53,23 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 bg-white dark:bg-gray-800 relative overflow-hidden"
+      className="py-32 bg-gradient-to-br from-white via-orange-50/30 to-amber-50/20 dark:from-gray-800 dark:via-gray-700/60 dark:to-gray-600/40 relative overflow-hidden"
     >
-      {/* Background decor */}
+      {/* Enhanced background elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-data-grid opacity-5" />
-        <div className="absolute top-1/3 right-1/3 w-40 h-40 bg-amber-300/20 dark:bg-amber-700/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-green-300/10 dark:bg-green-700/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-data-grid opacity-10" />
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-bl from-amber-300/30 to-orange-300/30 dark:from-amber-700/30 dark:to-orange-700/30 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-gradient-to-tr from-orange-300/20 to-amber-300/20 dark:from-orange-700/20 dark:to-amber-700/20 rounded-full blur-3xl animate-float-gentle" />
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16" ref={ref}>
-          <h2 className={`text-4xl font-bold font-intro text-gray-800 dark:text-amber-300 transition-all duration-700 ${
+        <div className="text-center mb-20" ref={ref}>
+          <h2 className={`text-5xl font-bold font-intro text-gradient transition-all duration-700 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Contact Me
           </h2>
-          <p className={`mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league transition-all duration-700 delay-100 ${
+          <p className={`mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league font-medium transition-all duration-700 delay-100 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Interested in working together or have a question about my work?
@@ -80,44 +77,44 @@ export default function ContactSection() {
           </p>
         </div>
         
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Contact info cards */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* Enhanced contact info cards */}
           <div className={`col-span-1 transition-all duration-700 delay-300 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 h-full">
-              <div className="space-y-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            <div className="enhanced-glassmorphism p-8 h-full enhanced-glow">
+              <div className="space-y-10">
+                <div className="flex items-start space-x-5">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 dark:from-amber-500 dark:to-orange-600 flex items-center justify-center flex-shrink-0 shadow-xl">
+                    <Mail className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300 break-all font-league">dhrimandekastudy@gmail.com</p>
+                    <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Email</h3>
+                    <p className="text-gray-600 dark:text-gray-300 break-all font-league font-medium">dhrimandekastudy@gmail.com</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                <div className="flex items-start space-x-5">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-orange-400 to-amber-500 dark:from-orange-500 dark:to-amber-600 flex items-center justify-center flex-shrink-0 shadow-xl">
+                    <MapPin className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-300 font-league">Bhopal, India</p>
+                    <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Location</h3>
+                    <p className="text-gray-600 dark:text-gray-300 font-league font-medium">Bhopal, India</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center flex-shrink-0">
-                    <Linkedin className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                <div className="flex items-start space-x-5">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 dark:from-amber-500 dark:to-orange-600 flex items-center justify-center flex-shrink-0 shadow-xl">
+                    <Linkedin className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2 text-amber-800 dark:text-amber-300 font-intro">Connect</h3>
+                    <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Connect</h3>
                     <a 
                       href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-amber-600 dark:text-gray-300 dark:hover:text-amber-400 transition-colors font-league"
+                      className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400 transition-colors font-league font-medium enhanced-link"
                     >
                       Connect on LinkedIn
                     </a>
@@ -127,15 +124,15 @@ export default function ContactSection() {
             </div>
           </div>
           
-          {/* Contact form */}
-          <div className={`col-span-1 md:col-span-2 transition-all duration-700 delay-200 ${
+          {/* Enhanced contact form */}
+          <div className={`col-span-1 lg:col-span-2 transition-all duration-700 delay-200 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
+            <div className="enhanced-glassmorphism p-8 enhanced-glow">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label htmlFor="name" className="block text-base font-bold text-gray-700 dark:text-gray-300 font-league">
                       Name
                     </label>
                     <input
@@ -145,13 +142,13 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
+                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
                       placeholder="Your name"
                     />
                   </div>
                   
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
+                  <div className="space-y-3">
+                    <label htmlFor="email" className="block text-base font-bold text-gray-700 dark:text-gray-300 font-league">
                       Email
                     </label>
                     <input
@@ -161,14 +158,14 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
+                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
                       placeholder="Your email"
                     />
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 font-league">
+                <div className="space-y-3">
+                  <label htmlFor="message" className="block text-base font-bold text-gray-700 dark:text-gray-300 font-league">
                     Message
                   </label>
                   <textarea
@@ -177,8 +174,8 @@ export default function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-league"
+                    rows={8}
+                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg resize-none"
                     placeholder="Your message"
                   ></textarea>
                 </div>
@@ -187,11 +184,11 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-3 bg-amber-600 text-white font-medium rounded-full shadow-md hover:bg-amber-500 transition-all duration-300 flex items-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed font-league"
+                    className="px-8 py-4 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white font-bold rounded-2xl shadow-2xl hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 transition-all duration-500 flex items-center space-x-3 disabled:opacity-70 disabled:cursor-not-allowed font-league enhanced-glow hover:scale-105"
                   >
                     {isSubmitting ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -200,7 +197,7 @@ export default function ContactSection() {
                     ) : (
                       <>
                         <span>Send Message</span>
-                        <SendHorizontal className="w-5 h-5 ml-2" />
+                        <SendHorizontal className="w-6 h-6 ml-2" />
                       </>
                     )}
                   </button>

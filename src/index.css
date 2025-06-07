@@ -82,17 +82,24 @@
 @layer base {
   * {
     @apply border-border;
+    /* STRICT FONT ENFORCEMENT - ONLY League Spartan and Intro Rust */
+    font-family: 'League Spartan', 'Intro Rust', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   }
 
   body {
-    @apply bg-background text-foreground font-league;
+    @apply bg-background text-foreground;
+    font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-size: 16px;
     line-height: 1.6;
+    font-weight: 400;
+    scroll-behavior: smooth;
   }
 
+  /* HEADINGS MUST USE INTRO RUST ONLY */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight font-intro;
+    font-family: 'Intro Rust', serif !important;
+    @apply font-semibold tracking-tight;
     line-height: 1.2;
   }
 
@@ -110,68 +117,86 @@
     @apply text-2xl sm:text-3xl;
   }
 
-  p {
-    @apply text-base leading-relaxed font-league;
+  /* ALL OTHER TEXT MUST USE LEAGUE SPARTAN ONLY */
+  p, span, div, a, button, input, textarea, label {
+    font-family: 'League Spartan', sans-serif !important;
+    @apply text-base leading-relaxed;
   }
 
   .subheading {
-    @apply text-lg font-bold font-league;
+    font-family: 'League Spartan', sans-serif !important;
+    @apply text-lg font-bold;
   }
 
+  /* Enhanced scrollbar with orange theme */
   ::-webkit-scrollbar {
-    @apply w-2 h-2;
+    @apply w-3 h-3;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    @apply bg-gray-100 dark:bg-gray-900;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-orange-400/40 rounded-full transition-colors hover:bg-orange-500/60;
+    @apply bg-gradient-to-b from-orange-400 to-amber-400 rounded-full;
+    transition: all 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply from-orange-500 to-amber-500;
   }
 }
 
-/* Custom Cursor Styles */
+/* Enhanced cursor styles with better visibility */
 .cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, #f97316, #f59e0b);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #f97316, #f59e0b);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease-out, opacity 0.3s ease-out;
+  z-index: 99999;
+  transition: transform 0.15s ease-out, opacity 0.3s ease-out, scale 0.2s ease-out;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
 }
 
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 32px;
-  border: 2px solid rgba(249, 115, 22, 0.4);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(249, 115, 22, 0.6);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
-  transition: transform 0.3s ease-out, scale 0.3s ease-out, opacity 0.3s ease-out;
+  z-index: 99998;
+  transition: transform 0.25s ease-out, scale 0.25s ease-out, opacity 0.3s ease-out, border-color 0.2s ease-out;
   transform: translate(-50%, -50%);
+  background: rgba(249, 115, 22, 0.05);
+  backdrop-filter: blur(2px);
+}
+
+.cursor-ring:hover {
+  border-color: rgba(249, 115, 22, 0.9);
+  scale: 1.2;
 }
 
 @layer components {
   .chip {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200 font-league;
+    font-family: 'League Spartan', sans-serif !important;
+    @apply inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 dark:from-gray-800 dark:to-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 shadow-sm;
   }
   
   .glassmorphism {
-    @apply bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/30 dark:border-gray-800/50 rounded-xl shadow-xl;
+    @apply bg-white/70 dark:bg-black/50 backdrop-blur-2xl border border-white/40 dark:border-gray-700/60 rounded-2xl shadow-2xl;
   }
 
   .enhanced-glassmorphism {
-    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-2xl border border-orange-200/30 dark:border-orange-700/30 rounded-2xl shadow-2xl;
+    @apply bg-white/85 dark:bg-gray-900/85 backdrop-blur-3xl border border-orange-200/40 dark:border-orange-700/40 rounded-3xl shadow-2xl;
   }
 
   .glow {
@@ -180,7 +205,7 @@
 
   .glow::after {
     content: '';
-    @apply absolute inset-0 -z-10 bg-gradient-to-r from-orange-400/20 to-amber-400/20 dark:from-orange-600/30 dark:to-amber-600/30 blur-2xl opacity-0 rounded-xl transition-all duration-1000;
+    @apply absolute inset-0 -z-10 bg-gradient-to-r from-orange-400/30 to-amber-400/30 dark:from-orange-600/40 dark:to-amber-600/40 blur-3xl opacity-0 rounded-2xl transition-all duration-1000;
   }
 
   .glow:hover::after {
@@ -193,11 +218,11 @@
 
   .enhanced-glow::before {
     content: '';
-    @apply absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl blur-lg opacity-0 transition-all duration-500;
+    @apply absolute -inset-2 bg-gradient-to-r from-orange-500/30 to-amber-500/30 rounded-3xl blur-2xl opacity-0 transition-all duration-700;
   }
 
   .enhanced-glow:hover::before {
-    @apply opacity-30;
+    @apply opacity-60;
   }
 
   .parallax-section {
@@ -205,16 +230,16 @@
   }
 
   .particle {
-    @apply absolute rounded-full pointer-events-none transition-all duration-300 ease-out;
+    @apply absolute rounded-full pointer-events-none transition-all duration-500 ease-out;
   }
 
   .enhanced-particle {
-    @apply absolute rounded-full pointer-events-none transition-all duration-500 ease-out;
-    filter: drop-shadow(0 0 8px rgba(255, 191, 64, 0.4));
+    @apply absolute rounded-full pointer-events-none transition-all duration-700 ease-out;
+    filter: drop-shadow(0 0 12px rgba(255, 191, 64, 0.6));
   }
 
   .data-point {
-    @apply absolute rounded-full bg-gradient-to-r from-orange-400/60 to-amber-400/60 dark:from-orange-500/50 dark:to-amber-500/50 transition-all duration-1000 shadow-lg;
+    @apply absolute rounded-full bg-gradient-to-r from-orange-400/70 to-amber-400/70 dark:from-orange-500/60 dark:to-amber-500/60 transition-all duration-1200 shadow-xl;
   }
 
   .stagger-item {
@@ -222,7 +247,7 @@
   }
 
   .link-underline {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-orange-500 after:to-amber-500 after:transition-all after:duration-300 hover:after:w-full;
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-0 after:bg-gradient-to-r after:from-orange-500 after:to-amber-500 after:transition-all after:duration-400 hover:after:w-full;
   }
 
   .enhanced-link {
@@ -231,7 +256,7 @@
 
   .enhanced-link::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-orange-500/10 to-amber-500/10 translate-x-[-100%] transition-transform duration-500;
+    @apply absolute inset-0 bg-gradient-to-r from-orange-500/15 to-amber-500/15 translate-x-[-100%] transition-transform duration-600;
   }
 
   .enhanced-link:hover::before {
@@ -239,24 +264,24 @@
   }
 
   .interactive {
-    @apply hover:scale-105 transition-all duration-500 hover:shadow-2xl;
+    @apply hover:scale-110 transition-all duration-600 hover:shadow-2xl;
   }
 
   .enhanced-interactive {
-    @apply transition-all duration-700 ease-out hover:scale-110 hover:rotate-2 hover:shadow-2xl;
+    @apply transition-all duration-800 ease-out hover:scale-115 hover:rotate-1 hover:shadow-3xl;
   }
 
   .card-3d {
-    @apply relative transition-all duration-700 ease-out transform-gpu perspective-1000 cursor-pointer will-change-transform;
+    @apply relative transition-all duration-800 ease-out transform-gpu perspective-1000 cursor-pointer will-change-transform;
   }
 
   .enhanced-card {
-    @apply relative transition-all duration-700 ease-out transform-gpu cursor-pointer will-change-transform bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-xl hover:shadow-2xl;
+    @apply relative transition-all duration-800 ease-out transform-gpu cursor-pointer will-change-transform bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-3xl shadow-2xl hover:shadow-3xl;
   }
 
   .enhanced-card::before {
     content: '';
-    @apply absolute -inset-px bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-2xl opacity-0 transition-opacity duration-500;
+    @apply absolute -inset-px bg-gradient-to-r from-orange-500/25 to-amber-500/25 rounded-3xl opacity-0 transition-opacity duration-600;
   }
 
   .enhanced-card:hover::before {
@@ -264,7 +289,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-orange-600 via-orange-500 to-amber-600 dark:from-orange-400 dark:via-orange-300 dark:to-amber-400 bg-clip-text text-transparent;
   }
 
   .border-gradient {
@@ -273,24 +298,75 @@
 
   .border-gradient::before {
     content: '';
-    @apply absolute inset-0 p-[1px] bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl;
+    @apply absolute inset-0 p-[2px] bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 rounded-2xl;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
   }
-}
 
-/* Enhanced scroll behavior */
-html {
-  scroll-behavior: smooth;
+  /* Enhanced background patterns */
+  .bg-data-grid {
+    background-image: 
+      linear-gradient(rgba(249, 115, 22, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(249, 115, 22, 0.1) 1px, transparent 1px);
+  }
+
+  /* Enhanced animations */
+  @keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(249, 115, 22, 0.6);
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes shimmer-enhanced {
+    0% { transform: translateX(-100%) skew(-15deg); }
+    100% { transform: translateX(200%) skew(-15deg); }
+  }
+
+  .animate-float-gentle {
+    animation: float-gentle 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer-enhanced {
+    animation: shimmer-enhanced 2s ease-in-out infinite;
+  }
+
+  /* Enhanced button styles */
+  .btn-primary {
+    font-family: 'League Spartan', sans-serif !important;
+    @apply relative overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white font-semibold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] transition-transform duration-500;
+  }
+
+  .btn-primary:hover::before {
+    @apply translate-x-[100%];
+  }
 }
 
 /* Enhanced selection colors */
 ::selection {
-  @apply bg-orange-500/30 text-orange-900;
+  @apply bg-orange-500/40 text-orange-900;
 }
 
 ::-moz-selection {
-  @apply bg-orange-500/30 text-orange-900;
+  @apply bg-orange-500/40 text-orange-900;
 }
 
 /* Hide cursor on touch devices */
@@ -312,10 +388,24 @@ html {
 
 /* Enhanced focus styles */
 *:focus-visible {
-  @apply outline-none ring-2 ring-orange-500/50 ring-offset-2 ring-offset-background;
+  @apply outline-none ring-3 ring-orange-500/60 ring-offset-3 ring-offset-background;
 }
 
 /* Enhanced loading spinner */
 .loading-spinner {
-  @apply w-8 h-8 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin;
+  @apply w-10 h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin shadow-lg;
+}
+
+/* Force font family on all elements */
+*, *::before, *::after {
+  font-family: inherit !important;
+}
+
+/* Ensure no system fonts leak through */
+.font-league, .font-league * {
+  font-family: 'League Spartan', sans-serif !important;
+}
+
+.font-intro, .font-intro * {
+  font-family: 'Intro Rust', serif !important;
 }

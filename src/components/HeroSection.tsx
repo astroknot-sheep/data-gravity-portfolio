@@ -15,8 +15,8 @@ export default function HeroSection() {
   
   const messages = [
     "Hi, I'm Dhriman",
-    "I specialise in <span class='text-orange-500 font-semibold'>ML</span> and <span class='text-orange-500 font-semibold'>Operations Research</span>.",
-    "Let's connect for <span class='text-orange-500 font-semibold'>data-driven innovation</span>!"
+    "I specialise in <span class='text-gradient font-bold'>ML</span> and <span class='text-gradient font-bold'>Operations Research</span>.",
+    "Let's connect for <span class='text-gradient font-bold'>data-driven innovation</span>!"
   ];
 
   useEffect(() => {
@@ -34,8 +34,8 @@ export default function HeroSection() {
       setTimeout(() => {
         setMessageIndex((prev) => (prev + 1) % messages.length);
         setIsAnimating(false);
-      }, 500); // 500ms for fade out
-    }, 4000); // Change message every 4 seconds
+      }, 500);
+    }, 4000);
     
     return () => {
       cleanupBackground();
@@ -44,9 +44,9 @@ export default function HeroSection() {
     };
   }, [messages.length]);
 
-  // Memoize the data points to prevent recreating on every render
+  // Enhanced data points with better distribution
   const dataPoints = useMemo(() => {
-    return Array.from({ length: 15 }).map((_, i) => {
+    return Array.from({ length: 20 }).map((_, i) => {
       const x = Math.random() * window.innerWidth;
       const y = Math.random() * window.innerHeight;
       return { id: i, x, y };
@@ -60,81 +60,80 @@ export default function HeroSection() {
         <ThreeCanvas />
       </div>
       
-      {/* Enhanced background with better visual depth */}
+      {/* Enhanced multi-layered background */}
       <div className="absolute inset-0 -z-10">
         <div 
           ref={parallaxBackgroundRef}
-          className="absolute inset-0 bg-gradient-radial from-orange-100/40 via-orange-50/20 to-transparent dark:from-orange-900/20 dark:via-orange-800/10"
+          className="absolute inset-0 bg-gradient-radial from-orange-200/50 via-orange-100/30 to-transparent dark:from-orange-900/30 dark:via-orange-800/20"
         />
         
-        {/* Enhanced grid with better opacity */}
-        <div className="absolute inset-0 bg-data-grid bg-[length:40px_40px] opacity-30 dark:opacity-20" />
+        {/* Enhanced grid pattern */}
+        <div className="absolute inset-0 bg-data-grid bg-[length:60px_60px] opacity-40 dark:opacity-25" />
         
-        {/* Enhanced decorative elements with better positioning */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-orange-300/15 to-amber-300/15 dark:from-orange-700/15 dark:to-amber-700/15 blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gradient-to-l from-orange-400/20 to-amber-400/20 dark:from-orange-600/20 dark:to-amber-600/20 blur-3xl animate-float" />
+        {/* Multiple floating gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-orange-300/20 via-amber-300/25 to-orange-400/20 dark:from-orange-700/20 dark:via-amber-700/25 dark:to-orange-600/20 blur-3xl animate-float-gentle" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-gradient-to-l from-amber-400/25 via-orange-400/30 to-amber-500/25 dark:from-amber-600/25 dark:via-orange-600/30 dark:to-amber-700/25 blur-3xl animate-pulse-glow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-to-br from-orange-300/25 via-amber-300/20 to-orange-400/25 dark:from-orange-700/25 dark:via-amber-700/20 dark:to-orange-600/25 rounded-full blur-3xl animate-float-gentle" style={{ animationDelay: '2s' }} />
         
-        {/* Enhanced morphing blob */}
-        <div className="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-to-br from-orange-300/20 via-amber-300/15 to-orange-400/20 dark:from-orange-700/20 dark:via-amber-700/15 dark:to-orange-600/20 rounded-full blur-3xl animate-morph" />
-        
-        {/* Additional floating elements */}
-        <div className="absolute top-1/2 left-1/6 w-32 h-32 rounded-full bg-gradient-to-tr from-orange-200/25 to-amber-200/25 dark:from-orange-800/25 dark:to-amber-800/25 blur-2xl animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/3 left-2/3 w-24 h-24 rounded-full bg-gradient-to-bl from-amber-300/30 to-orange-300/30 dark:from-amber-700/30 dark:to-orange-700/30 blur-xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        {/* Additional atmospheric elements */}
+        <div className="absolute top-1/2 left-1/6 w-40 h-40 rounded-full bg-gradient-to-tr from-orange-200/30 to-amber-200/30 dark:from-orange-800/30 dark:to-amber-800/30 blur-2xl animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute bottom-1/3 left-2/3 w-32 h-32 rounded-full bg-gradient-to-bl from-amber-300/35 to-orange-300/35 dark:from-amber-700/35 dark:to-orange-700/35 blur-xl animate-float-gentle" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/5 right-1/5 w-24 h-24 rounded-full bg-gradient-to-r from-orange-400/40 to-amber-400/40 dark:from-orange-600/40 dark:to-amber-600/40 blur-lg animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
       </div>
       
       {/* Enhanced main content */}
       <div className="container mx-auto px-6 z-20 relative">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           <div 
             ref={parallaxContentRef}
             className="relative"
           >
-            {/* Enhanced badge with better styling */}
-            <div className="mb-6 inline-block">
-              <span className="inline-flex items-center px-6 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/60 dark:to-amber-900/60 text-orange-800 dark:text-orange-200 backdrop-blur-lg border border-orange-200/50 dark:border-orange-700/50 shadow-lg font-league">
-                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2 animate-pulse"></span>
+            {/* Enhanced professional badge */}
+            <div className="mb-8 inline-block">
+              <span className="inline-flex items-center px-8 py-3 rounded-full text-sm font-bold bg-gradient-to-r from-orange-100/90 via-amber-100/90 to-orange-100/90 dark:from-orange-900/70 dark:via-amber-900/70 dark:to-orange-900/70 text-orange-800 dark:text-orange-200 backdrop-blur-2xl border-2 border-orange-200/60 dark:border-orange-700/60 shadow-2xl font-league enhanced-glow">
+                <span className="w-3 h-3 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mr-3 animate-pulse-glow"></span>
                 Data Scientist & ML Engineer
               </span>
             </div>
             
-            {/* Enhanced animated message display with reduced font size */}
-            <div className="min-h-[240px] flex flex-col items-center justify-center">
+            {/* REDUCED FONT SIZE - Enhanced animated message display */}
+            <div className="min-h-[200px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-bold text-gray-900 dark:text-white font-intro text-4xl md:text-6xl lg:text-7xl transition-all duration-700 ease-out leading-tight tracking-tight ${
+                className={`block font-bold text-gray-900 dark:text-white font-intro text-3xl sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-700 ease-out leading-tight tracking-tight ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
-                  textShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                  textShadow: '0 8px 32px rgba(0,0,0,0.15)',
                   letterSpacing: '-0.02em'
                 }}
                 dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               />
             </div>
             
-            {/* Enhanced call to action */}
+            {/* Enhanced call to action with better spacing */}
             <div 
               ref={buttonAnimation.ref}
-              className={`mt-16 ${buttonAnimation.animation}`}
+              className={`mt-20 ${buttonAnimation.animation}`}
               style={{ animationDelay: "0.8s" }}
             >
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a 
                   href="#projects" 
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 overflow-hidden bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-xl hover:shadow-2xl hover:scale-105 font-league"
+                  className="group relative inline-flex items-center px-10 py-5 text-lg font-bold rounded-full transition-all duration-600 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl hover:scale-110 font-league enhanced-glow"
                 >
-                  <span className="absolute inset-0 bg-shimmer-gradient animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/10 to-transparent translate-x-[-100%] transition-transform duration-600 group-hover:translate-x-[100%]"></span>
                   <span className="relative z-10">View My Work</span>
-                  <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-3 w-6 h-6 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
                 
                 <a 
                   href="#contact" 
-                  className="group inline-flex items-center px-8 py-4 text-lg font-medium rounded-full transition-all duration-500 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 text-orange-800 dark:text-orange-200 hover:bg-orange-50/20 dark:hover:bg-orange-900/20 hover:border-orange-300/50 dark:hover:border-orange-600/50 hover:scale-105 font-league"
+                  className="group inline-flex items-center px-10 py-5 text-lg font-bold rounded-full transition-all duration-600 bg-white/15 dark:bg-gray-800/40 backdrop-blur-2xl border-2 border-orange-200/40 dark:border-orange-700/40 text-orange-800 dark:text-orange-200 hover:bg-orange-50/30 dark:hover:bg-orange-900/30 hover:border-orange-300/60 dark:hover:border-orange-600/60 hover:scale-110 font-league enhanced-glow"
                 >
                   <span>Get In Touch</span>
-                  <svg className="ml-2 w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-3 w-6 h-6 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </a>
@@ -144,34 +143,34 @@ export default function HeroSection() {
         </div>
       </div>
       
-      {/* Enhanced floating data points */}
+      {/* Enhanced floating data points with better interactivity */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
         {dataPoints.map((point) => {
           const dx = cursorPos.x - point.x;
           const dy = cursorPos.y - point.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          const maxForceDistance = 300;
+          const maxForceDistance = 350;
           const forceMultiplier = Math.max(0, 1 - distance / maxForceDistance);
           
-          const moveX = dx * forceMultiplier * 0.2;
-          const moveY = dy * forceMultiplier * 0.2;
+          const moveX = dx * forceMultiplier * 0.3;
+          const moveY = dy * forceMultiplier * 0.3;
           
           return (
             <div
               key={point.id}
-              className="absolute rounded-full transition-all duration-300 ease-out will-change-transform"
+              className="absolute rounded-full transition-all duration-400 ease-out will-change-transform"
               style={{
                 left: `${point.x}px`,
                 top: `${point.y}px`,
                 transform: `translate(${moveX}px, ${moveY}px)`,
-                opacity: 0.4 + forceMultiplier * 0.6,
-                scale: 1 + forceMultiplier * 1.2,
-                width: (point.id % 4 === 0) ? '6px' : (point.id % 3 === 0) ? '4px' : '3px',
-                height: (point.id % 4 === 0) ? '6px' : (point.id % 3 === 0) ? '4px' : '3px',
-                backgroundColor: point.id % 2 === 0 
-                  ? `rgba(255, 191, 64, ${0.6 + forceMultiplier * 0.4})` 
-                  : `rgba(251, 191, 36, ${0.5 + forceMultiplier * 0.5})`,
-                boxShadow: forceMultiplier > 0.3 ? '0 0 10px rgba(255, 191, 64, 0.5)' : 'none',
+                opacity: 0.5 + forceMultiplier * 0.5,
+                scale: 1 + forceMultiplier * 1.5,
+                width: (point.id % 4 === 0) ? '8px' : (point.id % 3 === 0) ? '6px' : '4px',
+                height: (point.id % 4 === 0) ? '8px' : (point.id % 3 === 0) ? '6px' : '4px',
+                background: point.id % 2 === 0 
+                  ? `radial-gradient(circle, rgba(255, 191, 64, ${0.7 + forceMultiplier * 0.3}), rgba(249, 115, 22, ${0.4 + forceMultiplier * 0.4}))` 
+                  : `radial-gradient(circle, rgba(251, 191, 36, ${0.6 + forceMultiplier * 0.4}), rgba(245, 158, 11, ${0.5 + forceMultiplier * 0.3}))`,
+                boxShadow: forceMultiplier > 0.3 ? '0 0 20px rgba(255, 191, 64, 0.8)' : '0 0 8px rgba(255, 191, 64, 0.4)',
               }}
             />
           );
@@ -179,11 +178,11 @@ export default function HeroSection() {
       </div>
       
       {/* Enhanced scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-        <span className="text-sm text-gray-600 dark:text-gray-400 mb-3 font-league font-medium tracking-wide">Scroll to explore</span>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
+        <span className="text-sm text-gray-600 dark:text-gray-400 mb-4 font-league font-bold tracking-wider uppercase">Scroll to explore</span>
         <div className="animate-bounce">
-          <div className="w-6 h-10 border-2 border-orange-400 dark:border-orange-500 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-orange-500 dark:bg-orange-400 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-8 h-12 border-3 border-orange-400 dark:border-orange-500 rounded-full flex justify-center bg-white/10 dark:bg-gray-900/20 backdrop-blur-lg shadow-xl">
+            <div className="w-2 h-4 bg-gradient-to-b from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400 rounded-full mt-2 animate-pulse-glow"></div>
           </div>
         </div>
       </div>
