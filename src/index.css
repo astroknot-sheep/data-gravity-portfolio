@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,15 +80,26 @@
 }
 
 @layer base {
+  /* FORCE LEAGUE SPARTAN AND INTRO RUST FONTS ONLY - NO EXCEPTIONS */
   * {
     @apply border-border;
-    /* STRICT FONT ENFORCEMENT - ONLY League Spartan and Intro Rust */
-    font-family: 'League Spartan', 'Intro Rust', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    font-family: 'League Spartan', sans-serif !important;
+  }
+
+  /* OVERRIDE ALL SYSTEM FONTS */
+  html, body, div, span, applet, object, iframe,
+  p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+  b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+  figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+  time, mark, audio, video, button, input, textarea, select, option {
+    font-family: 'League Spartan', sans-serif !important;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+    font-family: 'League Spartan', sans-serif !important;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-size: 16px;
     line-height: 1.6;
@@ -105,19 +117,26 @@
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
     letter-spacing: -0.02em;
+    font-family: 'Intro Rust', serif !important;
   }
 
   h2 {
     @apply text-3xl sm:text-4xl;
     letter-spacing: -0.01em;
+    font-family: 'Intro Rust', serif !important;
   }
 
   h3 {
     @apply text-2xl sm:text-3xl;
+    font-family: 'Intro Rust', serif !important;
+  }
+
+  h4, h5, h6 {
+    font-family: 'Intro Rust', serif !important;
   }
 
   /* ALL OTHER TEXT MUST USE LEAGUE SPARTAN ONLY */
-  p, span, div, a, button, input, textarea, label {
+  p, span, div, a, button, input, textarea, label, li, td, th {
     font-family: 'League Spartan', sans-serif !important;
     @apply text-base leading-relaxed;
   }
@@ -385,9 +404,9 @@
   }
 }
 
-/* Enhanced focus styles */
+/* Enhanced focus styles - FIXED ring-3 to ring-4 */
 *:focus-visible {
-  @apply outline-none ring-3 ring-orange-500/60 ring-offset-3 ring-offset-background;
+  @apply outline-none ring-4 ring-orange-500/60 ring-offset-4 ring-offset-background;
 }
 
 /* Enhanced loading spinner */
@@ -395,16 +414,30 @@
   @apply w-10 h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin shadow-lg;
 }
 
-/* Force font family on all elements */
+/* ULTRA STRICT FONT ENFORCEMENT - NO SYSTEM FONTS ALLOWED */
 *, *::before, *::after {
-  font-family: inherit !important;
+  font-family: 'League Spartan', sans-serif !important;
 }
 
-/* Ensure no system fonts leak through */
+/* Override any external libraries trying to use other fonts */
+[class*="font-"], [style*="font-family"] {
+  font-family: 'League Spartan', sans-serif !important;
+}
+
+/* Specific class enforcement */
 .font-league, .font-league * {
   font-family: 'League Spartan', sans-serif !important;
 }
 
 .font-intro, .font-intro * {
+  font-family: 'Intro Rust', serif !important;
+}
+
+/* Force override any remaining system font usage */
+html * {
+  font-family: 'League Spartan', sans-serif !important;
+}
+
+html h1, html h2, html h3, html h4, html h5, html h6 {
   font-family: 'Intro Rust', serif !important;
 }
