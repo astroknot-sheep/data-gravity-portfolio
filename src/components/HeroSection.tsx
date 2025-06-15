@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
 import ThreeCanvas from "./ThreeCanvas";
@@ -15,8 +14,8 @@ export default function HeroSection() {
   
   const messages = [
     "Hi, I'm Dhriman",
-    "I specialise in <span class='text-gradient font-bold font-intro'>ML</span> and <span class='text-gradient font-bold font-intro'>Operations Research</span>.",
-    "Let's connect for <span class='text-gradient font-bold font-intro'>data-driven innovation</span>!"
+    "I specialise in <span class='text-gradient font-intro font-bold'>ML</span> and <span class='text-gradient font-intro font-bold'>Operations Research</span>.",
+    "Let's connect for <span class='text-gradient font-intro font-bold'>data-driven innovation</span>!"
   ];
 
   useEffect(() => {
@@ -88,55 +87,52 @@ export default function HeroSection() {
             ref={parallaxContentRef}
             className="relative"
           >
-            {/* Enhanced professional badge */}
+            {/* Enhanced professional badge with consistent sizing */}
             <div className="mb-8 inline-block">
-              <span className="inline-flex items-center px-8 py-3 rounded-full text-sm font-bold bg-gradient-to-r from-orange-100/90 via-amber-100/90 to-orange-100/90 dark:from-orange-900/70 dark:via-amber-900/70 dark:to-orange-900/70 text-orange-800 dark:text-orange-200 backdrop-blur-2xl border-2 border-orange-200/60 dark:border-orange-700/60 shadow-2xl font-league enhanced-glow">
-                <span className="w-3 h-3 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mr-3 animate-pulse-glow"></span>
+              <span className="inline-flex items-center px-6 py-3 rounded-full text-sm font-bold bg-gradient-to-r from-orange-100/90 via-amber-100/90 to-orange-100/90 dark:from-orange-900/70 dark:via-amber-900/70 dark:to-orange-900/70 text-orange-800 dark:text-orange-200 backdrop-blur-2xl border-2 border-orange-200/60 dark:border-orange-700/60 shadow-2xl font-league enhanced-glow">
+                <span className="w-2 h-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mr-3 animate-pulse-glow"></span>
                 Data Scientist & ML Engineer
               </span>
             </div>
             
-            {/* FIXED - Enhanced animated message display with explicit font classes */}
-            <div className="min-h-[200px] flex flex-col items-center justify-center">
+            {/* Main heading with consistent large font size */}
+            <div className="min-h-[160px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-bold text-gray-900 dark:text-white font-intro text-3xl sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-700 ease-out leading-tight tracking-tight ${
+                className={`block font-intro font-bold text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl transition-all duration-700 ease-out leading-tight tracking-tight ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
                   textShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                  letterSpacing: '-0.02em',
-                  fontFamily: "'Intro Rust', serif !important"
+                  letterSpacing: '-0.02em'
                 }}
                 dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               />
             </div>
             
-            {/* Enhanced call to action with better spacing */}
+            {/* Call to action buttons with consistent sizing */}
             <div 
               ref={buttonAnimation.ref}
-              className={`mt-20 ${buttonAnimation.animation}`}
+              className={`mt-16 ${buttonAnimation.animation}`}
               style={{ animationDelay: "0.8s" }}
             >
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a 
                   href="#projects" 
-                  className="group relative inline-flex items-center px-10 py-5 text-lg font-bold rounded-full transition-all duration-600 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl hover:scale-110 font-league enhanced-glow"
-                  style={{ fontFamily: "'League Spartan', sans-serif !important" }}
+                  className="group relative inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-600 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl hover:scale-110 font-league enhanced-glow"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/10 to-transparent translate-x-[-100%] transition-transform duration-600 group-hover:translate-x-[100%]"></span>
                   <span className="relative z-10 font-league">View My Work</span>
-                  <svg className="ml-3 w-6 h-6 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-3 w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
                 
                 <a 
                   href="#contact" 
-                  className="group inline-flex items-center px-10 py-5 text-lg font-bold rounded-full transition-all duration-600 bg-white/15 dark:bg-gray-800/40 backdrop-blur-2xl border-2 border-orange-200/40 dark:border-orange-700/40 text-orange-800 dark:text-orange-200 hover:bg-orange-50/30 dark:hover:bg-orange-900/30 hover:border-orange-300/60 dark:hover:border-orange-600/60 hover:scale-110 font-league enhanced-glow"
-                  style={{ fontFamily: "'League Spartan', sans-serif !important" }}
+                  className="group inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-600 bg-white/15 dark:bg-gray-800/40 backdrop-blur-2xl border-2 border-orange-200/40 dark:border-orange-700/40 text-orange-800 dark:text-orange-200 hover:bg-orange-50/30 dark:hover:bg-orange-900/30 hover:border-orange-300/60 dark:hover:border-orange-600/60 hover:scale-110 font-league enhanced-glow"
                 >
                   <span className="font-league">Get In Touch</span>
-                  <svg className="ml-3 w-6 h-6 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-3 w-5 h-5 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </a>
@@ -180,9 +176,9 @@ export default function HeroSection() {
         })}
       </div>
       
-      {/* Enhanced scroll indicator */}
+      {/* Enhanced scroll indicator with consistent sizing */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20">
-        <span className="text-sm text-gray-600 dark:text-gray-400 mb-4 font-league font-bold tracking-wider uppercase" style={{ fontFamily: "'League Spartan', sans-serif !important" }}>Scroll to explore</span>
+        <span className="text-sm font-league font-bold tracking-wider uppercase text-gray-600 dark:text-gray-400 mb-4">Scroll to explore</span>
         <div className="animate-bounce">
           <div className="w-8 h-12 border-3 border-orange-400 dark:border-orange-500 rounded-full flex justify-center bg-white/10 dark:bg-gray-900/20 backdrop-blur-lg shadow-xl">
             <div className="w-2 h-4 bg-gradient-to-b from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400 rounded-full mt-2 animate-pulse-glow"></div>
