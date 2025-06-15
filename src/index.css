@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* IMPORT FONTS FIRST */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/intro-rust');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -80,13 +84,13 @@
 }
 
 @layer base {
-  /* FORCE LEAGUE SPARTAN AND INTRO RUST FONTS ONLY - NO EXCEPTIONS */
-  * {
+  /* ULTRA STRICT FONT ENFORCEMENT - OVERRIDE EVERYTHING */
+  *, *::before, *::after {
     @apply border-border;
     font-family: 'League Spartan', sans-serif !important;
   }
 
-  /* OVERRIDE ALL SYSTEM FONTS */
+  /* FORCE LEAGUE SPARTAN FOR ALL ELEMENTS */
   html, body, div, span, applet, object, iframe,
   p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
   del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
@@ -438,6 +442,16 @@ html * {
   font-family: 'League Spartan', sans-serif !important;
 }
 
-html h1, html h2, html h3, html h4, html h5, html h6 {
+html h1, html h2, html h3, html h4, html h5, html h6,
+.font-intro, .font-intro h1, .font-intro h2, .font-intro h3, .font-intro h4, .font-intro h5, .font-intro h6 {
+  font-family: 'Intro Rust', serif !important;
+}
+
+/* SUPER STRICT ENFORCEMENT */
+* {
+  font-family: 'League Spartan', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .font-intro {
   font-family: 'Intro Rust', serif !important;
 }
