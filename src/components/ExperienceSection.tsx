@@ -1,12 +1,20 @@
 
 import { useInView } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { Beaker, Database, Search, Network, BookOpen } from "lucide-react";
+import { Beaker, Database, Search, Network, BookOpen, Briefcase } from "lucide-react";
 
 export default function ExperienceSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const experienceData = [
+    {
+      icon: <Briefcase className="w-6 h-6" />,
+      title: "Engineer - Data Science and ML",
+      company: "Probe42",
+      location: "India",
+      period: "Current",
+      description: "Leading data science and machine learning initiatives, developing advanced ML models and data-driven solutions. Working on cutting-edge AI projects, implementing scalable data pipelines, and driving innovation in artificial intelligence applications."
+    },
     {
       icon: <Beaker className="w-6 h-6" />,
       title: "Research Intern, LaRGo - Large Language Models Research Group",
@@ -48,7 +56,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league font-medium"
           >
-            My research journey in AI and language models
+            My professional journey in AI, data science, and research
           </motion.p>
         </div>
         
@@ -78,6 +86,9 @@ export default function ExperienceSection() {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
                   <div>
                     <h3 className="text-2xl font-bold text-gray-800 dark:text-orange-300 font-intro mb-2">{experience.title}</h3>
+                    {experience.company && (
+                      <p className="text-lg text-orange-600 dark:text-orange-400 font-league font-bold mb-1">{experience.company}</p>
+                    )}
                     <p className="text-base text-gray-600 dark:text-gray-400 font-league font-semibold">{experience.location}</p>
                   </div>
                   <div className="text-sm font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 dark:from-orange-900/60 dark:to-amber-900/60 dark:text-orange-400 px-4 py-2 rounded-full mt-3 lg:mt-0 font-league shadow-lg">

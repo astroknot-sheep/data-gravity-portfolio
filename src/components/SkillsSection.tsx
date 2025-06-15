@@ -99,7 +99,7 @@ export default function SkillsSection() {
             transition={{ duration: 0.8 }}
             className="inline-block mb-4"
           >
-            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/60 dark:to-amber-900/60 text-orange-800 dark:text-orange-200 border border-orange-200/50 dark:border-orange-700/50">
+            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-orange-100/80 to-amber-100/80 dark:from-orange-900/60 dark:to-amber-900/60 text-orange-800 dark:text-orange-200 border border-orange-200/50 dark:border-orange-700/50 font-league">
               Technical Expertise
             </span>
           </motion.div>
@@ -108,7 +108,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold mb-6 font-playfair text-gray-900 dark:text-white tracking-tight"
+            className="text-5xl md:text-6xl font-bold mb-6 font-intro text-gray-900 dark:text-white tracking-tight"
           >
             Skills & Technologies
           </motion.h2>
@@ -117,7 +117,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-inter leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league leading-relaxed"
           >
             Specialized in machine learning, data science, and engineering with expertise across multiple domains
           </motion.p>
@@ -150,7 +150,7 @@ export default function SkillsSection() {
                       {category.name === "Frontend & Architecture" && <Globe className="w-6 h-6" />}
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white font-playfair">{category.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white font-intro">{category.name}</h3>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
@@ -170,7 +170,7 @@ export default function SkillsSection() {
                       <div className="text-orange-600 dark:text-orange-400 mb-3 group-hover/skill:text-orange-700 dark:group-hover/skill:text-orange-300 transition-colors duration-300 group-hover/skill:scale-110 transform">
                         {skill.icon}
                       </div>
-                      <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-inter leading-tight">
+                      <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-league leading-tight">
                         {skill.name}
                       </span>
                     </motion.div>

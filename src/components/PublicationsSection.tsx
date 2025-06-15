@@ -40,7 +40,7 @@ export default function PublicationsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league"
           >
             Academic contributions and professional recognition in the field of data science
           </motion.p>
@@ -63,29 +63,29 @@ export default function PublicationsSection() {
                 
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white font-intro">
                       "Comparative Analysis of NPS & UPS from an Employee Perspective and Evaluation of Fiscal Implications of Pension Reforms"
                     </h3>
-                    <div className="bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 px-2 py-1 rounded-full text-xs font-medium">
+                    <div className="bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 px-2 py-1 rounded-full text-xs font-medium font-league">
                       Top Ten Ranked
                     </div>
                   </div>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 font-league">
                     Co-authored a top-ten ranked paper in SSRN's Political Methods eJournal, with 147+ abstract views and 33+ downloads. A comprehensive analysis with significant implications for pension reform policy.
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300">
+                    <span className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-league">
                       Political Methods eJournal
                     </span>
-                    <span className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300">
+                    <span className="text-xs py-1 px-2 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-league">
                       Economic Research
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 font-league">
                       <div className="flex items-center">
                         <Eye className="w-4 h-4 mr-1 text-amber-500" />
                         <span>147+ views</span>
@@ -100,7 +100,7 @@ export default function PublicationsSection() {
                       href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5088591" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors font-medium"
+                      className="flex items-center text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors font-medium font-league"
                     >
                       View Publication <ExternalLink className="w-4 h-4 ml-1" />
                     </a>
