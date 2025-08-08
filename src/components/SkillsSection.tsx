@@ -83,7 +83,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills" 
-      className="py-24 overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 relative"
+      className="py-24 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black relative"
     >
       {/* Enhanced background elements */}
       <div className="absolute inset-0 overflow-hidden">

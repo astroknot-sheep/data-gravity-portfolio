@@ -79,7 +79,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 bg-gray-900 relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden"
     >
       <div className="container mx-auto px-6 md:px-8 relative z-10">
         <div className="text-center mb-12" ref={ref}>
@@ -87,7 +87,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="type-h2 font-bold mb-4 font-intro text-gray-200"
+            className="type-h2 font-bold mb-4 font-intro text-amber-300"
           >
             Featured Projects
           </motion.h2>
@@ -110,14 +110,14 @@ export default function ProjectsSection() {
                 onClick={() => setFilter(category.id)}
                 className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === category.id 
-                    ? "text-gray-900" 
+                    ? "text-white" 
                     : "text-gray-300 hover:text-white"
                 }`}
               >
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 rounded-full -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 rounded-full -z-10 shadow-lg"
                     transition={{ type: "spring", duration: 0.6 }}
                   />
                 )}
@@ -165,7 +165,7 @@ export default function ProjectsSection() {
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-gray-500/50 text-gray-400 hover:bg-gray-500/10 hover:text-gray-300"
+              className="bg-transparent border-orange-500/40 text-orange-300 hover:bg-orange-500/10 hover:text-orange-200"
             >
               <PlusCircle className="mr-2 h-5 w-5" />
               View More Projects

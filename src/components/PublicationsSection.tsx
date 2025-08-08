@@ -22,7 +22,7 @@ export default function PublicationsSection() {
   return (
     <section
       id="publications"
-      className="py-20 bg-white dark:bg-gray-950 relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iLjAyNSI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptNi02aDZ2LTZoLTZ2NnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10 dark:opacity-5"></div>
       
@@ -52,7 +52,7 @@ export default function PublicationsSection() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={fadeInUp}
-            className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 flex flex-col"
+            className="bg-gray-900/80 rounded-xl overflow-hidden shadow-md border border-orange-700/40 flex flex-col"
           >
             <div className="p-1 bg-gradient-to-r from-amber-400 to-amber-600"></div>
             <div className="p-6 flex-grow">

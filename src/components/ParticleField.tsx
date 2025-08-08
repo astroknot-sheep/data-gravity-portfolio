@@ -26,10 +26,10 @@ export default function ParticleField({ count = 50, cursorTrail = true }: Partic
   const lastEmitTime = useRef<number>(0);
 
   const colors = [
-    "rgba(176, 127, 244, 0.7)", // Purple
     "rgba(245, 158, 11, 0.7)",  // Amber
-    "rgba(139, 92, 246, 0.7)",  // Indigo
     "rgba(249, 115, 22, 0.7)",  // Orange
+    "rgba(234, 88, 12, 0.7)",   // Red-Orange
+    "rgba(251, 191, 36, 0.7)",  // Yellow
   ];
 
   const createParticle = (x: number, y: number, fromCursor = false): Particle => {

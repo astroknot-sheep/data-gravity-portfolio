@@ -62,13 +62,13 @@ export default function ProjectCard({
           style={{ backfaceVisibility: 'hidden' }}
         >
           {/* Card background with gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl z-0"></div>
+          <div className="absolute inset-0 rounded-xl z-0 bg-gradient-to-br from-black via-gray-900 to-black ring-1 ring-orange-500/20"></div>
           
           {/* Card content */}
           <div className="relative z-10 p-6 h-full flex flex-col">
             <div className="flex items-start justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-200">{title}</h3>
-              <span className="bg-gray-600/20 text-gray-300 px-3 py-1 rounded-full text-xs font-medium border border-gray-600/30">
+              <h3 className="text-xl font-bold text-amber-200">{title}</h3>
+              <span className="bg-orange-500/10 text-orange-200 px-3 py-1 rounded-full text-xs font-medium border border-orange-500/30">
                 {mainTech}
               </span>
             </div>
@@ -82,7 +82,7 @@ export default function ProjectCard({
               {technologies.slice(1).map((tech, i) => (
                 <span 
                   key={i} 
-                  className="text-xs py-1 px-2 bg-gray-700/50 border border-gray-600/50 rounded-full text-gray-300"
+                  className="text-xs py-1 px-2 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-200"
                 >
                   {tech}
                 </span>
@@ -91,7 +91,7 @@ export default function ProjectCard({
             
             {/* View Project Button */}
             <Button 
-              className="absolute bottom-6 left-6 bg-gray-600 hover:bg-gray-700 text-white px-4 h-10 flex items-center"
+              className="absolute bottom-6 left-6 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white px-4 h-10 flex items-center shadow-lg"
               onClick={handleViewProject}
             >
               <span>View Project</span>
@@ -104,7 +104,7 @@ export default function ProjectCard({
               <ChevronRight className="w-4 h-4 ml-1" />
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gray-400 to-gray-600"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-orange-500 to-amber-500"></div>
           </div>
         </div>
         
@@ -118,11 +118,11 @@ export default function ProjectCard({
           }}
         >
           {/* Card background with gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl z-0"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black rounded-xl z-0"></div>
           
           {/* Card content */}
           <div className="relative z-10 p-6 h-full flex flex-col">
-            <h3 className="text-xl font-bold text-gray-200 mb-4">{title}</h3>
+            <h3 className="text-xl font-bold text-amber-200 mb-4">{title}</h3>
             
             <ul className="space-y-3 text-gray-300">
               {description.map((point, i) => (
@@ -150,7 +150,7 @@ export default function ProjectCard({
             <div className="mt-auto flex justify-between items-center">
               <Button 
                 variant="default"
-                className="bg-gray-600 hover:bg-gray-700 text-white"
+                className="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white"
                 onClick={handleViewProject}
               >
                 <Github className="w-4 h-4 mr-2" />
@@ -168,7 +168,7 @@ export default function ProjectCard({
               </button>
             </div>
             
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gray-600 to-gray-400"></div>
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-orange-500 to-amber-500"></div>
           </div>
         </div>
       </motion.div>
