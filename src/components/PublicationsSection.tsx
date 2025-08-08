@@ -32,7 +32,7 @@ export default function PublicationsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
+            className="type-h2 font-bold mb-4 font-intro text-gray-800 dark:text-amber-300"
           >
             Publications & Achievements
           </motion.h2>

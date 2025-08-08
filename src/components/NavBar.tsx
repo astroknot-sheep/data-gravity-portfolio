@@ -92,7 +92,7 @@ export default function NavBar() {
           <>
             <button
               onClick={toggleMenu}
-              className="p-3 rounded-xl focus:outline-none focus:ring-3 focus:ring-amber-400/50 enhanced-glassmorphism"
+              className="p-3 rounded-xl focus:outline-none focus:ring-4 focus:ring-amber-400/50 enhanced-glassmorphism"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
             >

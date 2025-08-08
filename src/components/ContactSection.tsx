@@ -64,7 +64,7 @@ export default function ContactSection() {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-20" ref={ref}>
-          <h2 className={`text-5xl font-bold font-intro text-gradient transition-all duration-700 ${
+          <h2 className={`type-h2 font-bold font-intro text-gradient transition-all duration-700 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Contact Me
@@ -142,7 +142,7 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
+                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
                       placeholder="Your name"
                     />
                   </div>
@@ -158,7 +158,7 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
+                      className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg"
                       placeholder="Your email"
                     />
                   </div>
@@ -175,7 +175,7 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required
                     rows={8}
-                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-3 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg resize-none"
+                    className="w-full px-5 py-4 border-2 border-gray-300 dark:border-gray-700 rounded-xl bg-white/80 dark:bg-gray-800/80 shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-lg resize-none"
                     placeholder="Your message"
                   ></textarea>
                 </div>

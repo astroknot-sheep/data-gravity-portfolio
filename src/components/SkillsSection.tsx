@@ -108,7 +108,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold mb-6 font-intro text-gray-900 dark:text-white tracking-tight"
+            className="type-h2 font-bold mb-6 font-intro text-gray-900 dark:text-white tracking-tight"
           >
             Skills & Technologies
           </motion.h2>

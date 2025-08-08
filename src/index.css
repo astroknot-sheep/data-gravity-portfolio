@@ -455,3 +455,10 @@ html h1, html h2, html h3, html h4, html h5, html h6,
 h1, h2, h3, h4, h5, h6, .font-intro {
   font-family: 'Intro Rust', serif !important;
 }
+
+/* Global type scale utilities */
+@layer components {
+  .type-h1 { font-family: 'Intro Rust', serif !important; font-size: clamp(2.75rem, 6vw, 4.75rem); line-height: 1.1; letter-spacing: -0.02em; }
+  .type-h2 { font-family: 'Intro Rust', serif !important; font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.15; letter-spacing: -0.01em; }
+  .type-h3 { font-family: 'Intro Rust', serif !important; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+}

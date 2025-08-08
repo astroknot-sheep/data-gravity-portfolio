@@ -98,12 +98,11 @@ export default function HeroSection() {
             {/* Main heading with consistent large font size */}
             <div className="min-h-[160px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-intro font-bold text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl transition-all duration-700 ease-out leading-tight tracking-tight ${
+                className={`block font-intro font-bold type-h1 text-gray-900 dark:text-white transition-all duration-700 ease-out ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
-                  textShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                  letterSpacing: '-0.02em'
+                  textShadow: '0 8px 32px rgba(0,0,0,0.15)'
                 }}
                 dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               />

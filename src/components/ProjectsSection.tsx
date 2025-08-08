@@ -87,7 +87,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4 font-intro text-gray-200"
+            className="type-h2 font-bold mb-4 font-intro text-gray-200"
           >
             Featured Projects
           </motion.h2>
