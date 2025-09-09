@@ -74,7 +74,7 @@
 }
 
 .font-intro {
-  font-family: 'Intro Rust', serif !important;
+  font-family: 'Intro Rust', sans-serif !important;
 }
 
 /* Force removal of any other font families with higher specificity */
@@ -87,7 +87,7 @@ body, p, div, span, a, button, input, textarea, select {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Intro Rust', 'League Spartan', sans-serif !important;
+  font-family: 'Intro Rust', sans-serif !important;
 }
 
 /* Override any conflicting styles */

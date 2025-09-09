@@ -14,7 +14,7 @@ const showErrorScreen = (error: unknown) => {
       padding: 2rem;
       color: #fff;
       text-align: center;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'League Spartan', sans-serif;
       background: linear-gradient(to bottom right, #1f2937, #111827);
       min-height: 100vh;
       display: flex;

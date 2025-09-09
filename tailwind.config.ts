@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -86,7 +85,7 @@ export default {
       fontFamily: {
         // ONLY THESE TWO FONTS ARE ALLOWED
         league: ['League Spartan', 'sans-serif'],
-        intro: ['Intro Rust', 'serif'],
+        intro: ['Intro Rust', 'sans-serif'],
       },
     },
   },

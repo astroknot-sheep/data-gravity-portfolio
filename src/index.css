@@ -113,7 +113,7 @@
 
   /* HEADINGS MUST USE INTRO RUST ONLY */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Intro Rust', serif !important;
+    font-family: 'Intro Rust', sans-serif !important;
     @apply font-semibold tracking-tight;
     line-height: 1.2;
   }
@@ -121,22 +121,22 @@
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
     letter-spacing: -0.02em;
-    font-family: 'Intro Rust', serif !important;
+    font-family: 'Intro Rust', sans-serif !important;
   }
 
   h2 {
     @apply text-3xl sm:text-4xl;
     letter-spacing: -0.01em;
-    font-family: 'Intro Rust', serif !important;
+    font-family: 'Intro Rust', sans-serif !important;
   }
 
   h3 {
     @apply text-2xl sm:text-3xl;
-    font-family: 'Intro Rust', serif !important;
+    font-family: 'Intro Rust', sans-serif !important;
   }
 
   h4, h5, h6 {
-    font-family: 'Intro Rust', serif !important;
+    font-family: 'Intro Rust', sans-serif !important;
   }
 
   /* ALL OTHER TEXT MUST USE LEAGUE SPARTAN ONLY */
@@ -434,7 +434,7 @@
 }
 
 .font-intro, .font-intro * {
-  font-family: 'Intro Rust', serif !important;
+  font-family: 'Intro Rust', sans-serif !important;
 }
 
 /* Force override any remaining system font usage */
@@ -444,7 +444,7 @@ html * {
 
 html h1, html h2, html h3, html h4, html h5, html h6,
 .font-intro, .font-intro h1, .font-intro h2, .font-intro h3, .font-intro h4, .font-intro h5, .font-intro h6 {
-  font-family: 'Intro Rust', serif !important;
+  font-family: 'Intro Rust', sans-serif !important;
 }
 
 /* SUPER STRICT ENFORCEMENT */
@@ -453,12 +453,12 @@ html h1, html h2, html h3, html h4, html h5, html h6,
 }
 
 h1, h2, h3, h4, h5, h6, .font-intro {
-  font-family: 'Intro Rust', serif !important;
+  font-family: 'Intro Rust', sans-serif !important;
 }
 
 /* Global type scale utilities */
 @layer components {
-  .type-h1 { font-family: 'Intro Rust', serif !important; font-size: clamp(2.75rem, 6vw, 4.75rem); line-height: 1.1; letter-spacing: -0.02em; }
-  .type-h2 { font-family: 'Intro Rust', serif !important; font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.15; letter-spacing: -0.01em; }
-  .type-h3 { font-family: 'Intro Rust', serif !important; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+  .type-h1 { font-family: 'Intro Rust', sans-serif !important; font-size: clamp(2.75rem, 6vw, 4.75rem); line-height: 1.1; letter-spacing: -0.02em; }
+  .type-h2 { font-family: 'Intro Rust', sans-serif !important; font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.15; letter-spacing: -0.01em; }
+  .type-h3 { font-family: 'Intro Rust', sans-serif !important; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
 }
