@@ -43,7 +43,6 @@ export default function ContactSection() {
       toast({
         title: "Error sending message",
         description: "Please try again or email me directly.",
-        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -100,7 +99,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-300 font-league font-medium">Bhopal, India</p>
+                    <p className="text-gray-600 dark:text-gray-300 font-league font-medium">Bengaluru, India</p>
                   </div>
                 </div>
                 

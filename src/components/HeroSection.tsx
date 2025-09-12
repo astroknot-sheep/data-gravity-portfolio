@@ -95,15 +95,16 @@ export default function HeroSection() {
               </span>
             </div>
             
-            {/* Main heading with consistent large font size */}
+            {/* Main heading with consistent large font size across all lines */}
             <div className="min-h-[200px] flex flex-col items-center justify-center">
               <h1 
-                className={`block font-intro font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gray-900 dark:text-white transition-all duration-700 ease-out leading-[1.1] ${
+                className={`block font-intro font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 dark:text-white transition-all duration-700 ease-out leading-[1.1] ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95' : 'opacity-100 transform translate-y-0 scale-100'
                 }`}
                 style={{ 
                   textShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                  letterSpacing: '-0.02em'
+                  letterSpacing: '-0.02em',
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)' // Consistent responsive sizing
                 }}
                 dangerouslySetInnerHTML={{ __html: messages[messageIndex] }}
               />
