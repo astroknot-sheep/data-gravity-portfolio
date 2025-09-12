@@ -5,12 +5,15 @@ import ThreeCanvas from "./ThreeCanvas";
 export default function HeroSection() {
   const parallaxBackgroundRef = useRef<HTMLDivElement>(null);
   const parallaxContentRef = useRef<HTMLDivElement>(null);
+  const headingContainerRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const buttonAnimation = useScrollAnimation();
   const cursorPos = useCursorPosition();
   
   // State for the sequential messages
   const [messageIndex, setMessageIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [computedFontSize, setComputedFontSize] = useState<number>(96);
   
   const messages = [
     "Hi, I'm Dhriman",
