@@ -26,7 +26,7 @@ export default function ContactSection() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      const mailtoLink = `mailto:dhrimandekastudy@gmail.com?subject=Message from ${formData.name}&body=${formData.message}%0D%0A%0D%0AFrom: ${formData.email}`;
+      const mailtoLink = `mailto:contact@dhrimandeka.com?subject=Message from ${formData.name}&body=${formData.message}%0D%0A%0D%0AFrom: ${formData.email}`;
       window.open(mailtoLink);
       
       toast({
@@ -89,7 +89,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300 break-all font-league font-medium">dhrimandekastudy@gmail.com</p>
+                    <p className="text-gray-600 dark:text-gray-300 break-all font-league font-medium">contact@dhrimandeka.com</p>
                   </div>
                 </div>
                 
@@ -111,7 +111,7 @@ export default function ContactSection() {
                     <h3 className="text-xl font-bold mb-3 text-gradient font-intro">Connect</h3>
                     <a 
                       href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
-                      target="_blank" 
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400 transition-colors font-league font-medium enhanced-link"
                     >
