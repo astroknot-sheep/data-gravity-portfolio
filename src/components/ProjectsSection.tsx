@@ -1,10 +1,11 @@
 
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
+import { useScrollReveal } from "@/lib/magnetic";
 import ProjectCard from "./ProjectCard";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Sparkles } from "lucide-react";
 
 const projectsData = [
   {
@@ -79,36 +80,51 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-24 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden"
+      className="py-32 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden"
     >
+      <div className="absolute inset-0 bg-data-grid bg-[length:120px_120px] opacity-10"></div>
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-r from-orange-300/20 to-amber-300/20 dark:from-orange-700/15 dark:to-amber-700/15 rounded-full blur-3xl animate-float-gentle"></div>
+      
       <div className="container mx-auto px-6 md:px-8 relative z-10">
-        <div className="text-center mb-12" ref={ref}>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+        <div className="text-center mb-16" ref={ref}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="type-h2 font-bold mb-4 font-intro text-amber-300"
+            transition={{ duration: 0.8 }}
+            className="inline-block mb-6"
+          >
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+              <Sparkles className="w-5 h-5 mr-2 animate-pulse-glow" />
+              Portfolio
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="type-h2 font-bold mb-6 font-intro text-amber-300"
           >
             Featured Projects
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-2xl text-gray-300 max-w-3xl mx-auto font-league"
           >
             Explore my data science and machine learning projects showcasing end-to-end implementation
           </motion.p>
         </div>
         
-        {/* Project filter tabs with dark gradient */}
-        <div className="flex justify-center mb-12 overflow-x-auto pb-2 px-4">
-          <div className="inline-flex rounded-full p-1 bg-gray-800/80 backdrop-blur-sm border border-gray-700">
+        {/* Project filter tabs with enhanced dark gradient */}
+        <div className="flex justify-center mb-16 overflow-x-auto pb-2 px-4">
+          <div className="inline-flex rounded-2xl p-1.5 bg-gray-800/90 backdrop-blur-xl border-2 border-gray-700/60 shadow-2xl">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setFilter(category.id)}
-                className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`relative px-8 py-3.5 rounded-xl text-base font-medium transition-all ${
                   filter === category.id 
                     ? "text-white" 
                     : "text-gray-300 hover:text-white"
@@ -117,8 +133,8 @@ export default function ProjectsSection() {
                 {filter === category.id && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 rounded-full -z-10 shadow-lg"
-                    transition={{ type: "spring", duration: 0.6 }}
+                    className="absolute inset-0 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 rounded-xl -z-10 shadow-2xl"
+                    transition={{ type: "spring", duration: 0.7 }}
                   />
                 )}
                 {category.name}
@@ -161,13 +177,13 @@ export default function ProjectsSection() {
         )}
         
         {filter === "all" && filteredProjects.length >= 5 && (
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Button 
               variant="outline" 
               size="lg"
-              className="bg-transparent border-orange-500/40 text-orange-300 hover:bg-orange-500/10 hover:text-orange-200"
+              className="bg-transparent border-2 border-orange-500/50 text-orange-300 hover:bg-orange-500/15 hover:text-orange-200 px-8 py-6 text-lg rounded-2xl font-league font-bold shadow-2xl hover:shadow-3xl transition-all duration-500"
             >
-              <PlusCircle className="mr-2 h-5 w-5" />
+              <PlusCircle className="mr-3 h-6 w-6" />
               View More Projects
             </Button>
           </div>
