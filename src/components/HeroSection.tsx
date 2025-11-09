@@ -1,5 +1,6 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { applyParallax, useScrollAnimation, useCursorPosition } from "@/lib/animations";
+import { useMagneticEffect } from "@/lib/magnetic";
 import ThreeCanvas from "./ThreeCanvas";
 
 export default function HeroSection() {
@@ -9,6 +10,8 @@ export default function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const buttonAnimation = useScrollAnimation();
   const cursorPos = useCursorPosition();
+  const primaryBtnRef = useMagneticEffect(0.4);
+  const secondaryBtnRef = useMagneticEffect(0.3);
   
   // State for the sequential messages
   const [messageIndex, setMessageIndex] = useState(0);
@@ -121,8 +124,9 @@ export default function HeroSection() {
             >
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a 
+                  ref={primaryBtnRef as any}
                   href="#projects" 
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-600 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl hover:scale-110 font-league enhanced-glow"
+                  className="group relative inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl font-league enhanced-glow shimmer-overlay animate-gradient-shift"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/10 to-transparent translate-x-[-100%] transition-transform duration-600 group-hover:translate-x-[100%]"></span>
                   <span className="relative z-10 font-league">View My Work</span>
@@ -132,8 +136,9 @@ export default function HeroSection() {
                 </a>
                 
                 <a 
+                  ref={secondaryBtnRef as any}
                   href="#contact" 
-                  className="group inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-600 bg-white/15 dark:bg-gray-800/40 backdrop-blur-2xl border-2 border-orange-200/40 dark:border-orange-700/40 text-orange-800 dark:text-orange-200 hover:bg-orange-50/30 dark:hover:bg-orange-900/30 hover:border-orange-300/60 dark:hover:border-orange-600/60 hover:scale-110 font-league enhanced-glow"
+                  className="group inline-flex items-center px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 bg-white/15 dark:bg-gray-800/40 backdrop-blur-2xl border-2 border-orange-200/40 dark:border-orange-700/40 text-orange-800 dark:text-orange-200 hover:bg-orange-50/30 dark:hover:bg-orange-900/30 hover:border-orange-300/60 dark:hover:border-orange-600/60 font-league enhanced-glow"
                 >
                   <span className="font-league">Get In Touch</span>
                   <svg className="ml-3 w-5 h-5 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">

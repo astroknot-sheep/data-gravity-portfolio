@@ -1,11 +1,14 @@
 
 import { useInView } from "@/lib/animations";
+import { useMagneticEffect, useCardTilt3D, useScrollReveal } from "@/lib/magnetic";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Code, Database, Server, Cloud, Terminal, GitBranch, FileCode, GraduationCap, MapPin, Calendar } from "lucide-react";
 
 export default function AboutSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const cardTiltRef = useCardTilt3D();
+  const educationRevealRef = useScrollReveal();
   
   const technologies = [
     { 
@@ -82,7 +85,10 @@ export default function AboutSection() {
               className="space-y-8 text-gray-600 dark:text-gray-300"
             >
               {/* Enhanced Education Section */}
-              <div className="enhanced-glassmorphism p-8 enhanced-glow border-gradient">
+              <div 
+                ref={educationRevealRef as any}
+                className="enhanced-glassmorphism p-8 enhanced-glow border-gradient card-tilt opacity-0"
+              >
                 <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3 font-intro">
                   <div className="p-2 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl">
                     <GraduationCap className="w-7 h-7 text-white" />
@@ -115,7 +121,10 @@ export default function AboutSection() {
                 <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white font-intro">Technical Skills</h3>
                 <div className="space-y-6">
                   {technologies.slice(0, 2).map((tech, index) => (
-                    <div key={index} className="p-4 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30">
+                    <div 
+                      key={index} 
+                      className="p-4 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 card-tilt transition-all duration-500 hover:border-orange-400/60 dark:hover:border-orange-600/60"
+                    >
                       <h4 className="text-lg font-bold mb-2 text-gradient font-intro">{tech.category}</h4>
                       <ul className="list-disc pl-6 space-y-1">
                         {tech.items.map((item, i) => (
@@ -159,6 +168,7 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative flex flex-col items-center"
+            ref={cardTiltRef as any}
           >
             {/* Enhanced Profile Image */}
             <div className="mb-10 flex justify-center relative">
@@ -170,7 +180,7 @@ export default function AboutSection() {
             </div>
             
             <div className="space-y-6 w-full">
-              <div className="p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30">
+              <div className="p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 card-tilt transition-all duration-500 hover:border-orange-400/60 dark:hover:border-orange-600/60 shimmer-overlay overflow-hidden">
                 <h4 className="text-lg font-bold mb-3 text-gradient font-intro">Data Engineering</h4>
                 <ul className="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[2].items.map((item, i) => (
@@ -179,7 +189,7 @@ export default function AboutSection() {
                 </ul>
               </div>
               
-              <div className="p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30">
+              <div className="p-6 bg-white/60 dark:bg-gray-800/60 rounded-xl backdrop-blur-lg border border-orange-200/30 dark:border-orange-700/30 card-tilt transition-all duration-500 hover:border-orange-400/60 dark:hover:border-orange-600/60 shimmer-overlay overflow-hidden">
                 <h4 className="text-lg font-bold mb-3 text-gradient font-intro">Cloud & Tools</h4>
                 <ul className="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                   {technologies[3].items.map((item, i) => (

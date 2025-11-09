@@ -1,6 +1,7 @@
 
 import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
+import { useCardTilt3D } from "@/lib/magnetic";
 import { motion } from "framer-motion";
 import { 
   Code, Database, Coffee, Terminal, FileCode, 
@@ -124,20 +125,25 @@ export default function SkillsSection() {
         </div>
         
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
-          {skillsData.map((category, catIndex) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ 
-                duration: 0.8, 
-                delay: catIndex * 0.15,
-                ease: "easeOut"
-              }}
-              className="group relative"
-            >
-              {/* Enhanced card with better shadows and gradients */}
-              <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 h-full transition-all duration-500 hover:shadow-2xl hover:scale-105 hover:bg-white/90 dark:hover:bg-gray-800/90">
+          {skillsData.map((category, catIndex) => {
+            const SkillCard = () => {
+              const tiltRef = useCardTilt3D();
+              
+              return (
+                <motion.div
+                  key={category.name}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: catIndex * 0.15,
+                    ease: "easeOut"
+                  }}
+                  className="group relative"
+                  ref={tiltRef as any}
+                >
+                  {/* Enhanced card with better shadows and gradients */}
+                  <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 h-full transition-all duration-500 hover:shadow-2xl hover:bg-white/90 dark:hover:bg-gray-800/90 shimmer-overlay overflow-hidden card-tilt">
                 {/* Gradient border effect on hover */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-500/20 to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
                 
@@ -178,7 +184,11 @@ export default function SkillsSection() {
                 </div>
               </div>
             </motion.div>
-          ))}
+          );
+        };
+        
+        return <SkillCard key={category.name} />;
+      })}
         </div>
       </div>
     </section>
