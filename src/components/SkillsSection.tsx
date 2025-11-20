@@ -1,6 +1,5 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useInView } from "@/lib/animations";
-import { useCardTilt3D } from "@/lib/magnetic";
 import { motion } from "framer-motion";
 import { 
   Code, Database, Coffee, Terminal, FileCode, 
@@ -21,23 +20,23 @@ export default function SkillsSection() {
   
   const getSkillIcon = (skill: string) => {
     switch (skill.toLowerCase()) {
-      case "python": return <Code className="w-8 h-8" />;
-      case "sql": return <Database className="w-8 h-8" />;
-      case "java": return <Coffee className="w-8 h-8" />;
-      case "r": return <FileCode className="w-8 h-8" />;
-      case "shell scripting": return <Terminal className="w-8 h-8" />;
-      case "docker": return <Server className="w-8 h-8" />;
-      case "aws": return <Cloud className="w-8 h-8" />;
-      case "ci/cd": return <GitCompare className="w-8 h-8" />;
-      case "airflow": return <Timer className="w-8 h-8" />;
-      case "fastapi": return <Cpu className="w-8 h-8" />;
-      case "vector stores": return <Archive className="w-8 h-8" />;
-      case "llms": return <Brain className="w-8 h-8" />;
-      case "prompt engineering": return <Edit className="w-8 h-8" />;
-      case "react": return <Globe className="w-8 h-8" />;
-      case "docker compose": return <HardDrive className="w-8 h-8" />;
-      case "microservices": return <Network className="w-8 h-8" />;
-      default: return <Code className="w-8 h-8" />;
+      case "python": return <Code className="w-6 h-6" />;
+      case "sql": return <Database className="w-6 h-6" />;
+      case "java": return <Coffee className="w-6 h-6" />;
+      case "r": return <FileCode className="w-6 h-6" />;
+      case "shell scripting": return <Terminal className="w-6 h-6" />;
+      case "docker": return <Server className="w-6 h-6" />;
+      case "aws": return <Cloud className="w-6 h-6" />;
+      case "ci/cd": return <GitCompare className="w-6 h-6" />;
+      case "airflow": return <Timer className="w-6 h-6" />;
+      case "fastapi": return <Cpu className="w-6 h-6" />;
+      case "vector stores": return <Archive className="w-6 h-6" />;
+      case "llms": return <Brain className="w-6 h-6" />;
+      case "prompt engineering": return <Edit className="w-6 h-6" />;
+      case "react": return <Globe className="w-6 h-6" />;
+      case "docker compose": return <HardDrive className="w-6 h-6" />;
+      case "microservices": return <Network className="w-6 h-6" />;
+      default: return <Code className="w-6 h-6" />;
     }
   };
 
@@ -83,113 +82,95 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills" 
-      className="py-32 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black relative"
+      className="py-32 overflow-hidden bg-muted relative"
     >
-      {/* Enhanced background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-gradient-to-r from-orange-100/30 to-amber-100/30 dark:from-orange-900/25 dark:to-amber-900/25 rounded-full blur-3xl animate-float-gentle" />
-        <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-gradient-to-l from-amber-100/30 to-orange-100/30 dark:from-amber-900/25 dark:to-orange-900/25 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute inset-0 bg-data-grid bg-[length:120px_120px] opacity-10"></div>
-      </div>
+      {/* Geometric background */}
+      <div className="absolute inset-0 geometric-grid opacity-10"></div>
+      
+      {/* Angular decorative elements */}
+      <div className="absolute top-40 right-40 w-48 h-48 bg-primary border-6 border-black dark:border-white angular-shape"></div>
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-secondary border-6 border-black dark:border-white"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20" ref={ref}>
+        <div className="text-center mb-16" ref={ref}>
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9 }}
+            transition={{ duration: 0.3 }}
             className="inline-block mb-6"
           >
-            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
-              <Sparkles className="w-5 h-5 mr-2 animate-pulse-glow" />
+            <span className="inline-flex items-center px-6 py-3 bg-accent border-5 border-black dark:border-white rounded-sm shadow-brutal text-accent-foreground font-bold uppercase">
+              <Sparkles className="w-5 h-5 mr-2" />
               Technical Expertise
             </span>
           </motion.div>
           
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            className="type-h2 font-bold mb-8 font-intro text-gray-900 dark:text-white tracking-tight"
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="type-h2 font-black mb-6 uppercase"
           >
             Skills & Technologies
           </motion.h2>
           
           <motion.p
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league leading-relaxed"
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="text-xl max-w-3xl mx-auto font-bold"
           >
-            Specialized in machine learning, data science, and engineering with expertise across multiple domains
+            Specialized in machine learning, data science, and engineering
           </motion.p>
         </div>
         
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
-          {skillsData.map((category, catIndex) => {
-            const SkillCard = () => {
-              const tiltRef = useCardTilt3D();
-              
-              return (
-                <motion.div
-                  key={category.name}
-                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                  transition={{ 
-                    duration: 0.9, 
-                    delay: catIndex * 0.15,
-                    ease: "easeOut"
-                  }}
-                  className="group relative"
-                  ref={tiltRef as any}
-                >
-                  {/* Enhanced card with better shadows and gradients */}
-                  <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border-2 border-gray-200/60 dark:border-gray-700/60 h-full transition-all duration-700 hover:shadow-3xl hover:bg-white/95 dark:hover:bg-gray-800/95 shimmer-overlay overflow-hidden card-tilt">
-                    {/* Gradient border effect on hover */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/25 to-amber-500/25 opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-2xl"></div>
-                    
-                    <div className="flex items-center mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center mr-5 shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                        <div className="text-white">
-                          {category.name === "Programming" && <Code className="w-8 h-8" />}
-                          {category.name === "DevOps & Deployment" && <Server className="w-8 h-8" />}
-                          {category.name === "AI & Machine Learning" && <Brain className="w-8 h-8" />}
-                          {category.name === "Frontend & Architecture" && <Globe className="w-8 h-8" />}
-                        </div>
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-intro">{category.name}</h3>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-5">
-                      {category.skills.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                          transition={{ 
-                            duration: 0.7, 
-                            delay: catIndex * 0.15 + skillIndex * 0.1,
-                            ease: "easeOut"
-                          }}
-                          whileHover={{ y: -10, scale: 1.08 }}
-                          className="group/skill flex flex-col items-center justify-center p-5 bg-gradient-to-br from-gray-50/90 to-gray-100/90 dark:from-gray-700/60 dark:to-gray-800/60 rounded-2xl hover:from-orange-50/90 hover:to-amber-50/90 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 transition-all duration-500 cursor-pointer border-2 border-gray-200/40 dark:border-gray-600/40 hover:border-orange-300/60 dark:hover:border-orange-600/60 shadow-lg hover:shadow-2xl"
-                        >
-                          <div className="text-orange-600 dark:text-orange-400 mb-4 group-hover/skill:text-orange-700 dark:group-hover/skill:text-orange-300 transition-colors duration-500 group-hover/skill:scale-125 transform">
-                            {skill.icon}
-                          </div>
-                          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-league leading-tight">
-                            {skill.name}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+          {skillsData.map((category, catIndex) => (
+            <motion.div
+              key={category.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.3, 
+                delay: catIndex * 0.1
+              }}
+              className="neobrutalist-card p-8 h-full quick-transition hover:shadow-brutal-lg"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-primary border-3 border-black dark:border-white rounded-sm flex items-center justify-center mr-4">
+                  <div className="text-primary-foreground">
+                    {category.name === "Programming" && <Code className="w-6 h-6" />}
+                    {category.name === "DevOps & Deployment" && <Server className="w-6 h-6" />}
+                    {category.name === "AI & Machine Learning" && <Brain className="w-6 h-6" />}
+                    {category.name === "Frontend & Architecture" && <Globe className="w-6 h-6" />}
                   </div>
-                </motion.div>
-              );
-            };
-            
-            return <SkillCard key={category.name} />;
-          })}
+                </div>
+                <h3 className="text-xl font-black uppercase">{category.name}</h3>
+              </div>
+              
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ 
+                      duration: 0.2, 
+                      delay: catIndex * 0.1 + skillIndex * 0.05
+                    }}
+                    className="flex items-center p-3 bg-background border-3 border-black dark:border-white rounded-sm cursor-pointer quick-transition hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px]"
+                  >
+                    <div className="text-primary mr-3">
+                      {skill.icon}
+                    </div>
+                    <span className="text-sm font-bold uppercase">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
