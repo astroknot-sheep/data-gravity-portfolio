@@ -68,21 +68,6 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      borderWidth: {
-        '3': '3px',
-        '5': '5px',
-        '6': '6px',
-        '8': '8px',
-      },
-      boxShadow: {
-        'brutal': '6px 6px 0px 0px #000000',
-        'brutal-sm': '4px 4px 0px 0px #000000',
-        'brutal-lg': '8px 8px 0px 0px #000000',
-        'brutal-xl': '12px 12px 0px 0px #000000',
-        'brutal-orange': '6px 6px 0px 0px hsl(var(--primary))',
-        'brutal-orange-sm': '4px 4px 0px 0px hsl(var(--primary))',
-        'brutal-orange-lg': '8px 8px 0px 0px hsl(var(--primary))',
-      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -92,15 +77,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "brutal-pop": {
-          "0%": { transform: "translate(0px, 0px)" },
-          "100%": { transform: "translate(-2px, -2px)" }
-        },
       },
       animation: {
-        "accordion-down": "accordion-down 0.15s ease-out",
-        "accordion-up": "accordion-up 0.15s ease-out",
-        "brutal-pop": "brutal-pop 0.1s ease-out forwards",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
         // ONLY THESE TWO FONTS ARE ALLOWED

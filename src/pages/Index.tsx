@@ -2,9 +2,11 @@
 import { useEffect, lazy, Suspense } from "react";
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
+import Cursor from "@/components/Cursor";
 import { Linkedin } from "lucide-react";
 
 // Lazy load heavier components to improve initial load time
+const ParticleField = lazy(() => import("@/components/ParticleField"));
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
@@ -68,6 +70,14 @@ export default function Index() {
 
   return (
     <div className="relative dark">
+      {/* Custom cursor */}
+      <Cursor />
+      
+      {/* Lazy load particle background */}
+      <Suspense fallback={null}>
+        <ParticleField count={30} />
+      </Suspense>
+      
       {/* Navigation */}
       <NavBar />
       
