@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Hook for magnetic button effect
 export function useMagneticEffect(strength: number = 0.3) {
@@ -78,6 +78,7 @@ export function useCardTilt3D() {
 // Hook for smooth scroll reveal
 export function useScrollReveal(threshold: number = 0.2) {
   const ref = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
@@ -87,6 +88,7 @@ export function useScrollReveal(threshold: number = 0.2) {
       ([entry]) => {
         if (entry.isIntersecting) {
           element.classList.add('animate-reveal-up');
+          setIsVisible(true);
           observer.unobserve(element);
         }
       },
@@ -100,5 +102,5 @@ export function useScrollReveal(threshold: number = 0.2) {
     };
   }, [threshold]);
 
-  return ref;
+  return { ref, isVisible };
 }
