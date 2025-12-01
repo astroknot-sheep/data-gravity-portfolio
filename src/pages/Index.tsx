@@ -11,6 +11,7 @@ const AboutSection = lazy(() => import("@/components/AboutSection"));
 const SkillsSection = lazy(() => import("@/components/SkillsSection"));
 const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
 const PublicationsSection = lazy(() => import("@/components/PublicationsSection"));
+const MediumBlogSection = lazy(() => import("@/components/MediumBlogSection"));
 const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
@@ -99,6 +100,10 @@ export default function Index() {
         
         <Suspense fallback={<SectionLoader />}>
           <PublicationsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <MediumBlogSection />
         </Suspense>
         
         <Suspense fallback={<SectionLoader />}>
