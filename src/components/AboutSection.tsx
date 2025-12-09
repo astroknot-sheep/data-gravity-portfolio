@@ -12,48 +12,47 @@ export default function AboutSection() {
   const technologies = [
     { 
       category: "Programming Languages",
-      items: ["Python (NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch)", "SQL", "Shell Scripting"]
+      items: ["Python (Advanced)", "SQL (Proficient)", "Shell Scripting"]
     },
     {
       category: "Machine Learning",
       items: [
-        "Regression, Classification", 
-        "Natural Language Processing (NLP)", 
-        "Deep Learning (CNN, RNN, LSTM, Transformers)",
-        "Reinforcement Learning",
-        "Feature Engineering, EDA",
-        "Statistical Modeling",
-        "Time Series Forecasting"
+        "NLP & Transformers", 
+        "Deep Learning (CNN, RNN, LSTM)", 
+        "Regression/Classification Models",
+        "Time Series Forecasting",
+        "Model Deployment",
+        "Hugging Face Transformers"
       ]
     },
     {
       category: "Data Engineering",
       items: [
-        "Data Pipelines (Apache Airflow, PostgreSQL)",
-        "ETL Processes",
-        "Data Warehousing",
-        "Data Cleaning"
+        "Data Pipelines (PostgreSQL)",
+        "Machine Learning Pipelines",
+        "Data Visualization (Matplotlib, Seaborn)",
+        "A/B Testing"
       ]
     },
     {
       category: "Cloud & Tools",
       items: [
         "Docker",
-        "AWS (S3, EC2, SageMaker, Lambda)",
-        "MLFlow, DVC, Git",
+        "AWS (S3, EC2, SageMaker)",
+        "MLflow, Git",
         "FastAPI, Flask, Streamlit",
-        "Tableau, Power BI"
+        "Kubernetes (Basic)"
       ]
     }
   ];
   
   const skills = [
     { name: "Python", level: "Advanced", icon: <Code className="w-5 h-5" /> },
-    { name: "ML/Deep Learning", level: "Intermediate", icon: <Server className="w-5 h-5" /> },
-    { name: "Data Engineering", level: "Intermediate", icon: <Database className="w-5 h-5" /> },
-    { name: "AWS", level: "Intermediate", icon: <Cloud className="w-5 h-5" /> },
-    { name: "Shell Scripting", level: "Intermediate", icon: <Terminal className="w-5 h-5" /> },
-    { name: "Git/Version Control", level: "Advanced", icon: <GitBranch className="w-5 h-5" /> }
+    { name: "ML/Deep Learning", level: "Advanced", icon: <Server className="w-5 h-5" /> },
+    { name: "NLP & Transformers", level: "Advanced", icon: <FileCode className="w-5 h-5" /> },
+    { name: "AWS", level: "Proficient", icon: <Cloud className="w-5 h-5" /> },
+    { name: "SQL", level: "Proficient", icon: <Database className="w-5 h-5" /> },
+    { name: "Git/Docker", level: "Proficient", icon: <GitBranch className="w-5 h-5" /> }
   ];
   
   return (

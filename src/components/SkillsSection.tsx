@@ -47,35 +47,38 @@ export default function SkillsSection() {
       skills: [
         { name: "Python", icon: getSkillIcon("python") },
         { name: "SQL", icon: getSkillIcon("sql") },
-        { name: "Java", icon: getSkillIcon("java") },
-        { name: "R", icon: getSkillIcon("r") },
         { name: "Shell Scripting", icon: getSkillIcon("shell scripting") },
       ]
     },
     {
-      name: "DevOps & Deployment",
+      name: "ML & Data Libraries",
+      skills: [
+        { name: "NumPy", icon: getSkillIcon("python") },
+        { name: "Pandas", icon: getSkillIcon("python") },
+        { name: "Scikit-learn", icon: getSkillIcon("python") },
+        { name: "TensorFlow", icon: getSkillIcon("llms") },
+        { name: "PyTorch", icon: getSkillIcon("llms") },
+        { name: "Hugging Face", icon: getSkillIcon("llms") },
+      ]
+    },
+    {
+      name: "ML Expertise",
+      skills: [
+        { name: "NLP", icon: getSkillIcon("prompt engineering") },
+        { name: "Transformers", icon: getSkillIcon("llms") },
+        { name: "CNN/RNN/LSTM", icon: getSkillIcon("vector stores") },
+        { name: "Time Series", icon: getSkillIcon("airflow") },
+      ]
+    },
+    {
+      name: "Tools & Cloud",
       skills: [
         { name: "Docker", icon: getSkillIcon("docker") },
         { name: "AWS", icon: getSkillIcon("aws") },
-        { name: "CI/CD", icon: getSkillIcon("ci/cd") },
-        { name: "Airflow", icon: getSkillIcon("airflow") },
+        { name: "MLflow", icon: getSkillIcon("ci/cd") },
         { name: "FastAPI", icon: getSkillIcon("fastapi") },
-      ]
-    },
-    {
-      name: "AI & Machine Learning",
-      skills: [
-        { name: "Vector Stores", icon: getSkillIcon("vector stores") },
-        { name: "LLMs", icon: getSkillIcon("llms") },
-        { name: "Prompt Engineering", icon: getSkillIcon("prompt engineering") },
-      ]
-    },
-    {
-      name: "Frontend & Architecture",
-      skills: [
-        { name: "React", icon: getSkillIcon("react") },
-        { name: "Docker Compose", icon: getSkillIcon("docker compose") },
-        { name: "Microservices", icon: getSkillIcon("microservices") },
+        { name: "Git", icon: getSkillIcon("ci/cd") },
+        { name: "Streamlit", icon: getSkillIcon("react") },
       ]
     }
   ];
@@ -150,11 +153,11 @@ export default function SkillsSection() {
                     
                     <div className="flex items-center mb-8">
                       <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center mr-5 shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                        <div className="text-white">
+                      <div className="text-white">
                           {category.name === "Programming" && <Code className="w-8 h-8" />}
-                          {category.name === "DevOps & Deployment" && <Server className="w-8 h-8" />}
-                          {category.name === "AI & Machine Learning" && <Brain className="w-8 h-8" />}
-                          {category.name === "Frontend & Architecture" && <Globe className="w-8 h-8" />}
+                          {category.name === "ML & Data Libraries" && <Database className="w-8 h-8" />}
+                          {category.name === "ML Expertise" && <Brain className="w-8 h-8" />}
+                          {category.name === "Tools & Cloud" && <Cloud className="w-8 h-8" />}
                         </div>
                       </div>
                       <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-intro">{category.name}</h3>
