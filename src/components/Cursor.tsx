@@ -1,164 +1,68 @@
-
-import { useEffect, useRef, useState, useCallback } from "react";
-
-interface CursorPosition {
-  x: number;
-  y: number;
-}
+import { useEffect, useState } from "react";
 
 export default function Cursor() {
-  const [hidden, setHidden] = useState(true);
-  const [linkHovered, setLinkHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const interactiveElementsRef = useRef<NodeListOf<Element> | null>(null);
-  const posRef = useRef<CursorPosition>({ x: 0, y: 0 });
-  const targetRef = useRef<CursorPosition>({ x: 0, y: 0 });
-  const rafRef = useRef<number | null>(null);
-  const handleLinkHoverOn = useCallback(() => setLinkHovered(true), []);
-  const handleLinkHoverOff = useCallback(() => setLinkHovered(false), []);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Hide default cursor
-    document.body.style.cursor = "none";
-
-    const lerp = (start: number, end: number, amt: number) => start + (end - start) * amt;
-
-    const animate = () => {
-      const ease = 0.2;
-      posRef.current.x = lerp(posRef.current.x, targetRef.current.x, ease);
-      posRef.current.y = lerp(posRef.current.y, targetRef.current.y, ease);
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${posRef.current.x}px, ${posRef.current.y}px)`;
-      }
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${posRef.current.x}px, ${posRef.current.y}px)`;
-      }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
     const handleMouseMove = (e: MouseEvent) => {
-      targetRef.current = { x: e.clientX, y: e.clientY };
-      setHidden(false);
-      if (rafRef.current === null) {
-        rafRef.current = requestAnimationFrame(animate);
-      }
+      setPosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseDown = () => setClicked(true);
-    const handleMouseUp = () => setClicked(false);
-    const handleMouseLeave = () => {
-      setHidden(true);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-    };
-    const handleMouseEnter = () => {
-      setHidden(false);
-      if (rafRef.current === null) {
-        rafRef.current = requestAnimationFrame(animate);
-      }
+    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => setIsVisible(false);
+
+    // Add hover detection for interactive elements
+    const handleElementHover = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = target.matches('a, button, [role="button"], input, textarea, select, [data-cursor="pointer"]');
+      setIsHovering(isInteractive);
     };
 
-    document.addEventListener("mousemove", handleMouseMove, { passive: true });
-    document.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
-
-    // Add event listeners to all links and interactive elements - once at mount
-    interactiveElementsRef.current = document.querySelectorAll(
-      "a, button, .interactive, input, select, textarea, [role='button']"
-    );
-
-    interactiveElementsRef.current.forEach((element) => {
-      element.addEventListener("mouseenter", handleLinkHoverOn);
-      element.addEventListener("mouseleave", handleLinkHoverOff);
-    });
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleElementHover);
+    document.body.addEventListener("mouseenter", handleMouseEnter);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      document.body.style.cursor = "auto";
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mousedown", handleMouseDown);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
-
-      if (interactiveElementsRef.current) {
-        interactiveElementsRef.current.forEach((element) => {
-          element.removeEventListener("mouseenter", handleLinkHoverOn);
-          element.removeEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
-
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleElementHover);
+      document.body.removeEventListener("mouseenter", handleMouseEnter);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [handleLinkHoverOn, handleLinkHoverOff]);
+  }, [isVisible]);
 
-  // Mutation observer to detect new interactive elements
-  useEffect(() => {
-    const updateInteractiveElements = () => {
-      if (interactiveElementsRef.current) {
-        interactiveElementsRef.current.forEach((element) => {
-          element.removeEventListener("mouseenter", handleLinkHoverOn);
-          element.removeEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
-
-      interactiveElementsRef.current = document.querySelectorAll(
-        "a, button, .interactive, input, select, textarea, [role='button']"
-      );
-
-      if (interactiveElementsRef.current) {
-        interactiveElementsRef.current.forEach((element) => {
-          element.addEventListener("mouseenter", handleLinkHoverOn);
-          element.addEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
-    };
-
-    const observer = new MutationObserver(updateInteractiveElements);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    // Initial setup
-    updateInteractiveElements();
-
-    return () => {
-      observer.disconnect();
-      if (interactiveElementsRef.current) {
-        interactiveElementsRef.current.forEach((element) => {
-          element.removeEventListener("mouseenter", handleLinkHoverOn);
-          element.removeEventListener("mouseleave", handleLinkHoverOff);
-        });
-      }
-    };
-  }, [handleLinkHoverOn, handleLinkHoverOff]);
-
-  if (typeof window === "undefined") return null;
+  // Don't render on touch devices
+  if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+    return null;
+  }
 
   return (
     <>
+      {/* Dot */}
       <div
-        ref={dotRef}
-        className={`cursor-dot will-change-transform ${hidden ? "opacity-0" : "opacity-100"} ${
-          clicked ? "scale-75" : ""
-        }`}
+        className="cursor-dot pointer-events-none hidden md:block"
+        style={{
+          left: position.x,
+          top: position.y,
+          opacity: isVisible ? 1 : 0,
+          transform: `translate(-50%, -50%) scale(${isHovering ? 0.5 : 1})`,
+        }}
       />
+      
+      {/* Ring */}
       <div
-        ref={ringRef}
-        className={`cursor-ring will-change-transform ${hidden ? "opacity-0" : "opacity-100"} ${
-          linkHovered ? "scale-150" : ""
-        } ${clicked ? "scale-75" : ""}`}
+        className="cursor-ring pointer-events-none hidden md:block"
+        style={{
+          left: position.x,
+          top: position.y,
+          opacity: isVisible ? 1 : 0,
+          width: isHovering ? 60 : 40,
+          height: isHovering ? 60 : 40,
+          borderColor: isHovering ? 'hsl(75 85% 50%)' : 'hsl(75 85% 50% / 0.5)',
+        }}
       />
     </>
   );
