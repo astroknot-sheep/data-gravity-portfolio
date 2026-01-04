@@ -1,105 +1,199 @@
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 import { useInView } from "@/lib/animations";
+import { useCardTilt3D } from "@/lib/magnetic";
+import { motion } from "framer-motion";
+import { 
+  Code, Database, Coffee, Terminal, FileCode, 
+  Server, Cloud, GitCompare, Timer, Cpu, 
+  Archive, Brain, Edit, Globe, HardDrive, Network, Sparkles
+} from "lucide-react";
 
 interface SkillCategory {
   name: string;
-  skills: string[];
+  skills: {
+    name: string;
+    icon: JSX.Element;
+  }[];
 }
 
 export default function SkillsSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  
+  const getSkillIcon = (skill: string) => {
+    switch (skill.toLowerCase()) {
+      case "python": return <Code className="w-8 h-8" />;
+      case "sql": return <Database className="w-8 h-8" />;
+      case "java": return <Coffee className="w-8 h-8" />;
+      case "r": return <FileCode className="w-8 h-8" />;
+      case "shell scripting": return <Terminal className="w-8 h-8" />;
+      case "docker": return <Server className="w-8 h-8" />;
+      case "aws": return <Cloud className="w-8 h-8" />;
+      case "ci/cd": return <GitCompare className="w-8 h-8" />;
+      case "airflow": return <Timer className="w-8 h-8" />;
+      case "fastapi": return <Cpu className="w-8 h-8" />;
+      case "vector stores": return <Archive className="w-8 h-8" />;
+      case "llms": return <Brain className="w-8 h-8" />;
+      case "prompt engineering": return <Edit className="w-8 h-8" />;
+      case "react": return <Globe className="w-8 h-8" />;
+      case "docker compose": return <HardDrive className="w-8 h-8" />;
+      case "microservices": return <Network className="w-8 h-8" />;
+      default: return <Code className="w-8 h-8" />;
+    }
+  };
 
   const skillsData: SkillCategory[] = [
     {
       name: "Programming",
-      skills: ["Python (Advanced)", "SQL (Proficient)", "Shell Scripting"]
+      skills: [
+        { name: "Python", icon: getSkillIcon("python") },
+        { name: "SQL", icon: getSkillIcon("sql") },
+        { name: "Shell Scripting", icon: getSkillIcon("shell scripting") },
+      ]
     },
     {
-      name: "ML & Data",
-      skills: ["NumPy", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch", "Hugging Face"]
+      name: "ML & Data Libraries",
+      skills: [
+        { name: "NumPy", icon: getSkillIcon("python") },
+        { name: "Pandas", icon: getSkillIcon("python") },
+        { name: "Scikit-learn", icon: getSkillIcon("python") },
+        { name: "TensorFlow", icon: getSkillIcon("llms") },
+        { name: "PyTorch", icon: getSkillIcon("llms") },
+        { name: "Hugging Face", icon: getSkillIcon("llms") },
+      ]
     },
     {
       name: "ML Expertise",
-      skills: ["NLP", "Transformers", "CNNs", "RNNs/LSTMs", "Time Series", "Model Deployment"]
+      skills: [
+        { name: "NLP", icon: getSkillIcon("prompt engineering") },
+        { name: "Transformers", icon: getSkillIcon("llms") },
+        { name: "CNN/RNN/LSTM", icon: getSkillIcon("vector stores") },
+        { name: "Time Series", icon: getSkillIcon("airflow") },
+      ]
     },
     {
       name: "Tools & Cloud",
-      skills: ["Docker", "AWS (S3, EC2, SageMaker)", "MLflow", "FastAPI", "Flask", "Streamlit", "Git", "Kubernetes"]
+      skills: [
+        { name: "Docker", icon: getSkillIcon("docker") },
+        { name: "AWS", icon: getSkillIcon("aws") },
+        { name: "MLflow", icon: getSkillIcon("ci/cd") },
+        { name: "FastAPI", icon: getSkillIcon("fastapi") },
+        { name: "Git", icon: getSkillIcon("ci/cd") },
+        { name: "Streamlit", icon: getSkillIcon("react") },
+      ]
     }
   ];
 
   return (
-    <section id="skills" className="section-padding bg-secondary/30 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blob-shape translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-stone-200/50 blob-shape-2 -translate-x-1/4 translate-y-1/4" />
-
-      <div className="container mx-auto px-6 md:px-12 relative z-10" ref={ref}>
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Expertise</p>
-          <h2 className="text-foreground mb-6">Skills & Technologies</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <section 
+      id="skills" 
+      className="py-32 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black relative"
+    >
+      {/* Enhanced background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-gradient-to-r from-orange-100/30 to-amber-100/30 dark:from-orange-900/25 dark:to-amber-900/25 rounded-full blur-3xl animate-float-gentle" />
+        <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-gradient-to-l from-amber-100/30 to-orange-100/30 dark:from-amber-900/25 dark:to-orange-900/25 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute inset-0 bg-data-grid bg-[length:120px_120px] opacity-10"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-20" ref={ref}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="inline-block mb-6"
+          >
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+              <Sparkles className="w-5 h-5 mr-2 animate-pulse-glow" />
+              Technical Expertise
+            </span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="type-h2 font-bold mb-8 font-intro text-gray-900 dark:text-white tracking-tight"
+          >
+            Skills & Technologies
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league leading-relaxed"
+          >
             Specialized in machine learning, data science, and engineering with expertise across multiple domains
-          </p>
-        </motion.div>
-
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillsData.map((category, catIndex) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: catIndex * 0.1 }}
-              className="border border-border bg-background p-8 hover:border-primary transition-all hover-lift group"
-            >
-              <h3 className="text-2xl mb-6 text-foreground group-hover:text-primary transition-colors">
-                {category.name}
-              </h3>
-              
-              <ul className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.li
-                    key={skill}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: catIndex * 0.1 + skillIndex * 0.05 }}
-                    className="text-muted-foreground text-sm flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
-                    {skill}
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          </motion.p>
         </div>
-
-        {/* Marquee of technologies */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-20 overflow-hidden border-y border-border py-6"
-        >
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex gap-12 mr-12">
-                {["Python", "TensorFlow", "PyTorch", "AWS", "Docker", "FastAPI", "Pandas", "Scikit-learn", "NLP", "Transformers", "MLflow", "PostgreSQL"].map((tech) => (
-                  <span key={`${tech}-${i}`} className="text-4xl md:text-5xl text-muted-foreground/30 font-bold tracking-tight" style={{ fontFamily: 'Bebas Neue, sans-serif' }}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </motion.div>
+        
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+          {skillsData.map((category, catIndex) => {
+            const SkillCard = () => {
+              const tiltRef = useCardTilt3D();
+              
+              return (
+                <motion.div
+                  key={category.name}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ 
+                    duration: 0.9, 
+                    delay: catIndex * 0.15,
+                    ease: "easeOut"
+                  }}
+                  className="group relative"
+                  ref={tiltRef as any}
+                >
+                  {/* Enhanced card with better shadows and gradients */}
+                  <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border-2 border-gray-200/60 dark:border-gray-700/60 h-full transition-all duration-700 hover:shadow-3xl hover:bg-white/95 dark:hover:bg-gray-800/95 shimmer-overlay overflow-hidden card-tilt">
+                    {/* Gradient border effect on hover */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/25 to-amber-500/25 opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-2xl"></div>
+                    
+                    <div className="flex items-center mb-8">
+                      <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center mr-5 shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                      <div className="text-white">
+                          {category.name === "Programming" && <Code className="w-8 h-8" />}
+                          {category.name === "ML & Data Libraries" && <Database className="w-8 h-8" />}
+                          {category.name === "ML Expertise" && <Brain className="w-8 h-8" />}
+                          {category.name === "Tools & Cloud" && <Cloud className="w-8 h-8" />}
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-intro">{category.name}</h3>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-5">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                          transition={{ 
+                            duration: 0.7, 
+                            delay: catIndex * 0.15 + skillIndex * 0.1,
+                            ease: "easeOut"
+                          }}
+                          whileHover={{ y: -10, scale: 1.08 }}
+                          className="group/skill flex flex-col items-center justify-center p-5 bg-gradient-to-br from-gray-50/90 to-gray-100/90 dark:from-gray-700/60 dark:to-gray-800/60 rounded-2xl hover:from-orange-50/90 hover:to-amber-50/90 dark:hover:from-orange-900/40 dark:hover:to-amber-900/40 transition-all duration-500 cursor-pointer border-2 border-gray-200/40 dark:border-gray-600/40 hover:border-orange-300/60 dark:hover:border-orange-600/60 shadow-lg hover:shadow-2xl"
+                        >
+                          <div className="text-orange-600 dark:text-orange-400 mb-4 group-hover/skill:text-orange-700 dark:group-hover/skill:text-orange-300 transition-colors duration-500 group-hover/skill:scale-125 transform">
+                            {skill.icon}
+                          </div>
+                          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-league leading-tight">
+                            {skill.name}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            };
+            
+            return <SkillCard key={category.name} />;
+          })}
+        </div>
       </div>
     </section>
   );
