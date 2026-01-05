@@ -1,137 +1,131 @@
-
 import { useEffect, lazy, Suspense } from "react";
-import NavBar from "@/components/NavBar";
-import HeroSection from "@/components/HeroSection";
 import Cursor from "@/components/Cursor";
-import { Linkedin } from "lucide-react";
 
-// Lazy load heavier components to improve initial load time
-const ParticleField = lazy(() => import("@/components/ParticleField"));
-const AboutSection = lazy(() => import("@/components/AboutSection"));
-const SkillsSection = lazy(() => import("@/components/SkillsSection"));
-const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
-const PublicationsSection = lazy(() => import("@/components/PublicationsSection"));
-const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
-const ContactSection = lazy(() => import("@/components/ContactSection"));
+// Lazy load components for performance
+const SpeedLinesBackground = lazy(() => import("@/components/SpeedLinesBackground"));
+const F1NavBar = lazy(() => import("@/components/F1NavBar"));
+const F1HeroSection = lazy(() => import("@/components/F1HeroSection"));
+const F1AboutSection = lazy(() => import("@/components/F1AboutSection"));
+const BentoSkillsSection = lazy(() => import("@/components/BentoSkillsSection"));
+const HorizontalProjectsSection = lazy(() => import("@/components/HorizontalProjectsSection"));
+const F1PublicationsSection = lazy(() => import("@/components/F1PublicationsSection"));
+const HorizontalExperienceSection = lazy(() => import("@/components/HorizontalExperienceSection"));
+const F1ContactSection = lazy(() => import("@/components/F1ContactSection"));
 const MediumBlogSection = lazy(() => import("@/components/MediumBlogSection"));
+const F1Footer = lazy(() => import("@/components/F1Footer"));
 
-// Simple loading component
+// F1-style loading spinner
 const SectionLoader = () => (
-  <div className="flex justify-center items-center py-20">
-    <div className="w-8 h-8 border-4 border-gray-700 border-t-transparent rounded-full animate-spin"></div>
+  <div className="flex justify-center items-center py-32">
+    <div className="relative">
+      <div className="w-12 h-12 border-2 border-primary/20 rounded-full" />
+      <div className="absolute inset-0 w-12 h-12 border-2 border-transparent border-t-primary rounded-full animate-spin" />
+    </div>
   </div>
 );
 
 export default function Index() {
   useEffect(() => {
-    // Set dark mode
+    // Force dark mode for F1 experience
     document.documentElement.classList.add('dark');
     
+    // Set background color immediately
+    document.body.style.backgroundColor = 'hsl(0 0% 2%)';
+    
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    const handleAnchorClick = (e: Event) => {
+      const target = e.target as HTMLAnchorElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
+        const targetId = target.getAttribute('href');
         if (!targetId) return;
         
         const targetElement = document.querySelector(targetId);
         if (!targetElement) return;
         
-        const navbarHeight = 80; // Approximate navbar height
+        const navbarHeight = 100;
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
         
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
         });
-      });
-    });
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
     
-    // Add a class to body for styling purposes
-    document.body.classList.add('portfolio-page');
-    
-    // Make sure fonts are properly loaded
-    document.body.classList.add('font-league');
-    
-    // Add responsive viewport meta tag to ensure proper mobile display
-    const existingMeta = document.querySelector('meta[name="viewport"]');
-    if (existingMeta) {
-      existingMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'viewport';
-      meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
-      document.head.appendChild(meta);
-    }
+    // Add F1 class for global styling
+    document.body.classList.add('f1-portfolio');
     
     return () => {
-      document.body.classList.remove('portfolio-page');
+      document.removeEventListener('click', handleAnchorClick);
+      document.body.classList.remove('f1-portfolio');
     };
   }, []);
 
   return (
-    <div className="relative dark">
-      {/* Custom cursor */}
+    <div className="relative min-h-screen bg-background text-foreground">
+      {/* Custom F1 cursor */}
       <Cursor />
       
-      {/* Lazy load particle background */}
+      {/* WebGL Speed Lines Background */}
       <Suspense fallback={null}>
-        <ParticleField count={30} />
+        <SpeedLinesBackground />
       </Suspense>
       
-      {/* Navigation */}
-      <NavBar />
+      {/* F1 Bottom Dock Navigation */}
+      <Suspense fallback={null}>
+        <F1NavBar />
+      </Suspense>
       
-      {/* Main content sections */}
-      <main className="overflow-x-hidden">
-        <HeroSection />
-        
+      {/* Main content */}
+      <main className="relative z-10">
+        {/* Hero - Full screen with 3D depth effect */}
         <Suspense fallback={<SectionLoader />}>
-          <AboutSection />
+          <F1HeroSection />
         </Suspense>
         
+        {/* About - With blob masking effect */}
         <Suspense fallback={<SectionLoader />}>
-          <SkillsSection />
+          <F1AboutSection />
         </Suspense>
         
+        {/* Skills - Bento grid with HUD corners */}
         <Suspense fallback={<SectionLoader />}>
-          <ProjectsSection />
+          <BentoSkillsSection />
         </Suspense>
         
+        {/* Projects - Horizontal scroll dashboard */}
         <Suspense fallback={<SectionLoader />}>
-          <PublicationsSection />
+          <HorizontalProjectsSection />
         </Suspense>
         
+        {/* Publications */}
         <Suspense fallback={<SectionLoader />}>
-          <ExperienceSection />
+          <F1PublicationsSection />
         </Suspense>
         
+        {/* Experience - Horizontal scroll timeline */}
         <Suspense fallback={<SectionLoader />}>
-          <ContactSection />
+          <HorizontalExperienceSection />
         </Suspense>
         
+        {/* Contact */}
+        <Suspense fallback={<SectionLoader />}>
+          <F1ContactSection />
+        </Suspense>
+        
+        {/* Medium Blog Section */}
         <Suspense fallback={<SectionLoader />}>
           <MediumBlogSection />
         </Suspense>
       </main>
       
-      {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-center text-gray-400 text-sm">
-        <div className="container mx-auto px-6">
-          <div className="mb-4 flex justify-center">
-            <a 
-              href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-amber-400 transition-colors"
-              aria-label="LinkedIn profile"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-          </div>
-          <p>© {new Date().getFullYear()} Dhriman Deka. All rights reserved.</p>
-        </div>
-      </footer>
+      {/* Giant F1 Footer with signature */}
+      <Suspense fallback={<SectionLoader />}>
+        <F1Footer />
+      </Suspense>
     </div>
   );
 }
