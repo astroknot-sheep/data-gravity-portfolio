@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, ExternalLink, Eye, Download, Sparkles } from "lucide-react";
+import { FileText, ExternalLink, Eye, Download } from "lucide-react";
 
 const publications = [
   {
@@ -31,47 +31,26 @@ const articles = [
 
 export default function F1PublicationsSection() {
   return (
-    <section id="publications" className="py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 f1-grid opacity-20" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="publications" className="py-24 relative">
+      <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-4 mb-4"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 hud-glass hud-corners text-sm font-bold uppercase tracking-widest text-amber-400">
-              <Sparkles className="w-4 h-4" />
-              Research & Writing
-            </span>
-          </motion.div>
-          
-          <motion.h2
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-intro uppercase text-gradient-glow mb-4"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-12"
+        >
+          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
+            Research & Writing
+          </span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
             Publications
-          </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-muted-foreground max-w-2xl"
-          >
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl">
             Research papers and technical articles on AI, ML, and data science
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Research Papers */}
@@ -87,21 +66,20 @@ export default function F1PublicationsSection() {
                 href={pub.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="block bento-card hud-corners-large p-6 group hover:border-primary/40 transition-all duration-300 mb-4"
-                whileHover={{ x: 5 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="block bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors mb-4"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary rounded-full border border-primary/30">
+                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary rounded-full">
                     {pub.type}
                   </span>
                   <span className="text-xs text-muted-foreground">{pub.platform}</span>
                 </div>
 
-                <h4 className="text-xl font-bold text-foreground mb-2 group-hover:text-gradient transition-all">
+                <h4 className="text-xl font-bold text-foreground mb-2">
                   {pub.title}
                 </h4>
                 <p className="text-muted-foreground text-sm mb-4">
@@ -117,11 +95,6 @@ export default function F1PublicationsSection() {
                     <Download className="w-4 h-4" />
                     {pub.stats.downloads} downloads
                   </span>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-sm font-semibold">Read Paper</span>
-                  <ExternalLink className="w-4 h-4" />
                 </div>
               </motion.a>
             ))}
@@ -140,28 +113,27 @@ export default function F1PublicationsSection() {
                 href={article.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="block bento-card hud-corners p-6 group hover:border-primary/40 transition-all duration-300 mb-4"
-                whileHover={{ x: 5 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="block bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors mb-4"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">
+                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-accent/20 text-accent rounded-full">
                     {article.type}
                   </span>
                   <span className="text-xs text-muted-foreground">{article.platform}</span>
                 </div>
 
-                <h4 className="text-lg font-bold text-foreground mb-2 group-hover:text-gradient transition-all line-clamp-2">
+                <h4 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
                   {article.title}
                 </h4>
                 <p className="text-muted-foreground text-sm line-clamp-2">
                   {article.description}
                 </p>
 
-                <div className="mt-4 flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="mt-4 flex items-center gap-2 text-primary">
                   <span className="text-sm font-semibold">Read Article</span>
                   <ExternalLink className="w-4 h-4" />
                 </div>
