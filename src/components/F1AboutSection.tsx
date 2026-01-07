@@ -22,70 +22,10 @@ export default function F1AboutSection() {
                 Transforming Data Into Intelligence
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                I'm a Data Scientist and ML Engineer passionate about building intelligent systems 
-                that solve real-world problems. With expertise in NLP, deep learning, and MLOps, 
-                I transform complex data into actionable insights and scalable solutions.
+                I'm a Data Scientist and ML Engineer with a curiosity for building intelligent systems. 
+                I enjoy working with NLP, deep learning, and MLOps — always learning and exploring 
+                new ways to turn data into meaningful solutions.
               </p>
-            </motion.div>
-
-            {/* Education Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="bg-card border border-border rounded-xl p-6 mb-6"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-xl bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
-                  <GraduationCap className="w-7 h-7" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground mb-1">
-                    B.S. in Economics
-                  </h3>
-                  <p className="text-primary font-semibold mb-2">
-                    IISER Bhopal • Department Rank: 4th / 60
-                  </p>
-                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      2021 - 2025
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      Bhopal, India
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Achievements */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="grid grid-cols-3 gap-4"
-            >
-              {[
-                { label: "JEE Main", value: "99.2%ile" },
-                { label: "JEE Advanced", value: "AIR 4421" },
-                { label: "CAT 2024", value: "99.01%ile" },
-              ].map((achievement) => (
-                <div 
-                  key={achievement.label}
-                  className="bg-card border border-border rounded-xl p-4 text-center"
-                >
-                  <p className="text-2xl font-bold text-primary mb-1">
-                    {achievement.value}
-                  </p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">
-                    {achievement.label}
-                  </p>
-                </div>
-              ))}
             </motion.div>
           </div>
 
