@@ -1,57 +1,59 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { 
   Code, Database, Brain, Cloud, Layers, Zap 
 } from "lucide-react";
+import { useRef } from "react";
+import TiltCard from "./TiltCard";
 
 const skillCategories = [
   {
     title: "Programming",
     icon: Code,
     skills: ["Python (Advanced)", "SQL (Proficient)", "Shell Scripting"],
-    size: "col-span-2 row-span-1",
   },
   {
     title: "ML & Data Libraries",
     icon: Layers,
     skills: ["NumPy", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch", "Hugging Face"],
-    size: "col-span-2 row-span-2",
   },
   {
     title: "ML Expertise",
     icon: Brain,
     skills: ["NLP & Transformers", "CNNs/RNNs/LSTMs", "Time Series Forecasting", "Model Deployment"],
-    size: "col-span-2 row-span-2",
   },
   {
     title: "Tools & Cloud",
     icon: Cloud,
     skills: ["Docker", "AWS (S3, EC2, SageMaker)", "MLflow", "FastAPI", "Git", "Kubernetes"],
-    size: "col-span-2 row-span-1",
   },
   {
     title: "Data Engineering",
     icon: Database,
     skills: ["ML Pipelines", "PostgreSQL", "Data Visualization", "A/B Testing"],
-    size: "col-span-2 row-span-1",
   },
   {
     title: "Core Competencies",
     icon: Zap,
     skills: ["Feature Engineering", "Statistical Modeling", "EDA", "Regression/Classification"],
-    size: "col-span-2 row-span-1",
   }
 ];
 
 export default function BentoSkillsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
   return (
-    <section id="skills" className="py-24 relative">
+    <section ref={sectionRef} id="skills" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
-        {/* Header - left aligned, simpler */}
+        {/* Header with parallax */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          style={{ y: headerY, opacity: headerOpacity }}
           className="mb-16 max-w-xl"
         >
           <span className="text-xs font-medium text-primary mb-4 block tracking-wide">
@@ -65,7 +67,7 @@ export default function BentoSkillsSection() {
           </p>
         </motion.div>
 
-        {/* Skills - simple grid, no bento complexity */}
+        {/* Skills grid with stagger and tilt */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
@@ -73,30 +75,54 @@ export default function BentoSkillsSection() {
             return (
               <motion.div
                 key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: [0.6, 0.01, -0.05, 0.95]
+                }}
               >
-                <div className="h-full p-6 border border-border rounded-lg hover:border-primary/30 transition-colors bg-card/50">
-                  <div className="flex items-center gap-3 mb-5">
-                    <Icon className="w-5 h-5 text-primary" />
-                    <h3 className="font-semibold text-foreground">
-                      {category.title}
-                    </h3>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1.5 text-sm bg-muted/50 rounded-md text-muted-foreground"
+                <TiltCard className="h-full" glare>
+                  <div className="h-full p-6 border border-border rounded-lg bg-card/50 hover:border-primary/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,158,11,0.08)]">
+                    <motion.div 
+                      className="flex items-center gap-3 mb-5"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
                       >
-                        {skill}
-                      </span>
-                    ))}
+                        <Icon className="w-5 h-5 text-primary" />
+                      </motion.div>
+                      <h3 className="font-semibold text-foreground">
+                        {category.title}
+                      </h3>
+                    </motion.div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.span
+                          key={skill}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2 + skillIndex * 0.05 }}
+                          whileHover={{ 
+                            scale: 1.05, 
+                            backgroundColor: "hsl(var(--primary) / 0.15)",
+                            color: "hsl(var(--primary))"
+                          }}
+                          className="px-3 py-1.5 text-sm bg-muted/50 rounded-md text-muted-foreground transition-colors cursor-default"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </TiltCard>
               </motion.div>
             );
           })}
