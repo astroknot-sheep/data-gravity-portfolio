@@ -7,105 +7,118 @@ export default function F1HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Main content */}
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Main content - asymmetric layout */}
       <div className="container mx-auto px-6 z-10 relative">
-        <div className="text-center max-w-6xl mx-auto">
-          {/* Pre-title badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mb-8"
-          >
-            <span className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-border rounded-lg text-sm font-bold uppercase tracking-widest text-primary">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          {/* Left column - main content */}
+          <div className="lg:col-span-8 lg:col-start-1">
+            {/* Small label */}
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-sm text-muted-foreground mb-6 font-medium tracking-wide"
+            >
               Data Scientist & ML Engineer
-            </span>
-          </motion.div>
+            </motion.p>
 
-          {/* Main name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase text-foreground mb-4"
-          >
-            DHRIMAN
-          </motion.h1>
+            {/* Main name - stacked asymmetrically */}
+            <div className="space-y-2 mb-8">
+              <motion.h1
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-[clamp(3rem,12vw,9rem)] font-bold uppercase text-foreground leading-[0.9] -ml-1"
+              >
+                Dhriman
+              </motion.h1>
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-[clamp(3rem,12vw,9rem)] font-bold uppercase text-primary leading-[0.9] -ml-1"
+              >
+                Deka
+              </motion.h2>
+            </div>
 
-          {/* Last name */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase text-primary mb-12"
-          >
-            DEKA
-          </motion.h2>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12"
-          >
-            Transforming complex data into{" "}
-            <span className="text-primary font-semibold">actionable insights</span>{" "}
-            through cutting-edge machine learning and AI solutions.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-primary text-primary-foreground font-bold uppercase tracking-wider rounded-lg hover:bg-primary/90 transition-colors"
+            {/* Tagline - left aligned, more casual */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg md:text-xl text-muted-foreground max-w-lg mb-10 leading-relaxed"
             >
-              View Projects
-            </a>
-            
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-card border border-border font-bold uppercase tracking-wider rounded-lg hover:border-primary/60 transition-colors text-foreground"
+              I build ML systems that make sense of messy data. 
+              Currently obsessed with NLP and making models actually work in production.
+            </motion.p>
+
+            {/* CTA Buttons - left aligned, different sizes */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="flex flex-wrap items-center gap-4"
             >
-              Get In Touch
-            </a>
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-6 py-3 bg-primary text-primary-foreground font-semibold tracking-wide rounded-lg hover:bg-primary/90 transition-all hover:translate-y-[-2px]"
+              >
+                See my work
+              </a>
+              
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-6 py-3 text-foreground font-medium hover:text-primary transition-colors underline underline-offset-4 decoration-border hover:decoration-primary"
+              >
+                Get in touch
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right column - decorative element */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="hidden lg:flex lg:col-span-4 justify-end items-center"
+          >
+            <div className="relative w-48 h-48">
+              <div className="absolute inset-0 border border-primary/20 rounded-full" />
+              <div className="absolute inset-4 border border-primary/30 rounded-full" />
+              <div className="absolute inset-8 bg-primary/10 rounded-full" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-6xl font-bold text-primary/40">ML</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - bottom left */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-6 z-20"
       >
         <button
           onClick={scrollToAbout}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
         >
-          <span className="text-xs font-bold uppercase tracking-widest">Scroll</span>
-          <ArrowDown className="w-5 h-5 animate-bounce" />
+          <ArrowDown className="w-4 h-4 animate-bounce" />
+          <span className="text-xs tracking-widest uppercase">Scroll</span>
         </button>
       </motion.div>
-
-      {/* Simple corner accents */}
-      <div className="absolute top-8 right-8 w-16 h-16 border-t border-r border-primary/30" />
-      <div className="absolute bottom-8 left-8 w-16 h-16 border-b border-l border-primary/30" />
     </section>
   );
 }
