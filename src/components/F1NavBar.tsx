@@ -46,73 +46,76 @@ export default function F1NavBar() {
 
   return (
     <>
-      {/* Desktop Bottom Dock */}
+      {/* Desktop - Simple top nav */}
       <motion.nav
-        initial={{ y: 100, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:block"
+        className="fixed top-0 left-0 right-0 z-50 hidden md:block"
       >
-        <div className="bg-card border border-border rounded-xl px-2 py-2 flex items-center gap-1">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.id;
-            
-            return (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative px-4 py-3 rounded-lg transition-colors ${
-                  isActive 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-              >
-                <div className="flex flex-col items-center gap-1">
-                  <Icon className="w-5 h-5" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider">
-                    {item.label}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="text-xl font-bold text-foreground hover:text-primary transition-colors"
+          >
+            DD<span className="text-primary">.</span>
+          </button>
+
+          {/* Nav links */}
+          <div className="flex items-center gap-8">
+            {navItems.slice(1).map((item) => {
+              const isActive = activeSection === item.id;
+              
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive 
+                      ? 'text-primary' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Floating Menu */}
+      {/* Mobile - Floating menu */}
       <div className="md:hidden fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center"
+          className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg"
         >
-          {isExpanded ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isExpanded ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
 
         <AnimatePresence>
           {isExpanded && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              className="absolute bottom-16 right-0 bg-card border border-border rounded-xl p-3 min-w-[200px]"
+              exit={{ opacity: 0, scale: 0.9, y: 10 }}
+              className="absolute bottom-14 right-0 bg-card border border-border rounded-lg p-2 min-w-[180px] shadow-xl"
             >
               {navItems.map((item) => {
-                const Icon = item.icon;
                 const isActive = activeSection === item.id;
                 
                 return (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    className={`w-full text-left px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
                       isActive 
                         ? 'bg-primary text-primary-foreground' 
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="font-semibold uppercase text-sm tracking-wider">{item.label}</span>
+                    {item.label}
                   </button>
                 );
               })}
@@ -120,23 +123,6 @@ export default function F1NavBar() {
           )}
         </AnimatePresence>
       </div>
-
-      {/* Logo at top */}
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="fixed top-6 left-6 z-50"
-      >
-        <button
-          onClick={() => scrollToSection('home')}
-          className="bg-card border border-border px-4 py-2 rounded-lg"
-        >
-          <span className="text-lg font-bold uppercase tracking-wider text-primary">
-            DD
-          </span>
-        </button>
-      </motion.div>
     </>
   );
 }

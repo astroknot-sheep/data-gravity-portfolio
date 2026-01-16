@@ -46,27 +46,27 @@ export default function BentoSkillsSection() {
   return (
     <section id="skills" className="py-24 relative">
       <div className="container mx-auto px-6">
-        {/* Header */}
+        {/* Header - left aligned, simpler */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mb-12"
+          className="mb-16 max-w-xl"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Technical Expertise
+          <span className="text-xs font-medium text-primary mb-4 block tracking-wide">
+            What I work with
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Skills & Technologies
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Tools & Technologies
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Specialized in machine learning, data science, and engineering
+          <p className="text-muted-foreground">
+            The stack I use to turn ideas into working systems.
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[150px]">
+        {/* Skills - simple grid, no bento complexity */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             
@@ -77,14 +77,11 @@ export default function BentoSkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={category.size}
               >
-                <div className="h-full bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="font-bold uppercase text-sm tracking-wider text-foreground">
+                <div className="h-full p-6 border border-border rounded-lg hover:border-primary/30 transition-colors bg-card/50">
+                  <div className="flex items-center gap-3 mb-5">
+                    <Icon className="w-5 h-5 text-primary" />
+                    <h3 className="font-semibold text-foreground">
                       {category.title}
                     </h3>
                   </div>
@@ -93,7 +90,7 @@ export default function BentoSkillsSection() {
                     {category.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1.5 text-xs font-medium bg-muted border border-border rounded-full text-muted-foreground"
+                        className="px-3 py-1.5 text-sm bg-muted/50 rounded-md text-muted-foreground"
                       >
                         {skill}
                       </span>

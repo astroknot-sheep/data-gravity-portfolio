@@ -76,15 +76,16 @@ export default function HorizontalProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
+          className="max-w-xl"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Portfolio
+          <span className="text-xs font-medium text-primary mb-4 block tracking-wide">
+            Recent work
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Featured Projects
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            Projects
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Swipe through my data science and ML projects
+          <p className="text-muted-foreground">
+            Some things I've built recently.
           </p>
         </motion.div>
       </div>
