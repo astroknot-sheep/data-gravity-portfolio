@@ -29,14 +29,14 @@ const experienceData = [
   },
   {
     type: "education",
-    title: "B.S. in Economics (Department Rank: 4th / 60)",
+    title: "B.S. in Economics",
     company: "IISER Bhopal",
     location: "Bhopal, India",
     period: "Dec 2021 – Jul 2025",
     highlights: [
-      "Coursework: Machine Learning, Data Analysis, Econometrics, Statistics",
-      "JEE Main 99.2 percentile; JEE Advanced AIR 4421",
-      "CAT 2024 99.01 percentile"
+      "Specialization in Machine Learning & Data Science",
+      "Coursework: ML, Deep Learning, Data Analysis, Econometrics, Statistics",
+      "Research focus on AI/ML applications in economic modeling"
     ]
   }
 ];
@@ -66,57 +66,66 @@ export default function HorizontalExperienceSection() {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'work': return <Briefcase className="w-6 h-6" />;
-      case 'research': return <Zap className="w-6 h-6" />;
-      case 'education': return <GraduationCap className="w-6 h-6" />;
-      default: return <Briefcase className="w-6 h-6" />;
+      case 'work': return <Briefcase className="w-5 h-5" />;
+      case 'research': return <Zap className="w-5 h-5" />;
+      case 'education': return <GraduationCap className="w-5 h-5" />;
+      default: return <Briefcase className="w-5 h-5" />;
     }
   };
 
   return (
-    <section id="experience" className="py-24 relative">
+    <section id="experience" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
+      
       <div className="container mx-auto px-6 mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Career Journey
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Experience
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            My professional journey in AI, data science, and research
-          </p>
-        </motion.div>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+                Journey
+              </span>
+              <div className="h-px flex-1 bg-border max-w-24" />
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
+              Experience
+            </h2>
+          </motion.div>
+
+          {/* Navigation */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              className={`w-12 h-12 border flex items-center justify-center transition-all ${
+                canScrollLeft 
+                  ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
+                  : 'border-border/30 text-muted-foreground/30'
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              className={`w-12 h-12 border flex items-center justify-center transition-all ${
+                canScrollRight 
+                  ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
+                  : 'border-border/30 text-muted-foreground/30'
+              }`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Navigation buttons */}
-      <div className="container mx-auto px-6 flex justify-end gap-3 mb-6">
-        <button
-          onClick={() => scroll('left')}
-          disabled={!canScrollLeft}
-          className={`w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center transition-colors ${
-            canScrollLeft ? 'text-foreground hover:bg-muted' : 'text-muted-foreground/30'
-          }`}
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={() => scroll('right')}
-          disabled={!canScrollRight}
-          className={`w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center transition-colors ${
-            canScrollRight ? 'text-foreground hover:bg-muted' : 'text-muted-foreground/30'
-          }`}
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
-
-      {/* Horizontal scroll container */}
+      {/* Cards */}
       <div 
         ref={scrollRef}
         onScroll={checkScrollButtons}
@@ -125,54 +134,61 @@ export default function HorizontalExperienceSection() {
         {experienceData.map((exp, index) => (
           <motion.div
             key={exp.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="horizontal-scroll-item w-[420px] md:w-[480px]"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="horizontal-scroll-item w-[380px] md:w-[450px]"
           >
-            <div className="h-full bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
-              {/* Icon & Type */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center">
-                  {getIcon(exp.type)}
+            <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="p-8">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                      {getIcon(exp.type)}
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+                      {exp.type}
+                    </span>
+                  </div>
                 </div>
-                <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary rounded-full">
-                  {exp.type}
-                </span>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
+                  {exp.title}
+                </h3>
+
+                {/* Company */}
+                <p className="text-lg text-primary font-semibold mb-4">
+                  {exp.company}
+                </p>
+
+                {/* Meta */}
+                <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3 h-3" />
+                    <span>{exp.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3" />
+                    <span>{exp.period}</span>
+                  </div>
+                </div>
+
+                {/* Highlights */}
+                <ul className="space-y-3">
+                  {exp.highlights.map((highlight, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-2">
-                {exp.title}
-              </h3>
-
-              {/* Company */}
-              <p className="text-lg text-primary font-semibold mb-4">
-                {exp.company}
-              </p>
-
-              {/* Location & Period */}
-              <div className="flex flex-wrap gap-4 mb-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>{exp.location}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{exp.period}</span>
-                </div>
-              </div>
-
-              {/* Highlights */}
-              <ul className="space-y-3">
-                {exp.highlights.map((highlight, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </motion.div>
         ))}

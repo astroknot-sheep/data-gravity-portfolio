@@ -13,63 +13,65 @@ export default function F1Footer() {
   ];
 
   return (
-    <footer className="py-24 border-t border-border">
-      <div className="container mx-auto px-6">
-        {/* Name */}
+    <footer className="py-24 border-t border-border relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative">
+        {/* Large name display */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-bold uppercase text-foreground mb-4">
-            DHRIMAN DEKA
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase text-foreground leading-[0.85]">
+            DHRIMAN<br />
+            <span className="text-primary">DEKA</span>
           </h2>
-          <p className="text-xl text-muted-foreground uppercase tracking-widest">
-            Data Scientist & ML Engineer
-          </p>
         </motion.div>
 
-        {/* Social links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex justify-center gap-4 mb-12"
-        >
-          {socialLinks.map((social) => {
-            const Icon = social.icon;
-            return (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors"
-                aria-label={social.label}
-              >
-                <Icon className="w-6 h-6" />
-              </a>
-            );
-          })}
-        </motion.div>
+        {/* Social & back to top */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+          {/* Social links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex gap-3"
+          >
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                  aria-label={social.label}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              );
+            })}
+          </motion.div>
 
-        {/* Back to top */}
-        <div className="text-center mb-12">
+          {/* Back to top */}
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-border rounded-lg text-sm font-bold uppercase tracking-wider text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+            className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
           >
+            <span>Back to Top</span>
             <ArrowUp className="w-4 h-4" />
-            Back to Top
           </button>
         </div>
 
         {/* Copyright */}
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-16 pt-8 border-t border-border text-center">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest">
             © {new Date().getFullYear()} Dhriman Deka. All rights reserved.
           </p>
         </div>

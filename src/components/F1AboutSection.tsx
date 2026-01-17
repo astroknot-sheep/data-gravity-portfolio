@@ -1,59 +1,115 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, MapPin, Calendar } from "lucide-react";
 
 export default function F1AboutSection() {
-  return (
-    <section id="about" className="py-24 relative">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Content */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-            >
-              <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-                About Me
-              </span>
-              <h2 className="text-4xl sm:text-5xl font-bold uppercase text-foreground mb-8">
-                Transforming Data Into Intelligence
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                I'm a Data Scientist and ML Engineer with a curiosity for building intelligent systems. 
-                I enjoy working with NLP, deep learning, and MLOps — always learning and exploring 
-                new ways to turn data into meaningful solutions.
-              </p>
-            </motion.div>
-          </div>
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
-          {/* Right - Profile Image */}
+  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  return (
+    <section ref={sectionRef} id="about" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-primary/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          {/* Left - Image with creative framing */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center"
+            style={{ y: imageY }}
+            className="lg:col-span-5 relative"
           >
             <div className="relative">
-              <Avatar className="w-64 h-64 md:w-80 md:h-80 border-4 border-border">
-                <AvatarImage 
-                  src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" 
-                  alt="Dhriman Deka" 
-                  className="object-cover"
-                />
-                <AvatarFallback className="text-6xl font-bold text-primary">DD</AvatarFallback>
-              </Avatar>
-
-              {/* Status indicator */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-card border border-border rounded-lg flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full" />
-                <span className="text-xs font-bold uppercase tracking-wider text-foreground">Available</span>
+              {/* Frame accents */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-primary/50" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-primary/50" />
+              
+              {/* Main image container */}
+              <div className="relative bg-card p-2">
+                <Avatar className="w-full aspect-[4/5] rounded-none">
+                  <AvatarImage 
+                    src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" 
+                    alt="Dhriman Deka" 
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="text-8xl font-bold text-primary rounded-none">DD</AvatarFallback>
+                </Avatar>
+                
+                {/* Overlay data strip */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background via-background/80 to-transparent p-6 pt-16">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-widest text-primary block">Role</span>
+                      <span className="text-sm font-semibold text-foreground">Data Scientist</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full" />
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Available</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
+
+          {/* Right - Content */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Section label */}
+              <div className="flex items-center gap-4 mb-8">
+                <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+                  About
+                </span>
+                <div className="h-px flex-1 bg-border max-w-24" />
+              </div>
+
+              {/* Main heading - editorial style */}
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase text-foreground leading-[0.9] mb-8">
+                Building <br />
+                <span className="text-primary">intelligent</span><br />
+                systems
+              </h2>
+
+              {/* Bio text */}
+              <div className="space-y-6 text-muted-foreground">
+                <p className="text-lg leading-relaxed">
+                  I'm a Data Scientist and ML Engineer driven by curiosity to build systems that learn and adapt. 
+                  My work spans NLP, deep learning, and MLOps — always pushing to turn raw data into meaningful impact.
+                </p>
+                <p className="text-base leading-relaxed">
+                  Currently focused on large language models, production ML pipelines, and the intersection of 
+                  AI with real-world applications.
+                </p>
+              </div>
+
+              {/* Quick facts - horizontal layout */}
+              <div className="mt-12 grid grid-cols-3 gap-6">
+                {[
+                  { label: "Focus", value: "NLP & LLMs" },
+                  { label: "Stack", value: "Python, PyTorch" },
+                  { label: "Base", value: "Bengaluru" }
+                ].map((item) => (
+                  <div key={item.label} className="border-l-2 border-primary/30 pl-4">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">
+                      {item.label}
+                    </span>
+                    <span className="text-sm font-semibold text-foreground">
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
