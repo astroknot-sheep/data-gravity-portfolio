@@ -56,16 +56,16 @@ export default function F1ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mb-12 max-w-xl"
+          className="text-center mb-12"
         >
-          <span className="text-xs font-medium text-primary mb-4 block tracking-wide">
-            Say hello
+          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
+            Get In Touch
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Let's work together
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
+            Contact Me
           </h2>
-          <p className="text-muted-foreground">
-            Got an interesting project? I'd love to hear about it.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Have a project in mind or want to collaborate? Let's connect!
           </p>
         </motion.div>
 

@@ -1,9 +1,7 @@
 import { useEffect, lazy, Suspense } from "react";
 
 // Lazy load components for performance
-const SmoothCursor = lazy(() => import("@/components/SmoothCursor"));
-const FloatingShapes = lazy(() => import("@/components/FloatingShapes"));
-const ParallaxBackground = lazy(() => import("@/components/ParallaxBackground"));
+const SpeedLinesBackground = lazy(() => import("@/components/SpeedLinesBackground"));
 const F1NavBar = lazy(() => import("@/components/F1NavBar"));
 const F1HeroSection = lazy(() => import("@/components/F1HeroSection"));
 const F1AboutSection = lazy(() => import("@/components/F1AboutSection"));
@@ -21,23 +19,10 @@ export default function Index() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground cursor-none">
-      {/* Custom cursor */}
+    <div className="relative min-h-screen bg-background text-foreground">
+      {/* Background */}
       <Suspense fallback={null}>
-        <SmoothCursor />
-      </Suspense>
-      
-      {/* 3D Background - lazy loaded */}
-      <Suspense fallback={null}>
-        <FloatingShapes />
-      </Suspense>
-      <Suspense fallback={null}>
-        <FloatingShapes />
-      </Suspense>
-      
-      {/* Parallax gradient orbs */}
-      <Suspense fallback={null}>
-        <ParallaxBackground />
+        <SpeedLinesBackground />
       </Suspense>
       
       {/* Navigation */}

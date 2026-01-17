@@ -29,13 +29,14 @@ const experienceData = [
   },
   {
     type: "education",
-    title: "B.S. in Economics",
+    title: "B.S. in Economics (Department Rank: 4th / 60)",
     company: "IISER Bhopal",
     location: "Bhopal, India",
     period: "Dec 2021 – Jul 2025",
     highlights: [
-      "Focus: Machine Learning, Data Analysis, Econometrics, Statistics",
-      "Thesis on time-series forecasting methods in financial markets"
+      "Coursework: Machine Learning, Data Analysis, Econometrics, Statistics",
+      "JEE Main 99.2 percentile; JEE Advanced AIR 4421",
+      "CAT 2024 99.01 percentile"
     ]
   }
 ];
@@ -80,16 +81,15 @@ export default function HorizontalExperienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="max-w-xl"
         >
-          <span className="text-xs font-medium text-primary mb-4 block tracking-wide">
-            Background
+          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
+            Career Journey
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
             Experience
           </h2>
-          <p className="text-muted-foreground">
-            Where I've been and what I've worked on.
+          <p className="text-xl text-muted-foreground max-w-2xl">
+            My professional journey in AI, data science, and research
           </p>
         </motion.div>
       </div>
