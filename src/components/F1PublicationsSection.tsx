@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, ExternalLink, Eye, Download } from "lucide-react";
+import { FileText, ExternalLink, Eye, Download, BookOpen } from "lucide-react";
 
 const publications = [
   {
@@ -31,34 +31,40 @@ const articles = [
 
 export default function F1PublicationsSection() {
   return (
-    <section id="publications" className="py-24 relative">
+    <section id="publications" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
+      
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Research & Writing
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Publications
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              Writing
+            </span>
+            <div className="h-px flex-1 bg-border max-w-24" />
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
+            Research &<br />
+            <span className="text-primary">Publications</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Research papers and technical articles on AI, ML, and data science
-          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Research Papers */}
           <div>
-            <h3 className="text-lg font-bold uppercase tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
+            <div className="flex items-center gap-3 mb-8">
               <FileText className="w-5 h-5 text-primary" />
-              Research Papers
-            </h3>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                Research Papers
+              </h3>
+            </div>
             
             {publications.map((pub, index) => (
               <motion.a
@@ -69,32 +75,37 @@ export default function F1PublicationsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="block bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors mb-4"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary rounded-full">
-                    {pub.type}
-                  </span>
-                  <span className="text-xs text-muted-foreground">{pub.platform}</span>
-                </div>
+                {/* Top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="p-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1">
+                      {pub.type}
+                    </span>
+                    <span className="text-xs text-muted-foreground">{pub.platform}</span>
+                  </div>
 
-                <h4 className="text-xl font-bold text-foreground mb-2">
-                  {pub.title}
-                </h4>
-                <p className="text-muted-foreground text-sm mb-4">
-                  {pub.subtitle}
-                </p>
+                  <h4 className="text-xl font-bold text-foreground mb-2 leading-tight">
+                    {pub.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {pub.subtitle}
+                  </p>
 
-                <div className="flex items-center gap-6 text-sm">
-                  <span className="flex items-center gap-2 text-muted-foreground">
-                    <Eye className="w-4 h-4" />
-                    {pub.stats.views} views
-                  </span>
-                  <span className="flex items-center gap-2 text-muted-foreground">
-                    <Download className="w-4 h-4" />
-                    {pub.stats.downloads} downloads
-                  </span>
+                  <div className="flex items-center gap-6 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-2">
+                      <Eye className="w-4 h-4" />
+                      {pub.stats.views} views
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Download className="w-4 h-4" />
+                      {pub.stats.downloads} downloads
+                    </span>
+                  </div>
                 </div>
               </motion.a>
             ))}
@@ -102,10 +113,12 @@ export default function F1PublicationsSection() {
 
           {/* Technical Articles */}
           <div>
-            <h3 className="text-lg font-bold uppercase tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-primary" />
-              Technical Articles
-            </h3>
+            <div className="flex items-center gap-3 mb-8">
+              <BookOpen className="w-5 h-5 text-primary" />
+              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                Technical Articles
+              </h3>
+            </div>
             
             {articles.map((article, index) => (
               <motion.a
@@ -116,26 +129,31 @@ export default function F1PublicationsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="block bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors mb-4"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-accent/20 text-accent rounded-full">
-                    {article.type}
-                  </span>
-                  <span className="text-xs text-muted-foreground">{article.platform}</span>
-                </div>
+                {/* Top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="p-8">
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent border border-accent/30 px-3 py-1">
+                      {article.type}
+                    </span>
+                    <span className="text-xs text-muted-foreground">{article.platform}</span>
+                  </div>
 
-                <h4 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
-                  {article.title}
-                </h4>
-                <p className="text-muted-foreground text-sm line-clamp-2">
-                  {article.description}
-                </p>
+                  <h4 className="text-lg font-bold text-foreground mb-2 leading-tight line-clamp-2">
+                    {article.title}
+                  </h4>
+                  <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+                    {article.description}
+                  </p>
 
-                <div className="mt-4 flex items-center gap-2 text-primary">
-                  <span className="text-sm font-semibold">Read Article</span>
-                  <ExternalLink className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-primary">
+                    <span className="text-xs font-bold uppercase tracking-wider">Read Article</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
                 </div>
               </motion.a>
             ))}

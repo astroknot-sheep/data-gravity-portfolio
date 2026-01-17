@@ -1,72 +1,79 @@
 import { motion } from "framer-motion";
-import { 
-  Code, Database, Brain, Cloud, Layers, Zap 
-} from "lucide-react";
+import { Brain, Code, Database, Cloud, BarChart3, Cpu } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Programming",
-    icon: Code,
-    skills: ["Python (Advanced)", "SQL (Proficient)", "Shell Scripting"],
-    size: "col-span-2 row-span-1",
-  },
-  {
-    title: "ML & Data Libraries",
-    icon: Layers,
-    skills: ["NumPy", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch", "Hugging Face"],
-    size: "col-span-2 row-span-2",
-  },
-  {
-    title: "ML Expertise",
+    title: "Machine Learning",
     icon: Brain,
-    skills: ["NLP & Transformers", "CNNs/RNNs/LSTMs", "Time Series Forecasting", "Model Deployment"],
-    size: "col-span-2 row-span-2",
+    skills: ["PyTorch", "TensorFlow", "Scikit-learn", "XGBoost"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-2"
   },
   {
-    title: "Tools & Cloud",
-    icon: Cloud,
-    skills: ["Docker", "AWS (S3, EC2, SageMaker)", "MLflow", "FastAPI", "Git", "Kubernetes"],
-    size: "col-span-2 row-span-1",
+    title: "NLP & LLMs",
+    icon: Cpu,
+    skills: ["Transformers", "BERT", "Hugging Face", "LangChain"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-2"
   },
   {
     title: "Data Engineering",
     icon: Database,
-    skills: ["ML Pipelines", "PostgreSQL", "Data Visualization", "A/B Testing"],
-    size: "col-span-2 row-span-1",
+    skills: ["SQL", "MongoDB", "Spark", "Airflow"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1"
   },
   {
-    title: "Core Competencies",
-    icon: Zap,
-    skills: ["Feature Engineering", "Statistical Modeling", "EDA", "Regression/Classification"],
-    size: "col-span-2 row-span-1",
+    title: "Programming",
+    icon: Code,
+    skills: ["Python", "TypeScript", "R", "Julia"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1"
+  },
+  {
+    title: "Cloud & MLOps",
+    icon: Cloud,
+    skills: ["AWS", "Docker", "MLflow", "FastAPI"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1"
+  },
+  {
+    title: "Analytics",
+    icon: BarChart3,
+    skills: ["Pandas", "NumPy", "Matplotlib", "Plotly"],
+    size: "col-span-2 md:col-span-2 lg:col-span-2 row-span-1"
   }
 ];
 
 export default function BentoSkillsSection() {
   return (
-    <section id="skills" className="py-24 relative">
+    <section id="skills" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/5 to-transparent rounded-full pointer-events-none" />
+      
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Technical Expertise
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Skills & Technologies
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Specialized in machine learning, data science, and engineering
-          </p>
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              Expertise
+            </span>
+            <div className="h-px flex-1 bg-border max-w-24" />
+          </div>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
+              Technical<br />
+              <span className="text-primary">Arsenal</span>
+            </h2>
+            <p className="text-muted-foreground max-w-md lg:text-right">
+              Specialized in building production-grade ML systems with a focus on NLP and deep learning.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[150px]">
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[120px]">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             
@@ -76,28 +83,33 @@ export default function BentoSkillsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
                 className={category.size}
               >
-                <div className="h-full bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
+                <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+                  {/* Hover accent */}
+                  <div className="absolute top-0 left-0 w-1 h-0 bg-primary group-hover:h-full transition-all duration-300" />
+                  
+                  <div className="p-6 h-full flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">
+                        {category.title}
+                      </h3>
                     </div>
-                    <h3 className="font-bold uppercase text-sm tracking-wider text-foreground">
-                      {category.title}
-                    </h3>
-                  </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1.5 text-xs font-medium bg-muted border border-border rounded-full text-muted-foreground"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {category.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 text-xs font-medium bg-muted text-muted-foreground"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

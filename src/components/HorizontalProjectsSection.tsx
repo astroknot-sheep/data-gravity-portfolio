@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
+import { ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
 
 const projectsData = [
   {
@@ -49,6 +49,7 @@ export default function HorizontalProjectsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const checkScrollButtons = () => {
     if (scrollRef.current) {
@@ -61,7 +62,7 @@ export default function HorizontalProjectsSection() {
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: direction === 'left' ? -400 : 400,
+        left: direction === 'left' ? -420 : 420,
         behavior: 'smooth'
       });
       setTimeout(checkScrollButtons, 300);
@@ -69,49 +70,64 @@ export default function HorizontalProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container mx-auto px-6 mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Portfolio
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Swipe through my data science and ML projects
-          </p>
-        </motion.div>
+    <section id="projects" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 mb-10">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+                Portfolio
+              </span>
+              <div className="h-px flex-1 bg-border max-w-24" />
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
+              Featured<br />
+              <span className="text-primary">Projects</span>
+            </h2>
+          </motion.div>
+
+          {/* Navigation */}
+          <div className="flex items-center gap-4">
+            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground hidden sm:block">
+              {String(hoveredIndex !== null ? hoveredIndex + 1 : 1).padStart(2, '0')} / {String(projectsData.length).padStart(2, '0')}
+            </span>
+            <div className="flex gap-3">
+              <button
+                onClick={() => scroll('left')}
+                disabled={!canScrollLeft}
+                className={`w-12 h-12 border flex items-center justify-center transition-all ${
+                  canScrollLeft 
+                    ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
+                    : 'border-border/30 text-muted-foreground/30'
+                }`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                disabled={!canScrollRight}
+                className={`w-12 h-12 border flex items-center justify-center transition-all ${
+                  canScrollRight 
+                    ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
+                    : 'border-border/30 text-muted-foreground/30'
+                }`}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Navigation buttons */}
-      <div className="container mx-auto px-6 flex justify-end gap-3 mb-6">
-        <button
-          onClick={() => scroll('left')}
-          disabled={!canScrollLeft}
-          className={`w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center transition-colors ${
-            canScrollLeft ? 'text-foreground hover:bg-muted' : 'text-muted-foreground/30'
-          }`}
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={() => scroll('right')}
-          disabled={!canScrollRight}
-          className={`w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center transition-colors ${
-            canScrollRight ? 'text-foreground hover:bg-muted' : 'text-muted-foreground/30'
-          }`}
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
-
-      {/* Horizontal scroll container */}
+      {/* Cards */}
       <div 
         ref={scrollRef}
         onScroll={checkScrollButtons}
@@ -120,66 +136,84 @@ export default function HorizontalProjectsSection() {
         {projectsData.map((project, index) => (
           <motion.div
             key={project.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="horizontal-scroll-item w-[380px] md:w-[420px]"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            className="horizontal-scroll-item w-[350px] md:w-[400px]"
           >
-            <div className="h-full bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
-              <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary/20 text-primary rounded-full">
-                  {project.category}
-                </span>
+            <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              {/* Large index number */}
+              <div className="absolute top-4 right-4 text-6xl font-bold text-border/30 group-hover:text-primary/20 transition-colors select-none">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              
+              <div className="p-8 relative">
+                {/* Category & link */}
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1">
+                    {project.category}
+                  </span>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-foreground mb-4 leading-tight pr-12">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Metrics */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.metrics.map((metric) => (
+                    <span 
+                      key={metric}
+                      className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 border border-primary/20 text-primary"
+                    >
+                      {metric}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.map((tech) => (
+                    <span 
+                      key={tech}
+                      className="px-2 py-1 text-xs text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* View link */}
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground hover:text-primary transition-colors group/link"
                 >
-                  <Github className="w-5 h-5" />
+                  <span>View Project</span>
+                  <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                 </a>
               </div>
-
-              <h3 className="text-xl font-bold text-foreground mb-3">
-                {project.title}
-              </h3>
-
-              <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.metrics.map((metric) => (
-                  <span 
-                    key={metric}
-                    className="px-2 py-1 text-xs font-semibold bg-primary/10 border border-primary/20 rounded text-primary"
-                  >
-                    {metric}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span 
-                    key={tech}
-                    className="px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground font-bold uppercase text-sm tracking-wider rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                View Project
-                <ExternalLink className="w-4 h-4" />
-              </a>
             </div>
           </motion.div>
         ))}
