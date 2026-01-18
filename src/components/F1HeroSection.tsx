@@ -107,7 +107,7 @@ export default function F1HeroSection() {
                 Transforming complex data into{" "}
                 <span className="text-foreground font-semibold">intelligent systems</span>.
                 <br className="hidden sm:block" />
-                Specializing in NLP, deep learning & production ML.
+                NLP, deep learning & production ML.
               </p>
             </motion.div>
 
@@ -151,13 +151,6 @@ export default function F1HeroSection() {
             className="lg:col-span-3 lg:col-start-10 hidden lg:block"
           >
             <div className="space-y-8 text-right">
-              <div className="border-r-2 border-primary/30 pr-6">
-                <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-1">Status</span>
-                <span className="text-sm font-semibold text-foreground flex items-center justify-end gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  Available
-                </span>
-              </div>
               <div className="border-r-2 border-primary/30 pr-6">
                 <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-1">Focus</span>
                 <span className="text-sm font-semibold text-foreground">NLP & LLMs</span>

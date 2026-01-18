@@ -30,27 +30,12 @@ export default function F1AboutSection() {
               
               {/* Main image container */}
               <div className="relative bg-card p-2">
-                <Avatar className="w-full aspect-[4/5] rounded-none">
-                  <AvatarImage 
+                <div className="w-full aspect-[3/4] overflow-hidden">
+                  <img 
                     src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" 
                     alt="Dhriman Deka" 
-                    className="object-cover"
+                    className="w-full h-full object-contain"
                   />
-                  <AvatarFallback className="text-8xl font-bold text-primary rounded-none">DD</AvatarFallback>
-                </Avatar>
-                
-                {/* Overlay data strip */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background via-background/80 to-transparent p-6 pt-16">
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-primary block">Role</span>
-                      <span className="text-sm font-semibold text-foreground">Data Scientist</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-500 rounded-full" />
-                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Available</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -82,7 +67,7 @@ export default function F1AboutSection() {
               {/* Bio text */}
               <div className="space-y-6 text-muted-foreground">
                 <p className="text-lg leading-relaxed">
-                  I'm a Data Scientist and ML Engineer driven by curiosity to build systems that learn and adapt. 
+                  Driven by curiosity to build systems that learn and adapt. 
                   My work spans NLP, deep learning, and MLOps — always pushing to turn raw data into meaningful impact.
                 </p>
                 <p className="text-base leading-relaxed">
