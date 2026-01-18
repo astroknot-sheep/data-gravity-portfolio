@@ -8,7 +8,7 @@ const experienceData = [
     title: "Data Science & ML Engineer",
     company: "Probe42",
     location: "Bangalore, India",
-    period: "May 2025 – Present",
+    period: "Present",
     highlights: [
       "Architected generative ML model using 20,000+ PAN records",
       "Designed BERT-based NLP search system boosting accuracy by 45%",
@@ -32,7 +32,7 @@ const experienceData = [
     title: "B.S. in Economics",
     company: "IISER Bhopal",
     location: "Bhopal, India",
-    period: "Dec 2021 – Jul 2025",
+    period: "Completed",
     highlights: [
       "Specialization in Machine Learning & Data Science",
       "Coursework: ML, Deep Learning, Data Analysis, Econometrics, Statistics",
