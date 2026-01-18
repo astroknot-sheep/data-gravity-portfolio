@@ -3,10 +3,10 @@ import { useEffect, lazy, Suspense } from "react";
 // Lazy load components for performance
 const SpeedLinesBackground = lazy(() => import("@/components/SpeedLinesBackground"));
 const F1NavBar = lazy(() => import("@/components/F1NavBar"));
-const F1HeroSection = lazy(() => import("@/components/F1HeroSection"));
-const F1AboutSection = lazy(() => import("@/components/F1AboutSection"));
-const BentoSkillsSection = lazy(() => import("@/components/BentoSkillsSection"));
-const HorizontalProjectsSection = lazy(() => import("@/components/HorizontalProjectsSection"));
+const ScrollHeroSection = lazy(() => import("@/components/ScrollHeroSection"));
+const ScrollAboutSection = lazy(() => import("@/components/ScrollAboutSection"));
+const ScrollSkillsSection = lazy(() => import("@/components/ScrollSkillsSection"));
+const ScrollProjectsSection = lazy(() => import("@/components/ScrollProjectsSection"));
 const F1PublicationsSection = lazy(() => import("@/components/F1PublicationsSection"));
 const HorizontalExperienceSection = lazy(() => import("@/components/HorizontalExperienceSection"));
 const F1ContactSection = lazy(() => import("@/components/F1ContactSection"));
@@ -30,22 +30,22 @@ export default function Index() {
         <F1NavBar />
       </Suspense>
       
-      {/* Main content */}
+      {/* Main content - Scroll-driven sections */}
       <main className="relative z-10">
         <Suspense fallback={null}>
-          <F1HeroSection />
+          <ScrollHeroSection />
         </Suspense>
         
         <Suspense fallback={null}>
-          <F1AboutSection />
+          <ScrollAboutSection />
         </Suspense>
         
         <Suspense fallback={null}>
-          <BentoSkillsSection />
+          <ScrollSkillsSection />
         </Suspense>
         
         <Suspense fallback={null}>
-          <HorizontalProjectsSection />
+          <ScrollProjectsSection />
         </Suspense>
         
         <Suspense fallback={null}>
