@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Zap, MapPin, Calendar } from "lucide-react";
 
 const experienceData = [
@@ -34,7 +34,7 @@ const experienceData = [
     location: "Bhopal, India",
     period: "Completed",
     highlights: [
-      "Specialization in Machine Learning & Data Science",
+      "Focus on Machine Learning & Data Science",
       "Coursework: ML, Deep Learning, Data Analysis, Econometrics, Statistics",
       "Research focus on AI/ML applications in economic modeling"
     ]
@@ -42,9 +42,18 @@ const experienceData = [
 ];
 
 export default function HorizontalExperienceSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const headerY = useTransform(scrollYProgress, [0, 0.15], [60, 0]);
 
   const checkScrollButtons = () => {
     if (scrollRef.current) {
@@ -74,18 +83,16 @@ export default function HorizontalExperienceSection() {
   };
 
   return (
-    <section id="experience" className="py-32 relative overflow-hidden">
+    <section ref={sectionRef} id="experience" className="py-32 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
       
       <div className="container mx-auto px-6 mb-8">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+        <motion.div 
+          style={{ opacity: headerOpacity, y: headerY }}
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
+        >
+          <div>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
                 Journey
@@ -95,7 +102,7 @@ export default function HorizontalExperienceSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
               Experience
             </h2>
-          </motion.div>
+          </div>
 
           {/* Navigation */}
           <div className="flex gap-3">
@@ -122,7 +129,7 @@ export default function HorizontalExperienceSection() {
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Cards */}
@@ -132,67 +139,87 @@ export default function HorizontalExperienceSection() {
         className="horizontal-scroll px-6 gap-6 pb-4"
       >
         {experienceData.map((exp, index) => (
-          <motion.div
+          <ScrollExperienceCard 
             key={exp.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="horizontal-scroll-item w-[380px] md:w-[450px]"
-          >
-            <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
-              {/* Top accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-              
-              <div className="p-8">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                      {getIcon(exp.type)}
-                    </div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                      {exp.type}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
-                  {exp.title}
-                </h3>
-
-                {/* Company */}
-                <p className="text-lg text-primary font-semibold mb-4">
-                  {exp.company}
-                </p>
-
-                {/* Meta */}
-                <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3 h-3" />
-                    <span>{exp.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3 h-3" />
-                    <span>{exp.period}</span>
-                  </div>
-                </div>
-
-                {/* Highlights */}
-                <ul className="space-y-3">
-                  {exp.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
+            exp={exp}
+            index={index}
+            progress={scrollYProgress}
+            getIcon={getIcon}
+          />
         ))}
       </div>
     </section>
+  );
+}
+
+function ScrollExperienceCard({ exp, index, progress, getIcon }: {
+  exp: typeof experienceData[0];
+  index: number;
+  progress: any;
+  getIcon: (type: string) => JSX.Element;
+}) {
+  const start = 0.1 + (index * 0.05);
+  const end = start + 0.15;
+  
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+  const y = useTransform(progress, [start, end], [80, 0]);
+  const scale = useTransform(progress, [start, end], [0.9, 1]);
+
+  return (
+    <motion.div
+      style={{ opacity, y, scale }}
+      className="horizontal-scroll-item w-[380px] md:w-[450px]"
+    >
+      <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+        {/* Top accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+        
+        <div className="p-8">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                {getIcon(exp.type)}
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+                {exp.type}
+              </span>
+            </div>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
+            {exp.title}
+          </h3>
+
+          {/* Company */}
+          <p className="text-lg text-primary font-semibold mb-4">
+            {exp.company}
+          </p>
+
+          {/* Meta */}
+          <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3 h-3" />
+              <span>{exp.location}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3 h-3" />
+              <span>{exp.period}</span>
+            </div>
+          </div>
+
+          {/* Highlights */}
+          <ul className="space-y-3">
+            {exp.highlights.map((highlight, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span>{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </motion.div>
   );
 }
