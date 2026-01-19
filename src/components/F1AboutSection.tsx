@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import MarqueeTicker from "./MarqueeTicker";
 
 export default function F1AboutSection() {
@@ -9,28 +9,31 @@ export default function F1AboutSection() {
     offset: ["start end", "end start"]
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const [hoveredWord, setHoveredWord] = useState<number | null>(null);
+  // Scroll-driven animations
+  const textY = useTransform(scrollYProgress, [0, 0.5], [150, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [0.9, 1]);
 
   const statementWords = ["I", "BUILD", "SYSTEMS", "THAT", "LEARN", "&", "ADAPT"];
 
   return (
-    <section ref={sectionRef} id="about" className="py-32 relative overflow-hidden">
-      {/* Marquee background */}
-      <div className="absolute top-1/2 -translate-y-1/2 w-full pointer-events-none">
+    <section ref={sectionRef} id="about" className="relative min-h-screen py-32 overflow-hidden">
+      {/* Marquee background - fades in as you scroll */}
+      <motion.div 
+        className="absolute top-1/2 -translate-y-1/2 w-full pointer-events-none"
+        style={{ opacity: textOpacity }}
+      >
         <MarqueeTicker 
           items={["DATA", "MACHINE LEARNING", "NLP", "DEEP LEARNING"]} 
           direction="left"
           speed={40}
         />
-      </div>
+      </motion.div>
       
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section label */}
+        {/* Section label - reveals on scroll */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          style={{ opacity: textOpacity, y: textY }}
           className="flex items-center gap-4 mb-16"
         >
           <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
@@ -42,32 +45,27 @@ export default function F1AboutSection() {
           </span>
         </motion.div>
 
-        {/* Large statement typography - Lando style */}
+        {/* Large statement typography - word by word reveal */}
         <div className="mb-20">
           <motion.div 
-            style={{ y: textY }}
+            style={{ scale }}
             className="flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2"
           >
-            {statementWords.map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 50, rotateX: -45 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
-                onMouseEnter={() => setHoveredWord(index)}
-                onMouseLeave={() => setHoveredWord(null)}
-                className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase cursor-default transition-all duration-300 ${
-                  hoveredWord === index 
-                    ? 'text-primary scale-105' 
-                    : hoveredWord !== null 
-                      ? 'text-muted-foreground/50' 
-                      : 'text-foreground'
-                }`}
-              >
-                {word}
-              </motion.span>
-            ))}
+            {statementWords.map((word, index) => {
+              // Each word reveals at different scroll progress
+              const wordStart = 0.1 + (index * 0.05);
+              const wordEnd = wordStart + 0.15;
+              
+              return (
+                <ScrollWord 
+                  key={index} 
+                  word={word} 
+                  index={index}
+                  progress={scrollYProgress}
+                  range={[wordStart, wordEnd]}
+                />
+              );
+            })}
           </motion.div>
         </div>
 
@@ -75,10 +73,10 @@ export default function F1AboutSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left - Bio text with reveal */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            style={{ 
+              opacity: useTransform(scrollYProgress, [0.3, 0.5], [0, 1]),
+              x: useTransform(scrollYProgress, [0.3, 0.5], [-50, 0])
+            }}
             className="space-y-6"
           >
             <p className="text-xl md:text-2xl leading-relaxed text-muted-foreground">
@@ -93,12 +91,12 @@ export default function F1AboutSection() {
             </p>
           </motion.div>
 
-          {/* Right - Quick facts with HUD styling */}
+          {/* Right - Quick facts with staggered reveal */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ 
+              opacity: useTransform(scrollYProgress, [0.4, 0.6], [0, 1]),
+              x: useTransform(scrollYProgress, [0.4, 0.6], [50, 0])
+            }}
             className="space-y-6"
           >
             {[
@@ -106,31 +104,68 @@ export default function F1AboutSection() {
               { label: "Stack", value: "Python, PyTorch", num: "02" },
               { label: "Base", value: "Bengaluru", num: "03" }
             ].map((item, index) => (
-              <motion.div 
-                key={item.label}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                className="group flex items-center gap-6 p-4 border border-border hover:border-primary/50 bg-card/50 transition-all duration-300"
-              >
-                <span className="text-xs font-bold text-primary/50 group-hover:text-primary transition-colors">
-                  {item.num}
-                </span>
-                <div className="h-8 w-px bg-border group-hover:bg-primary/50 transition-colors" />
-                <div className="flex-1">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">
-                    {item.label}
-                  </span>
-                  <span className="text-lg font-semibold text-foreground">
-                    {item.value}
-                  </span>
-                </div>
-              </motion.div>
+              <FactCard 
+                key={item.label} 
+                item={item} 
+                index={index}
+                progress={scrollYProgress}
+              />
             ))}
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ScrollWord({ word, index, progress, range }: { 
+  word: string; 
+  index: number;
+  progress: any;
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0, 1]);
+  const y = useTransform(progress, range, [60, 0]);
+  const rotateX = useTransform(progress, range, [-45, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, y, rotateX }}
+      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase cursor-default text-foreground hover:text-primary transition-colors duration-300"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+function FactCard({ item, index, progress }: { 
+  item: { label: string; value: string; num: string };
+  index: number;
+  progress: any;
+}) {
+  const start = 0.45 + (index * 0.05);
+  const end = start + 0.1;
+  
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+  const x = useTransform(progress, [start, end], [30, 0]);
+
+  return (
+    <motion.div 
+      style={{ opacity, x }}
+      className="group flex items-center gap-6 p-4 border border-border hover:border-primary/50 bg-card/50 transition-all duration-300"
+    >
+      <span className="text-xs font-bold text-primary/50 group-hover:text-primary transition-colors">
+        {item.num}
+      </span>
+      <div className="h-8 w-px bg-border group-hover:bg-primary/50 transition-colors" />
+      <div className="flex-1">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground block mb-1">
+          {item.label}
+        </span>
+        <span className="text-lg font-semibold text-foreground">
+          {item.value}
+        </span>
+      </div>
+    </motion.div>
   );
 }

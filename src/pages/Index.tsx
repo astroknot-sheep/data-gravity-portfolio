@@ -1,4 +1,5 @@
 import { useEffect, lazy, Suspense } from "react";
+import { ScrollProgress } from "@/components/ScrollDrivenLayout";
 
 // Lazy load components for performance
 const SpeedLinesBackground = lazy(() => import("@/components/SpeedLinesBackground"));
@@ -20,6 +21,9 @@ export default function Index() {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
+      {/* Scroll progress indicator - Lando style */}
+      <ScrollProgress />
+      
       {/* Background */}
       <Suspense fallback={null}>
         <SpeedLinesBackground />
