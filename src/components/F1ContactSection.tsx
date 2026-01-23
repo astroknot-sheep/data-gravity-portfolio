@@ -48,46 +48,47 @@ export default function F1ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-24 relative">
+    <section id="contact" className="py-32 relative">
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-12"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
         >
-          <span className="text-sm font-bold uppercase tracking-widest text-primary mb-4 block">
-            Get In Touch
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground mb-4">
-            Contact Me
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              Connect
+            </span>
+            <div className="h-px flex-1 bg-border max-w-24" />
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
+            Get In<br />
+            <span className="text-primary">Touch</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Let's connect!
-          </p>
         </motion.div>
 
         <div className="max-w-5xl mx-auto grid lg:grid-cols-5 gap-8">
           {/* Contact Info Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
             className="lg:col-span-2 space-y-4"
           >
-            {contactInfo.map((info) => {
+            {contactInfo.map((info, index) => {
               const Icon = info.icon;
               const content = (
-                <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
+                <div className="bg-card border border-border p-6 hover:border-primary/50 transition-colors">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-12 h-12 bg-primary text-primary-foreground flex items-center justify-center">
+                      <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                      <p className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">
                         {info.label}
                       </p>
                       <p className="font-semibold text-foreground">
@@ -99,34 +100,46 @@ export default function F1ContactSection() {
               );
 
               return info.href ? (
-                <a
+                <motion.a
                   key={info.label}
                   href={info.href}
                   target={info.href.startsWith('http') ? '_blank' : undefined}
                   rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="block"
                 >
                   {content}
-                </a>
+                </motion.a>
               ) : (
-                <div key={info.label}>{content}</div>
+                <motion.div 
+                  key={info.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  {content}
+                </motion.div>
               );
             })}
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-3"
           >
-            <div className="bg-card border border-border rounded-xl p-8">
+            <div className="bg-card border border-border p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
                       Name
                     </label>
                     <input
@@ -135,13 +148,13 @@ export default function F1ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors text-foreground"
+                      className="w-full px-4 py-3 bg-background border border-border focus:outline-none focus:border-primary transition-colors text-foreground"
                       placeholder="Your name"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
                       Email
                     </label>
                     <input
@@ -150,14 +163,14 @@ export default function F1ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors text-foreground"
+                      className="w-full px-4 py-3 bg-background border border-border focus:outline-none focus:border-primary transition-colors text-foreground"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
                     Message
                   </label>
                   <textarea
@@ -166,7 +179,7 @@ export default function F1ContactSection() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-none text-foreground"
+                    className="w-full px-4 py-3 bg-background border border-border focus:outline-none focus:border-primary transition-colors resize-none text-foreground"
                     placeholder="Tell me about your project..."
                   />
                 </div>
@@ -174,7 +187,7 @@ export default function F1ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-primary text-primary-foreground font-bold uppercase tracking-wider rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-colors"
+                  className="w-full px-8 py-4 bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-colors"
                 >
                   {isSubmitting ? (
                     <>
