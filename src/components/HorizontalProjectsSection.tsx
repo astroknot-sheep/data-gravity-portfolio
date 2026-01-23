@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
 
 const projectsData = [
@@ -46,27 +46,32 @@ const projectsData = [
 ];
 
 export default function HorizontalProjectsSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const headerY = useTransform(scrollYProgress, [0, 0.15], [60, 0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const checkScrollButtons = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollLeft(scrollLeft > 10);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      
+      // Calculate current index
+      const cardWidth = 420;
+      const index = Math.round(scrollLeft / cardWidth);
+      setCurrentIndex(Math.min(index, projectsData.length - 1));
     }
   };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const scrollEl = scrollRef.current;
+    if (scrollEl) {
+      scrollEl.addEventListener('scroll', checkScrollButtons, { passive: true });
+      return () => scrollEl.removeEventListener('scroll', checkScrollButtons);
+    }
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -74,18 +79,20 @@ export default function HorizontalProjectsSection() {
         left: direction === 'left' ? -420 : 420,
         behavior: 'smooth'
       });
-      setTimeout(checkScrollButtons, 300);
     }
   };
 
   return (
-    <section ref={sectionRef} id="projects" className="py-32 relative overflow-hidden">
+    <section id="projects" className="py-32 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
       
       <div className="container mx-auto px-6 mb-10">
         <motion.div 
-          style={{ opacity: headerOpacity, y: headerY }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
         >
           <div>
@@ -104,16 +111,16 @@ export default function HorizontalProjectsSection() {
           {/* Navigation */}
           <div className="flex items-center gap-4">
             <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground hidden sm:block">
-              {String(hoveredIndex !== null ? hoveredIndex + 1 : 1).padStart(2, '0')} / {String(projectsData.length).padStart(2, '0')}
+              {String(currentIndex + 1).padStart(2, '0')} / {String(projectsData.length).padStart(2, '0')}
             </span>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <button
                 onClick={() => scroll('left')}
                 disabled={!canScrollLeft}
                 className={`w-12 h-12 border flex items-center justify-center transition-all ${
                   canScrollLeft 
                     ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
-                    : 'border-border/30 text-muted-foreground/30'
+                    : 'border-border/30 text-muted-foreground/30 cursor-not-allowed'
                 }`}
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -124,7 +131,7 @@ export default function HorizontalProjectsSection() {
                 className={`w-12 h-12 border flex items-center justify-center transition-all ${
                   canScrollRight 
                     ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
-                    : 'border-border/30 text-muted-foreground/30'
+                    : 'border-border/30 text-muted-foreground/30 cursor-not-allowed'
                 }`}
               >
                 <ChevronRight className="w-5 h-5" />
@@ -134,119 +141,99 @@ export default function HorizontalProjectsSection() {
         </motion.div>
       </div>
 
-      {/* Cards - reveal on scroll */}
-      <div 
+      {/* Cards */}
+      <motion.div 
         ref={scrollRef}
-        onScroll={checkScrollButtons}
-        className="horizontal-scroll px-6 gap-6 pb-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex overflow-x-auto gap-6 px-6 pb-4 snap-x snap-mandatory scrollbar-hide"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {projectsData.map((project, index) => (
-          <ScrollProjectCard 
+          <motion.div
             key={project.title}
-            project={project}
-            index={index}
-            progress={scrollYProgress}
-            onHover={() => setHoveredIndex(index)}
-            onLeave={() => setHoveredIndex(null)}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ScrollProjectCard({ project, index, progress, onHover, onLeave }: {
-  project: typeof projectsData[0];
-  index: number;
-  progress: any;
-  onHover: () => void;
-  onLeave: () => void;
-}) {
-  const start = 0.1 + (index * 0.04);
-  const end = start + 0.15;
-  
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const y = useTransform(progress, [start, end], [80, 0]);
-  const scale = useTransform(progress, [start, end], [0.9, 1]);
-
-  return (
-    <motion.div
-      style={{ opacity, y, scale }}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      className="horizontal-scroll-item w-[350px] md:w-[400px]"
-    >
-      <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
-        {/* Top accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-        
-        {/* Large index number */}
-        <div className="absolute top-4 right-4 text-6xl font-bold text-border/30 group-hover:text-primary/20 transition-colors select-none">
-          {String(index + 1).padStart(2, '0')}
-        </div>
-        
-        <div className="p-8 relative">
-          {/* Category & link */}
-          <div className="flex items-center justify-between mb-8">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1">
-              {project.category}
-            </span>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-bold text-foreground mb-4 leading-tight pr-12">
-            {project.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-            {project.description}
-          </p>
-
-          {/* Metrics */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.metrics.map((metric) => (
-              <span 
-                key={metric}
-                className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 border border-primary/20 text-primary"
-              >
-                {metric}
-              </span>
-            ))}
-          </div>
-
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.technologies.map((tech) => (
-              <span 
-                key={tech}
-                className="px-2 py-1 text-xs text-muted-foreground"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {/* View link */}
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground hover:text-primary transition-colors group/link"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className="flex-shrink-0 w-[340px] md:w-[400px] snap-start"
           >
-            <span>View Project</span>
-            <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-          </a>
-        </div>
-      </div>
-    </motion.div>
+            <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              {/* Large index number */}
+              <div className="absolute top-4 right-4 text-6xl font-bold text-border/30 group-hover:text-primary/20 transition-colors select-none">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              
+              <div className="p-8 relative">
+                {/* Category & link */}
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1">
+                    {project.category}
+                  </span>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-foreground mb-4 leading-tight pr-12">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Metrics */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.metrics.map((metric) => (
+                    <span 
+                      key={metric}
+                      className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 border border-primary/20 text-primary"
+                    >
+                      {metric}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.map((tech) => (
+                    <span 
+                      key={tech}
+                      className="px-2 py-1 text-xs text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* View link */}
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground hover:text-primary transition-colors group/link"
+                >
+                  <span>View Project</span>
+                  <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
   );
 }

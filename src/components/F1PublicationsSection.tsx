@@ -29,6 +29,18 @@ const articles = [
   }
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+};
+
 export default function F1PublicationsSection() {
   return (
     <section id="publications" className="py-32 relative overflow-hidden">
@@ -38,9 +50,9 @@ export default function F1PublicationsSection() {
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
@@ -58,7 +70,12 @@ export default function F1PublicationsSection() {
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Research Papers */}
-          <div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             <div className="flex items-center gap-3 mb-8">
               <FileText className="w-5 h-5 text-primary" />
               <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
@@ -66,16 +83,13 @@ export default function F1PublicationsSection() {
               </h3>
             </div>
             
-            {publications.map((pub, index) => (
+            {publications.map((pub) => (
               <motion.a
                 key={pub.title}
                 href={pub.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                variants={itemVariants}
                 className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
               >
                 {/* Top accent */}
@@ -109,10 +123,15 @@ export default function F1PublicationsSection() {
                 </div>
               </motion.a>
             ))}
-          </div>
+          </motion.div>
 
           {/* Technical Articles */}
-          <div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             <div className="flex items-center gap-3 mb-8">
               <BookOpen className="w-5 h-5 text-primary" />
               <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
@@ -120,16 +139,13 @@ export default function F1PublicationsSection() {
               </h3>
             </div>
             
-            {articles.map((article, index) => (
+            {articles.map((article) => (
               <motion.a
                 key={article.title}
                 href={article.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                variants={itemVariants}
                 className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
               >
                 {/* Top accent */}
@@ -157,7 +173,7 @@ export default function F1PublicationsSection() {
                 </div>
               </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

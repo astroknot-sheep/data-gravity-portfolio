@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Briefcase, GraduationCap, Zap, MapPin, Calendar } from "lucide-react";
 
 const experienceData = [
@@ -42,26 +42,26 @@ const experienceData = [
 ];
 
 export default function HorizontalExperienceSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const headerY = useTransform(scrollYProgress, [0, 0.15], [60, 0]);
-
   const checkScrollButtons = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollLeft(scrollLeft > 10);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
   };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const scrollEl = scrollRef.current;
+    if (scrollEl) {
+      scrollEl.addEventListener('scroll', checkScrollButtons, { passive: true });
+      return () => scrollEl.removeEventListener('scroll', checkScrollButtons);
+    }
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -69,7 +69,6 @@ export default function HorizontalExperienceSection() {
         left: direction === 'left' ? -450 : 450,
         behavior: 'smooth'
       });
-      setTimeout(checkScrollButtons, 300);
     }
   };
 
@@ -83,13 +82,16 @@ export default function HorizontalExperienceSection() {
   };
 
   return (
-    <section ref={sectionRef} id="experience" className="py-32 relative overflow-hidden">
+    <section id="experience" className="py-32 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
       
       <div className="container mx-auto px-6 mb-8">
         <motion.div 
-          style={{ opacity: headerOpacity, y: headerY }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
         >
           <div>
@@ -105,14 +107,14 @@ export default function HorizontalExperienceSection() {
           </div>
 
           {/* Navigation */}
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               onClick={() => scroll('left')}
               disabled={!canScrollLeft}
               className={`w-12 h-12 border flex items-center justify-center transition-all ${
                 canScrollLeft 
                   ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
-                  : 'border-border/30 text-muted-foreground/30'
+                  : 'border-border/30 text-muted-foreground/30 cursor-not-allowed'
               }`}
             >
               <ChevronLeft className="w-5 h-5" />
@@ -123,7 +125,7 @@ export default function HorizontalExperienceSection() {
               className={`w-12 h-12 border flex items-center justify-center transition-all ${
                 canScrollRight 
                   ? 'border-primary/50 text-foreground hover:bg-primary hover:text-primary-foreground' 
-                  : 'border-border/30 text-muted-foreground/30'
+                  : 'border-border/30 text-muted-foreground/30 cursor-not-allowed'
               }`}
             >
               <ChevronRight className="w-5 h-5" />
@@ -133,93 +135,77 @@ export default function HorizontalExperienceSection() {
       </div>
 
       {/* Cards */}
-      <div 
+      <motion.div 
         ref={scrollRef}
-        onScroll={checkScrollButtons}
-        className="horizontal-scroll px-6 gap-6 pb-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex overflow-x-auto gap-6 px-6 pb-4 snap-x snap-mandatory"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {experienceData.map((exp, index) => (
-          <ScrollExperienceCard 
+          <motion.div
             key={exp.title}
-            exp={exp}
-            index={index}
-            progress={scrollYProgress}
-            getIcon={getIcon}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            className="flex-shrink-0 w-[360px] md:w-[420px] snap-start"
+          >
+            <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="p-8">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                      {getIcon(exp.type)}
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+                      {exp.type}
+                    </span>
+                  </div>
+                </div>
 
-function ScrollExperienceCard({ exp, index, progress, getIcon }: {
-  exp: typeof experienceData[0];
-  index: number;
-  progress: any;
-  getIcon: (type: string) => JSX.Element;
-}) {
-  const start = 0.1 + (index * 0.05);
-  const end = start + 0.15;
-  
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const y = useTransform(progress, [start, end], [80, 0]);
-  const scale = useTransform(progress, [start, end], [0.9, 1]);
+                {/* Title */}
+                <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
+                  {exp.title}
+                </h3>
 
-  return (
-    <motion.div
-      style={{ opacity, y, scale }}
-      className="horizontal-scroll-item w-[380px] md:w-[450px]"
-    >
-      <div className="group h-full bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden">
-        {/* Top accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-        
-        <div className="p-8">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                {getIcon(exp.type)}
+                {/* Company */}
+                <p className="text-lg text-primary font-semibold mb-4">
+                  {exp.company}
+                </p>
+
+                {/* Meta */}
+                <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3 h-3" />
+                    <span>{exp.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3" />
+                    <span>{exp.period}</span>
+                  </div>
+                </div>
+
+                {/* Highlights */}
+                <ul className="space-y-3">
+                  {exp.highlights.map((highlight, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                {exp.type}
-              </span>
             </div>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
-            {exp.title}
-          </h3>
-
-          {/* Company */}
-          <p className="text-lg text-primary font-semibold mb-4">
-            {exp.company}
-          </p>
-
-          {/* Meta */}
-          <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-3 h-3" />
-              <span>{exp.location}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-3 h-3" />
-              <span>{exp.period}</span>
-            </div>
-          </div>
-
-          {/* Highlights */}
-          <ul className="space-y-3">
-            {exp.highlights.map((highlight, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </motion.div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
   );
 }
