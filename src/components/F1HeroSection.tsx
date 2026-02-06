@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import developerPhoto from "@/assets/developer-photo.png";
 
 export default function F1HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -290,19 +291,67 @@ export default function F1HeroSection() {
             </motion.div>
           </div>
 
-          {/* Vertical text with animation */}
+          {/* Developer Photo */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 1.4 }}
+            initial={{ opacity: 0, scale: 0.9, x: 50 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.2, ease: [0.33, 1, 0.68, 1] }}
             className="lg:col-span-2 hidden lg:flex items-center justify-end"
           >
             <motion.div 
-              className="writing-vertical text-xs font-bold uppercase tracking-[0.4em] text-muted-foreground"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 3, repeat: Infinity }}
+              className="relative group"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              NLP • Deep Learning • MLOps
+              {/* Glow effect behind photo */}
+              <motion.div
+                className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              />
+              
+              {/* HUD frame corners */}
+              <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-primary/60" />
+              <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-primary/60" />
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-primary/60" />
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-primary/60" />
+              
+              {/* Photo container */}
+              <div className="relative w-48 h-56 overflow-hidden border border-border/50">
+                <img 
+                  src={developerPhoto} 
+                  alt="Dhriman Deka"
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                />
+                
+                {/* Scanline overlay */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)'
+                  }}
+                />
+                
+                {/* Hover highlight */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
+              
+              {/* Status indicator */}
+              <motion.div 
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.6 }}
+              >
+                <motion.div 
+                  className="w-2 h-2 bg-primary rounded-full"
+                  animate={{ opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Available
+                </span>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
