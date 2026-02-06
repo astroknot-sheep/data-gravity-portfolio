@@ -9,7 +9,6 @@ import F1PublicationsSection from "@/components/F1PublicationsSection";
 import HorizontalExperienceSection from "@/components/HorizontalExperienceSection";
 import F1ContactSection from "@/components/F1ContactSection";
 import F1Footer from "@/components/F1Footer";
-import MagneticCursor from "@/components/MagneticCursor";
 import IntroAnimation from "@/components/IntroAnimation";
 
 export default function Index() {
@@ -29,9 +28,6 @@ export default function Index() {
     <div className="relative min-h-screen bg-background text-foreground">
       {/* Intro Animation */}
       {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
-      
-      {/* Custom Cursor */}
-      <MagneticCursor />
       
       {/* Background */}
       <SpeedLinesBackground />
