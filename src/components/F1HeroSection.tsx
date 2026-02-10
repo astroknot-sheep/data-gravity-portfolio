@@ -336,22 +336,6 @@ export default function F1HeroSection() {
                 />
               </div>
               
-              {/* Status indicator */}
-              <motion.div 
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.6 }}
-              >
-                <motion.div 
-                  className="w-2 h-2 bg-primary rounded-full"
-                  animate={{ opacity: [1, 0.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                  Available
-                </span>
-              </motion.div>
             </motion.div>
           </motion.div>
         </div>
