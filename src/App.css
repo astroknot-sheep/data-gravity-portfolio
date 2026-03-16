@@ -69,12 +69,12 @@
 }
 
 /* Font classes for consistency */
-.font-league {
-  font-family: 'League Spartan', sans-serif !important;
+.font-body {
+  font-family: 'DM Sans', sans-serif !important;
 }
 
-.font-intro {
-  font-family: 'Intro Rust', sans-serif !important;
+.font-heading {
+  font-family: 'Space Grotesk', sans-serif !important;
 }
 
 /* Force removal of any other font families with higher specificity */
@@ -83,11 +83,11 @@ html *, body * {
 }
 
 body, p, div, span, a, button, input, textarea, select {
-  font-family: 'League Spartan', sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Intro Rust', sans-serif !important;
+  font-family: 'Space Grotesk', sans-serif !important;
 }
 
 /* Override any conflicting styles */

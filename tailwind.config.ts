@@ -84,8 +84,8 @@ export default {
       },
       fontFamily: {
         // ONLY THESE TWO FONTS ARE ALLOWED
-        league: ['League Spartan', 'sans-serif'],
-        intro: ['Intro Rust', 'sans-serif'],
+        body: ['DM Sans', 'sans-serif'],
+        heading: ['Space Grotesk', 'sans-serif'],
       },
     },
   },
