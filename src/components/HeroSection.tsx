@@ -20,8 +20,8 @@ export default function HeroSection() {
   
   const messages = [
     "Hi, I'm Dhriman",
-    "I specialise in <span class='text-gradient font-intro font-bold'>ML</span> and <span class='text-gradient font-intro font-bold'>Operations Research</span>.",
-    "Let's connect for <span class='text-gradient font-intro font-bold'>data-driven innovation</span>!"
+    "I specialise in <span class='text-gradient font-heading font-bold'>ML</span> and <span class='text-gradient font-heading font-bold'>Operations Research</span>.",
+    "Let's connect for <span class='text-gradient font-heading font-bold'>data-driven innovation</span>!"
   ];
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function HeroSection() {
           >
             {/* Enhanced professional badge */}
             <div className="mb-12 inline-block animate-reveal-up">
-              <span className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold bg-gradient-to-r from-orange-100/95 via-amber-100/95 to-orange-100/95 dark:from-orange-900/80 dark:via-amber-900/80 dark:to-orange-900/80 text-orange-800 dark:text-orange-200 backdrop-blur-3xl border-2 border-orange-200/70 dark:border-orange-700/70 shadow-2xl font-league enhanced-glow shimmer-overlay overflow-hidden">
+              <span className="inline-flex items-center px-8 py-4 rounded-full text-base font-bold bg-gradient-to-r from-orange-100/95 via-amber-100/95 to-orange-100/95 dark:from-orange-900/80 dark:via-amber-900/80 dark:to-orange-900/80 text-orange-800 dark:text-orange-200 backdrop-blur-3xl border-2 border-orange-200/70 dark:border-orange-700/70 shadow-2xl font-body enhanced-glow shimmer-overlay overflow-hidden">
                 <Sparkles className="w-5 h-5 mr-3 animate-pulse-glow" />
                 Data Scientist & ML Engineer
                 <Zap className="w-5 h-5 ml-3 animate-pulse-glow" />
@@ -105,7 +105,7 @@ export default function HeroSection() {
             {/* Main heading with consistent large font size across all lines */}
             <div className="min-h-[220px] flex flex-col items-center justify-center mb-16">
               <h1 
-                className={`block font-intro font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 dark:text-white transition-all duration-700 ease-out leading-[1.1] ${
+                className={`block font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 dark:text-white transition-all duration-700 ease-out leading-[1.1] ${
                   isAnimating ? 'opacity-0 transform translate-y-8 scale-95 blur-sm' : 'opacity-100 transform translate-y-0 scale-100 blur-0'
                 }`}
                 style={{ 
@@ -127,18 +127,18 @@ export default function HeroSection() {
                 <a 
                   ref={primaryBtnRef as any}
                   href="#projects" 
-                  className="group relative inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl transition-all duration-300 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl font-league enhanced-glow shimmer-overlay animate-gradient-shift"
+                  className="group relative inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl transition-all duration-300 overflow-hidden bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white shadow-2xl hover:shadow-3xl font-body enhanced-glow shimmer-overlay animate-gradient-shift"
                 >
-                  <span className="relative z-10 font-league">View My Work</span>
+                  <span className="relative z-10 font-body">View My Work</span>
                   <ArrowRight className="ml-3 w-6 h-6 transition-transform group-hover:translate-x-2 relative z-10" />
                 </a>
                 
                 <a 
                   ref={secondaryBtnRef as any}
                   href="#contact" 
-                  className="group inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl transition-all duration-300 bg-white/20 dark:bg-gray-800/50 backdrop-blur-3xl border-3 border-orange-200/50 dark:border-orange-700/50 text-orange-800 dark:text-orange-200 hover:bg-orange-50/40 dark:hover:bg-orange-900/40 hover:border-orange-300/70 dark:hover:border-orange-600/70 font-league enhanced-glow shimmer-overlay overflow-hidden"
+                  className="group inline-flex items-center px-10 py-5 text-xl font-bold rounded-2xl transition-all duration-300 bg-white/20 dark:bg-gray-800/50 backdrop-blur-3xl border-3 border-orange-200/50 dark:border-orange-700/50 text-orange-800 dark:text-orange-200 hover:bg-orange-50/40 dark:hover:bg-orange-900/40 hover:border-orange-300/70 dark:hover:border-orange-600/70 font-body enhanced-glow shimmer-overlay overflow-hidden"
                 >
-                  <span className="font-league">Get In Touch</span>
+                  <span className="font-body">Get In Touch</span>
                   <svg className="ml-3 w-6 h-6 transition-transform group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
@@ -185,7 +185,7 @@ export default function HeroSection() {
       
       {/* Enhanced scroll indicator */}
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20 animate-bounce">
-        <span className="text-sm font-league font-bold tracking-wider uppercase text-gray-600 dark:text-gray-400 mb-5">Scroll to explore</span>
+        <span className="text-sm font-body font-bold tracking-wider uppercase text-gray-600 dark:text-gray-400 mb-5">Scroll to explore</span>
         <div className="w-9 h-14 border-4 border-orange-400 dark:border-orange-500 rounded-full flex justify-center bg-white/15 dark:bg-gray-900/25 backdrop-blur-lg shadow-2xl">
           <div className="w-2.5 h-5 bg-gradient-to-b from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400 rounded-full mt-2.5 animate-pulse-glow"></div>
         </div>

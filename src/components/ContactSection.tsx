@@ -72,18 +72,18 @@ export default function ContactSection() {
             transition={{ duration: 0.9 }}
             className="inline-block mb-6"
           >
-            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-body shadow-xl">
               <Sparkles className="w-5 h-5 mr-2 animate-pulse-glow" />
               Get In Touch
             </span>
           </motion.div>
           
-          <h2 className={`type-h2 font-bold font-intro text-gradient transition-all duration-900 ${
+          <h2 className={`type-h2 font-bold font-heading text-gradient transition-all duration-900 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Contact Me
           </h2>
-          <p className={`mt-8 text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league font-medium transition-all duration-900 delay-100 ${
+          <p className={`mt-8 text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-body font-medium transition-all duration-900 delay-100 ${
             isInView ? "opacity-100 transform-none" : "opacity-0 translate-y-10"
           }`}>
             Interested in working together or have a question about my work?
@@ -103,8 +103,8 @@ export default function ContactSection() {
                     <Mail className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-gradient font-intro">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300 break-all font-league font-medium text-lg">contact@dhrimandeka.com</p>
+                    <h3 className="text-2xl font-bold mb-4 text-gradient font-heading">Email</h3>
+                    <p className="text-gray-600 dark:text-gray-300 break-all font-body font-medium text-lg">contact@dhrimandeka.com</p>
                   </div>
                 </div>
                 
@@ -113,8 +113,8 @@ export default function ContactSection() {
                     <MapPin className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-gradient font-intro">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-300 font-league font-medium text-lg">Bengaluru, India</p>
+                    <h3 className="text-2xl font-bold mb-4 text-gradient font-heading">Location</h3>
+                    <p className="text-gray-600 dark:text-gray-300 font-body font-medium text-lg">Bengaluru, India</p>
                   </div>
                 </div>
                 
@@ -123,12 +123,12 @@ export default function ContactSection() {
                     <Linkedin className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-gradient font-intro">Connect</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-gradient font-heading">Connect</h3>
                     <a 
                       href="https://www.linkedin.com/in/dhriman-d-b57b76179/" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400 transition-colors font-league font-medium enhanced-link text-lg"
+                      className="text-gray-600 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-400 transition-colors font-body font-medium enhanced-link text-lg"
                     >
                       Connect on LinkedIn
                     </a>
@@ -146,7 +146,7 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div className="space-y-4">
-                    <label htmlFor="name" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-league">
+                    <label htmlFor="name" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-body">
                       Name
                     </label>
                     <input
@@ -156,13 +156,13 @@ export default function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-xl text-lg"
+                      className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-body backdrop-blur-xl text-lg"
                       placeholder="Your name"
                     />
                   </div>
                   
                   <div className="space-y-4">
-                    <label htmlFor="email" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-league">
+                    <label htmlFor="email" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-body">
                       Email
                     </label>
                     <input
@@ -172,14 +172,14 @@ export default function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-xl text-lg"
+                      className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-body backdrop-blur-xl text-lg"
                       placeholder="Your email"
                     />
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <label htmlFor="message" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-league">
+                  <label htmlFor="message" className="block text-lg font-bold text-gray-700 dark:text-gray-300 font-body">
                     Message
                   </label>
                   <textarea
@@ -189,7 +189,7 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required
                     rows={9}
-                    className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-league backdrop-blur-xl resize-none text-lg"
+                    className="w-full px-6 py-5 border-3 border-gray-300 dark:border-gray-700 rounded-2xl bg-white/90 dark:bg-gray-800/90 shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-500/50 focus:border-orange-500 transition-all font-body backdrop-blur-xl resize-none text-lg"
                     placeholder="Your message"
                   ></textarea>
                 </div>
@@ -199,7 +199,7 @@ export default function ContactSection() {
                     ref={submitBtnRef as any}
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-10 py-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white font-bold rounded-2xl shadow-2xl hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 transition-all duration-500 flex items-center space-x-4 disabled:opacity-70 disabled:cursor-not-allowed font-league enhanced-glow shimmer-overlay overflow-hidden text-lg"
+                    className="px-10 py-5 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white font-bold rounded-2xl shadow-2xl hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 transition-all duration-500 flex items-center space-x-4 disabled:opacity-70 disabled:cursor-not-allowed font-body enhanced-glow shimmer-overlay overflow-hidden text-lg"
                   >
                     {isSubmitting ? (
                       <>
