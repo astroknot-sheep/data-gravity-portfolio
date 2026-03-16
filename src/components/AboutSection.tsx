@@ -72,7 +72,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7 }}
-              className="type-h2 font-bold mb-10 font-intro text-gradient flex items-center gap-4"
+              className="type-h2 font-bold mb-10 font-heading text-gradient flex items-center gap-4"
             >
               <Sparkles className="w-10 h-10 text-orange-500 animate-pulse-glow" />
               About Me
@@ -89,7 +89,7 @@ export default function AboutSection() {
                 ref={educationRevealRef as any}
                 className="enhanced-glassmorphism p-10 enhanced-glow border-gradient card-tilt opacity-0 overflow-hidden shimmer-overlay"
               >
-                <h3 className="text-4xl font-bold mb-8 text-gray-800 dark:text-white flex items-center gap-4 font-intro">
+                <h3 className="text-4xl font-bold mb-8 text-gray-800 dark:text-white flex items-center gap-4 font-heading">
                   <div className="p-3 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl shadow-2xl">
                     <GraduationCap className="w-8 h-8 text-white" />
                   </div>
@@ -101,14 +101,14 @@ export default function AboutSection() {
                       <GraduationCap className="w-7 h-7" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-2xl font-bold text-gray-800 dark:text-white font-intro">
+                      <h4 className="text-2xl font-bold text-gray-800 dark:text-white font-heading">
                         Bachelor of Science (B.S.) in Economics
                       </h4>
-                      <div className="flex items-center gap-3 mt-3 text-orange-600 dark:text-orange-400 font-league font-semibold text-lg">
+                      <div className="flex items-center gap-3 mt-3 text-orange-600 dark:text-orange-400 font-body font-semibold text-lg">
                         <Calendar className="w-5 h-5" />
                         <span>2021 - 2025</span>
                       </div>
-                      <div className="flex items-center gap-3 mt-2 text-gray-600 dark:text-gray-300 font-league text-base">
+                      <div className="flex items-center gap-3 mt-2 text-gray-600 dark:text-gray-300 font-body text-base">
                         <MapPin className="w-5 h-5" />
                         <span>Indian Institute of Science Education and Research, Bhopal</span>
                       </div>
@@ -118,17 +118,17 @@ export default function AboutSection() {
               </div>
               
               <div>
-                <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white font-intro">Technical Skills</h3>
+                <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white font-heading">Technical Skills</h3>
                 <div className="space-y-8">
                   {technologies.slice(0, 2).map((tech, index) => (
                     <div 
                       key={index} 
                       className="p-6 bg-white/70 dark:bg-gray-800/70 rounded-2xl backdrop-blur-lg border-2 border-orange-200/40 dark:border-orange-700/40 card-tilt transition-all duration-500 hover:border-orange-400/70 dark:hover:border-orange-600/70 hover:shadow-2xl shimmer-overlay overflow-hidden"
                     >
-                      <h4 className="text-xl font-bold mb-4 text-gradient font-intro">{tech.category}</h4>
+                      <h4 className="text-xl font-bold mb-4 text-gradient font-heading">{tech.category}</h4>
                       <ul className="list-disc pl-6 space-y-2">
                         {tech.items.map((item, i) => (
-                          <li key={i} className="text-base font-league font-medium">{item}</li>
+                          <li key={i} className="text-base font-body font-medium">{item}</li>
                         ))}
                       </ul>
                     </div>
@@ -143,7 +143,7 @@ export default function AboutSection() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-12"
             >
-              <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white font-intro">Core Competencies</h3>
+              <h3 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white font-heading">Core Competencies</h3>
               <div className="flex flex-wrap gap-4">
                 {skills.map((skill, index) => (
                   <motion.div
@@ -151,7 +151,7 @@ export default function AboutSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.5, delay: 0.5 + index * 0.05 }}
-                    className="enhanced-glassmorphism px-6 py-4 rounded-2xl text-base flex items-center gap-3 font-league font-semibold enhanced-interactive shadow-lg hover:shadow-2xl"
+                    className="enhanced-glassmorphism px-6 py-4 rounded-2xl text-base flex items-center gap-3 font-body font-semibold enhanced-interactive shadow-lg hover:shadow-2xl"
                     title={`${skill.name} - ${skill.level}`}
                   >
                     <span className="text-orange-500 dark:text-orange-400">{skill.icon}</span>
@@ -175,25 +175,25 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full blur-2xl opacity-40 animate-pulse-glow"></div>
               <Avatar className="w-64 h-64 border-4 border-gradient shadow-2xl relative z-10 enhanced-glow">
                 <AvatarImage src="/lovable-uploads/6823fcd0-ca17-4f62-8923-7501bae70db1.png" alt="Profile picture of Dhriman Deka" />
-                <AvatarFallback className="text-4xl font-bold font-intro">DD</AvatarFallback>
+                <AvatarFallback className="text-4xl font-bold font-heading">DD</AvatarFallback>
               </Avatar>
             </div>
             
             <div className="space-y-8 w-full">
               <div className="p-8 bg-white/70 dark:bg-gray-800/70 rounded-2xl backdrop-blur-lg border-2 border-orange-200/40 dark:border-orange-700/40 card-tilt transition-all duration-500 hover:border-orange-400/70 dark:hover:border-orange-600/70 shimmer-overlay overflow-hidden shadow-xl hover:shadow-2xl">
-                <h4 className="text-2xl font-bold mb-4 text-gradient font-intro">Data Engineering</h4>
+                <h4 className="text-2xl font-bold mb-4 text-gradient font-heading">Data Engineering</h4>
                 <ul className="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-300 text-base">
                   {technologies[2].items.map((item, i) => (
-                    <li key={i} className="font-league font-medium">{item}</li>
+                    <li key={i} className="font-body font-medium">{item}</li>
                   ))}
                 </ul>
               </div>
               
               <div className="p-8 bg-white/70 dark:bg-gray-800/70 rounded-2xl backdrop-blur-lg border-2 border-orange-200/40 dark:border-orange-700/40 card-tilt transition-all duration-500 hover:border-orange-400/70 dark:hover:border-orange-600/70 shimmer-overlay overflow-hidden shadow-xl hover:shadow-2xl">
-                <h4 className="text-2xl font-bold mb-4 text-gradient font-intro">Cloud & Tools</h4>
+                <h4 className="text-2xl font-bold mb-4 text-gradient font-heading">Cloud & Tools</h4>
                 <ul className="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-300 text-base">
                   {technologies[3].items.map((item, i) => (
-                    <li key={i} className="font-league font-medium">{item}</li>
+                    <li key={i} className="font-body font-medium">{item}</li>
                   ))}
                 </ul>
               </div>

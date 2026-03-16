@@ -82,7 +82,7 @@ export default function NavBar() {
       <div className="container mx-auto px-6 md:px-8 flex items-center justify-between">
         <a 
           href="#home" 
-          className="text-2xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-intro enhanced-glow"
+          className="text-2xl font-bold text-gray-900 dark:text-amber-400 tracking-tight font-heading enhanced-glow"
           aria-label="Dhriman Deka - Go to home section"
         >
           DHRIMAN DEKA
@@ -127,7 +127,7 @@ export default function NavBar() {
                         <li key={item.href} className="w-full">
                           <a
                             href={item.href}
-                            className={`text-3xl font-bold transition-colors block py-3 text-center font-league ${
+                            className={`text-3xl font-bold transition-colors block py-3 text-center font-body ${
                               activeSection === item.href.substring(1)
                                 ? "text-gradient"
                                 : "text-gray-800 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
@@ -176,7 +176,7 @@ export default function NavBar() {
                     
                     <div className="mt-16 text-center">
                       <Button 
-                        className="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white h-14 px-8 font-league font-bold text-lg rounded-2xl shadow-2xl enhanced-glow"
+                        className="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white h-14 px-8 font-body font-bold text-lg rounded-2xl shadow-2xl enhanced-glow"
                         onClick={() => {
                           setMenuOpen(false);
                           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -197,7 +197,7 @@ export default function NavBar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className={`relative px-4 py-3 rounded-full font-bold text-sm transition-colors font-league ${
+                  className={`relative px-4 py-3 rounded-full font-bold text-sm transition-colors font-body ${
                     activeSection === item.href.substring(1)
                       ? "text-white dark:text-gray-900"
                       : "text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100"
@@ -217,7 +217,7 @@ export default function NavBar() {
             <li>
               <a
                 href="#contact"
-                className="ml-4 px-6 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white rounded-full text-sm font-bold transition-all duration-500 font-league shadow-xl hover:shadow-2xl hover:scale-105 enhanced-glow"
+                className="ml-4 px-6 py-3 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 hover:from-orange-600 hover:via-orange-700 hover:to-amber-600 text-white rounded-full text-sm font-bold transition-all duration-500 font-body shadow-xl hover:shadow-2xl hover:scale-105 enhanced-glow"
               >
                 Contact Me
               </a>

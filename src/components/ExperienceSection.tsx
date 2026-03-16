@@ -50,7 +50,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.8 }}
             className="inline-block mb-6"
           >
-            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-body shadow-xl">
               <Zap className="w-5 h-5 mr-2 animate-pulse-glow" />
               Career Journey
             </span>
@@ -60,7 +60,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="type-h2 font-bold mb-8 font-intro text-gradient"
+            className="type-h2 font-bold mb-8 font-heading text-gradient"
           >
             Experience
           </motion.h2>
@@ -68,7 +68,7 @@ export default function ExperienceSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league font-medium"
+            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-body font-medium"
           >
             My professional journey in AI, data science, and research
           </motion.p>
@@ -99,17 +99,17 @@ export default function ExperienceSection() {
               <div className="enhanced-glassmorphism p-10 enhanced-glow border-gradient shadow-2xl hover:shadow-3xl transition-all duration-700 card-tilt shimmer-overlay overflow-hidden">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-7">
                   <div>
-                    <h3 className="text-3xl font-bold text-gray-800 dark:text-orange-300 font-intro mb-3">{experience.title}</h3>
+                    <h3 className="text-3xl font-bold text-gray-800 dark:text-orange-300 font-heading mb-3">{experience.title}</h3>
                     {experience.company && (
-                      <p className="text-xl text-orange-600 dark:text-orange-400 font-league font-bold mb-2">{experience.company}</p>
+                      <p className="text-xl text-orange-600 dark:text-orange-400 font-body font-bold mb-2">{experience.company}</p>
                     )}
-                    <p className="text-lg text-gray-600 dark:text-gray-400 font-league font-semibold">{experience.location}</p>
+                    <p className="text-lg text-gray-600 dark:text-gray-400 font-body font-semibold">{experience.location}</p>
                   </div>
-                  <div className="text-base font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 dark:from-orange-900/70 dark:to-amber-900/70 dark:text-orange-400 px-5 py-3 rounded-2xl mt-4 lg:mt-0 font-league shadow-2xl">
+                  <div className="text-base font-bold bg-gradient-to-r from-orange-100 to-amber-100 text-orange-800 dark:from-orange-900/70 dark:to-amber-900/70 dark:text-orange-400 px-5 py-3 rounded-2xl mt-4 lg:mt-0 font-body shadow-2xl">
                     {experience.period}
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 font-league leading-relaxed text-lg">
+                <p className="text-gray-600 dark:text-gray-300 font-body leading-relaxed text-lg">
                   {experience.description}
                 </p>
               </div>

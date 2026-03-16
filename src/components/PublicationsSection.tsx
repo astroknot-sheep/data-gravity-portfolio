@@ -37,7 +37,7 @@ export default function PublicationsSection() {
             transition={{ duration: 0.8 }}
             className="inline-block mb-6"
           >
-            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-body shadow-xl">
               <Award className="w-5 h-5 mr-2 animate-pulse-glow" />
               Research & Publications
             </span>
@@ -47,7 +47,7 @@ export default function PublicationsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="type-h2 font-bold mb-6 font-intro text-gray-800 dark:text-amber-300"
+            className="type-h2 font-bold mb-6 font-heading text-gray-800 dark:text-amber-300"
           >
             Publications & Achievements
           </motion.h2>
@@ -55,7 +55,7 @@ export default function PublicationsSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-league"
+            className="text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-body"
           >
             Academic contributions and professional recognition in the field of data science
           </motion.p>
@@ -79,29 +79,29 @@ export default function PublicationsSection() {
                 
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-intro">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white font-heading">
                       "Comparative Analysis of NPS & UPS from an Employee Perspective and Evaluation of Fiscal Implications of Pension Reforms"
                     </h3>
-                    <div className="bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-medium font-league shadow-lg">
+                    <div className="bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-medium font-body shadow-lg">
                       Top Ten Ranked
                     </div>
                   </div>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 font-league text-lg">
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 font-body text-lg">
                     Co-authored a top-ten ranked paper in SSRN's Political Methods eJournal, with 147+ abstract views and 33+ downloads. A comprehensive analysis with significant implications for pension reform policy.
                   </p>
                   
                   <div className="flex flex-wrap gap-3 mb-6">
-                    <span className="text-sm py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-league font-semibold">
+                    <span className="text-sm py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-body font-semibold">
                       Political Methods eJournal
                     </span>
-                    <span className="text-sm py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-league font-semibold">
+                    <span className="text-sm py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 font-body font-semibold">
                       Economic Research
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-6 text-base text-gray-500 dark:text-gray-400 font-league">
+                    <div className="flex items-center space-x-6 text-base text-gray-500 dark:text-gray-400 font-body">
                       <div className="flex items-center">
                         <Eye className="w-5 h-5 mr-2 text-amber-500" />
                         <span>147+ views</span>
@@ -116,7 +116,7 @@ export default function PublicationsSection() {
                       href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5088591" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors font-medium font-league text-lg enhanced-link px-4 py-2 rounded-xl"
+                      className="flex items-center text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors font-medium font-body text-lg enhanced-link px-4 py-2 rounded-xl"
                     >
                       View Publication <ExternalLink className="w-5 h-5 ml-2" />
                     </a>

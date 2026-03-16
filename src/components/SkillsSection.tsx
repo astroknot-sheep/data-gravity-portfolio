@@ -103,7 +103,7 @@ export default function SkillsSection() {
             transition={{ duration: 0.9 }}
             className="inline-block mb-6"
           >
-            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-league shadow-xl">
+            <span className="inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-gradient-to-r from-orange-100/90 to-amber-100/90 dark:from-orange-900/70 dark:to-amber-900/70 text-orange-800 dark:text-orange-200 border-2 border-orange-200/60 dark:border-orange-700/60 font-body shadow-xl">
               <Sparkles className="w-5 h-5 mr-2 animate-pulse-glow" />
               Technical Expertise
             </span>
@@ -113,7 +113,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="type-h2 font-bold mb-8 font-intro text-gray-900 dark:text-white tracking-tight"
+            className="type-h2 font-bold mb-8 font-heading text-gray-900 dark:text-white tracking-tight"
           >
             Skills & Technologies
           </motion.h2>
@@ -122,7 +122,7 @@ export default function SkillsSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-league leading-relaxed"
+            className="text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-body leading-relaxed"
           >
             Specialized in machine learning, data science, and engineering with expertise across multiple domains
           </motion.p>
@@ -160,7 +160,7 @@ export default function SkillsSection() {
                           {category.name === "Tools & Cloud" && <Cloud className="w-8 h-8" />}
                         </div>
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-intro">{category.name}</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-heading">{category.name}</h3>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-5">
@@ -180,7 +180,7 @@ export default function SkillsSection() {
                           <div className="text-orange-600 dark:text-orange-400 mb-4 group-hover/skill:text-orange-700 dark:group-hover/skill:text-orange-300 transition-colors duration-500 group-hover/skill:scale-125 transform">
                             {skill.icon}
                           </div>
-                          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-league leading-tight">
+                          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center font-body leading-tight">
                             {skill.name}
                           </span>
                         </motion.div>
