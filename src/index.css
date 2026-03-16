@@ -64,7 +64,7 @@
 
   *, *::before, *::after {
     @apply border-border;
-    font-family: 'League Spartan', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
 
   body {
