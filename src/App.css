@@ -42,21 +42,7 @@
   color: #888;
 }
 
-/* Dark mode specific styles */
-.dark body {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-.dark .glassmorphism {
-  background-color: rgba(30, 30, 30, 0.5);
-  backdrop-filter: blur(8px);
-  border-color: rgba(50, 50, 50, 0.5);
-}
-
-.dark .glow::after {
-  background: radial-gradient(circle, rgba(60, 60, 60, 0.3) 0%, rgba(20, 20, 20, 0.1) 70%);
-}
+/* Dark mode handled via semantic tokens in index.css */
 
 /* Three.js canvas specific styles */
 .three-canvas {
