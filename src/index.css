@@ -6,60 +6,66 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3%;
-    --foreground: 40 100% 95%;
-    --card: 0 0% 5%;
-    --card-foreground: 40 100% 95%;
-    --popover: 0 0% 4%;
-    --popover-foreground: 40 100% 95%;
-    --primary: 38 100% 50%;
-    --primary-foreground: 0 0% 3%;
-    --secondary: 45 100% 55%;
-    --secondary-foreground: 0 0% 3%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 40 30% 60%;
-    --accent: 32 100% 55%;
-    --accent-foreground: 0 0% 3%;
-    --border: 40 50% 15%;
-    --input: 40 50% 15%;
-    --ring: 38 100% 50%;
+    /* Editorial palette: warm bone background, ink charcoal text, terracotta + olive accents */
+    --background: 36 25% 94%;
+    --foreground: 20 14% 12%;
+    --card: 36 30% 97%;
+    --card-foreground: 20 14% 12%;
+    --popover: 36 30% 97%;
+    --popover-foreground: 20 14% 12%;
+    --primary: 12 55% 48%;          /* terracotta */
+    --primary-foreground: 36 30% 97%;
+    --secondary: 80 18% 38%;        /* olive */
+    --secondary-foreground: 36 30% 97%;
+    --muted: 36 18% 88%;
+    --muted-foreground: 20 10% 38%;
+    --accent: 28 70% 55%;           /* warm rust */
+    --accent-foreground: 20 14% 12%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 36 30% 97%;
+    --border: 30 15% 80%;
+    --input: 30 15% 80%;
+    --ring: 12 55% 48%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 3%;
-    --sidebar-foreground: 40 100% 95%;
-    --sidebar-primary: 38 100% 50%;
-    --sidebar-primary-foreground: 0 0% 3%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 40 100% 95%;
-    --sidebar-border: 40 50% 15%;
-    --sidebar-ring: 38 100% 50%;
+    --sidebar-background: 36 25% 94%;
+    --sidebar-foreground: 20 14% 12%;
+    --sidebar-primary: 12 55% 48%;
+    --sidebar-primary-foreground: 36 30% 97%;
+    --sidebar-accent: 36 18% 88%;
+    --sidebar-accent-foreground: 20 14% 12%;
+    --sidebar-border: 30 15% 80%;
+    --sidebar-ring: 12 55% 48%;
   }
 
   .dark {
-    --background: 0 0% 2%;
-    --foreground: 40 100% 95%;
-    --card: 0 0% 4%;
-    --card-foreground: 40 100% 95%;
-    --popover: 0 0% 3%;
-    --popover-foreground: 40 100% 95%;
-    --primary: 38 100% 50%;
-    --primary-foreground: 0 0% 2%;
-    --secondary: 45 100% 55%;
-    --secondary-foreground: 0 0% 2%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 40 30% 55%;
-    --accent: 32 100% 55%;
-    --accent-foreground: 0 0% 2%;
-    --border: 40 40% 12%;
-    --input: 40 40% 12%;
-    --ring: 38 100% 50%;
-    --sidebar-background: 0 0% 2%;
-    --sidebar-foreground: 40 100% 95%;
-    --sidebar-primary: 38 100% 50%;
-    --sidebar-primary-foreground: 0 0% 2%;
-    --sidebar-accent: 0 0% 6%;
-    --sidebar-accent-foreground: 40 100% 95%;
-    --sidebar-border: 40 40% 12%;
-    --sidebar-ring: 38 100% 50%;
+    /* Dark editorial: ink charcoal background with terracotta + sage */
+    --background: 20 12% 9%;
+    --foreground: 36 25% 92%;
+    --card: 20 12% 12%;
+    --card-foreground: 36 25% 92%;
+    --popover: 20 12% 11%;
+    --popover-foreground: 36 25% 92%;
+    --primary: 14 65% 58%;          /* glowing terracotta */
+    --primary-foreground: 20 12% 9%;
+    --secondary: 75 20% 55%;        /* sage */
+    --secondary-foreground: 20 12% 9%;
+    --muted: 20 10% 18%;
+    --muted-foreground: 36 15% 65%;
+    --accent: 28 75% 62%;           /* warm rust glow */
+    --accent-foreground: 20 12% 9%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 36 25% 92%;
+    --border: 20 10% 22%;
+    --input: 20 10% 22%;
+    --ring: 14 65% 58%;
+    --sidebar-background: 20 12% 9%;
+    --sidebar-foreground: 36 25% 92%;
+    --sidebar-primary: 14 65% 58%;
+    --sidebar-primary-foreground: 20 12% 9%;
+    --sidebar-accent: 20 10% 15%;
+    --sidebar-accent-foreground: 36 25% 92%;
+    --sidebar-border: 20 10% 22%;
+    --sidebar-ring: 14 65% 58%;
   }
 
   *, *::before, *::after {
