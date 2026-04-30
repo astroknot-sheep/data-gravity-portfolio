@@ -1,180 +1,94 @@
 import { motion } from "framer-motion";
-import { FileText, ExternalLink, Eye, Download, BookOpen } from "lucide-react";
 
-const publications = [
+const writing = [
   {
-    title: "Comparative Analysis of NPS and UPS from an Employee Perspective",
-    subtitle: "Evaluation of Fiscal Implications of Pension Reforms",
-    platform: "SSRN",
-    stats: { views: "2,848+", downloads: "468+" },
+    year: "2024",
+    venue: "SSRN",
+    title: "A comparative look at NPS and UPS from an employee&rsquo;s perspective",
+    note: "A small paper on Indian pension reform. Mostly accounting and assumptions.",
     link: "https://ssrn.com/",
-    type: "Research Paper"
-  }
-];
-
-const articles = [
-  {
-    title: "Teaching AI to Play Ludo: A 10,000-Episode Deep Reinforcement Learning Journey",
-    description: "Deep dive into building a DQN agent from scratch with 9,000+ lines of code, achieving 43% win rate in 4-player games.",
-    platform: "Medium",
-    link: "https://medium.com/@not_mordecai/teaching-ai-to-play-ludo-a-10-000-episode-deep-reinforcement-learning-journey-b8aacebc1044",
-    type: "Technical Article"
   },
   {
-    title: "I Built a Transformer to Predict Stocks — It Achieved 53.7% Accuracy",
-    description: "A journey into building stock prediction models with transformers and the lessons learned.",
-    platform: "Medium",
+    year: "2024",
+    venue: "Medium",
+    title: "Teaching a DQN agent to play Ludo, badly",
+    note: "10,000 episodes, 9k lines of code, 43% win rate. Mostly notes-to-self.",
+    link: "https://medium.com/@not_mordecai/teaching-ai-to-play-ludo-a-10-000-episode-deep-reinforcement-learning-journey-b8aacebc1044",
+  },
+  {
+    year: "2024",
+    venue: "Medium",
+    title: "I built a transformer to predict stocks. It lost the money.",
+    note: "53.7% accuracy and a tidy reminder that the market doesn&rsquo;t care.",
     link: "https://medium.com/@not_mordecai/i-built-a-transformer-to-predict-stocks-it-achieved-53-7-accuracy-and-lost-all-its-money-dfe7a8a44a14",
-    type: "Technical Article"
-  }
+  },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-};
 
 export default function F1PublicationsSection() {
   return (
-    <section id="publications" className="py-32 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-      
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+    <section id="publications" className="py-32 lg:py-44">
+      <div className="container mx-auto px-6 lg:px-10">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="text-xs text-muted-foreground mb-16"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
-              Writing
-            </span>
-            <div className="h-px flex-1 bg-border max-w-24" />
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold uppercase text-foreground leading-[0.9]">
-            Research &<br />
-            <span className="text-primary">Publications</span>
-          </h2>
-        </motion.div>
+          — Writing
+        </motion.p>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Research Papers */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-7 text-2xl md:text-3xl lg:text-4xl font-light leading-[1.3] tracking-[-0.01em] text-foreground"
+            style={{ textTransform: "none" }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <FileText className="w-5 h-5 text-primary" />
-              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                Research Papers
-              </h3>
-            </div>
-            
-            {publications.map((pub) => (
-              <motion.a
-                key={pub.title}
-                href={pub.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={itemVariants}
-                className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
-              >
-                {/* Top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary border border-primary/30 px-3 py-1">
-                      {pub.type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{pub.platform}</span>
-                  </div>
-
-                  <h4 className="text-xl font-bold text-foreground mb-2 leading-tight">
-                    {pub.title}
-                  </h4>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    {pub.subtitle}
-                  </p>
-
-                  <div className="flex items-center gap-6 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-2">
-                      <Eye className="w-4 h-4" />
-                      {pub.stats.views} views
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <Download className="w-4 h-4" />
-                      {pub.stats.downloads} downloads
-                    </span>
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* Technical Articles */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <BookOpen className="w-5 h-5 text-primary" />
-              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                Technical Articles
-              </h3>
-            </div>
-            
-            {articles.map((article) => (
-              <motion.a
-                key={article.title}
-                href={article.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={itemVariants}
-                className="group block bg-card border border-border hover:border-primary/50 transition-all duration-300 relative overflow-hidden mb-4"
-              >
-                {/* Top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent border border-accent/30 px-3 py-1">
-                      {article.type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{article.platform}</span>
-                  </div>
-
-                  <h4 className="text-lg font-bold text-foreground mb-2 leading-tight line-clamp-2">
-                    {article.title}
-                  </h4>
-                  <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
-                    {article.description}
-                  </p>
-
-                  <div className="flex items-center gap-2 text-primary">
-                    <span className="text-xs font-bold uppercase tracking-wider">Read Article</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
+            Notes I&rsquo;ve written down — partly to remember, partly to be corrected.
+          </motion.h2>
         </div>
+
+        <ul>
+          {writing.map((w, i) => (
+            <motion.li
+              key={w.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="border-t border-border/40 last:border-b py-8 lg:py-10 group"
+            >
+              <a
+                href={w.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid lg:grid-cols-12 gap-4 lg:gap-10 items-start"
+              >
+                <span className="lg:col-span-1 text-xs text-muted-foreground pt-1" style={{ textTransform: "none" }}>
+                  {w.year}
+                </span>
+                <div className="lg:col-span-7">
+                  <h3
+                    className="text-xl md:text-2xl font-light text-foreground tracking-[-0.01em] group-hover:text-primary transition-colors"
+                    style={{ textTransform: "none" }}
+                    dangerouslySetInnerHTML={{ __html: w.title }}
+                  />
+                  <p
+                    className="mt-2 text-sm text-muted-foreground leading-relaxed"
+                    style={{ textTransform: "none" }}
+                    dangerouslySetInnerHTML={{ __html: w.note }}
+                  />
+                </div>
+                <span className="lg:col-span-4 text-xs text-muted-foreground lg:text-right" style={{ textTransform: "none" }}>
+                  {w.venue} ↗
+                </span>
+              </a>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   );
