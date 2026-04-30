@@ -24,8 +24,8 @@ export default function F1HeroSection() {
               transition={{ duration: 0.6 }}
               className="text-sm text-muted-foreground mb-10 max-w-md leading-relaxed"
             >
-              Dhriman Deka — based in Bengaluru. Working with language models,
-              messy data, and the slow art of making them useful.
+              Dhriman Deka — based in Bengaluru. Still learning how data and
+              language models actually work in the wild.
             </motion.p>
 
             <motion.h1
@@ -35,11 +35,10 @@ export default function F1HeroSection() {
               className="text-[clamp(2.5rem,8vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.03em] normal-case text-foreground"
               style={{ textTransform: "none" }}
             >
-              I make models<br />
-              that <span className="text-primary italic font-light">behave</span> in production —
-              <br />
-              and break them<br />
-              until they don&rsquo;t.
+              Mostly trying<br />
+              to make small things <span className="text-primary italic font-light">work</span><br />
+              a little better<br />
+              than yesterday.
             </motion.h1>
 
             <motion.div
@@ -56,7 +55,7 @@ export default function F1HeroSection() {
                 }}
                 className="text-foreground border-b border-primary pb-1 hover:text-primary transition-colors"
               >
-                Selected work
+                A few things I&rsquo;ve made
               </a>
               <a
                 href="#contact"
@@ -66,7 +65,7 @@ export default function F1HeroSection() {
                 }}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                Get in touch ↗
+                Say hello ↗
               </a>
             </motion.div>
           </div>
@@ -85,7 +84,7 @@ export default function F1HeroSection() {
                 className="w-full grayscale opacity-90"
               />
               <p className="mt-3 text-[11px] text-muted-foreground tracking-wide">
-                Bengaluru, IN — currently building.
+                Bengaluru, IN — usually reading.
               </p>
             </div>
           </motion.div>
@@ -99,8 +98,8 @@ export default function F1HeroSection() {
         transition={{ duration: 0.6, delay: 1 }}
         className="container mx-auto px-6 lg:px-10 relative z-10 flex flex-wrap justify-between items-end gap-4 text-[11px] text-muted-foreground"
       >
-        <span>(2026 — open to collaborations)</span>
-        <span className="hidden md:inline">Notes, papers & half-finished ideas below ↓</span>
+        <span>(2026 — happy to chat)</span>
+        <span className="hidden md:inline">Some notes and half-finished ideas below ↓</span>
         <span>v.04</span>
       </motion.div>
     </section>

@@ -28,17 +28,16 @@ export default function F1AboutSection() {
               className="text-2xl md:text-3xl lg:text-4xl leading-[1.3] tracking-[-0.01em] text-foreground font-light"
               style={{ textTransform: "none" }}
             >
-              I spend most of my week training, breaking, and re-training models —
-              mostly <span className="text-primary">language</span> ones, sometimes the
-              kind that have to run inside something embarrassingly small. The interesting
-              bit is rarely the model. It&rsquo;s the data, the eval, and the dozen
-              quiet decisions that decide whether the thing actually helps anyone.
+              Most of my week goes into poking at <span className="text-primary">language</span> models,
+              cleaning up data, and re-running things that didn&rsquo;t work the
+              first time. I&rsquo;m still figuring a lot of it out — the model is
+              usually the easy part; the data and the eval are where I get humbled.
             </p>
 
             <p className="mt-10 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl" style={{ textTransform: "none" }}>
-              I read more papers than I probably should, write small tools to keep
-              myself honest, and try to leave the codebase a little less haunted
-              than I found it.
+              I read papers slower than I&rsquo;d like, write small scripts to
+              keep myself honest, and try not to make the codebase worse on the
+              way out.
             </p>
           </motion.div>
 
