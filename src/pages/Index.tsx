@@ -10,6 +10,7 @@ import HorizontalExperienceSection from "@/components/HorizontalExperienceSectio
 import F1ContactSection from "@/components/F1ContactSection";
 import F1Footer from "@/components/F1Footer";
 import IntroAnimation from "@/components/IntroAnimation";
+import ScrollReveal3DText from "@/components/ScrollReveal3DText";
 
 export default function Index() {
   const [showIntro, setShowIntro] = useState(true);
@@ -39,6 +40,15 @@ export default function Index() {
       <main className="relative z-10">
         <F1HeroSection />
         <F1AboutSection />
+        <ScrollReveal3DText
+          label="— In practice"
+          lines={[
+            "Read the data first.",
+            "Write the eval before the model.",
+            "Ship the boring version.",
+            "Then make it a little better.",
+          ]}
+        />
         <BentoSkillsSection />
         <HorizontalProjectsSection />
         <F1PublicationsSection />
