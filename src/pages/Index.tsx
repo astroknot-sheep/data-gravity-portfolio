@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import SpeedLinesBackground from "@/components/SpeedLinesBackground";
+import ScrollDriven3D from "@/components/ScrollDriven3D";
 import F1NavBar from "@/components/F1NavBar";
 import F1HeroSection from "@/components/F1HeroSection";
 import F1AboutSection from "@/components/F1AboutSection";
@@ -31,6 +32,9 @@ export default function Index() {
       
       {/* Background */}
       <SpeedLinesBackground />
+
+      {/* Subtle scroll-driven 3D accent */}
+      <ScrollDriven3D />
       
       {/* Navigation */}
       <F1NavBar />
