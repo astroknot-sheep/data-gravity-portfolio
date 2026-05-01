@@ -49,19 +49,19 @@ export default function F1AboutSection() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="lg:col-span-4 lg:pt-3"
           >
-            <dl className="space-y-5 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
               {[
                 ["Working on", "LLM evaluation, retrieval"],
                 ["Stack", "Python, PyTorch, vLLM"],
                 ["Reading", "Anthropic interp papers"],
                 ["Listening", "Caribou — Suddenly"],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-6 border-b border-border/40 pb-4">
-                  <dt className="text-muted-foreground">{k}</dt>
-                  <dd className="text-foreground text-right" style={{ textTransform: "none" }}>{v}</dd>
+                <div key={k} className="glass-card rounded-[14px] px-5 py-4">
+                  <p className="text-[11px] text-muted-foreground mb-1.5" style={{ textTransform: "none" }}>{k}</p>
+                  <p className="text-sm text-foreground" style={{ textTransform: "none" }}>{v}</p>
                 </div>
               ))}
-            </dl>
+            </div>
           </motion.div>
         </div>
       </div>

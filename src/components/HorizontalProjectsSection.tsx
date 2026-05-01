@@ -42,15 +42,15 @@ export default function HorizontalProjectsSection() {
   return (
     <section id="projects" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-16"
+          className="mb-12"
         >
-          — A few things I&rsquo;ve made
-        </motion.p>
+          <span className="pill-badge">A few things I&rsquo;ve made</span>
+        </motion.div>
 
         <ul>
           {projects.map((p, i) => (

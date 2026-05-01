@@ -28,15 +28,15 @@ export default function F1PublicationsSection() {
   return (
     <section id="publications" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-16"
+          className="mb-12"
         >
-          — Writing
-        </motion.p>
+          <span className="pill-badge">Writing</span>
+        </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
           <motion.h2
