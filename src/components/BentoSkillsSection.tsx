@@ -6,13 +6,6 @@ const groups = [
   { label: "Touched, still learning", items: ["TypeScript", "JAX", "Triton", "MLflow", "Airflow", "Spark"] },
 ];
 
-const marqueeItems = [
-  "Python", "PyTorch", "Hugging Face", "vLLM", "FastAPI",
-  "Transformers", "RAG", "LoRA / QLoRA", "Pandas", "SQL",
-  "Docker", "AWS", "TypeScript", "JAX", "Triton",
-  "MLflow", "Airflow", "Spark",
-];
-
 export default function BentoSkillsSection() {
   return (
     <section id="skills" className="py-32 lg:py-44">
@@ -61,30 +54,6 @@ export default function BentoSkillsSection() {
               </motion.div>
             ))}
           </div>
-        </div>
-
-        {/* Continuous left-to-right marquee — single, simple, looping */}
-        <div className="mt-24 lg:mt-32 -mx-6 lg:-mx-10 overflow-hidden border-y border-border/40 py-6">
-          <motion.div
-            className="flex gap-12 whitespace-nowrap will-change-transform"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 40,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-          >
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span
-                key={`${item}-${i}`}
-                className="text-2xl md:text-3xl font-light text-foreground/70 flex items-center gap-12"
-                style={{ textTransform: "none" }}
-              >
-                {item}
-                <span className="text-primary/60">•</span>
-              </span>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
