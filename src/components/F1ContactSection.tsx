@@ -4,15 +4,15 @@ export default function F1ContactSection() {
   return (
     <section id="contact" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="text-xs text-muted-foreground mb-16"
         >
-          <span className="pill-badge">Say hello</span>
-        </motion.div>
+          — Say hello
+        </motion.p>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
           <motion.h2

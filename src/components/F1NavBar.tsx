@@ -37,9 +37,9 @@ export default function F1NavBar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/40 border-b border-white/[0.04]"
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <div className="container mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 lg:px-10 py-6 flex items-center justify-between">
         <button
           onClick={() => scrollTo("home")}
           className="text-sm text-foreground hover:text-primary transition-colors"

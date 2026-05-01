@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
 import developerPhoto from "@/assets/developer-photo.png";
 
 export default function F1HeroSection() {
@@ -19,17 +18,15 @@ export default function F1HeroSection() {
         <div className="grid lg:grid-cols-12 gap-10 w-full items-end">
           {/* Left — typographic statement */}
           <div className="lg:col-span-8">
-            <motion.div
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="mb-8"
+              className="text-sm text-muted-foreground mb-10 max-w-md leading-relaxed"
             >
-              <span className="pill-badge">
-                <MapPin className="w-3 h-3 text-primary" />
-                Based in Bengaluru
-              </span>
-            </motion.div>
+              Dhriman Deka — based in Bengaluru. Still learning how data and
+              language models actually work in the wild.
+            </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -39,26 +36,16 @@ export default function F1HeroSection() {
               style={{ textTransform: "none" }}
             >
               Mostly trying<br />
-              to make small things <span className="text-primary italic font-light amber-glow">work</span><br />
+              to make small things <span className="text-primary italic font-light">work</span><br />
               a little better<br />
               than yesterday.
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed"
-              style={{ textTransform: "none" }}
-            >
-              Still learning how data and language models actually work in the wild.
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-4 text-sm"
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm"
             >
               <a
                 href="#projects"
@@ -66,10 +53,9 @@ export default function F1HeroSection() {
                   e.preventDefault();
                   document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground hover:-translate-y-0.5 transition-transform"
-                style={{ boxShadow: "0 10px 40px hsl(var(--primary) / 0.25)" }}
+                className="text-foreground border-b border-primary pb-1 hover:text-primary transition-colors"
               >
-                View my work
+                A few things I&rsquo;ve made
               </a>
               <a
                 href="#contact"
@@ -77,7 +63,7 @@ export default function F1HeroSection() {
                   e.preventDefault();
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-border hover:border-primary hover:text-primary text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 Say hello ↗
               </a>
@@ -92,19 +78,11 @@ export default function F1HeroSection() {
             className="lg:col-span-4 hidden lg:block"
           >
             <div className="relative w-full max-w-[280px] ml-auto">
-              <div
-                className="relative p-[1px] rounded-[20px]"
-                style={{
-                  background:
-                    "linear-gradient(135deg, hsl(var(--primary) / 0.7), transparent 60%)",
-                }}
-              >
-                <img
-                  src={developerPhoto}
-                  alt="Dhriman Deka"
-                  className="w-full rounded-[19px] grayscale opacity-95"
-                />
-              </div>
+              <img
+                src={developerPhoto}
+                alt="Dhriman Deka"
+                className="w-full grayscale opacity-90"
+              />
               <p className="mt-3 text-[11px] text-muted-foreground tracking-wide">
                 Bengaluru, IN — usually reading.
               </p>

@@ -13,15 +13,15 @@ export default function BentoSkillsSection() {
   return (
     <section id="skills" className="py-32 lg:py-44 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-10 mb-16">
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="text-xs text-muted-foreground mb-8"
         >
-          <span className="pill-badge">What I use</span>
-        </motion.div>
+          — What I use
+        </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
