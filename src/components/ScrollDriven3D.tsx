@@ -31,7 +31,7 @@ export default function ScrollDriven3D() {
     const fg = getComputedStyle(document.documentElement)
       .getPropertyValue("--foreground")
       .trim();
-    const color = new THREE.Color(`hsl(${fg.replaceAll("%", "%")})`);
+    const color = new THREE.Color(`hsl(${fg})`);
 
     const geometry = new THREE.IcosahedronGeometry(1.4, 1);
     const wire = new THREE.WireframeGeometry(geometry);
