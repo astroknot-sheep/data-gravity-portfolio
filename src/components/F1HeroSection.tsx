@@ -81,7 +81,7 @@ export default function F1HeroSection() {
               <img
                 src={developerPhoto}
                 alt="Dhriman Deka"
-                className="w-full grayscale opacity-90"
+                className="w-full rounded-full"
               />
               <p className="mt-3 text-[11px] text-muted-foreground tracking-wide">
                 Bengaluru, IN — usually reading.
