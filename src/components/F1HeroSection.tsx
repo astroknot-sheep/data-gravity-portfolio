@@ -125,6 +125,28 @@ export default function F1HeroSection() {
       >
         <span>↓ scroll, slowly</span>
       </motion.div>
+
+      {/* Giant brand mark — sits at the bottom edge as a bespoke signature */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mt-16 lg:mt-24 overflow-hidden select-none pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="whitespace-nowrap leading-[0.8] tracking-[-0.05em] text-center"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(5rem, 22vw, 22rem)",
+            fontWeight: 500,
+            WebkitTextStroke: "1px hsl(var(--foreground) / 0.5)",
+            color: "transparent",
+          }}
+        >
+          dhriman<span className="text-primary" style={{ WebkitTextStroke: "0" }}>.</span>deka
+        </div>
+      </motion.div>
     </section>
   );
 }
