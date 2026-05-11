@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import SpeedLinesBackground from "@/components/SpeedLinesBackground";
 import F1NavBar from "@/components/F1NavBar";
 import F1HeroSection from "@/components/F1HeroSection";
