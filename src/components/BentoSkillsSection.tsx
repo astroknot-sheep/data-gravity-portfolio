@@ -18,9 +18,9 @@ export default function BentoSkillsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-8"
+          className="text-[11px] text-muted-foreground/70 mb-8 font-mono-ui tracking-wider"
         >
-          — What I use
+          02 — stack
         </motion.p>
 
         <motion.h2

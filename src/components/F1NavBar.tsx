@@ -12,6 +12,21 @@ const navItems = [
 
 export default function F1NavBar() {
   const [active, setActive] = useState("home");
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const update = () => {
+      const t = new Date().toLocaleTimeString("en-GB", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      setTime(t);
+    };
+    update();
+    const id = setInterval(update, 30000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,13 +57,14 @@ export default function F1NavBar() {
       <div className="container mx-auto px-6 lg:px-10 py-6 flex items-center justify-between">
         <button
           onClick={() => scrollTo("home")}
-          className="text-sm text-foreground hover:text-primary transition-colors"
+          className="text-sm text-foreground hover:text-primary transition-colors flex items-center gap-2"
           style={{ textTransform: "none" }}
         >
-          Dhriman Deka<span className="text-muted-foreground">, ds &amp; ml.</span>
+          <span className="inline-block w-1.5 h-1.5 bg-primary rounded-full" />
+          Dhriman Deka
         </button>
 
-        <nav className="hidden md:flex items-center gap-7 text-sm">
+        <nav className="hidden md:flex items-center gap-7 text-xs font-mono-ui">
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -56,19 +72,22 @@ export default function F1NavBar() {
               className={`transition-colors ${
                 active === item.id ? "text-primary" : "text-muted-foreground hover:text-foreground"
               }`}
-              style={{ textTransform: "none" }}
+              style={{ textTransform: "lowercase" }}
             >
               {item.label}
             </button>
           ))}
+          <span className="text-muted-foreground/60 tabular-nums pl-2 border-l border-border/40">
+            blr {time}
+          </span>
         </nav>
 
         <button
           onClick={() => scrollTo("contact")}
-          className="md:hidden text-sm text-primary"
-          style={{ textTransform: "none" }}
+          className="md:hidden text-xs font-mono-ui text-primary"
+          style={{ textTransform: "lowercase" }}
         >
-          Contact ↗
+          contact ↗
         </button>
       </div>
     </motion.header>

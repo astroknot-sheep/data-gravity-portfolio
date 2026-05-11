@@ -33,9 +33,9 @@ export default function F1PublicationsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-16"
+          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
         >
-          — Writing
+          04 — writing
         </motion.p>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
@@ -67,7 +67,7 @@ export default function F1PublicationsSection() {
                 rel="noopener noreferrer"
                 className="grid lg:grid-cols-12 gap-4 lg:gap-10 items-start"
               >
-                <span className="lg:col-span-1 text-xs text-muted-foreground pt-1" style={{ textTransform: "none" }}>
+                <span className="lg:col-span-1 text-xs text-muted-foreground pt-1 font-mono-ui" style={{ textTransform: "none" }}>
                   {w.year}
                 </span>
                 <div className="lg:col-span-7">
