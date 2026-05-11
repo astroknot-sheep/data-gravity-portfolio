@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import developerPhoto from "@/assets/developer-photo.png";
 
+const lines = [
+  { text: "Mostly trying" },
+  { text: "to make small things" },
+  { text: "work", emphasis: true },
+  { text: "a little better" },
+  { text: "than yesterday." },
+];
+
 export default function F1HeroSection() {
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-28 pb-16">
@@ -29,16 +37,34 @@ export default function F1HeroSection() {
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+              }}
               className="text-[clamp(2.5rem,8vw,7.5rem)] font-medium leading-[0.95] tracking-[-0.03em] normal-case text-foreground"
               style={{ textTransform: "none" }}
             >
-              Mostly trying<br />
-              to make small things <span className="underline decoration-primary decoration-[3px] underline-offset-[10px]">work</span><br />
-              a little better<br />
-              than yesterday.
+              {lines.map((line, i) => (
+                <span key={i} className="block overflow-hidden">
+                  <motion.span
+                    variants={{
+                      hidden: { y: "110%" },
+                      visible: {
+                        y: "0%",
+                        transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                      },
+                    }}
+                    className={`inline-block ${
+                      line.emphasis
+                        ? "underline decoration-primary decoration-[3px] underline-offset-[10px]"
+                        : ""
+                    }`}
+                  >
+                    {line.text}
+                  </motion.span>
+                </span>
+              ))}
             </motion.h1>
 
             <motion.div

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import SpeedLinesBackground from "@/components/SpeedLinesBackground";
+import ScrollProgress from "@/components/ScrollProgress";
+import GiantMarquee from "@/components/GiantMarquee";
 import F1NavBar from "@/components/F1NavBar";
 import F1HeroSection from "@/components/F1HeroSection";
 import F1AboutSection from "@/components/F1AboutSection";
@@ -18,6 +20,7 @@ export default function Index() {
     <div className="relative min-h-screen bg-background text-foreground">
       {/* Background */}
       <SpeedLinesBackground />
+      <ScrollProgress />
       
       {/* Navigation */}
       <F1NavBar />
@@ -27,8 +30,10 @@ export default function Index() {
         <F1HeroSection />
         <F1AboutSection />
         <BentoSkillsSection />
+        <GiantMarquee />
         <HorizontalProjectsSection />
         <F1PublicationsSection />
+        <GiantMarquee text="writing — work — notes — half-finished ideas — " reverse />
         <HorizontalExperienceSection />
         <F1ContactSection />
       </main>
