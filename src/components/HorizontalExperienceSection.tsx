@@ -39,9 +39,9 @@ export default function HorizontalExperienceSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-16"
+          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
         >
-          — Where I&rsquo;ve been
+          05 — cv
         </motion.p>
 
         <ul className="max-w-4xl">
@@ -54,7 +54,7 @@ export default function HorizontalExperienceSection() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="border-t border-border/40 last:border-b py-10 lg:py-12 grid lg:grid-cols-12 gap-4 lg:gap-10"
             >
-              <span className="lg:col-span-3 text-xs text-muted-foreground pt-1" style={{ textTransform: "none" }}>
+              <span className="lg:col-span-3 text-xs text-muted-foreground pt-1 font-mono-ui" style={{ textTransform: "none" }}>
                 {e.period}
               </span>
 

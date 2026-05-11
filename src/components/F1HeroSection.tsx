@@ -36,7 +36,7 @@ export default function F1HeroSection() {
               style={{ textTransform: "none" }}
             >
               Mostly trying<br />
-              to make small things <span className="text-primary italic font-light">work</span><br />
+              to make small things <span className="underline decoration-primary decoration-[3px] underline-offset-[10px]">work</span><br />
               a little better<br />
               than yesterday.
             </motion.h1>
@@ -45,7 +45,7 @@ export default function F1HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm"
+              className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-mono-ui"
             >
               <a
                 href="#projects"
@@ -53,9 +53,9 @@ export default function F1HeroSection() {
                   e.preventDefault();
                   document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="text-foreground border-b border-primary pb-1 hover:text-primary transition-colors"
+                className="text-foreground border-b border-primary pb-1 hover:text-primary transition-colors lowercase"
               >
-                A few things I&rsquo;ve made
+                a few things i&rsquo;ve made
               </a>
               <a
                 href="#contact"
@@ -63,9 +63,9 @@ export default function F1HeroSection() {
                   e.preventDefault();
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors lowercase"
               >
-                Say hello ↗
+                say hello ↗
               </a>
             </motion.div>
           </div>
@@ -91,16 +91,13 @@ export default function F1HeroSection() {
         </div>
       </div>
 
-      {/* Bottom meta strip — replaces "Scroll" prompt with something more bespoke */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="container mx-auto px-6 lg:px-10 relative z-10 flex flex-wrap justify-between items-end gap-4 text-[11px] text-muted-foreground"
+        className="container mx-auto px-6 lg:px-10 relative z-10 text-[11px] text-muted-foreground/70 font-mono-ui"
       >
-        <span>(2026 — happy to chat)</span>
-        <span className="hidden md:inline">Some notes and half-finished ideas below ↓</span>
-        <span>v.04</span>
+        <span>↓ scroll, slowly</span>
       </motion.div>
     </section>
   );

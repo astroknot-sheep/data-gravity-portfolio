@@ -10,9 +10,9 @@ export default function F1AboutSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-xs text-muted-foreground mb-16"
+          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
         >
-          — About
+          01 — about
         </motion.p>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
@@ -28,7 +28,7 @@ export default function F1AboutSection() {
               className="text-2xl md:text-3xl lg:text-4xl leading-[1.3] tracking-[-0.01em] text-foreground font-light"
               style={{ textTransform: "none" }}
             >
-              Most of my week goes into poking at <span className="text-primary">language</span> models,
+              Most of my week goes into poking at language models,
               cleaning up data, and re-running things that didn&rsquo;t work the
               first time. I&rsquo;m still figuring a lot of it out — the model is
               usually the easy part; the data and the eval are where I get humbled.
@@ -49,7 +49,7 @@ export default function F1AboutSection() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="lg:col-span-4 lg:pt-3"
           >
-            <dl className="space-y-5 text-sm">
+            <dl className="space-y-5 text-sm font-mono-ui">
               {[
                 ["Working on", "LLM evaluation, retrieval"],
                 ["Stack", "Python, PyTorch, vLLM"],
@@ -57,7 +57,7 @@ export default function F1AboutSection() {
                 ["Listening", "Caribou — Suddenly"],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-6 border-b border-border/40 pb-4">
-                  <dt className="text-muted-foreground">{k}</dt>
+                  <dt className="text-muted-foreground lowercase">{k}</dt>
                   <dd className="text-foreground text-right" style={{ textTransform: "none" }}>{v}</dd>
                 </div>
               ))}
