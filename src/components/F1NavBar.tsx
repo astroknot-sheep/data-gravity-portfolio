@@ -52,7 +52,7 @@ export default function F1NavBar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-7 left-0 right-0 z-50"
     >
       <div className="container mx-auto px-6 lg:px-10 py-6 flex items-center justify-between">
         <button

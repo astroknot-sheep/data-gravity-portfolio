@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 const writing = [
   {
@@ -28,30 +29,20 @@ export default function F1PublicationsSection() {
   return (
     <section id="publications" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
-        >
-          04 — writing
-        </motion.p>
+        <SectionHeader
+          number="04"
+          label="writing"
+          meta={`${writing.length} pieces`}
+          title={
+            <>
+              Notes I&rsquo;ve written down —
+              <br />
+              partly to remember, partly to be corrected.
+            </>
+          }
+        />
 
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-7 text-2xl md:text-3xl lg:text-4xl font-light leading-[1.3] tracking-[-0.01em] text-foreground"
-            style={{ textTransform: "none" }}
-          >
-            Notes I&rsquo;ve written down — partly to remember, partly to be corrected.
-          </motion.h2>
-        </div>
-
-        <ul>
+        <ul className="border-t border-border/40">
           {writing.map((w, i) => (
             <motion.li
               key={w.title}
@@ -59,7 +50,7 @@ export default function F1PublicationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="border-t border-border/40 last:border-b py-8 lg:py-10 group"
+              className="border-b border-border/40 py-8 lg:py-10 group relative"
             >
               <a
                 href={w.link}
