@@ -1,39 +1,34 @@
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 export default function F1ContactSection() {
   return (
     <section id="contact" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
-        >
-          06 — contact
-        </motion.p>
+        <SectionHeader
+          number="06"
+          label="contact"
+          meta="reply within a few days"
+          title={
+            <>
+              Happy to chat about small ML problems,
+              <br />
+              papers worth reading,
+              <br />
+              or anything in between.
+            </>
+          }
+        />
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-7 text-3xl md:text-5xl lg:text-6xl font-light leading-[1.1] tracking-[-0.02em] text-foreground"
-            style={{ textTransform: "none" }}
-          >
-            Happy to chat about small ML problems,<br />
-            papers worth reading,<br />
-            or anything in between.
-          </motion.h2>
+          <div className="lg:col-span-7" />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="lg:col-span-5 lg:pt-3 space-y-6"
+            className="lg:col-span-5 space-y-6"
           >
             <a
               href="mailto:contact@dhrimandeka.com"
