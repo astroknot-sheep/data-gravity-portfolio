@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import SectionHeader from "./SectionHeader";
 
 const entries = [
   {
@@ -35,18 +34,15 @@ export default function HorizontalExperienceSection() {
   return (
     <section id="experience" className="py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10">
-        <SectionHeader
-          number="05"
-          label="cv"
-          meta="2022 — now"
-          title={
-            <>
-              Where I&rsquo;ve been
-              <br />
-              and what I picked up there.
-            </>
-          }
-        />
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
+        >
+          05 — cv
+        </motion.p>
 
         <ul className="max-w-4xl">
           {entries.map((e, i) => (

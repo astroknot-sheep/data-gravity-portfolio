@@ -1,22 +1,19 @@
 import { motion } from "framer-motion";
-import SectionHeader from "./SectionHeader";
 
 export default function F1AboutSection() {
   return (
     <section id="about" className="relative py-32 lg:py-44">
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
-        <SectionHeader
-          number="01"
-          label="about"
-          meta="who, where, why"
-          title={
-            <>
-              Trying to build small things
-              <br />
-              that don&rsquo;t embarrass me later.
-            </>
-          }
-        />
+        {/* Plain, small label — no animated lines, no 01 numbering */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-[11px] text-muted-foreground/70 mb-16 font-mono-ui tracking-wider"
+        >
+          01 — about
+        </motion.p>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Left — long-form paragraph, sentence-case, no big uppercase reveal */}
