@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 const stack = [
   "Python", "PyTorch", "Hugging Face", "vLLM", "FastAPI",
@@ -13,27 +14,18 @@ export default function BentoSkillsSection() {
   return (
     <section id="skills" className="py-32 lg:py-44 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-10 mb-16">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-[11px] text-muted-foreground/70 mb-8 font-mono-ui tracking-wider"
-        >
-          02 — stack
-        </motion.p>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl text-2xl md:text-3xl lg:text-4xl font-light leading-[1.3] tracking-[-0.01em] text-foreground"
-          style={{ textTransform: "none" }}
-        >
-          A small, boring stack —<br />
-          chosen mostly because it gets out of the way.
-        </motion.h2>
+        <SectionHeader
+          number="02"
+          label="stack"
+          meta={`${stack.length} tools`}
+          title={
+            <>
+              A small, boring stack —
+              <br />
+              chosen mostly because it gets out of the way.
+            </>
+          }
+        />
       </div>
 
       {/* Marquee */}
