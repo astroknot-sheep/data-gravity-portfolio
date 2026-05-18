@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 const projects = [
   {
     year: "2025",
-    title: "Lyra",
-    summary: "A small mental-health chatbot built around Gemini. Mostly an excuse to learn how fragile conversational eval really is.",
-    stack: ["React", "Express", "MongoDB", "Gemini"],
-    link: "https://github.com/astroknot-sheep",
+    title: "Meridian",
+    summary: "A clinical-grade mental health agent. LangGraph orchestrator with deterministic safety gates, MentalRoBERTa ONNX screening, and session-scoped ChromaDB RAG — ephemeral by design.",
+    stack: ["LangGraph", "MentalRoBERTa", "ONNX", "ChromaDB", "FastAPI"],
+    link: "https://huggingface.co/spaces/astroknotsheep/meridian",
   },
   {
     year: "2024",
